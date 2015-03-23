@@ -15,6 +15,9 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import NHSsystem.Doctor;
+import NHSsystem.Manager;
+import NHSsystem.Nurse;
 import NHSsystem.Person;
 import NHSsystem.TreatmentRoom;
 
@@ -30,19 +33,19 @@ public class queueExample {
 
 		// LinkedList<TreatmentRoom> ar = new LinkedList<TreatmentRoom>();
 
-		Person rt = new Person("Mr", "Jay", "Walker", "55 street", "belfast",
+		Person rt = new Doctor("Mr", "Jay", "Walker", "55 street", "belfast",
 				"bt26", "29");
 		
-		Person it = new Person("Mr", "H", "Walker", "55 street", "belfast",
+		Person it = new Manager("Mr", "H", "Walker", "55 street", "belfast",
 				"bt26", "12");
 		
-		Person ru = new Person("Mr", "K", "Walker", "55 street", "belfast",
+		Person ru = new Nurse("Mr", "K", "Walker", "55 street", "belfast",
 				"bt26", "50");
 		
-		Person wp = new Person("Mr", "A", "Walker", "55 street", "belfast",
+		Person wp = new Doctor("Mr", "A", "Walker", "55 street", "belfast",
 				"bt26", "60");
 		
-		Person sd = new Person("Mr", "Q", "Walker", "55 street", "belfast",
+		Person sd = new Nurse("Mr", "Q", "Walker", "55 street", "belfast",
 				"bt26", "46");
 
 		LinkedList<Person> pr = new LinkedList<Person>();

@@ -7,7 +7,7 @@ package NHSsystem;
  * @author chrismcclune
  *
  */
-public class Person {
+public abstract class Person {
 	/**
 	 * Instance variables to hold information about the Person
 	 */
