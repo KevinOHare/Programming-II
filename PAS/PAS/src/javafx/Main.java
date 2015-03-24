@@ -21,8 +21,8 @@ public class Main extends Application {
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			//primaryStage.setScene(scene);
 			//primaryStage.show();
-			   Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));		  
-		        Scene scene = new Scene(root);  
+			   Parent root = FXMLLoader.load(getClass().getResource("Triage.fxml"));		  
+		        Scene scene = new Scene(root, 400, 300);  
 		        stage.setTitle("PAS Login");
 		        stage.setScene(scene);
 		        stage.show();
