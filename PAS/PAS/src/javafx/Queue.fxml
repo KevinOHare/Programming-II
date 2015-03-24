@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="37.0" layoutY="201.0" prefHeight="333.0" prefWidth="525.0">
+        <columns>
+          <TableColumn prefWidth="103.0" text="First Name" />
+            <TableColumn prefWidth="106.0" text="Surname" />
+            <TableColumn prefWidth="100.0" text="Time Entered" />
+            <TableColumn prefWidth="108.0" text="Time Waiting" />
+          <TableColumn prefWidth="106.0" text="Condition" />
+        </columns>
+      </TableView>
+      <Label layoutX="37.0" layoutY="40.0" prefHeight="63.0" prefWidth="515.0" text="Queue of patients awaiting treatment">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Button layoutX="496.0" layoutY="148.0" mnemonicParsing="false" text="Search" />
+      <TextField layoutX="37.0" layoutY="148.0" prefHeight="26.0" prefWidth="446.0" />
+      <Label layoutX="37.0" layoutY="114.0" prefHeight="26.0" prefWidth="182.0" text="Search For Patient In Queue" />
+   </children>
+</Pane>
