@@ -7,7 +7,7 @@ package NHSsystem;
  * @author chrismcclune
  *
  */
-public class Doctor extends Person {
+public class Doctor extends Staff {
 
 	/**
 	 * Default constructor
@@ -25,11 +25,12 @@ public class Doctor extends Person {
 	 * @param city
 	 * @param postcode
 	 * @param contactNumber
+	 * @param staffID
 	 */
 	public Doctor(String title, String firstName, String lastName,
-			String street, String city, String postcode, String contactNumber) {
-		super(title, firstName, lastName, street, city, postcode, contactNumber);
-		// add any other class specific variables here
+			String street, String city, String postcode, String contactNumber, int staffID) {
+		super(title, firstName, lastName, street, city, postcode, contactNumber, staffID);
 	}
+
 
 }

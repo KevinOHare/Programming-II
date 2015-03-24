@@ -1,0 +1,94 @@
+package queue;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import NHSsystem.Doctor;
+import NHSsystem.Manager;
+import NHSsystem.Nurse;
+import NHSsystem.Person;
+import NHSsystem.TreatmentRoom;
+
+public class queueExample {
+
+	public queueExample() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+
+		// LinkedList<TreatmentRoom> ar = new LinkedList<TreatmentRoom>();
+
+		Person rt = new Doctor("Mr", "Jay", "Walker", "55 street", "belfast",
+				"bt26", "29");
+		
+		Person it = new Manager("Mr", "H", "Walker", "55 street", "belfast",
+				"bt26", "12");
+		
+		Person ru = new Nurse("Mr", "K", "Walker", "55 street", "belfast",
+				"bt26", "50");
+		
+		Person wp = new Doctor("Mr", "A", "Walker", "55 street", "belfast",
+				"bt26", "60");
+		
+		Person sd = new Nurse("Mr", "Q", "Walker", "55 street", "belfast",
+				"bt26", "46");
+
+		LinkedList<Person> pr = new LinkedList<Person>();
+
+		pr.add(rt);
+		pr.add(it);
+		pr.add(ru);
+		pr.add(wp);
+		pr.add(sd);
+		
+		for (Person ft : pr){
+			System.out.println(ft.getContactNumber());
+		}
+		
+		// sort? function?
+		
+		
+		System.out.println("\n**************\n");
+		
+		Queue<String> q = new LinkedList<String>();
+		
+		q.add(rt.getContactNumber());
+		q.add(it.getContactNumber());
+		q.add(ru.getContactNumber());
+		q.add(wp.getContactNumber());
+		q.add(sd.getContactNumber());
+		
+		SortedSet<String> eo = new TreeSet<String>(q);
+		
+		Queue<String> yu = new LinkedList<String>(eo);
+		
+		while(!yu.isEmpty()){
+			System.out.println(yu.remove());
+			Thread.sleep(2000);
+		}
+
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

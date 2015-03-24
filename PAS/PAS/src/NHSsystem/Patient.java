@@ -8,6 +8,11 @@ package NHSsystem;
  *
  */
 public class Patient extends Person {
+	
+	/**
+	 * Instance variable for the NHS number of the patient
+	 */
+	private String nhsNumber;
 
 	/**
 	 * Default constructor
@@ -25,11 +30,28 @@ public class Patient extends Person {
 	 * @param city
 	 * @param postcode
 	 * @param contactNumber
+	 * @param nhsNumber
 	 */
 	public Patient(String title, String firstName, String lastName,
-			String street, String city, String postcode, String contactNumber) {
+			String street, String city, String postcode, String contactNumber, String nhsNumber) {
 		super(title, firstName, lastName, street, city, postcode, contactNumber);
-		// add any other class specific variables here
+		this.nhsNumber = nhsNumber;
+	}
+
+	/**
+	 * Get the NHS number of the patient
+	 * @return
+	 */
+	public String getNhsNumber() {
+		return nhsNumber;
+	}
+
+	/**
+	 * Set the NHS number of the patient
+	 * @param nhsNumber
+	 */
+	public void setNhsNumber(String nhsNumber) {
+		this.nhsNumber = nhsNumber;
 	}
 
 }

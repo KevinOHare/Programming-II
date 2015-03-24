@@ -1,0 +1,57 @@
+/**
+ * 
+ */
+package NHSsystem;
+
+/**
+ * @author chrismcclune
+ *
+ */
+public class Doctor extends Person {
+	
+	/**
+	 * Instance variable for the Staff ID number of the Doctor
+	 */
+	private int staffID;
+
+	/**
+	 * Default constructor
+	 */
+	public Doctor() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * Constructor with arguments
+	 * @param title
+	 * @param firstName
+	 * @param lastName
+	 * @param street
+	 * @param city
+	 * @param postcode
+	 * @param contactNumber
+	 * @param staffID
+	 */
+	public Doctor(String title, String firstName, String lastName,
+			String street, String city, String postcode, String contactNumber, int staffID) {
+		super(title, firstName, lastName, street, city, postcode, contactNumber);
+		this.staffID = staffID;
+	}
+
+	/**
+	 * Get the Staff ID number of the Doctor
+	 * @return
+	 */
+	public int getStaffID() {
+		return staffID;
+	}
+
+	/**
+	 * Set the Staff ID number of the Doctor
+	 * @param staffID
+	 */
+	public void setStaffID(int staffID) {
+		this.staffID = staffID;
+	}
+
+}

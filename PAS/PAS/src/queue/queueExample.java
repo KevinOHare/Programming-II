@@ -34,19 +34,19 @@ public class queueExample {
 		// LinkedList<TreatmentRoom> ar = new LinkedList<TreatmentRoom>();
 
 		Person rt = new Doctor("Mr", "Jay", "Walker", "55 street", "belfast",
-				"bt26", "29");
+				"bt26", "29", 0);
 		
 		Person it = new Manager("Mr", "H", "Walker", "55 street", "belfast",
-				"bt26", "12");
+				"bt26", "12", 0);
 		
 		Person ru = new Nurse("Mr", "K", "Walker", "55 street", "belfast",
-				"bt26", "50");
+				"bt26", "50", 0);
 		
 		Person wp = new Doctor("Mr", "A", "Walker", "55 street", "belfast",
-				"bt26", "60");
+				"bt26", "60", 0);
 		
 		Person sd = new Nurse("Mr", "Q", "Walker", "55 street", "belfast",
-				"bt26", "46");
+				"bt26", "46", 0);
 
 		LinkedList<Person> pr = new LinkedList<Person>();
 
