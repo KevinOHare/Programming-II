@@ -12,9 +12,19 @@ public class JDBC_class {
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
 
-	public static void main(String[] args) {
+	// Boolean to confirm search status
+	private Boolean bool;
+
+	public void databaseSearch(String fN, String sN, String idN) {
+
+		// Local Variables
 		Connection conn = null;
 		Statement stmt = null;
+		bool = false;
+		String cf = "";
+		String cs = "";
+		String ci = "";
+
 		try {
 			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -28,15 +38,25 @@ public class JDBC_class {
 			stmt = conn.createStatement();
 			String sql1;
 
+			// Passed in values being applied to SQL query
+			String firstNamedb = fN;
+			String surNamedb = sN;
+			String nhsNumdb = idN;
+
 			// *** Assign values to mysql query ***
-			sql1 = "SELECT ID, title, first_name, last_name, address_1, address_2, address_3, country, telephone_number, allergies, blood_type FROM patient ";
-			// sql2 =
-			// "SELECT id, title, firstName, lastName, address1, address2, address3, country, phone_number, allergies, blood_type FROM patient ";
+			// sql1 =
+			// "SELECT ID, title, first_name, last_name, address_1, address_2, address_3, country, telephone_number, allergies, blood_type FROM patient WHERE first_name = 'Lonnie' AND last_name = 'Deloach' AND ID = '9828558246' ";
+			sql1 = "SELECT ID, title, first_name, last_name, address_1, address_2, address_3, country, telephone_number, allergies, blood_type FROM patient WHERE first_name = '"
+					+ firstNamedb
+					+ "' AND last_name = '"
+					+ surNamedb
+					+ "' AND ID = '" + nhsNumdb + "'";
 
 			// *** Result Set ***
 			ResultSet rs = stmt.executeQuery(sql1);
 
 			// STEP 5: Extract data from result set
+			// Cycle through database for the result set
 			while (rs.next()) {
 				// Retrieve by column name
 
@@ -54,9 +74,23 @@ public class JDBC_class {
 				String rset11 = rs.getString("blood_type");
 
 				// *** Test ***
-				System.out.println(rset1 + " " + rset2 + " " + rset3);
-
+				System.out.println(rset1 + " " + rset3 + " " + rset4);
+				
+				// To check for values that relate to the search tag
+				if (!rset1.isEmpty() && !rset3.isEmpty() && !rset4.isEmpty()) {
+					cf = rset1; // First name
+					cs = rset2; // surname
+					ci = rset3; // nhs number or ID
+				}
 			}
+			
+			// Check if a result was found, assign value to boolean to explain if found or not
+			if (!cf.isEmpty() && !cs.isEmpty() && !ci.isEmpty()) {
+				bool = false; // result was found
+			} else {
+				bool = true; // result was not found
+			}
+
 			// STEP 6: Clean-up environment
 			rs.close();
 			stmt.close();
@@ -64,9 +98,11 @@ public class JDBC_class {
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
+			bool = true;
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
+			bool = true;
 		} finally {
 			// finally block used to close resources
 			try {
@@ -83,4 +119,14 @@ public class JDBC_class {
 		}// end try
 		System.out.println("Goodbye!");
 	}// end main
-}// end FirstExample
+
+	/**
+	 * A method to return the status of finding the value
+	 * of the search
+	 * @return bool
+	 */
+	public Boolean traceCond() {
+		return bool;
+	}
+
+}// ************** class ************

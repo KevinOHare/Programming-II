@@ -1,6 +1,10 @@
 package javafx;
 	
+import java.awt.Button;
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -24,6 +28,9 @@ public class Main extends Application {
 		        stage.setTitle("Queue System");
 		        stage.setScene(scene);
 		        stage.show();
+		        
+		        
+		        
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
