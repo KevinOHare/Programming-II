@@ -14,12 +14,12 @@ public class TreatmentRoom {
 	/**
 	 * The treatment room number
 	 */
-	private int roomNumber;
+	private static int roomNumber;
 
 	/**
 	 * The availability of the treatment room
 	 */
-	private boolean isAvailable;
+	private static boolean isAvailable;
 
 	/**
 	 * How long a patient has been in the room
@@ -51,7 +51,7 @@ public class TreatmentRoom {
 	 * 
 	 * @return the roomNumber
 	 */
-	public int getRoomNumber() {
+	public static int getRoomNumber() {
 		return roomNumber;
 	}
 
@@ -70,7 +70,7 @@ public class TreatmentRoom {
 	 * 
 	 * @return the isAvailable
 	 */
-	public boolean isAvailable() {
+	public static boolean isAvailable() {
 		return isAvailable;
 	}
 
