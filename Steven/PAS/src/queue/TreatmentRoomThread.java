@@ -27,8 +27,8 @@ public class TreatmentRoomThread implements Runnable {
 		int loop = 0;
 		
 		do {
-			System.out.println(loop);
-			this.treatmentRoom.timer(loop);
+			//System.out.println(loop);
+			this.treatmentRoom.setCountTimer(loop);;
 			loop++;
 			try {
 				Thread.sleep(2000);

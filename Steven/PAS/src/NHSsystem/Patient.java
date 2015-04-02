@@ -3,6 +3,8 @@
  */
 package NHSsystem;
 
+import queue.PatientThread;
+
 
 /**
  * @author chrismcclune
@@ -19,6 +21,11 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * Instance variable for triage priority
 	 */
 	private int triage;
+	
+	/**
+	 * Instance variable to count the timer method
+	 */
+	private int countTimer;
 
 	/**
 	 * Default constructor
@@ -85,6 +92,14 @@ public class Patient extends Person implements Comparable<Patient> {
 			this.triage = 4;
 		}
 	}
+	
+	public int getCountTimer(){
+		return countTimer;
+	}
+	
+	public void setCountTimer(int countTimer){
+		this.countTimer = countTimer;
+	}
 
 	//public boolean equals(Patient other) {
 	//	return this.getTriage() == other.getTriage();
@@ -116,8 +131,7 @@ public class Patient extends Person implements Comparable<Patient> {
 		return this.getTitle() + "  " + this.getFirstName() + "  "
 				+ this.getLastName() + "  " + this.getStreet() + "  "
 				+ this.getCity() + "  " + this.getPostcode() + "  "
-				+ this.getContactNumber() + "  " + this.getNhsNumber() + "  " + this.getTriage();
+				+ this.getContactNumber() + "  " + this.getNhsNumber() + "  *Triage:{" + this.getTriage() + "}  *QueueTimer:[" + this.getCountTimer() + "]";
 
 	}
-
 }

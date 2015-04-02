@@ -101,6 +101,16 @@ public class Queue {
 
 		// add to sort queue
 		for (Patient ae : pQueue) {
+			// instantiate classes to activate the 
+			// start time at the queue
+			PatientThread pt = new PatientThread(ae);
+			Runnable rr = new Runnable() {
+		         public void run() {
+		             pt.run();
+		         }
+		     };
+		     new Thread(rr).start();
+		     // add to sort queue
 			sort.add(ae);
 		}
 
@@ -108,47 +118,52 @@ public class Queue {
 		while (!sort.isEmpty()) {
 
 			System.out.println("****** Treatment Room *******");
+			System.out.println("Room Number \t Room Available?    Patient Details ");
 			for (TreatmentRoom tr : treat) {
 				System.out.println(tr.toString());
 			}
 
 			System.out.println("********** Queue ************");
+			System.out.println("Name\t\t  Address & Contact Details & ID number");
 			for (Patient as : sort) {
 				System.out.println(as.toString());
 				if (treat.getFirst().isAvailable() == true) {
 					treat.getFirst().setPatient(as);
 					treat.getFirst().setAvailable(false);
-					
-					TreatmentRoomThread thr = new TreatmentRoomThread(treat.getFirst());
-					//thr.run();
-					Runnable r = new Runnable() {
-				         public void run() {
-				             thr.run();
-				         }
-				     };
-
-				     new Thread(r).start();
-				     //this line will execute immediately, not waiting for your task to complete
-					
-					
-					
-					
+					// start count for treatment room
+					// using Treatment room thread
+					startTimer(treat.getFirst());
 					//sort.remove();
 				} else if (treat.get(1).isAvailable() == true) {
 					treat.get(1).setPatient(as);
 					treat.get(1).setAvailable(false);
+					// start count for treatment room
+					// using Treatment room thread
+					startTimer(treat.get(1));
 				} else if (treat.get(2).isAvailable() == true) {
 					treat.get(2).setPatient(as);
 					treat.get(2).setAvailable(false);
+					// start count for treatment room
+					// using Treatment room thread
+					startTimer(treat.get(2));
 				} else if (treat.get(3).isAvailable() == true) {
 					treat.get(3).setPatient(as);
 					treat.get(3).setAvailable(false);
+					// start count for treatment room
+					// using Treatment room thread
+					startTimer(treat.get(3));
 				} else if (treat.get(4).isAvailable() == true) {
 					treat.get(4).setPatient(as);
 					treat.get(4).setAvailable(false);
+					// start count for treatment room
+					// using Treatment room thread
+					startTimer(treat.get(4));
 				} else if (treat.getLast().isAvailable() == true) {
 					treat.getLast().setPatient(as);
 					treat.getLast().setAvailable(false);
+					// start count for treatment room
+					// using Treatment room thread
+					startTimer(treat.getLast());
 				}
 
 			}
@@ -159,5 +174,22 @@ public class Queue {
 
 	}
 
+	/**
+	 * A method to invoke the treatment room thread class
+	 * timer count
+	 * @param tr
+	 */
+	public static void startTimer(TreatmentRoom tr){
+		
+		// instantiate classes to activate the 
+		// start time at the queue
+		TreatmentRoomThread thr = new TreatmentRoomThread(tr);
+		Runnable r = new Runnable() {
+	         public void run() {
+	             thr.run();
+	         }
+	     };
+	     new Thread(r).start();
+	}
 
 }
