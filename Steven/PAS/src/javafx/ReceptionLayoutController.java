@@ -86,6 +86,8 @@ public class ReceptionLayoutController implements Initializable {
 		// reception table class object here
 		String[] ar = db.rsetPrint();
 		
+		// take string objects from db search
+		// to a string value
 		String str1 = ar[0];
 		String str2 = ar[1];
 		String str3 = ar[2];
@@ -94,6 +96,8 @@ public class ReceptionLayoutController implements Initializable {
 		String str6 = ar[5];
 		String str7 = ar[6];
 		
+		// set string values to ReceptionLayoutTable
+		// object
 		rt.setTitle(str1);
 		rt.setFirstName(str2);
 		rt.setLastName(str3);
@@ -102,6 +106,7 @@ public class ReceptionLayoutController implements Initializable {
 		rt.setPostcode(str6);
 		rt.setTelephone(str7);
 		
+		// get the object variables
 		rt.getTitle();
 		rt.getFirstName();
 		rt.getLastName();
@@ -110,6 +115,7 @@ public class ReceptionLayoutController implements Initializable {
 		rt.getPostcode();
 		rt.getTelephone();
 		
+		// add to observable array list
 		data.addAll(rt);	
 	}
 
@@ -131,7 +137,7 @@ public class ReceptionLayoutController implements Initializable {
 		tableTelephone.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
 				"telephone"));
 		
-
+		// set data to table id for show results
 		tableID.setItems(data);
 
 	}

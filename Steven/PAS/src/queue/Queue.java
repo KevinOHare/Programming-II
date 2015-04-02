@@ -1,4 +1,4 @@
-package NHSsystem;
+package queue;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,6 +10,7 @@ import java.util.TimerTask;
 import java.util.TreeSet;
 
 import NHSsystem.Patient;
+import NHSsystem.TreatmentRoom;
 
 public class Queue {
 
@@ -25,7 +26,7 @@ public class Queue {
 
 	static TreatmentRoom[] treatAr = new TreatmentRoom[5];
 
-	// local variables
+	// **** test *****
 
 	static Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
 			"Lisburn", "BT67 524", "098 38563", "3759-283", 3);
@@ -48,6 +49,8 @@ public class Queue {
 	static Patient pat10 = new Patient("Ms", "Rachel", "Lenvine", "03 road",
 			"Moria", "BT28 828", "493 03895", "294-3985", 1);
 
+	// instance of treatment room objects
+	
 	static TreatmentRoom room1 = new TreatmentRoom(1, true);
 	static TreatmentRoom room2 = new TreatmentRoom(2, true);
 	static TreatmentRoom room3 = new TreatmentRoom(3, true);
@@ -115,6 +118,21 @@ public class Queue {
 				if (treat.getFirst().isAvailable() == true) {
 					treat.getFirst().setPatient(as);
 					treat.getFirst().setAvailable(false);
+					
+					TreatmentRoomThread thr = new TreatmentRoomThread(treat.getFirst());
+					//thr.run();
+					Runnable r = new Runnable() {
+				         public void run() {
+				             thr.run();
+				         }
+				     };
+
+				     new Thread(r).start();
+				     //this line will execute immediately, not waiting for your task to complete
+					
+					
+					
+					
 					//sort.remove();
 				} else if (treat.get(1).isAvailable() == true) {
 					treat.get(1).setPatient(as);

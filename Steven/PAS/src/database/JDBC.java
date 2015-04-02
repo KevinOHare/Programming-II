@@ -11,9 +11,6 @@ public class JDBC {
 	// Database credentials
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
-
-	// Boolean to confirm search status
-	private Boolean bool;
 	
 	// create string array
 	String[] str = new String[7];
@@ -24,11 +21,6 @@ public class JDBC {
 		// Local Variables
 		Connection conn = null;
 		Statement stmt = null;
-		bool = false;
-		String cf = "";
-		String cs = "";
-		String ci = "";
-		String cp = "";
 
 		try {
 			// STEP 2: Register JDBC driver
@@ -83,6 +75,7 @@ public class JDBC {
 				// *** Test ***
 				System.out.println(rset1 + " " + rset3 + " " + rset4 + " "
 						+ rset7);
+				
 				// assign values to str array
 				str[0] = rset2;
 				str[1] = rset3;
@@ -92,24 +85,8 @@ public class JDBC {
 				str[5] = rset7;
 				str[6] = rset9;
 
-				// To check for values that relate to the search tag
-				if (!rset1.isEmpty() && !rset3.isEmpty() && !rset4.isEmpty()
-						&& !rset7.isEmpty()) {
-					cf = rset3; // First name
-					cs = rset4; // surname
-					ci = rset1; // nhs number or ID
-					cp = rset7; // postcode
-				}
 			}
 
-			// Check if a result was found, assign value to boolean to explain
-			// if found or not
-			if (!cf.isEmpty() && !cs.isEmpty() && !ci.isEmpty()
-					&& !cp.isEmpty()) {
-				bool = false; // result was found
-			} else {
-				bool = true; // result was not found
-			}
 
 			// STEP 6: Clean-up environment
 			rs.close();
@@ -118,11 +95,11 @@ public class JDBC {
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
-			bool = true;
+			
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-			bool = true;
+			
 		} finally {
 			// finally block used to close resources
 			try {
@@ -140,14 +117,6 @@ public class JDBC {
 		System.out.println("Goodbye!");
 	}// end main
 
-	/**
-	 * A method to return the status of finding the value of the search
-	 * 
-	 * @return bool
-	 */
-	public Boolean traceCond() {
-		return bool;
-	}
 
 	/**
 	 * A method to return the rsets of the correct patient search
