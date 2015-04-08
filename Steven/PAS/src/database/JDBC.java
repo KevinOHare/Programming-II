@@ -13,7 +13,7 @@ public class JDBC {
 	static final String PASS = "UYN6542";
 	
 	// create string array
-	String[] str = new String[7];
+	String[] str = new String[8];
 
 	public void databaseSearch(String firstName, String lastName,
 			String postcode, String id) {
@@ -74,7 +74,7 @@ public class JDBC {
 
 				// *** Test ***
 				System.out.println(rset1 + " " + rset3 + " " + rset4 + " "
-						+ rset7);
+						+ rset7 + " " + rset10);
 				
 				// assign values to str array
 				str[0] = rset2;
@@ -84,6 +84,7 @@ public class JDBC {
 				str[4] = rset6;
 				str[5] = rset7;
 				str[6] = rset9;
+				str[7] = rset10;
 
 			}
 

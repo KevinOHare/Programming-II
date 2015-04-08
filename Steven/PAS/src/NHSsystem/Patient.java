@@ -26,6 +26,12 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * Instance variable to count the timer method
 	 */
 	private int countTimer;
+	
+	/**
+	 * Instance variable to signal if patient is
+	 * in a treatment room
+	 */
+	private Boolean inRoom = false;
 
 	/**
 	 * Default constructor
@@ -93,14 +99,38 @@ public class Patient extends Person implements Comparable<Patient> {
 		}
 	}
 	
+	/**
+	 * get method for the count timer
+	 * @return countTimer
+	 */
 	public int getCountTimer(){
 		return countTimer;
 	}
 	
+	/**
+	 * set method for the count timer
+	 * @param countTimer
+	 */
 	public void setCountTimer(int countTimer){
 		this.countTimer = countTimer;
 	}
-
+	
+	/**
+	 * get method for the in room boolean
+	 * @return inRoom
+	 */
+	public Boolean getInRoom(){
+		return inRoom;
+	}
+	
+	/**
+	 * set method for the in room boolean
+	 * @param inRoom
+	 */
+	public void setInRoom(Boolean inRoom){
+		this.inRoom = inRoom;
+	}
+	
 	//public boolean equals(Patient other) {
 	//	return this.getTriage() == other.getTriage();
 	//}

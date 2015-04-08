@@ -32,7 +32,7 @@ public class LoginController {
 			// open new window centred
 			Parent root = FXMLLoader.load(getClass().getResource(
 					"ReceptionLayout.fxml"));
-			Scene scene = new Scene(root, 630, 600);
+			Scene scene = new Scene(root, 630, 650);
 			Stage stage = (Stage) ((Node) event.getSource()).getScene()
 					.getWindow();
 			stage.setScene(scene);

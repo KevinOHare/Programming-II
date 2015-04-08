@@ -34,7 +34,7 @@ public class PatientThread implements Runnable {
 			} catch (InterruptedException e) {
 				System.out.println("Interupted");
 			}
-		} while (loop < 30);
+		} while (loop < 300); // to act as 30 mins
 
 	}
 	

@@ -40,7 +40,7 @@
         <Font size="14.0" />
       </font>
     </Text>
-    <Button layoutX="444.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Add to Triage" />
+    <Button layoutX="444.0" layoutY="616.0" mnemonicParsing="false" onAction="#handleActionNewPage" prefHeight="26.0" prefWidth="119.0" text="Add to Triage" />
     <Button layoutX="363.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleButtonAction" prefWidth="97.0" text="Search" />
   </children>
 </AnchorPane>

@@ -2,6 +2,7 @@ package queue;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.SortedSet;
@@ -15,6 +16,8 @@ import NHSsystem.TreatmentRoom;
 public class Queue {
 
 	// set up instances
+
+	static ArrayList<Patient> alist = new ArrayList<Patient>();
 
 	static LinkedList<Patient> link = new LinkedList<Patient>();
 
@@ -50,21 +53,13 @@ public class Queue {
 			"Moria", "BT28 828", "493 03895", "294-3985", 1);
 
 	// instance of treatment room objects
-	
+
 	static TreatmentRoom room1 = new TreatmentRoom(1, true);
 	static TreatmentRoom room2 = new TreatmentRoom(2, true);
 	static TreatmentRoom room3 = new TreatmentRoom(3, true);
 	static TreatmentRoom room4 = new TreatmentRoom(4, true);
 	static TreatmentRoom room5 = new TreatmentRoom(5, true);
 
-	// **get details from database - fill object of patient
-	// **print patient object
-	// **put in linkedlist
-	// **add 10 patient objects
-	// **put in linkedlist
-	// **sort list on priority
-	// **give each object a time - thread
-	// **(comparable in Patient)
 
 	// ********** ad hoc **********
 	public static void main(String[] args) throws InterruptedException {
@@ -101,31 +96,40 @@ public class Queue {
 
 		// add to sort queue
 		for (Patient ae : pQueue) {
-			// instantiate classes to activate the 
+			// instantiate classes to activate the
 			// start time at the queue
 			PatientThread pt = new PatientThread(ae);
 			Runnable rr = new Runnable() {
-		         public void run() {
-		             pt.run();
-		         }
-		     };
-		     new Thread(rr).start();
-		     // add to sort queue
+				public void run() {
+					pt.run();
+				}
+			};
+			new Thread(rr).start();
+			// add to sort queue
 			sort.add(ae);
+		}
+
+		
+		// add to array list for editing
+		// the working queue
+		for (Patient ju : sort) {
+			alist.add(ju);
 		}
 
 		// print out sort queue results
 		while (!sort.isEmpty()) {
 
 			System.out.println("****** Treatment Room *******");
-			System.out.println("Room Number \t Room Available?    Patient Details ");
+			System.out
+					.println("Room Number \t Room Available?    Patient Details ");
 			for (TreatmentRoom tr : treat) {
 				System.out.println(tr.toString());
 			}
 
 			System.out.println("********** Queue ************");
-			System.out.println("Name\t\t  Address & Contact Details & ID number");
-			for (Patient as : sort) {
+			System.out
+					.println("Name\t\t  Address & Contact Details & ID number");
+			for (Patient as : alist) {
 				System.out.println(as.toString());
 				if (treat.getFirst().isAvailable() == true) {
 					treat.getFirst().setPatient(as);
@@ -133,41 +137,66 @@ public class Queue {
 					// start count for treatment room
 					// using Treatment room thread
 					startTimer(treat.getFirst());
-					//sort.remove();
+					// a boolean assigned within patient
+					// object to execute the remove later
+					as.setInRoom(true);
 				} else if (treat.get(1).isAvailable() == true) {
 					treat.get(1).setPatient(as);
 					treat.get(1).setAvailable(false);
 					// start count for treatment room
 					// using Treatment room thread
 					startTimer(treat.get(1));
+					// a boolean assigned within patient
+					// object to execute the remove later
+					as.setInRoom(true);
 				} else if (treat.get(2).isAvailable() == true) {
 					treat.get(2).setPatient(as);
 					treat.get(2).setAvailable(false);
 					// start count for treatment room
 					// using Treatment room thread
 					startTimer(treat.get(2));
+					// a boolean assigned within patient
+					// object to execute the remove later
+					as.setInRoom(true);
 				} else if (treat.get(3).isAvailable() == true) {
 					treat.get(3).setPatient(as);
 					treat.get(3).setAvailable(false);
 					// start count for treatment room
 					// using Treatment room thread
 					startTimer(treat.get(3));
+					// a boolean assigned within patient
+					// object to execute the remove later
+					as.setInRoom(true);
 				} else if (treat.get(4).isAvailable() == true) {
 					treat.get(4).setPatient(as);
 					treat.get(4).setAvailable(false);
 					// start count for treatment room
 					// using Treatment room thread
 					startTimer(treat.get(4));
+					// a boolean assigned within patient
+					// object to execute the remove later
+					as.setInRoom(true);
 				} else if (treat.getLast().isAvailable() == true) {
 					treat.getLast().setPatient(as);
 					treat.getLast().setAvailable(false);
 					// start count for treatment room
 					// using Treatment room thread
 					startTimer(treat.getLast());
+					// a boolean assigned within patient
+					// object to execute the remove later
+					as.setInRoom(true);
 				}
+			}
 
+			// to remove patients from the list that are in 
+			// treatment rooms
+			for (int i = 0; i < alist.size(); i++) {
+				if (alist.get(i).getInRoom() == true) {
+					alist.remove(alist.get(i));
+				}
 			}
 			
+
 			System.out.println("\n*****************************************\n");
 			Thread.sleep(4000);
 		}
@@ -175,21 +204,21 @@ public class Queue {
 	}
 
 	/**
-	 * A method to invoke the treatment room thread class
-	 * timer count
+	 * A method to invoke the treatment room thread class timer count
+	 * 
 	 * @param tr
 	 */
-	public static void startTimer(TreatmentRoom tr){
-		
-		// instantiate classes to activate the 
+	public static void startTimer(TreatmentRoom tr) {
+
+		// instantiate classes to activate the
 		// start time at the queue
 		TreatmentRoomThread thr = new TreatmentRoomThread(tr);
 		Runnable r = new Runnable() {
-	         public void run() {
-	             thr.run();
-	         }
-	     };
-	     new Thread(r).start();
+			public void run() {
+				thr.run();
+			}
+		};
+		new Thread(r).start();
 	}
 
 }
