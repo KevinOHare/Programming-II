@@ -11,7 +11,7 @@ public class JDBC {
 	// Database credentials
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
-	
+
 	// create string array
 	String[] str = new String[8];
 
@@ -75,7 +75,7 @@ public class JDBC {
 				// *** Test ***
 				System.out.println(rset1 + " " + rset3 + " " + rset4 + " "
 						+ rset7 + " " + rset10);
-				
+
 				// assign values to str array
 				str[0] = rset2;
 				str[1] = rset3;
@@ -88,7 +88,6 @@ public class JDBC {
 
 			}
 
-
 			// STEP 6: Clean-up environment
 			rs.close();
 			stmt.close();
@@ -96,11 +95,11 @@ public class JDBC {
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
-			
+
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-			
+
 		} finally {
 			// finally block used to close resources
 			try {
@@ -117,7 +116,6 @@ public class JDBC {
 		}// end try
 		System.out.println("Goodbye!");
 	}// end main
-
 
 	/**
 	 * A method to return the rsets of the correct patient search
