@@ -196,6 +196,26 @@ public class Queue {
 				}
 			}
 			
+			// check if the treatment rooms are finished
+			// with patients
+			if (treat.getFirst().getCountTimer() == 49){
+				treat.getFirst().setAvailable(true);
+			}
+			if (treat.get(1).getCountTimer() == 49){
+				treat.get(1).setAvailable(true);
+			}
+			if (treat.get(2).getCountTimer() == 49){
+				treat.get(2).setAvailable(true);
+			}
+			if (treat.get(3).getCountTimer() == 49){
+				treat.get(3).setAvailable(true);
+			}
+			if (treat.get(4).getCountTimer() == 49){
+				treat.get(4).setAvailable(true);
+			}
+			if (treat.getLast().getCountTimer() == 49){
+				treat.getLast().setAvailable(true);
+			}
 
 			System.out.println("\n*****************************************\n");
 			Thread.sleep(4000);

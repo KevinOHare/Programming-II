@@ -17,11 +17,7 @@ public class TreatmentRoomThread implements Runnable {
 		this.treatmentRoom = treatmentRoom;
 	}
 	
-	/**
-	 * Instance Variable
-	 */
-	private Boolean threadBool = false;
-
+	
 	/**
 	 * Run thread counting time entered 
 	 * treatment room object
@@ -30,6 +26,8 @@ public class TreatmentRoomThread implements Runnable {
 	public void run() {
 		
 		int loop = 0;
+		
+		
 		
 		do {
 			//System.out.println(loop);
@@ -41,26 +39,9 @@ public class TreatmentRoomThread implements Runnable {
 				System.out.println("Interrupted");
 			}
 			
-		} while (!(loop == 100)); // to act as 10 mins
+		} while (loop != 50); // to act as 10 mins
 		
-		setThreadBool(true);
 		
-	}
-
-	/**
-	 * get method for thread boolean
-	 * @return threadBool
-	 */
-	public Boolean getThreadBool() {
-		return threadBool;
-	}
-
-	/**
-	 * set method for thread boolean
-	 * @param threadBool
-	 */
-	private void setThreadBool(Boolean threadBool) {
-		this.threadBool = threadBool;
 	}
 
 }
