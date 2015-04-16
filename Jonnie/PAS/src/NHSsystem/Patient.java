@@ -3,7 +3,8 @@
  */
 package NHSsystem;
 
-import javafx.SceneBuilderTable;
+import queue.PatientThread;
+
 
 /**
  * @author chrismcclune
@@ -16,7 +17,21 @@ public class Patient extends Person implements Comparable<Patient> {
 	 */
 	private String nhsNumber;
 
+	/**
+	 * Instance variable for triage priority
+	 */
 	private int triage;
+	
+	/**
+	 * Instance variable to count the timer method
+	 */
+	private int countTimer;
+	
+	/**
+	 * Instance variable to signal if patient is
+	 * in a treatment room
+	 */
+	private Boolean inRoom = false;
 
 	/**
 	 * Default constructor
@@ -63,10 +78,19 @@ public class Patient extends Person implements Comparable<Patient> {
 		this.nhsNumber = nhsNumber;
 	}
 
+	/**
+	 * Get triage priority
+	 * @return triage
+	 */
 	public int getTriage() {
 		return triage;
 	}
 
+	/**
+	 * Set triage priority
+	 * with validation 
+	 * @param triage
+	 */
 	public void setTriage(int triage) {
 		if (triage >= 1 || triage <= 4) {
 			this.triage = triage;
@@ -74,11 +98,48 @@ public class Patient extends Person implements Comparable<Patient> {
 			this.triage = 4;
 		}
 	}
-
+	
+	/**
+	 * get method for the count timer
+	 * @return countTimer
+	 */
+	public int getCountTimer(){
+		return countTimer;
+	}
+	
+	/**
+	 * set method for the count timer
+	 * @param countTimer
+	 */
+	public void setCountTimer(int countTimer){
+		this.countTimer = countTimer;
+	}
+	
+	/**
+	 * get method for the in room boolean
+	 * @return inRoom
+	 */
+	public Boolean getInRoom(){
+		return inRoom;
+	}
+	
+	/**
+	 * set method for the in room boolean
+	 * @param inRoom
+	 */
+	public void setInRoom(Boolean inRoom){
+		this.inRoom = inRoom;
+	}
+	
 	//public boolean equals(Patient other) {
 	//	return this.getTriage() == other.getTriage();
 	//}
 
+	/**
+	 * Implemented with comparable to
+	 * be used by priority queue to
+	 * sort the triage in the right order
+	 */
 	@Override
 	public int compareTo(Patient other) {
 
@@ -92,13 +153,15 @@ public class Patient extends Person implements Comparable<Patient> {
 
 	}
 
+	/**
+	 * A to string method to print results
+	 */
 	@Override
 	public String toString() {
 		return this.getTitle() + "  " + this.getFirstName() + "  "
 				+ this.getLastName() + "  " + this.getStreet() + "  "
 				+ this.getCity() + "  " + this.getPostcode() + "  "
-				+ this.getContactNumber() + "  " + this.getNhsNumber() + "  " + this.getTriage();
+				+ this.getContactNumber() + "  " + this.getNhsNumber() + "  *Triage:{" + this.getTriage() + "}  *QueueTimer:[" + this.getCountTimer() + "]";
 
 	}
-
 }
