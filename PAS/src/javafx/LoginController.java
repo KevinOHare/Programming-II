@@ -62,7 +62,11 @@ public class LoginController extends Application implements Initializable {
 						primaryStage.setScene(scene);
 						primaryStage.show();
 						Stage stage = (Stage) myButton.getScene().getWindow();
-					    stage.close();
+					    	stage.close();
+
+						//set icon of the application
+				            	Image applicationIcon = new Image(getClass().getResourceAsStream("PASicon.png"));
+			            		primaryStage.getIcons().add(applicationIcon);
 						
 					}
 					if (fieldUsername.getText().equals("admin")
@@ -75,7 +79,11 @@ public class LoginController extends Application implements Initializable {
 						primaryStage.setScene(scene);
 						primaryStage.show();
 						Stage stage = (Stage) myButton.getScene().getWindow();
-					    stage.close();
+					    	stage.close();
+
+						//set icon of the application
+			            		Image applicationIcon = new Image(getClass().getResourceAsStream("PASicon.png"));
+			            		primaryStage.getIcons().add(applicationIcon);
 					    
 					}
 					if (fieldUsername.getText().equals("doctor")
@@ -88,8 +96,12 @@ public class LoginController extends Application implements Initializable {
 						primaryStage.setScene(scene);
 						primaryStage.show();
 						Stage stage = (Stage) myButton.getScene().getWindow();
-					    stage.close();
-					    
+					    	stage.close();
+					    	
+						//set icon of the application
+			            		Image applicationIcon = new Image(getClass().getResourceAsStream("PASicon.png"));
+			            		primaryStage.getIcons().add(applicationIcon);
+
 					} else {
 						loginLabel.setText("Wrong credentials were entered");
 					}

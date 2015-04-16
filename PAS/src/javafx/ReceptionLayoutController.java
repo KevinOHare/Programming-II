@@ -74,6 +74,10 @@ public class ReceptionLayoutController implements Initializable {
 			stage.setTitle("Triage Screen");
 			stage.centerOnScreen();
 			stage.show();
+			
+			//set icon of the application
+			Image applicationIcon = new Image(getClass().getResourceAsStream("PASicon.png"));
+			primaryStage.getIcons().add(applicationIcon);
 		}
 	}
 
