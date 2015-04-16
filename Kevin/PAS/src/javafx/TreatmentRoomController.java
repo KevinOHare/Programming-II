@@ -16,13 +16,13 @@ public class TreatmentRoomController {
 	@FXML
 	public static TextField treatmentDetails;
 
-	public static Date startTime;
+	public static Date startTime = new Date();
 
 	public static Date finishTime;
 
 	public static void main(String[] args) {
 
-		startTime = new Date();
+		//startTime = new Date();
 		System.out.println("startTime created");
 
 	}
@@ -38,8 +38,13 @@ public class TreatmentRoomController {
 	// create treatment details string array
 	static String[] detailsstr = new String[5];
 
+	/**
+	 * saves Patients ID, start time, finish time, duration and treatment
+	 * details to treatment_log
+	 */
 	public static void saveTreatmentDetails() {
 
+		// test message to make sure method begins running
 		System.out.println("saveTreatmentDetails invoked");
 
 		// Local Variables
@@ -72,40 +77,40 @@ public class TreatmentRoomController {
 			String treatmentDetailsText = treatmentDetails.getText().toString();
 
 			// *** Assign values to mysql query ***
-			command = "INSERT INTO treatment_log ('ID', 'Started', 'Finished', 'Duration', 'Details') VALUES (ID, startTimeString, finishTimeString, appointmentDuration, treatmentDetailsText)";
+			command = "INSERT INTO treatment_log VALUES (ID, startTimeString, finishTimeString, appointmentDuration, treatmentDetailsText)";
 
 			// *** Result Set ***
 			ResultSet rs = stmt.executeQuery(command);
 
-			// STEP 5: Extract data from result set
-			// Cycle through database for the result set
-			while (rs.next()) {
-				// Retrieve by column name
+			// command execution flag
+			System.out.println("Command executed");
 
-				// *** cycle through result set and assign values ***
-				String rset1 = rs.getString("ID");
-				String rset2 = rs.getString("Started");
-				String rset3 = rs.getString("Finished");
-				String rset4 = rs.getString("Duration");
-				String rset5 = rs.getString("Details");
-
-				// *** Test ***
-				System.out.println(rset1 + " | " + rset2 + " | " + rset3
-						+ " | " + rset4 + " | \n" + rset5);
-
-				// assign values to str array
-				detailsstr[0] = rset1;
-				detailsstr[1] = rset2;
-				detailsstr[2] = rset3;
-				detailsstr[3] = rset4;
-				detailsstr[4] = rset5;
-
-			}
+			// prints results to console
+			/*
+			 * // STEP 5: Extract data from result set // Cycle through database
+			 * for the result set while (rs.next()) { // Retrieve by column name
+			 * 
+			 * // *** cycle through result set and assign values *** String
+			 * rset1 = rs.getString("ID"); String rset2 =
+			 * rs.getString("Started"); String rset3 = rs.getString("Finished");
+			 * String rset4 = rs.getString("Duration"); String rset5 =
+			 * rs.getString("Details");
+			 * 
+			 * // *** Test *** System.out.println(rset1 + " | " + rset2 + " | "
+			 * + rset3 + " | " + rset4 + " | \n" + rset5);
+			 * 
+			 * // assign values to str array detailsstr[0] = rset1;
+			 * detailsstr[1] = rset2; detailsstr[2] = rset3; detailsstr[3] =
+			 * rset4; detailsstr[4] = rset5;
+			 * 
+			 * }
+			 */
 
 			// STEP 6: Clean-up environment
 			rs.close();
 			stmt.close();
 			conn.close();
+
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -133,14 +138,13 @@ public class TreatmentRoomController {
 
 	/**
 	 * A method to return the rsets of the correct patient search
-	 * 
 	 * @return rsets
 	 */
 	public String[] rsetPrint() {
 		// local variable
 		return detailsstr;
 	}
-
+	
 	// ************** class ************
 
 	// BUTTON
