@@ -28,9 +28,6 @@ public class Main extends Application {
 	            Scene scene = new Scene(root);
 	            primaryStage.setScene(scene);
 	            primaryStage.show();
-		//set icon of the application
-		Image applicationIcon = new Image(getClass().getResourceAsStream("PASicon.png"));
-		primaryStage.getIcons().add(applicationIcon);
 
 	            /**
 	             * 
