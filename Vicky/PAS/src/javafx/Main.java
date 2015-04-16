@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -15,13 +16,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-
+			// load new scene
 			Parent root = FXMLLoader.load(getClass().getResource(
 					"Login.fxml"));
 			Scene scene = new Scene(root, 320, 300);
 			stage.setTitle("Login");
 			stage.setScene(scene);
 			stage.show();
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -21,15 +21,14 @@ public class TreatmentRoom {
 	 */
 	private boolean isAvailable;
 
-	int count = 0;
+	/**
+	 * A count for the timer method
+	 */
+	private int countTimer;
 	
 	/**
-	 * How long a patient has been in the room
+	 * Instance of Patient object
 	 */
-	private void timer(long value) {
-		this.count += count;
-	}
-	
 	private Patient patient;
 
 	/**
@@ -88,17 +87,44 @@ public class TreatmentRoom {
 		this.isAvailable = isAvailable;
 	}
 
+	/**
+	 * Get the Patient object
+	 * @return patient
+	 */
 	public Patient getPatient() {
 		return patient;
 	}
 
+	/**
+	 * Set the Patient object
+	 * @param as
+	 */
 	public void setPatient(Patient as) {
 		this.patient = as;
 	}
 	
+	/**
+	 * Get the count of the treatment thread timer
+	 * @return countTimer
+	 */
+	public int getCountTimer(){
+		return countTimer;
+	}
+	
+	/**
+	 * Set the count of the treatment thread timer
+	 * @param countTimer
+	 */
+	public void setCountTimer(int countTimer){
+		this.countTimer = countTimer;
+	}
+	
+	/**
+	 * A to string method to print the results
+	 */
 	@Override
 	public String toString(){
-		return this.roomNumber + "  " + this.isAvailable + "  " + this.patient;
+		return this.roomNumber + " \t\t " + this.isAvailable + " \t\t    " + this.patient + "  *TreatTimer=[" + this.getCountTimer() + "]";
 	}
 
 }

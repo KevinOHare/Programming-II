@@ -1,6 +1,6 @@
 package onCallMessage;
 
-/*//everyone will need to download twilio jar 
+//everyone will need to download twilio jar 
  
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
@@ -25,7 +25,7 @@ public class OnCallMessage {
 	 
 		 // Build the parameters 
 		 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
-		 params.add(new BasicNameValuePair("Body", "Emergency come to hosiptal"));
+		 params.add(new BasicNameValuePair("Body", "Emergency Alert! You are required to attend the hosiptal immediately"));
 		 //staff numbers message sent to
 		 params.add(new BasicNameValuePair("To", "+447787945009"));
 		 //twilio number used to send message
@@ -36,6 +36,39 @@ public class OnCallMessage {
 		 System.out.println(message.getSid()); 
 	 } 
 	 
-	}
-
-*/
+	 public static void ManagerMessage1() throws TwilioRestException {
+		 
+		 TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
+		 
+		 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
+		 params.add(new BasicNameValuePair("Body", "Emergency Alert! The Accident and Emergency Queue is full."));
+		 //staff numbers message sent to
+		 params.add(new BasicNameValuePair("To", "+447787945009"));
+		 //twilio number used to send message
+		 params.add(new BasicNameValuePair("From", "+441249400057"));    
+	 
+		 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 
+		 Message message = messageFactory.create(params); 
+		 System.out.println(message.getSid()); 
+	 } 
+	 
+ public static void ManagerMessage2() throws TwilioRestException {
+		 
+		 TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
+		 
+		 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
+		 params.add(new BasicNameValuePair("Body", "Emergency Alert! Patient Waiting Times in Accident and Emergency "
+		 		+ "& Department are exceding 30 minutes."));
+		 //staff numbers message sent to
+		 params.add(new BasicNameValuePair("To", "+447787945009"));
+		 //twilio number used to send message
+		 params.add(new BasicNameValuePair("From", "+441249400057"));    
+	 
+		 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 
+		 Message message = messageFactory.create(params); 
+		 System.out.println(message.getSid()); 
+	 } 
+		 
+	 
+	 
+}

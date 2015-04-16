@@ -1,4 +1,4 @@
-package queue;
+package javafx;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ import java.util.TreeSet;
 
 import NHSsystem.Patient;
 import NHSsystem.Person;
-import javafx.SceneBuilderTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class QueueToJavaFx implements Initializable {
+public class QueueController implements Initializable {
 
 	// DEFINE TABLE
 	
