@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="/Library/Java/mysql-connector-java-5.1.34" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="/Library/Java/Twilio jar file" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="BuildPathsPropertyPage">
 		<item value="2" key="pageIndex"/>
 	</section>
