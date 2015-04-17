@@ -29,16 +29,13 @@ public class Main extends Application {
 	            primaryStage.setScene(scene);
 	            primaryStage.show();
 
-	            /**
-	             * 
 	            FXMLLoader anotherLoader = new FXMLLoader() ; // FXML for second stage
-	             
 	            Parent anotherRoot = FXMLLoader.load(getClass().getResource(
 						"Queue.fxml"));
 	            Scene anotherScene = new Scene(anotherRoot);
 	            anotherStage.setScene(anotherScene);
 	            anotherStage.show();
-				*/
+
 	        } catch (Exception exc) {
 
 	            exc.printStackTrace();
