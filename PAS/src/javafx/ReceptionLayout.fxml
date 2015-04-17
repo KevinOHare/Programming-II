@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="684.0" prefWidth="630.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.ReceptionLayoutController">
+<AnchorPane prefHeight="684.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.ReceptionLayoutController">
   <children>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="28.0" layoutX="214.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="203.0" />
     <Text layoutX="234.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Search" wrappingWidth="202.68292617797852">
@@ -18,21 +18,27 @@
     </Text>
     <TextField fx:id="firstName" layoutX="342.0" layoutY="61.0" />
     <TextField fx:id="lastName" layoutX="342.0" layoutY="106.0" />
-    <TextField fx:id="postcode" layoutX="342.0" layoutY="154.0" />
-    <TextField fx:id="id" layoutX="342.0" layoutY="198.0" />
+    <TextField fx:id="postcode" layoutX="342.0" layoutY="154.0">
+         <tooltip>
+            <Tooltip autoHide="true" text="Valid postcode includes a space e.g. BT27 6HD" textAlignment="JUSTIFY" wrapText="true" />
+         </tooltip></TextField>
+    <TextField fx:id="id" layoutX="342.0" layoutY="198.0">
+         <tooltip>
+            <Tooltip autoHide="true" text="Valid NHS Number is 10 numbers" wrapText="true" />
+         </tooltip></TextField>
     <Text layoutX="140.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" wrappingWidth="148.68292617797852" />
     <Text layoutX="140.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="148.68292617797852" />
     <Text layoutX="140.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postcode" wrappingWidth="148.68292617797852" />
     <Text layoutX="140.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NHS Number" wrappingWidth="148.68292617797852" />
     <TableView fx:id="tableID" layoutX="18.0" layoutY="302.0" prefHeight="285.0" prefWidth="591.0">
       <columns>
-        <TableColumn prefWidth="38.0" text="Title" fx:id="tableTitle" />
-        <TableColumn prefWidth="88.0" text="First Name" fx:id="tableFirstName" />
-        <TableColumn prefWidth="84.0" text="Last Name" fx:id="tableLastName" />
-        <TableColumn prefWidth="109.0" text="Street" fx:id="tableStreet" />
-        <TableColumn prefWidth="101.0" text="City" fx:id="tableCity" />
-        <TableColumn prefWidth="78.0" text="Postcode" fx:id="tablePostcode" />
-        <TableColumn prefWidth="91.0" text="Telephone" fx:id="tableTelephone" />
+        <TableColumn fx:id="tableTitle" prefWidth="38.0" text="Title" />
+        <TableColumn fx:id="tableFirstName" prefWidth="88.0" text="First Name" />
+        <TableColumn fx:id="tableLastName" prefWidth="84.0" text="Last Name" />
+        <TableColumn fx:id="tableStreet" prefWidth="109.0" text="Street" />
+        <TableColumn fx:id="tableCity" prefWidth="101.0" text="City" />
+        <TableColumn fx:id="tablePostcode" prefWidth="78.0" text="Postcode" />
+        <TableColumn fx:id="tableTelephone" prefWidth="91.0" text="Telephone" />
       </columns>
     </TableView>
     <Text layoutX="24.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Results :" wrappingWidth="133.68292617797852">
@@ -42,5 +48,6 @@
     </Text>
     <Button layoutX="444.0" layoutY="616.0" mnemonicParsing="false" onAction="#handleActionNewPage" prefHeight="26.0" prefWidth="119.0" text="Add to Triage" />
     <Button layoutX="363.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleButtonAction" prefWidth="97.0" text="Search" />
+      <Label fx:id="searchValidation" layoutX="158.0" layoutY="250.0" prefHeight="16.0" prefWidth="182.0" />
   </children>
 </AnchorPane>
