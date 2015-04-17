@@ -1,6 +1,6 @@
 package onCallMessage;
 
-/*//everyone will need to download twilio jar 
+//everyone will need to download twilio jar 
  
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
@@ -17,8 +17,8 @@ public class OnCallMessage {
 	
 	
 	 // Find your Account Sid and Token at twilio.com/user/account 
-	 public static final String ACCOUNT_SID = "ACbd1c2283f3ce08388849962a45c65c8a"; 
-	 public static final String AUTH_TOKEN = "25c9cda6ed1d2dd17d5a8d362082e37a"; 
+	 public static final String ACCOUNT_SID = "ACa88ba7fe3549f739540f8c36fe1ece44"; 
+	 public static final String AUTH_TOKEN = "67a46d885dbf4292874797d21fe57ca8"; 
 	 
 	 public static void main(String[]args) throws TwilioRestException { 
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
@@ -27,9 +27,9 @@ public class OnCallMessage {
 		 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
 		 params.add(new BasicNameValuePair("Body", "Emergency come to hosiptal"));
 		 //staff numbers message sent to
-		 params.add(new BasicNameValuePair("To", "+447787945009"));
+		 params.add(new BasicNameValuePair("To", "+447713901488"));
 		 //twilio number used to send message
-		 params.add(new BasicNameValuePair("From", "+441249400057"));    
+		 params.add(new BasicNameValuePair("From", "+441440966046"));    
 	 
 		 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 
 		 Message message = messageFactory.create(params); 
@@ -38,4 +38,3 @@ public class OnCallMessage {
 	 
 	}
 
-*/
