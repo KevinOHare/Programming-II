@@ -31,36 +31,34 @@ public class QueueController implements Initializable {
 
 	@FXML
 	TextArea patientQueue;
-	
 
 	// INSTANCES FOR PATIENT OBJECT
 
 	static ArrayList<Patient> alist = new ArrayList<Patient>();
-	
+
 	static LinkedList<Patient> llist = new LinkedList<Patient>();
 
 	static SortedSet<Patient> sort = new TreeSet<Patient>();
 
 	static PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
-	
+
 	String[] stringPa = new String[10];
-	
-	
+
 	// INSTANCES FOR TREATMENT ROOM OBJECT
-	
+
 	static LinkedList<TreatmentRoom> treat = new LinkedList<TreatmentRoom>();
 
 	static TreatmentRoom[] treatAr = new TreatmentRoom[5];
-	
+
 	static TreatmentRoom room1 = new TreatmentRoom(1, true);
 	static TreatmentRoom room2 = new TreatmentRoom(2, true);
 	static TreatmentRoom room3 = new TreatmentRoom(3, true);
 	static TreatmentRoom room4 = new TreatmentRoom(4, true);
 	static TreatmentRoom room5 = new TreatmentRoom(5, true);
-	
+
 	String[] stringAr = new String[5];
 
-	// ************************ TEST DATA  ***********************************
+	// ************************ TEST DATA ***********************************
 
 	static Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
 			"Lisburn", "BT67 524", "098 38563", "3759-283", 3);
@@ -85,11 +83,9 @@ public class QueueController implements Initializable {
 
 	// ************************************************************************
 
-	
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		// **** Treatment Rooms ****
 
 		treat.add(room1);
@@ -98,29 +94,25 @@ public class QueueController implements Initializable {
 		treat.add(room4);
 		treat.add(room5);
 
-		// **** Queue ****
+		// **** Patient Queue Arrays ****
 
-		
-
-		// add to Priority queue
+		// ******************** TEST DATA ****************
 		/*
 		 * pQueue.add(pat1); pQueue.add(pat2); pQueue.add(pat3);
 		 * pQueue.add(pat4); pQueue.add(pat5); pQueue.add(pat6);
 		 * pQueue.add(pat7); pQueue.add(pat8); pQueue.add(pat9);
 		 * pQueue.add(pat10);
 		 */
+		// **************************************************
 
+		// add to array list
+		//for (int i = 0; i < alist.size(); i++) {
+		//	alist.get(i).
+		//}
+		
+		
 		// add to sort queue
 		for (Patient ae : pQueue) {
-			// instantiate classes to activate the
-			// start time at the queue
-			PatientThread pt = new PatientThread(ae);
-			Runnable rr = new Runnable() {
-				public void run() {
-					pt.run();
-				}
-			};
-			new Thread(rr).start();
 			// add to sort queue
 			sort.add(ae);
 		}
@@ -128,44 +120,62 @@ public class QueueController implements Initializable {
 		// add to array list for editing
 		// the working queue
 		for (Patient ju : sort) {
-			alist.add(ju);
+			// instantiate classes to activate the
+			// start time at the queue
+			PatientThread pt = new PatientThread(ju);
+			Runnable rr = new Runnable() {
+				public void run() {
+					pt.run();
+				}
+			};
+			new Thread(rr).start();
+			llist.add(ju);
 		}
 
+		// In order to refresh the page every few seconds, the timeline feature is
+		// used to carry out the action event below
+		
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2),
 				new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent actionEvent) {
 
+						// call to method to check if new patients
+						// can be added
 						addToQueue();
 
-						// print out sort queue results
-
-						// System.out.println("****** Treatment Room *******");
-						// System.out.println("Room Number \t Room Available?    Patient Details ");
+						// *** Treatment Room Queue ***
+						
+						// set queue results to string array for 
+						// printing 
 						for (int i = 0; i < treat.size(); i++) {
-							// System.out.println(tr.toString());
 							stringAr[i] = treat.get(i).toString();
 						}
 
+						// setting the text box with the refreshed data
 						treatmentRoomQueue.setText(stringAr[0] + "\n"
 								+ stringAr[1] + "\n" + stringAr[2] + "\n"
 								+ stringAr[3] + "\n" + stringAr[4]);
 
-						// System.out.println("********** Queue ************");
-						// System.out.println("Name\t\t  Address & Contact Details & ID number");
+						// *** Patient Queue ***
 
-						for (int i = 0; i < alist.size(); i++) {
-							stringPa[i] = alist.get(i).toString();
+						// set queue results to string array for
+						// printing
+						for (int i = 0; i < llist.size(); i++) {
+							stringPa[i] = llist.get(i).toString();
 						}
 
+						// setting the text box with the refreshed data
 						patientQueue.setText(stringPa[0] + "\n" + stringPa[1]
 								+ "\n" + stringPa[2] + "\n" + stringPa[3]
 								+ "\n" + stringPa[4] + "\n" + stringPa[5]
 								+ "\n" + stringPa[6] + "\n" + stringPa[7]
 								+ "\n" + stringPa[8] + "\n" + stringPa[9]);
 
-						for (Patient as : alist) {
-							// System.out.println(as.toString());
+						
+						// check if a Patient can get into a treatment room
+						for (Patient as : llist) {
+							
 							if (treat.getFirst().isAvailable() == true) {
 								treat.getFirst().setPatient(as);
 								treat.getFirst().setAvailable(false);
@@ -225,9 +235,9 @@ public class QueueController implements Initializable {
 
 						// to remove patients from the list that are in
 						// treatment rooms
-						for (int i = 0; i < alist.size(); i++) {
-							if (alist.get(i).getInRoom() == true) {
-								alist.remove(alist.get(i));
+						for (int i = 0; i < llist.size(); i++) {
+							if (llist.get(i).getInRoom() == true) {
+								llist.remove(llist.get(i));
 							}
 						}
 
@@ -251,17 +261,19 @@ public class QueueController implements Initializable {
 						if (treat.getLast().getCountTimer() == 49) {
 							treat.getLast().setAvailable(true);
 						}
-
-						// System.out.println("\n*****************************************\n");
-
 					}
 				}));
+		// it will continue to cycle and refresh
 		timeline.setCycleCount(Animation.INDEFINITE);
+		// begin again
 		timeline.play();
 	}
+
 	
-	
-	
+	/**
+	 * A method to invoke the treatment room thread class timer count
+	 * @param tr
+	 */
 	public static void startTimer(TreatmentRoom tr) {
 
 		// instantiate classes to activate the
@@ -275,17 +287,26 @@ public class QueueController implements Initializable {
 		new Thread(r).start();
 	}
 
+	
+	/**
+	 * A method to instantiate the information from 
+	 * Triage controller to add to queue
+	 */
 	public void addToQueue() {
 
+		// Instance of Triage Controller
 		TriageController tc = new TriageController();
+		// Instance of the Patient object
 		Patient ptq = new Patient();
 
+		// find out if triage controller has data 
+		// in order to add data to patient object
 		if (tc.firstNamePass != null) {
 			ptq.setFirstName(tc.firstNamePass);
 			ptq.setLastName(tc.lastNamePass);
 			ptq.setTriage(tc.triagePass);
-
-			alist.add(ptq);
+			// add to array for sorting
+			llist.add(ptq);
 		}
 	}
 
