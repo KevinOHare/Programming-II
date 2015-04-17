@@ -31,12 +31,12 @@ public class LoginController {
 				&& (password.getText().equals("password"))) {
 			// open new window centred
 			Parent root = FXMLLoader.load(getClass().getResource(
-					"ReceptionLayout.fxml"));
+					"TreatmentRoomController.fxml"));
 			Scene scene = new Scene(root, 630, 650);
 			Stage stage = (Stage) ((Node) event.getSource()).getScene()
 					.getWindow();
 			stage.setScene(scene);
-			stage.setTitle("Reception Screen");
+			stage.setTitle("Treatment room screen");
 			stage.centerOnScreen();
 			stage.show();
 		}

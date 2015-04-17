@@ -14,18 +14,35 @@ public class TreatmentRoomController {
 
 	// TEXT FIELDS
 	@FXML
+	public static TextField firstName;
+	
+	@FXML
+	public static TextField surname;
+	
+	@FXML
+	public static TextField bloodType;
+	
+	@FXML
+	public static TextField allergies;
+	
+	@FXML
 	public static TextField treatmentDetails;
 
-	public static Date startTime = new Date();
+	//public static Date startTime = new Date();
+	public static String startTime;
+	
+	//public static Date finishTime;
+	public static String finishTime;
 
-	public static Date finishTime;
-
+	
 	public static void main(String[] args) {
 
 		//startTime = new Date();
+		startTime = "test";
 		System.out.println("startTime created");
 
 	}
+	
 
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -68,11 +85,14 @@ public class TreatmentRoomController {
 
 			String ID = "test";
 
-			String startTimeString = startTime.toString();
+			//String startTimeString = startTime.toString();
+			String startTimeString = "test";
 
-			String finishTimeString = finishTime.toString();
+			//String finishTimeString = finishTime.toString();
+			String finishTimeString = "test";
 
-			int appointmentDuration = startTime.compareTo(finishTime);
+			//int appointmentDuration = startTime.compareTo(finishTime);
+			int appointmentDuration = 0;
 
 			String treatmentDetailsText = treatmentDetails.getText().toString();
 
@@ -151,7 +171,8 @@ public class TreatmentRoomController {
 	@FXML
 	private void handleButtonAction() {
 
-		finishTime = new Date();
+		//finishTime = new Date();
+		finishTime = "finish time";
 		System.out.println("finish time created");
 
 		saveTreatmentDetails();
