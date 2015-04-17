@@ -411,6 +411,15 @@ public class QueueController implements Initializable {
 				// a boolean assigned within patient
 				// object to execute the remove later
 				ep.setInRoom(true);
+			} else if (onCallTeam.isAvailable() == true) { // if all treatment rooms full
+				onCallTeam.setPatient(ep);
+				onCallTeam.setAvailable(false);
+				// start count for treatment room
+				// using Treatment room thread
+				startTimer(onCallTeam);
+				// a boolean assigned within patient
+				// object to execute the remove later
+				ep.setInRoom(true);
 			}
 		}
 		
