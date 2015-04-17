@@ -1,11 +1,19 @@
 package javafx;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,10 +44,8 @@ public class TreatmentRoomController implements Initializable {
 	@FXML
 	TextField treatmentDetails;
 	
-	/*
 	@FXML
-	private Button myButton;
-	*/
+	private Button saveAndClearButton;
 
 	// public static Date startTime = new Date();
 	// String startTime;
@@ -65,6 +71,18 @@ public class TreatmentRoomController implements Initializable {
 		bloodTypeLabel.setText("testBloodType");
 		
 		allergiesLabel.setText("testAllergies");
+		
+		beginTimeLabel.setText("testStartTime");
+
+		saveAndClearButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				saveTreatmentDetails();
+				
+			}
+		});
 		
 	}
 
@@ -102,16 +120,17 @@ public class TreatmentRoomController implements Initializable {
 
 			// Passed in values being applied to SQL query
 
-			String ID = "test";
+			String ID = "testID";
 
 			// String startTimeString = startTime.toString();
-			String startTimeString = "test";
+			String startTimeString = "testStartTimeString";
 
 			// String finishTimeString = finishTime.toString();
-			String finishTimeString = "test";
+			String finishTimeString = "testFinishTimeString";
 
 			// int appointmentDuration = startTime.compareTo(finishTime);
-			int appointmentDuration = 0;
+			// int appointmentDuration = 0;
+			String appointmentDuration = "test";
 
 			String treatmentDetailsText = treatmentDetails.getText().toString();
 
