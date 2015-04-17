@@ -111,9 +111,7 @@ public class QueueController implements Initializable {
 		
 		  pQueue.add(pat1); pQueue.add(pat2); pQueue.add(pat3);
 		  pQueue.add(pat4); pQueue.add(pat5); pQueue.add(pat6);
-		/* pQueue.add(pat7); pQueue.add(pat8); pQueue.add(pat9);
-		 * pQueue.add(pat10);
-		 */
+		 
 		// **************************************************
 
 		// add to array list

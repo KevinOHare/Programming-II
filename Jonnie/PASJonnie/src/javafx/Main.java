@@ -31,6 +31,14 @@ public class Main extends Application {
 			Image applicationIcon = new Image(getClass().getResourceAsStream(
 					"PASicon.png"));
 			primaryStage.getIcons().add(applicationIcon);
+			
+			FXMLLoader loader2 = new FXMLLoader(); // FXML for primary stage
+			Parent root2 = FXMLLoader.load(getClass().getResource("Queue.fxml"));
+			Scene scene2 = new Scene(root2);
+			anotherStage.setScene(scene2);
+			anotherStage.show();
+			// set icon of the application
+			
 
 		} catch (Exception exc) {
 
