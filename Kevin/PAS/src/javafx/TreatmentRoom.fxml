@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.TreatmentRoomController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.QueueController">
   <children>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="27.0" prefHeight="63.0" prefWidth="515.0" text="Treatment">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="27.0" prefHeight="63.0" prefWidth="515.0" text="Treatment">
       <font>
         <Font size="27.0" />
       </font>
@@ -21,10 +21,10 @@
     <Label id="bloodType" layoutX="295.0" layoutY="90.0" prefHeight="26.0" prefWidth="64.0" text="Blood type :" />
     <Label id="allergies" layoutX="295.0" layoutY="116.0" prefHeight="26.0" prefWidth="70.00022207030997" text="Allergies     :" />
     <Button fx:id="saveAndClearButton" layoutX="454.0" layoutY="515.0" mnemonicParsing="false" onAction="#saveTreatmentDetails" text="Save and Clear" />
-    <TextArea fx:id="firstName" layoutX="103.0" layoutY="90.0" prefHeight="26.0" prefWidth="192.0" wrapText="true" />
-    <TextArea fx:id="surname" layoutX="103.0" layoutY="116.0" prefHeight="26.0" prefWidth="192.0" wrapText="true" />
-    <TextArea fx:id="bloodType" layoutX="361.0" layoutY="90.0" prefHeight="26.0" prefWidth="192.0" wrapText="true" />
-    <TextArea fx:id="allergies" layoutX="361.0" layoutY="116.0" prefHeight="26.0" prefWidth="192.0" wrapText="true" />
-    <TextArea fx:id="startTime" layoutX="167.0" layoutY="142.0" prefHeight="26.0" prefWidth="192.0" wrapText="true" />
+    <Label id="firstName" fx:id="firstNameLabel" layoutX="101.0" layoutY="90.0" prefHeight="26.0" prefWidth="194.0" text="" wrapText="false" />
+    <Label id="firstName" fx:id="surnameLabel" layoutX="102.0" layoutY="116.0" prefHeight="26.0" prefWidth="194.0" text="" wrapText="false" />
+    <Label id="firstName" fx:id="beginTimeLabel" layoutX="165.0" layoutY="142.0" prefHeight="26.0" prefWidth="194.0" text="" wrapText="false" />
+    <Label id="firstName" fx:id="bloodTypeLabel" layoutX="365.0" layoutY="90.0" prefHeight="26.0" prefWidth="194.0" text="" wrapText="false" />
+    <Label id="firstName" fx:id="allergiesLabel" layoutX="365.0" layoutY="116.0" prefHeight="26.0" prefWidth="194.0" text="" wrapText="false" />
   </children>
 </Pane>

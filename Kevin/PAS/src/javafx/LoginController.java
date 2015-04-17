@@ -52,35 +52,53 @@ public class LoginController extends Application implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 				Parent root;
+				
+				 Stage anotherStage = new Stage();
+				
 				try {
 					if (fieldUsername.getText().equals("triage")
 							&& fieldPassword.getText().equals("password")) {
 						root = FXMLLoader.load(getClass().getResource(
-								"/javafx/Triage.fxml"));
+								"/javafx/Queue.fxml"));
 						Stage primaryStage = new Stage();
-						Scene scene = new Scene(root, 500, 600);
-						primaryStage.setTitle("Triage Page");
+						Scene scene = new Scene(root, 1400, 684);
+						primaryStage.setTitle("Queue Page");
 						primaryStage.setScene(scene);
 						primaryStage.show();
 						Stage stage = (Stage) myButton.getScene().getWindow();
+						
+						// FXML for second stage			        
+			            Parent anotherRoot = FXMLLoader.load(getClass().getResource("Triage.fxml"));
+			            Scene anotherScene = new Scene(anotherRoot);
+			            anotherStage.setScene(anotherScene);
+						anotherStage.setTitle("Triage Page");
+			            anotherStage.show();
 						stage.close();
 
 						// set icon of the application
 						Image applicationIcon = new Image(getClass()
 								.getResourceAsStream("PASicon.png"));
 						primaryStage.getIcons().add(applicationIcon);
+						
 
 					}
 					if (fieldUsername.getText().equals("admin")
 							&& fieldPassword.getText().equals("password")) {
 						root = FXMLLoader.load(getClass().getResource(
-								"/javafx/ReceptionLayout.fxml"));
+								"/javafx/Queue.fxml"));
 						Stage primaryStage = new Stage();
-						Scene scene = new Scene(root, 630, 684);
-						primaryStage.setTitle("Reception Page");
+						Scene scene = new Scene(root, 1400, 684);
+						primaryStage.setTitle("Queue Page");
 						primaryStage.setScene(scene);
 						primaryStage.show();
 						Stage stage = (Stage) myButton.getScene().getWindow();
+						
+						// FXML for second stage			        
+			            Parent anotherRoot = FXMLLoader.load(getClass().getResource("ReceptionLayout.fxml"));
+			            Scene anotherScene = new Scene(anotherRoot);
+			            anotherStage.setScene(anotherScene);
+						anotherStage.setTitle("Reception Page");
+			            anotherStage.show();
 						stage.close();
 
 						// set icon of the application
@@ -92,13 +110,20 @@ public class LoginController extends Application implements Initializable {
 					if (fieldUsername.getText().equals("doctor")
 							&& fieldPassword.getText().equals("password")) {
 						root = FXMLLoader.load(getClass().getResource(
-								"/javafx/TreatmentRoom.fxml"));
+								"/javafx/Queue.fxml"));
 						Stage primaryStage = new Stage();
-						Scene scene = new Scene(root, 630, 684);
+						Scene scene = new Scene(root, 1400, 684);
 						primaryStage.setTitle("Treatment Room");
 						primaryStage.setScene(scene);
 						primaryStage.show();
 						Stage stage = (Stage) myButton.getScene().getWindow();
+						
+						// FXML for second stage			        
+			            Parent anotherRoot = FXMLLoader.load(getClass().getResource("TreatmentRoom.fxml"));
+			            Scene anotherScene = new Scene(anotherRoot);
+			            anotherStage.setScene(anotherScene);
+						anotherStage.setTitle("Treatment Room Page");
+			            anotherStage.show();
 						stage.close();
 
 						// set icon of the application

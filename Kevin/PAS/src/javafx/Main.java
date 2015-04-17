@@ -23,7 +23,7 @@ public class Main extends Application {
 
 		try {
 			FXMLLoader loader = new FXMLLoader(); // FXML for primary stage
-			Parent root = FXMLLoader.load(getClass().getResource("TreatmentRoom.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
