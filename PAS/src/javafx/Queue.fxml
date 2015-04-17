@@ -7,23 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="1005.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.QueueController">
+<Pane maxHeight="700" maxWidth="1400" minHeight="700" minWidth="1400" prefHeight="700" prefWidth="1400" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.QueueController">
   <children>
-    <Label layoutX="37.0" layoutY="7.0" prefHeight="63.0" prefWidth="515.0" text="Queue System">
+    <Label layoutX="44.0" layoutY="8.0" prefHeight="63.0" prefWidth="202.0" text="Queue System">
       <font>
-        <Font size="27.0" />
+        <Font name="System Bold" size="27.0" />
       </font>
     </Label>
-    <TextArea fx:id="treatmentRoomQueue" layoutX="26.0" layoutY="107.0" prefHeight="99.0" prefWidth="944.9998779296875" wrapText="true" />
-    <Label layoutX="37.0" layoutY="80.0" text="Treatment Room Queue">
+    <TextArea fx:id="treatmentRoomQueue" layoutX="44.0" layoutY="119.0" prefHeight="156.0" prefWidth="1274.0" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+    <Label layoutX="44.0" layoutY="93.0" text="Treatment Room Queue">
       <font>
         <Font size="14.0" fx:id="x1" />
       </font>
     </Label>
-    <TextArea fx:id="patientQueue" layoutX="27.0" layoutY="267.0" prefHeight="223.0" prefWidth="943.9998779296875" wrapText="true" />
-    <Label font="$x1" layoutX="40.0" layoutY="238.0" text="Patient Queue" />
-    <Button layoutX="138.0" layoutY="512.0" mnemonicParsing="false" prefWidth="109.0" text="Edit Triage" />
-    <ChoiceBox layoutX="54.0" layoutY="512.0" prefWidth="58.0">
+    <TextArea fx:id="patientQueue" layoutX="44.0" layoutY="318.0" prefHeight="215.0" prefWidth="1274.0" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
+    <Label font="$x1" layoutX="44.0" layoutY="290.0" text="Patient Queue" />
+    <Button layoutX="676.0" layoutY="562.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Edit Triage" />
+    <ChoiceBox layoutX="596.0" layoutY="562.0" prefHeight="25.0" prefWidth="65.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -32,8 +38,8 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <Button layoutX="411.0" layoutY="512.0" mnemonicParsing="false" prefWidth="129.0" text="Treatment Room" />
-    <ChoiceBox layoutX="323.0" layoutY="512.0" prefWidth="65.0">
+    <Button layoutX="676.0" layoutY="603.0" mnemonicParsing="false" prefWidth="129.0" text="Treatment Room" />
+    <ChoiceBox layoutX="596.0" layoutY="603.0" prefWidth="65.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
