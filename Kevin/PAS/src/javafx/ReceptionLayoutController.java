@@ -30,6 +30,7 @@ public class ReceptionLayoutController implements Initializable {
 	public static String allergyPass;
 	
 	String tempAllergy;
+	
 
 	// TEXT FIELDS
 

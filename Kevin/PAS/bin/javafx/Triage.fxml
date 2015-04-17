@@ -27,8 +27,7 @@
         <Font size="29.0" />
       </font>
     </Label>
-    <Button layoutX="388.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleButtonNextPage" prefHeight="25.0" prefWidth="60.0" text="Save" />
-    <Button layoutX="319.0" layoutY="309.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Edit" />
+    <Button layoutX="388.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleButtonTransfer" prefHeight="25.0" prefWidth="60.0" text="Save" />
     <ChoiceBox fx:id="box" layoutX="27.0" layoutY="309.0" prefHeight="25.0" prefWidth="158.0">
       <items>
         <FXCollections fx:factory="observableArrayList">

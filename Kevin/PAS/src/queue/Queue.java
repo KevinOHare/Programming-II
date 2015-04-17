@@ -19,8 +19,6 @@ public class Queue {
 
 	static ArrayList<Patient> alist = new ArrayList<Patient>();
 
-	static LinkedList<Patient> link = new LinkedList<Patient>();
-
 	static SortedSet<Patient> sort = new TreeSet<Patient>();
 
 	static PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
@@ -77,22 +75,18 @@ public class Queue {
 		System.out.println("*******************************");
 		System.out.println("*********** Queue *************\n");
 
-		// add to linked list
-		link.add(pat1);
-		link.add(pat2);
-		link.add(pat3);
-		link.add(pat4);
-		link.add(pat5);
-		link.add(pat6);
-		link.add(pat7);
-		link.add(pat8);
-		link.add(pat9);
-		link.add(pat10);
+		// add to Priority queue
+		pQueue.add(pat1);
+		pQueue.add(pat2);
+		pQueue.add(pat3);
+		pQueue.add(pat4);
+		pQueue.add(pat5);
+		pQueue.add(pat6);
+		pQueue.add(pat7);
+		pQueue.add(pat8);
+		pQueue.add(pat9);
+		pQueue.add(pat10);
 
-		// add to priority queue
-		for (Patient ap : link) {
-			pQueue.add(ap);
-		}
 
 		// add to sort queue
 		for (Patient ae : pQueue) {
@@ -196,6 +190,26 @@ public class Queue {
 				}
 			}
 			
+			// check if the treatment rooms are finished
+			// with patients
+			if (treat.getFirst().getCountTimer() == 49){
+				treat.getFirst().setAvailable(true);
+			}
+			if (treat.get(1).getCountTimer() == 49){
+				treat.get(1).setAvailable(true);
+			}
+			if (treat.get(2).getCountTimer() == 49){
+				treat.get(2).setAvailable(true);
+			}
+			if (treat.get(3).getCountTimer() == 49){
+				treat.get(3).setAvailable(true);
+			}
+			if (treat.get(4).getCountTimer() == 49){
+				treat.get(4).setAvailable(true);
+			}
+			if (treat.getLast().getCountTimer() == 49){
+				treat.getLast().setAvailable(true);
+			}
 
 			System.out.println("\n*****************************************\n");
 			Thread.sleep(4000);

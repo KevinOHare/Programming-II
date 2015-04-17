@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import NHSsystem.Patient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +23,17 @@ import javafx.stage.Stage;
 
 public class TriageController implements Initializable {
 
+	// LOCAL VARIABLES
+	
+	public static String firstNamePass;
+	public static String lastNamePass;
+	public static int triagePass;
+	
+	// INSTANCE VARIABLES
+	
+	TriageTable tt = new TriageTable();
+	ReceptionLayoutController rlc = new ReceptionLayoutController();
+
 	// BUTTON
 
 	@FXML
@@ -33,15 +45,15 @@ public class TriageController implements Initializable {
 	}
 
 	@FXML
-	private void handleButtonNextPage(ActionEvent event) throws IOException {
-		// open new window centred
-		Parent root = FXMLLoader.load(getClass().getResource("Queue.fxml"));
-		Scene scene = new Scene(root, 600, 550);
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.setTitle("Queue Screen");
-		stage.centerOnScreen();
-		stage.show();
+	private void handleButtonTransfer() {
+		
+		// assign values to static strings and ints
+		// for transfer to queue system
+		
+		firstNamePass = tt.getFirstName();
+		lastNamePass = tt.getLastName();
+		triagePass = tt.getCondition();
+		
 	}
 
 	// CHOICEBOX
@@ -104,10 +116,6 @@ public class TriageController implements Initializable {
 	 */
 	public void setData() {
 
-		// Instance Variables
-		TriageTable tt = new TriageTable();
-		ReceptionLayoutController rlc = new ReceptionLayoutController();
-
 		// Local Variables
 		String str = (String) box.getValue();
 
@@ -137,10 +145,6 @@ public class TriageController implements Initializable {
 	 * @param strg
 	 */
 	public void setData(String strg) {
-
-		// Instance Variables
-		TriageTable tt = new TriageTable();
-		ReceptionLayoutController rlc = new ReceptionLayoutController();
 
 		// set values for table
 		tt.setNhs(rlc.nhsPass);
