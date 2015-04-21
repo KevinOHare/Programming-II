@@ -18,35 +18,25 @@ public class TreatmentRoomController implements Initializable {
 
 	// TEXT FIELDS
 	@FXML
-	TextField firstName;
-	
-	@FXML
-	public static TextField surname;
-	
-	@FXML
-	public static TextField bloodType;
-	
-	@FXML
-	public static TextField allergies;
-	
-	@FXML
-	public static TextField treatmentDetails;
+	public static TextField firstNameText;
 
-	//public static Date startTime = new Date();
-	public static String startTime;
-	
-	//public static Date finishTime;
-	public static String finishTime;
+	@FXML
+	public static TextField surnameText;
 
-	
-	public static void main(String[] args) {
+	@FXML
+	public static TextField bloodTypeText;
 
-		//startTime = new Date();
-		startTime = "test";
-		System.out.println("startTime created");
+	@FXML
+	public static TextField allergiesText;
 
-	}
-	
+	@FXML
+	public static TextField treatmentDetailsText;
+
+	// public static Date startTime = new Date();
+	public static TextField startTimeText;
+
+	// public static Date finishTime;
+	public static String finishTimeText;
 
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -56,8 +46,20 @@ public class TreatmentRoomController implements Initializable {
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
 
-	// create treatment details string array
-	static String[] detailsstr = new String[5];
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		firstNameText.setText("testFirstName");
+
+		surnameText.setText("testSurname");
+
+		bloodTypeText.setText("testBloodType");
+
+		allergiesText.setText("testAllergies");
+
+		startTimeText.setText("testStartTime");
+
+	}
 
 	/**
 	 * saves Patients ID, start time, finish time, duration and treatment
@@ -89,46 +91,26 @@ public class TreatmentRoomController implements Initializable {
 
 			String ID = "test";
 
-			//String startTimeString = startTime.toString();
+			// String startTimeString = startTime.toString();
 			String startTimeString = "test";
 
-			//String finishTimeString = finishTime.toString();
+			// String finishTimeString = finishTime.toString();
 			String finishTimeString = "test";
 
-			//int appointmentDuration = startTime.compareTo(finishTime);
+			// int appointmentDuration = startTime.compareTo(finishTime);
 			int appointmentDuration = 0;
 
-			String treatmentDetailsText = treatmentDetails.getText().toString();
+			String treatmentDetailsString = treatmentDetailsText.getText()
+					.toString();
 
 			// *** Assign values to mysql query ***
-			command = "INSERT INTO treatment_log VALUES (ID, startTimeString, finishTimeString, appointmentDuration, treatmentDetailsText)";
+			command = "INSERT INTO treatment_log VALUES (ID, startTimeString, finishTimeString, appointmentDuration, treatmentDetailsString)";
 
 			// *** Result Set ***
 			ResultSet rs = stmt.executeQuery(command);
 
 			// command execution flag
 			System.out.println("Command executed");
-
-			// prints results to console
-			/*
-			 * // STEP 5: Extract data from result set // Cycle through database
-			 * for the result set while (rs.next()) { // Retrieve by column name
-			 * 
-			 * // *** cycle through result set and assign values *** String
-			 * rset1 = rs.getString("ID"); String rset2 =
-			 * rs.getString("Started"); String rset3 = rs.getString("Finished");
-			 * String rset4 = rs.getString("Duration"); String rset5 =
-			 * rs.getString("Details");
-			 * 
-			 * // *** Test *** System.out.println(rset1 + " | " + rset2 + " | "
-			 * + rset3 + " | " + rset4 + " | \n" + rset5);
-			 * 
-			 * // assign values to str array detailsstr[0] = rset1;
-			 * detailsstr[1] = rset2; detailsstr[2] = rset3; detailsstr[3] =
-			 * rset4; detailsstr[4] = rset5;
-			 * 
-			 * }
-			 */
 
 			// STEP 6: Clean-up environment
 			rs.close();
@@ -160,33 +142,16 @@ public class TreatmentRoomController implements Initializable {
 		System.out.println("Goodbye!");
 	}// end main
 
-	/**
-	 * A method to return the rsets of the correct patient search
-	 * @return rsets
-	 */
-	public String[] rsetPrint() {
-		// local variable
-		return detailsstr;
-	}
-	
-	// ************** class ************
-
 	// BUTTON
 	@FXML
 	private void handleButtonAction() {
 
-		//finishTime = new Date();
-		finishTime = "finish time";
+		// finishTime = new Date();
+		finishTimeText = "finish time";
 		System.out.println("finish time created");
 
 		saveTreatmentDetails();
 
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
