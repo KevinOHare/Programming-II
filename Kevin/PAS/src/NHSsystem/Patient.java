@@ -32,6 +32,12 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * in a treatment room
 	 */
 	private Boolean inRoom = false;
+	
+	/**
+	 * Instance variable to indicate if patient is 
+	 * is an emergency condition
+	 */
+	private boolean emergencyCondition;
 
 	/**
 	 * Default constructor
@@ -54,7 +60,7 @@ public class Patient extends Person implements Comparable<Patient> {
 	 */
 	public Patient(String title, String firstName, String lastName,
 			String street, String city, String postcode, String contactNumber,
-			String nhsNumber, int triage) {
+			String nhsNumber, int triage, boolean emergencyCondition) {
 		super(title, firstName, lastName, street, city, postcode, contactNumber);
 		this.nhsNumber = nhsNumber;
 		this.setTriage(triage);
@@ -131,6 +137,21 @@ public class Patient extends Person implements Comparable<Patient> {
 		this.inRoom = inRoom;
 	}
 	
+	/**
+	 * @return the emergencyCondition
+	 */
+	public boolean isEmergencyCondition() {
+		return emergencyCondition;
+	}
+
+	/**
+	 * to set emergencyCondition
+	 * @param emergencyCondition 
+	 */
+	public void setEmergencyCondition(boolean emergencyCondition) {
+		this.emergencyCondition = emergencyCondition;
+	}
+	
 	//public boolean equals(Patient other) {
 	//	return this.getTriage() == other.getTriage();
 	//}
@@ -158,10 +179,10 @@ public class Patient extends Person implements Comparable<Patient> {
 	 */
 	@Override
 	public String toString() {
-		return this.getTitle() + "  " + this.getFirstName() + "  "
-				+ this.getLastName() + "  " + this.getStreet() + "  "
-				+ this.getCity() + "  " + this.getPostcode() + "  "
-				+ this.getContactNumber() + "  " + this.getNhsNumber() + "  *Triage:{" + this.getTriage() + "}  *QueueTimer:[" + this.getCountTimer() + "]";
+		return this.getFirstName() + "  "
+				+ this.getLastName() + "   ID:" + this.getNhsNumber() + "  |  *Triage:{" + this.getTriage() + "}  *QueueTimer:[" + this.getCountTimer() + "]  |";
 
 	}
+
 }
+
