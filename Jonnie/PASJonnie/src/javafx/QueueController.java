@@ -317,6 +317,36 @@ public class QueueController implements Initializable {
 							}
 						}
 
+						// JL checks if a patient's waiting time has exceeded 30
+						// minutes
+						boolean waitingTimeOver30Mins = false;
+						// JL need access to patient threads to get actual waiting times
+						if ((pat1.getCountTimer() > 30)
+								|| (pat2.getCountTimer() > 30)
+								|| (pat3.getCountTimer() > 30)
+								|| (pat4.getCountTimer() > 30)
+								|| (pat5.getCountTimer() > 30)
+								|| (pat6.getCountTimer() > 30)
+								|| (pat7.getCountTimer() > 30)
+								|| (pat8.getCountTimer() > 30)
+								|| (pat9.getCountTimer() > 30)
+								|| (pat10.getCountTimer() > 30)) {
+							waitingTimeOver30Mins = true;
+						} else {
+							waitingTimeOver30Mins = false;
+						}
+
+						// JL sends manager a message if a patient has been
+						// waiting for 30 minutes
+						if (waitingTimeOver30Mins) {
+							try {
+								onCallMessage.OnCallMessage.ManagerMessage2();
+							} catch (TwilioRestException tre) {
+								System.out
+										.println("Message to manager not sent");
+							}
+						}
+
 					}
 				}));
 		// it will continue to cycle and refresh
