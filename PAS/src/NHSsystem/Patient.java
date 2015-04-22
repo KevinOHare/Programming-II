@@ -10,7 +10,7 @@ import queue.PatientThread;
  * @author chrismcclune
  *
  */
-public class Patient extends Person implements Comparable<Patient> {
+public class Patient extends Person implements Triaged/*Comparable<Patient>*/ {
 
 	/**
 	 * Instance variable for the NHS number of the patient
@@ -176,7 +176,8 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * be used by priority queue to
 	 * sort the triage in the right order
 	 */
-	@Override
+	
+	/*@Override
 	public int compareTo(Patient other) {
 
 		if (this.equals(other)) {
@@ -187,6 +188,16 @@ public class Patient extends Person implements Comparable<Patient> {
 			return -1;
 		}
 
+	}*/
+	
+	/**
+	 * Compares the triage priority of two patients
+	 * @param p Patient to compare triage priority to
+	 * @return Difference between priorities
+	 */
+	@Override
+	public int compareToTriage(Triaged p) {
+		return p.getTriage() - this.getTriage();
 	}
 
 	/**
