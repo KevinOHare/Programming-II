@@ -10,7 +10,7 @@ import queue.PatientThread;
  * @author chrismcclune
  *
  */
-public class Patient extends Person implements Comparable<Patient> {
+public class Patient extends Person implements Triaged/*Comparable<Patient>*/ {
 
 	/**
 	 * Instance variable for the NHS number of the patient
@@ -21,6 +21,18 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * Instance variable for triage priority
 	 */
 	private int triage;
+	
+	/** 
+	 * highest priority is emergency
+	 */
+	
+	private static final int TOP_PRIORITY = 1;
+	
+	/** 
+	 * lowest priority is Non Emergency
+	 */
+	
+	private static final int LOW_PRIORITY = 4;
 	
 	/**
 	 * Instance variable to count the timer method
@@ -98,9 +110,12 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * @param triage
 	 */
 	public void setTriage(int triage) {
-		if (triage >= 1 || triage <= 4) {
+		if (triage >= TOP_PRIORITY || triage <= LOW_PRIORITY) {
 			this.triage = triage;
+		} else if (triage < TOP_PRIORITY) {
+			this.triage = 1;
 		} else {
+			this.triage = LOW_PRIORITY;
 			this.triage = 4;
 		}
 	}
@@ -161,7 +176,8 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * be used by priority queue to
 	 * sort the triage in the right order
 	 */
-	@Override
+	
+	/*@Override
 	public int compareTo(Patient other) {
 
 		if (this.equals(other)) {
@@ -172,6 +188,16 @@ public class Patient extends Person implements Comparable<Patient> {
 			return -1;
 		}
 
+	}*/
+	
+	/**
+	 * Compares the triage priority of two patients
+	 * @param p Patient to compare triage priority to
+	 * @return Difference between priorities
+	 */
+	@Override
+	public int compareToTriage(Triaged p) {
+		return p.getTriage() - this.getTriage();
 	}
 
 	/**
