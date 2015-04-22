@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-/javafx/
-=======
-/.DS_Store
-/NHSsystem/
 /database/
+/src/
 /javafx/
-/onCallMessage/
+/NHSsystem/
 /queue/
->>>>>>> origin/master
+/onCallMessage/
