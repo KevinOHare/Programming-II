@@ -3,6 +3,7 @@ package javafx;
 import javafx.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import java.awt.TextField;
 import java.net.URL;
@@ -18,22 +19,22 @@ public class TreatmentRoomController implements Initializable {
 
 	// TEXT FIELDS
 	@FXML
-	public static TextField firstNameText;
+	public static Label firstNameLabel;
 
 	@FXML
-	public static TextField surnameText;
+	public static Label surnameLabel;
 
 	@FXML
-	public static TextField bloodTypeText;
+	public static Label bloodTypeLabel;
 
 	@FXML
-	public static TextField allergiesText;
+	public static Label allergiesLabel;
+
+	// public static Date startTime = new Date();
+	public static Label startTimeLabel;
 
 	@FXML
 	public static TextField treatmentDetailsText;
-
-	// public static Date startTime = new Date();
-	public static TextField startTimeText;
 
 	// public static Date finishTime;
 	public static String finishTimeText;
@@ -45,20 +46,25 @@ public class TreatmentRoomController implements Initializable {
 	// Database credentials
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
+	
+	firstNameLabel.setText("test firstName");
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		firstNameText.setText("testFirstName");
-
-		surnameText.setText("testSurname");
-
-		bloodTypeText.setText("testBloodType");
-
-		allergiesText.setText("testAllergies");
-
-		startTimeText.setText("testStartTime");
-
+		//firstNameLabel.setText("test firstName");
+		
+		/*
+		 * firstNameText.setText("testFirstName");
+		 * 
+		 * surnameText.setText("testSurname");
+		 * 
+		 * bloodTypeText.setText("testBloodType");
+		 * 
+		 * allergiesText.setText("testAllergies");
+		 * 
+		 * startTimeText.setText("testStartTime");
+		 */
 	}
 
 	/**

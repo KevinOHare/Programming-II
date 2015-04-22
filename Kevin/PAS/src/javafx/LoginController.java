@@ -120,8 +120,10 @@ public class LoginController extends Application implements Initializable {
 						primaryStage.show();
 						Stage stage = (Stage) myButton.getScene().getWindow();
 						
-						// FXML for second stage			        
+						// FXML for second stage
+						System.out.println("about to get treat.fxml ***");
 			            Parent anotherRoot = FXMLLoader.load(getClass().getResource("TreatmentRoom.fxml"));
+			            System.out.println("Got treat.fxml");
 			            Scene anotherScene = new Scene(anotherRoot);
 			            anotherStage.setScene(anotherScene);
 						anotherStage.setTitle("Treatment Room Page");
