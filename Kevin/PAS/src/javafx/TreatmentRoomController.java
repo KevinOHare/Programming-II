@@ -1,105 +1,87 @@
 package javafx;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import javafx.scene.control.TextArea;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 public class TreatmentRoomController implements Initializable {
-
-	// TEXT FIELDS
-	@FXML
-	Label firstNameLabel;
-
-	@FXML
-	Label surnameLabel;
-
-	@FXML
-	Label bloodTypeLabel;
-
-	@FXML
-	Label allergiesLabel;
 	
+	// the id on line 107 will need changed everytime you want to run this
+
+	/**
+	 * Labels and TextArea from TreatmentRoom.fxml
+	 */
 	@FXML
-	Label beginTimeLabel;
-
+	Label firstNameText;
 	@FXML
-	TextField treatmentDetails;
-	
+	Label surnameText;
 	@FXML
-	private Button saveAndClearButton;
+	Label bloodTypeText;
+	@FXML
+	Label allergiesText;
+	@FXML
+	Label beginTimeText;
+	@FXML
+	TextArea treatmentDetailsText;
 
-	// public static Date startTime = new Date();
-	// String startTime;
+	/**
+	 * startTime instantiated upon window opening
+	 */
+	public static Date startTime = new Date();
+	/**
+	 * finishTime not instantiated until save button selected
+	 */
+	public static Date finishTime;
 
-	// public static Date finishTime;
-	// String finishTime;
-
-	// JDBC driver name and database URL
+	/**
+	 * JDBC driver name and database URL
+	 */
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
-	// Database credentials
+	/**
+	 * Database credentials
+	 */
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
-	
+
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL location, ResourceBundle resources) {
 
-		firstNameLabel.setText("testFirstName");
-		
-		surnameLabel.setText("testSurname");
-		
-		bloodTypeLabel.setText("testBloodType");
-		
-		allergiesLabel.setText("testAllergies");
-		
-		beginTimeLabel.setText("testStartTime");
+		// test message ensuring initialize begins
+		System.out.println("initialising begins");
 
-		saveAndClearButton.setOnAction(new EventHandler<ActionEvent>() {
+		// different labels set
+		// to be replaced by values from queue
+		firstNameText.setText("test firstName");
+		surnameText.setText("test surname");
+		bloodTypeText.setText("test blood type");
+		allergiesText.setText("test allergies");
+		beginTimeText.setText(startTime.toString());
 
-			@Override
-			public void handle(ActionEvent arg0) {
-				
-				saveTreatmentDetails();
-				
-			}
-		});
-		
+		// test message ensuring setting label finishes
+		System.out.println("initialising ends");
+
 	}
 
-	/**
-	 * saves Patients ID, start time, finish time, duration and treatment
-	 * details to treatment_log
-	 */
 	// BUTTON
 	@FXML
-	private void saveTreatmentDetails() {
+	private void handleSaveAndClearButtonAction() {
 
-		// finishTime = new Date();
-		// finishTime = "finish time";
-		System.out.println("finish time created");
-
-		// test message to make sure method begins running
-		System.out.println("saveTreatmentDetails invoked");
+		// test message
+		System.out.println("Save button selected");
+		
+		// finishTime now instantiated upon saving
+		finishTime = new Date();
 
 		// Local Variables
 		Connection conn = null;
@@ -117,34 +99,42 @@ public class TreatmentRoomController implements Initializable {
 			System.out.println("Creating statement...\n");
 			stmt = conn.createStatement();
 			String command;
+			System.out.println("statement created");
 
 			// Passed in values being applied to SQL query
+			System.out.println("setting input vars");
+			// to be replaced by value from queue
+			String ID = "test ID 18";
 
-			String ID = "testID";
+			String startTimeString = startTime.toString();
+			String finishTimeString = finishTime.toString();
+			// time difference converted from milliseconds to minutes
+			String appointmentDuration = (long)(finishTime.getTime() - startTime
+					.getTime()) / 60000 + "m"+(long)((finishTime.getTime()-startTime.getTime())%60000)/1000+"s";
 
-			// String startTimeString = startTime.toString();
-			String startTimeString = "testStartTimeString";
+			// doctors manually entered treatment details
+			String treatmentDetailsString = treatmentDetailsText.getText()
+					.toString();
 
-			// String finishTimeString = finishTime.toString();
-			String finishTimeString = "testFinishTimeString";
+			// test message
+			System.out.println("input vars set");
 
-			// int appointmentDuration = startTime.compareTo(finishTime);
-			// int appointmentDuration = 0;
-			String appointmentDuration = "test";
+			// test message
+			System.out.println("About to set command");
+			// *** Assign values to mysql insert***
+			command = "INSERT INTO treatment_log VALUES ('" + ID + "', '"
+					+ startTimeString + "', '" + finishTimeString + "', '"
+					+ appointmentDuration + "', '" + treatmentDetailsString
+					+ "')";
+			// test message
+			System.out.println("command set");
 
-			String treatmentDetailsText = treatmentDetails.getText().toString();
+			// command executed
+			stmt.executeUpdate(command);
+			// test message
+			System.out.println("Command executed, details saved");
 
-			// *** Assign values to mysql query ***
-			command = "INSERT INTO treatment_log VALUES (ID, startTimeString, finishTimeString, appointmentDuration, treatmentDetailsText)";
-
-			// *** Result Set ***
-			ResultSet rs = stmt.executeQuery(command);
-
-			// command execution flag
-			System.out.println("Command executed");
-
-			// STEP 6: Clean-up environment
-			rs.close();
+			// Clean-up environment
 			stmt.close();
 			conn.close();
 
@@ -171,6 +161,5 @@ public class TreatmentRoomController implements Initializable {
 			}// end finally try
 		}// end try
 		System.out.println("Goodbye!");
-	}
-
+	}// end main
 }

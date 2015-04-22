@@ -1,10 +1,10 @@
+<<<<<<< HEAD
+/javafx/
+=======
+/.DS_Store
 /NHSsystem/
 /database/
 /javafx/
 /onCallMessage/
-<<<<<<< Updated upstream
 /queue/
-=======
-/javafx/
-/Exceptions/
->>>>>>> Stashed changes
+>>>>>>> origin/master

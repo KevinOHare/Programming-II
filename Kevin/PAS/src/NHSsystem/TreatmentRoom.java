@@ -124,7 +124,7 @@ public class TreatmentRoom {
 	 */
 	@Override
 	public String toString(){
-		return this.roomNumber + " \t\t " + this.isAvailable + " \t\t    " + this.patient + "  *TreatTimer=[" + this.getCountTimer() + "]";
+		return this.roomNumber + " \t\t " + this.isAvailable + " \t\t    " + this.patient + "  |  *TreatTimer=[" + this.getCountTimer() + "]  |";
 	}
 
 }
