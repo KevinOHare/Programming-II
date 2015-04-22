@@ -26,7 +26,7 @@ public class OnCallMessage {
 	 * @param args
 	 * @throws TwilioRestException
 	 */
-	public static void main(String[] args) throws TwilioRestException {
+	public static void OnCallTeamMessage() throws TwilioRestException {
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
 		// Build the parameters

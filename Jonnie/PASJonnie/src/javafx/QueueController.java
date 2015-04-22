@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import com.twilio.sdk.TwilioRestException;
+
 import queue.OnCallTeamQueue;
 import queue.PatientThread;
 import queue.TreatmentRoomThread;
@@ -23,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
+import onCallMessage.OnCallMessage;
 
 public class QueueController implements Initializable {
 
@@ -108,10 +111,14 @@ public class QueueController implements Initializable {
 		// **** Patient Queue Arrays ****
 
 		// ******************** TEST DATA ****************
-		
-		  pQueue.add(pat1); pQueue.add(pat2); pQueue.add(pat3);
-		  pQueue.add(pat4); pQueue.add(pat5); pQueue.add(pat6);
-		 
+
+		pQueue.add(pat1);
+		pQueue.add(pat2);
+		pQueue.add(pat3);
+		pQueue.add(pat4);
+		pQueue.add(pat5);
+		pQueue.add(pat6);
+
 		// **************************************************
 
 		// add to array list
@@ -148,7 +155,7 @@ public class QueueController implements Initializable {
 				new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent actionEvent) {
-						
+
 						// JL call to method to check if new emergency
 						// patients can be added to treatment rooms
 						emergencyPatients();
@@ -273,6 +280,43 @@ public class QueueController implements Initializable {
 						if (treat.getLast().getCountTimer() == 49) {
 							treat.getLast().setAvailable(true);
 						}
+
+						// JL checks if queue is full
+						boolean queueIsFull = false;
+						if ((!(stringPa[0] == null))
+								&& (!(stringPa[1] == null))
+								&& (!(stringPa[2] == null))
+								&& (!(stringPa[3] == null))
+								&& (!(stringPa[4] == null))
+								&& (!(stringPa[5] == null))
+								&& (!(stringPa[6] == null))
+								&& (!(stringPa[7] == null))
+								&& (!(stringPa[8] == null))
+								&& (!(stringPa[9] == null))) {
+							queueIsFull = true;
+						} else if ((stringPa[0] == null)
+								|| (stringPa[1] == null)
+								|| (stringPa[2] == null)
+								|| (stringPa[3] == null)
+								|| (stringPa[4] == null)
+								|| (stringPa[5] == null)
+								|| (stringPa[6] == null)
+								|| (stringPa[7] == null)
+								|| (stringPa[8] == null)
+								|| (stringPa[9] == null)) {
+							queueIsFull = false;
+						}
+
+						// JL sends manager a message if queue is full
+						if (queueIsFull) {
+							try {
+								onCallMessage.OnCallMessage.ManagerMessage1();
+							} catch (TwilioRestException tre) {
+								System.out
+										.println("Message to manager not sent");
+							}
+						}
+
 					}
 				}));
 		// it will continue to cycle and refresh
@@ -354,7 +398,7 @@ public class QueueController implements Initializable {
 			ep.setLastName(tc.lastNamePass);
 			ep.setTriage(tc.triagePass);
 		}
-		
+
 		// if emergency then assign patient to an empty treatment room
 		if (ep.getTriage() == 1) {
 			if (treat.getFirst().isAvailable() == true) {
@@ -411,7 +455,8 @@ public class QueueController implements Initializable {
 				// a boolean assigned within patient
 				// object to execute the remove later
 				ep.setInRoom(true);
-			} else if (onCallTeam.isAvailable() == true) { // if all treatment rooms full
+			} else if (onCallTeam.isAvailable() == true) { // if all treatment
+															// rooms full
 				onCallTeam.setPatient(ep);
 				onCallTeam.setAvailable(false);
 				// start count for treatment room
@@ -420,9 +465,15 @@ public class QueueController implements Initializable {
 				// a boolean assigned within patient
 				// object to execute the remove later
 				ep.setInRoom(true);
+				// sends on call team a message
+				try {
+					onCallMessage.OnCallMessage.OnCallTeamMessage();
+				} catch (TwilioRestException tre) {
+					System.out.println("Message to on call team not sent");
+				}
 			}
 		}
-		
+
 	}
 
 }
