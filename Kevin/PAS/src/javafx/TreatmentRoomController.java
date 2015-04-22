@@ -1,6 +1,5 @@
 package javafx;
 
-import javafx.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -16,48 +15,58 @@ import java.util.ResourceBundle;
 
 public class TreatmentRoomController implements Initializable {
 
-	// Labels and TextArea from TreatmentRoom.fxml
+	/**
+	 * Labels and TextArea from TreatmentRoom.fxml
+	 */
 	@FXML
-	Label firstNameLabel;
+	Label firstNameText;
 	@FXML
-	Label surnameLabel;
+	Label surnameText;
 	@FXML
-	Label bloodTypeLabel;
+	Label bloodTypeText;
 	@FXML
-	Label allergiesLabel;
+	Label allergiesText;
 	@FXML
-	Label beginTimeLabel;
+	Label beginTimeText;
 	@FXML
-	TextArea treatmentDetailsTextArea;
+	TextArea treatmentDetailsText;
 
-	// startTime instantiated upon window opening
+	/**
+	 * startTime instantiated upon window opening
+	 */
 	public static Date startTime = new Date();
-	// finishTime not instantiated until save button selected
+	/**
+	 * finishTime not instantiated until save button selected
+	 */
 	public static Date finishTime;
 
-	// JDBC driver name and database URL
+	/**
+	 * JDBC driver name and database URL
+	 */
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
-	// Database credentials
+	/**
+	 * Database credentials
+	 */
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		// test message ensuring initialize begins
 		System.out.println("initialising begins");
 
-		firstNameLabel.setText("test firstName");
+		// different labels set
+		// to be replaced by values from queue
+		firstNameText.setText("test firstName");
+		surnameText.setText("test surname");
+		bloodTypeText.setText("test blood type");
+		allergiesText.setText("test allergies");
+		beginTimeText.setText(startTime.toString());
 
-		surnameLabel.setText("test surname");
-
-		bloodTypeLabel.setText("test blood type");
-
-		allergiesLabel.setText("test allergies");
-
-		beginTimeLabel.setText(startTime.toString());
-
+		// test message ensuring setting label finishes
 		System.out.println("initialising ends");
 
 	}
@@ -66,11 +75,8 @@ public class TreatmentRoomController implements Initializable {
 	@FXML
 	private void handleSaveAndClearButtonAction() {
 
+		// finishTime now instantiated upon saving
 		finishTime = new Date();
-		// System.out.println("finish time created");
-
-		// test message to make sure method begins running
-		System.out.println("saveTreatmentDetails invoked");
 
 		// Local Variables
 		Connection conn = null;
@@ -92,35 +98,38 @@ public class TreatmentRoomController implements Initializable {
 
 			// Passed in values being applied to SQL query
 			System.out.println("setting input vars");
-			String ID = "test ID 10";
+			// to be replaced by value from queue
+			String ID = "test ID 16";
 
 			String startTimeString = startTime.toString();
-
 			String finishTimeString = finishTime.toString();
+			// time difference converted from milliseconds to minutes
+			String appointmentDuration = (long)(finishTime.getTime() - startTime
+					.getTime()) / 60000 + "m"+(long)((finishTime.getTime()-startTime.getTime())%60000)/1000+"s";
 
-			long appointmentDuration = (finishTime.getTime() - startTime
-					.getTime()) / 60000;
-
-			String treatmentDetailsString = treatmentDetailsTextArea.getText()
+			// doctors manually entered treatment details
+			String treatmentDetailsString = treatmentDetailsText.getText()
 					.toString();
 
+			// test message
 			System.out.println("input vars set");
 
+			// test message
 			System.out.println("About to set command");
-			// *** Assign values to mysql query ***
+			// *** Assign values to mysql insert***
 			command = "INSERT INTO treatment_log VALUES ('" + ID + "', '"
 					+ startTimeString + "', '" + finishTimeString + "', '"
 					+ appointmentDuration + "', '" + treatmentDetailsString
 					+ "')";
+			// test message
 			System.out.println("command set");
 
-			// *** Result Set ***
+			// command executed
 			stmt.executeUpdate(command);
-
-			// command execution flag
+			// test message
 			System.out.println("Command executed");
 
-			// STEP 6: Clean-up environment
+			// Clean-up environment
 			stmt.close();
 			conn.close();
 
