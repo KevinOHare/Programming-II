@@ -22,6 +22,18 @@ public class Patient extends Person implements Comparable<Patient> {
 	 */
 	private int triage;
 	
+	/** 
+	 * highest priority is emergency
+	 */
+	
+	private static final int TOP_PRIORITY = 1;
+	
+	/** 
+	 * lowest priority is Non Emergency
+	 */
+	
+	private static final int LOW_PRIORITY = 4;
+	
 	/**
 	 * Instance variable to count the timer method
 	 */
@@ -98,9 +110,12 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * @param triage
 	 */
 	public void setTriage(int triage) {
-		if (triage >= 1 || triage <= 4) {
+		if (triage >= TOP_PRIORITY || triage <= LOW_PRIORITY) {
 			this.triage = triage;
+		} else if (triage < TOP_PRIORITY) {
+			this.triage = 1;
 		} else {
+			this.triage = LOW_PRIORITY;
 			this.triage = 4;
 		}
 	}
