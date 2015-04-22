@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class TreatmentRoomController implements Initializable {
+	
+	// the id on line 107 will need changed everytime you want to run this
 
 	/**
 	 * Labels and TextArea from TreatmentRoom.fxml
@@ -75,6 +77,9 @@ public class TreatmentRoomController implements Initializable {
 	@FXML
 	private void handleSaveAndClearButtonAction() {
 
+		// test message
+		System.out.println("Save button selected");
+		
 		// finishTime now instantiated upon saving
 		finishTime = new Date();
 
@@ -99,7 +104,7 @@ public class TreatmentRoomController implements Initializable {
 			// Passed in values being applied to SQL query
 			System.out.println("setting input vars");
 			// to be replaced by value from queue
-			String ID = "test ID 16";
+			String ID = "test ID 18";
 
 			String startTimeString = startTime.toString();
 			String finishTimeString = finishTime.toString();
@@ -127,7 +132,7 @@ public class TreatmentRoomController implements Initializable {
 			// command executed
 			stmt.executeUpdate(command);
 			// test message
-			System.out.println("Command executed");
+			System.out.println("Command executed, details saved");
 
 			// Clean-up environment
 			stmt.close();
