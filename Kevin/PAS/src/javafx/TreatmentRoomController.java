@@ -4,12 +4,11 @@ import javafx.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
-import java.awt.TextField;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -17,27 +16,24 @@ import java.util.ResourceBundle;
 
 public class TreatmentRoomController implements Initializable {
 
-	// TEXT FIELDS
+	// Labels and TextArea from TreatmentRoom.fxml
 	@FXML
-	public static Label firstNameLabel;
-
+	Label firstNameLabel;
 	@FXML
-	public static Label surnameLabel;
-
+	Label surnameLabel;
 	@FXML
-	public static Label bloodTypeLabel;
-
+	Label bloodTypeLabel;
 	@FXML
-	public static Label allergiesLabel;
-
-	// public static Date startTime = new Date();
-	public static Label startTimeLabel;
-
+	Label allergiesLabel;
 	@FXML
-	public static TextField treatmentDetailsText;
+	Label beginTimeLabel;
+	@FXML
+	TextArea treatmentDetailsTextArea;
 
-	// public static Date finishTime;
-	public static String finishTimeText;
+	// startTime instantiated upon window opening
+	public static Date startTime = new Date();
+	// finishTime not instantiated until save button selected
+	public static Date finishTime;
 
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -46,32 +42,32 @@ public class TreatmentRoomController implements Initializable {
 	// Database credentials
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
-	
-	firstNameLabel.setText("test firstName");
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		//firstNameLabel.setText("test firstName");
-		
-		/*
-		 * firstNameText.setText("testFirstName");
-		 * 
-		 * surnameText.setText("testSurname");
-		 * 
-		 * bloodTypeText.setText("testBloodType");
-		 * 
-		 * allergiesText.setText("testAllergies");
-		 * 
-		 * startTimeText.setText("testStartTime");
-		 */
+
+		System.out.println("initialising begins");
+
+		firstNameLabel.setText("test firstName");
+
+		surnameLabel.setText("test surname");
+
+		bloodTypeLabel.setText("test blood type");
+
+		allergiesLabel.setText("test allergies");
+
+		beginTimeLabel.setText(startTime.toString());
+
+		System.out.println("initialising ends");
+
 	}
 
-	/**
-	 * saves Patients ID, start time, finish time, duration and treatment
-	 * details to treatment_log
-	 */
-	public static void saveTreatmentDetails() {
+	// BUTTON
+	@FXML
+	private void handleSaveAndClearButtonAction() {
+
+		finishTime = new Date();
+		// System.out.println("finish time created");
 
 		// test message to make sure method begins running
 		System.out.println("saveTreatmentDetails invoked");
@@ -92,34 +88,39 @@ public class TreatmentRoomController implements Initializable {
 			System.out.println("Creating statement...\n");
 			stmt = conn.createStatement();
 			String command;
+			System.out.println("statement created");
 
 			// Passed in values being applied to SQL query
+			System.out.println("setting input vars");
+			String ID = "test ID 10";
 
-			String ID = "test";
+			String startTimeString = startTime.toString();
 
-			// String startTimeString = startTime.toString();
-			String startTimeString = "test";
+			String finishTimeString = finishTime.toString();
 
-			// String finishTimeString = finishTime.toString();
-			String finishTimeString = "test";
+			long appointmentDuration = (finishTime.getTime() - startTime
+					.getTime()) / 60000;
 
-			// int appointmentDuration = startTime.compareTo(finishTime);
-			int appointmentDuration = 0;
-
-			String treatmentDetailsString = treatmentDetailsText.getText()
+			String treatmentDetailsString = treatmentDetailsTextArea.getText()
 					.toString();
 
+			System.out.println("input vars set");
+
+			System.out.println("About to set command");
 			// *** Assign values to mysql query ***
-			command = "INSERT INTO treatment_log VALUES (ID, startTimeString, finishTimeString, appointmentDuration, treatmentDetailsString)";
+			command = "INSERT INTO treatment_log VALUES ('" + ID + "', '"
+					+ startTimeString + "', '" + finishTimeString + "', '"
+					+ appointmentDuration + "', '" + treatmentDetailsString
+					+ "')";
+			System.out.println("command set");
 
 			// *** Result Set ***
-			ResultSet rs = stmt.executeQuery(command);
+			stmt.executeUpdate(command);
 
 			// command execution flag
 			System.out.println("Command executed");
 
 			// STEP 6: Clean-up environment
-			rs.close();
 			stmt.close();
 			conn.close();
 
@@ -147,17 +148,4 @@ public class TreatmentRoomController implements Initializable {
 		}// end try
 		System.out.println("Goodbye!");
 	}// end main
-
-	// BUTTON
-	@FXML
-	private void handleButtonAction() {
-
-		// finishTime = new Date();
-		finishTimeText = "finish time";
-		System.out.println("finish time created");
-
-		saveTreatmentDetails();
-
-	}
-
 }
