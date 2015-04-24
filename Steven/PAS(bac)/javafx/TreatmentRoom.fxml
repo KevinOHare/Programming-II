@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.TreatmentRoomController">
+  <children>
+    <Label fx:id="treatmentPageHeader" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="27.0" prefHeight="63.0" prefWidth="515.0" text="Treatment">
+      <font>
+        <Font size="27.0" />
+      </font>
+    </Label>
+    <Label fx:id="treatmentDetailsLabel" layoutX="38.0" layoutY="180.0" prefHeight="26.0" prefWidth="239.0" text="Treatment Details (Limited to 300 characters)" />
+    <Label id="firstName" fx:id="firstNameLabel" layoutX="38.0" layoutY="90.0" prefHeight="26.0" prefWidth="64.0001220703125" text="First Name :" />
+    <Label id="surname" fx:id="surnameLabel" layoutX="38.0" layoutY="116.0" prefHeight="26.000099999997474" prefWidth="64.0001220703125" text="Surname    :" />
+    <Label id="beginTime" fx:id="startTimeLabel" layoutX="37.0" layoutY="142.0" prefHeight="26.0" prefWidth="165.0" text="Treatment time begins :" />
+    <Label id="bloodType" fx:id="bloodTypeLabel" layoutX="295.0" layoutY="90.0" prefHeight="26.0" prefWidth="64.0" text="Blood type :" />
+    <Label id="allergies" fx:id="allergiesLabel" layoutX="295.0" layoutY="116.0" prefHeight="26.0" prefWidth="70.00022207030997" text="Allergies     :" />
+    <Button fx:id="saveAndClearButton" layoutX="454.0" layoutY="515.0" mnemonicParsing="false" onAction="#handleSaveAndClearButtonAction" text="Save and Clear" />
+    <Label id="firstName" fx:id="firstNameText" layoutX="105.0" layoutY="90.0" prefHeight="26.0" prefWidth="174.0" text="" />
+    <Label id="firstName" fx:id="surnameText" layoutX="105.0" layoutY="116.0" prefHeight="26.0" prefWidth="174.0" text="" />
+    <Label id="firstName" fx:id="bloodTypeText" layoutX="365.0" layoutY="90.0" prefHeight="26.0" prefWidth="174.0" text="" />
+    <Label id="firstName" fx:id="allergiesText" layoutX="365.0" layoutY="116.0" prefHeight="26.0" prefWidth="174.0" text="" />
+    <Label id="firstName" fx:id="beginTimeText" layoutX="169.0" layoutY="142.0" prefHeight="26.0" prefWidth="174.0" text="" />
+    <TextArea id="treatmentDetailsTextArea" fx:id="treatmentDetailsText" layoutX="38.0" layoutY="208.0" prefHeight="290.0" prefWidth="515.0" promptText="Enter basic details of treatment here..." wrapText="true" />
+    <Button fx:id="extendTreatmentTime" layoutX="38.0" layoutY="516.0" mnemonicParsing="false" text="Extend Appointment" />
+  </children>
+</Pane>
