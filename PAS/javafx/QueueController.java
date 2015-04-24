@@ -77,7 +77,7 @@ public class QueueController implements Initializable {
 		treat.add(room5);
 		
 		
-		
+		// Thread run in the background to produce the queue
 		Runnable r = new Runnable() {
 	         public void run() {
 		while (boolQ = true) {
@@ -96,22 +96,7 @@ public class QueueController implements Initializable {
 							System.out.println(tr.toString());
 						}
 
-						//****************************************************************
-						// *** Treatment Room Queue ***
-
-						// set queue results to string array for
-						// printing
-						for (int i = 0; i < treat.size(); i++) {
-							stringAr[i] = treat.get(i).toString();
-						}
-						// *** Patient Queue ***
-
-						// set queue results to string array for
-						// printing
-						for (int i = 0; i < llist.size(); i++) {
-							stringPa[i] = llist.get(i).toString();
-						}
-						//*********************************************************************
+						
 					
 						// print details for console for patient
 						System.out.println("********** Queue ************");
@@ -185,6 +170,7 @@ public class QueueController implements Initializable {
 						for (int i = 0; i < llist.size(); i++) {
 							if (llist.get(i).getInRoom() == true) {
 								llist.remove(llist.get(i));
+
 							}
 						}
 						
@@ -213,9 +199,7 @@ public class QueueController implements Initializable {
 							treat.get(3).setAvailable(true);
 							treat.get(3).setPatient(null);
 							treat.get(3).setCountTimer(0);
-							
 						}
-						
 						if (treat.getLast().getCountTimer() == 49) {
 							treat.getLast().setAvailable(true);
 							treat.getLast().setPatient(null);
@@ -267,11 +251,11 @@ public class QueueController implements Initializable {
 		if ((bool == true)) {
 
 			// add to array list
-			for (Patient sa : alist){
+			for (Patient sa : llist){
 				// add to priority queue
 				pQueue.add(sa);
 			}
-			
+				
 			// add to sort queue
 			for (Patient ae : pQueue) {
 				// add to sort queue
@@ -303,6 +287,7 @@ public class QueueController implements Initializable {
 	public void addToQueue() {
 		// Instance of Triage Controller
 		TriageController tc = new TriageController();
+		
 		// Instance of the Patient object
 		Patient ptq = new Patient();
 
@@ -312,13 +297,15 @@ public class QueueController implements Initializable {
 			ptq.setFirstName(tc.firstNamePass);
 			ptq.setLastName(tc.lastNamePass);
 			ptq.setTriage(tc.triagePass);
+			
 			// add to array for sorting
-			alist.add(ptq);
+			llist.add(ptq);
+			// allow access for addingToArrays()
 			bool = true;
+			// reset values
 			tc.firstNamePass = null;
 			tc.tableLastName = null;
-			//tc.triagePass = null;
-			
+			//tc.triagePass = 0;
 		}
 	}
 
