@@ -19,11 +19,29 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 
 public class QueueController implements Initializable {
 
+	// FXML ID TAGS
+	
+	@FXML
+	ChoiceBox triageBox;
+	
+	@FXML
+	ChoiceBox treatBox;
+	
+	@FXML
+	private void handleButtonTriage(){
+		
+	}
+	
+	@FXML
+	private void handleButtonTreat(){
+		
+	}
 	
 	// INSTANCES FOR PATIENT OBJECT
 	

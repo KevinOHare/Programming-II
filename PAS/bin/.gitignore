@@ -1,6 +1,12 @@
-/database/
-/src/
-/javafx/
+/.DS_Store
+/.checkstyle
+/.classpath
+/.metadata/
+/.project
+/.settings/
 /NHSsystem/
-/queue/
+/build.fxbuild
+/database/
+/javafx/
 /onCallMessage/
+/queue/

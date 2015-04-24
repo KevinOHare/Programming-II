@@ -55,6 +55,18 @@ public class TriageController implements Initializable {
 		triagePass = tt.getCondition();
 		
 	}
+	
+	@FXML
+	private void handleButtonBack(ActionEvent event) throws IOException{
+		// open reception page again - back button
+		Parent anotherRoot = FXMLLoader.load(getClass().getResource("ReceptionLayout.fxml"));
+        Scene anotherScene = new Scene(anotherRoot);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene()
+				.getWindow();
+        stage.setScene(anotherScene);
+		stage.setTitle("Reception Page");
+        stage.show();	
+	}
 
 	// CHOICEBOX
 

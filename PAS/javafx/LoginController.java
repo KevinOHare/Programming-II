@@ -90,7 +90,7 @@ public class LoginController extends Application implements Initializable {
 						root = FXMLLoader.load(getClass().getResource(
 								"/javafx/Queue.fxml"));
 						Stage primaryStage = new Stage();
-						Scene scene = new Scene(root, 1400, 684);
+						Scene scene = new Scene(root, 500 , 250);
 						primaryStage.setTitle("Queue Page");
 						primaryStage.setScene(scene);
 						primaryStage.show();
