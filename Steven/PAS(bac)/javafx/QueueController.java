@@ -30,15 +30,19 @@ public class QueueController implements Initializable {
 	
 	@FXML
 	ChoiceBox triageNumber;
-	
-	@FXML
-	Button triageButton;
-	
+
 	@FXML
 	ChoiceBox treatNumber;
 	
 	@FXML
-	Button treatbutton;
+	private void handleButtonTriage(){
+		
+	}
+	
+	@FXML
+	private void handleButtonTreat(){
+		
+	}
 	
 	// INSTANCES FOR PATIENT OBJECT
 	

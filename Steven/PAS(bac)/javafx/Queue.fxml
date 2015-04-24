@@ -7,29 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="700" maxWidth="1400" minHeight="700" minWidth="1400" prefHeight="700" prefWidth="1400" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.QueueController">
+<Pane maxHeight="700" maxWidth="1400" minHeight="255.0" minWidth="411.0" prefHeight="255.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.QueueController">
   <children>
-    <Label layoutX="44.0" layoutY="8.0" prefHeight="63.0" prefWidth="202.0" text="Queue System">
+    <Label layoutX="25.0" layoutY="4.0" prefHeight="63.0" prefWidth="202.0" text="Queue System">
       <font>
         <Font name="System Bold" size="27.0" />
       </font>
     </Label>
-    <TextArea fx:id="treatmentRoomQueue" layoutX="44.0" layoutY="119.0" prefHeight="156.0" prefWidth="1274.0" wrapText="true">
-         <font>
-            <Font size="18.0" />
-         </font></TextArea>
-    <Label layoutX="44.0" layoutY="93.0" text="Treatment Room Queue">
-      <font>
-        <Font size="14.0" fx:id="x1" />
-      </font>
-    </Label>
-    <TextArea fx:id="patientQueue" layoutX="44.0" layoutY="318.0" prefHeight="215.0" prefWidth="1274.0" wrapText="true">
-         <font>
-            <Font size="14.0" />
-         </font></TextArea>
-    <Label font="$x1" layoutX="44.0" layoutY="290.0" text="Patient Queue" />
-    <Button layoutX="676.0" layoutY="562.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Edit Triage" />
-    <ChoiceBox layoutX="596.0" layoutY="562.0" prefHeight="25.0" prefWidth="65.0">
+    <Button layoutX="218.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleButtonTriage" prefHeight="25.0" prefWidth="129.0" text="Edit Triage" />
+    <ChoiceBox fx:id="triageNumber" layoutX="112.0" layoutY="98.0" prefHeight="25.0" prefWidth="83.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -38,8 +24,8 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <Button layoutX="676.0" layoutY="603.0" mnemonicParsing="false" prefWidth="129.0" text="Treatment Room" />
-    <ChoiceBox layoutX="596.0" layoutY="603.0" prefWidth="65.0">
+    <Button layoutX="218.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleButtonTreat" prefWidth="129.0" text="Treatment Room" />
+    <ChoiceBox fx:id="treatNumber" layoutX="112.0" layoutY="137.0" prefHeight="25.0" prefWidth="83.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
