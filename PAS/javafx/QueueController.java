@@ -50,6 +50,8 @@ public class QueueController implements Initializable {
 	private void handleButtonTriage() {
 		// take the entered number in the linked list for patient
 		int llistNum = Integer.parseInt((String) triageListNum.getValue());
+		llistNum--; // remove 1 as dealing with an array
+		
 		// take the entered triage priority and set it to the 
 		// selected linked list patient number
 		int priNum = Integer.parseInt((String) triagePriority.getValue());
@@ -87,14 +89,6 @@ public class QueueController implements Initializable {
 
 	public static String[] stringPa = new String[10];
 
-	// COMPARATOR FOR PATIENT
-
-	public int compare(Patient pat1, Patient pat2) {
-		return (pat1.isEmergencyCondition() == pat2.isEmergencyCondition()) ? (Integer
-				.valueOf(pat1.getTriage()).compareTo(pat2.getTriage())) : (pat1
-				.isEmergencyCondition() ? -1 : 1);
-	}
-
 	// INSTANCES FOR TREATMENT ROOM OBJECT
 
 	static LinkedList<TreatmentRoom> treat = new LinkedList<TreatmentRoom>();
@@ -126,18 +120,51 @@ public class QueueController implements Initializable {
 		treat.add(room3);
 		treat.add(room4);
 		treat.add(room5);
+		
+		//**********************TEST*********************
+		/*Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
+				"Lisburn", "BT67 524", "098 38563", "3759-283", 3, false);
+		Patient pat2 = new Patient("Ms", "June", "Campbell", "20 road",
+				"Lisburn", "BT23 524", "234 4263", "3234-83", 4, false);
+		Patient pat3 = new Patient("Mr", "Philip", "White", "94 road",
+				"Hillsborough", "BT57 254", "234 4543", "0568-283", 2, false);
+		Patient pat4 = new Patient("Mrs", "Mary", "Kelly", "60 road",
+				"Moria", "BT57 092", "689 2583", "3452-039", 1, true);
+		Patient pat5 = new Patient("Mr", "Conner", "Lee", "10 road",
+				"Anahilt", "BT59 203", "582 9385", "0429-3458", 3, false);
+		Patient pat6 = new Patient("Mrs", "Will", "Goon", "85 road",
+				"Kilea", "BT20 578", "098 3490", "0694-3829", 4, false);
+		Patient pat7 = new Patient("Mr", "Red", "Wright", "02 road",
+				"Belfast", "BT03 039", "485 3020", "9592-2985", 3, false);
+		Patient pat8 = new Patient("Ms", "Kelly", "Goodman", "58 road",
+				"Lisburn", "BT28 394", "509 3853", "9837-3029", 2, false);
+		Patient pat9 = new Patient("Mr", "Kevin", "Ken", "95 road",
+				"Hillsborough", "BT02 984", "039 3085", "303-59387", 4, false);
+		Patient pat10 = new Patient("Ms", "Rachel", "Lenvine", "03 road",
+				"Moria", "BT28 828", "493 03895", "294-3985", 1, true);*/
+		
+		/*llist.add(pat1);
+		llist.add(pat2);
+		llist.add(pat3);
+		llist.add(pat4);
+		llist.add(pat5);
+		llist.add(pat6);
+		llist.add(pat7);
+		llist.add(pat8);
+		llist.add(pat9);*/
+		//***************************************************
 
 		// Thread run in the background to produce the queue
 		Runnable r = new Runnable() {
 			public void run() {
 				while (boolQ = true) {
-
-					// to add and cycle through arrays
-					addingToArrays();
-
+					
 					// call to method to check if new patients
 					// can be added
 					addToQueue();
+					
+					// to add and cycle through arrays
+					addingToArrays();
 
 					// print treatment room to console
 					System.out.println("****** Treatment Room *******");
@@ -298,7 +325,7 @@ public class QueueController implements Initializable {
 		if ((bool == true)) {
 
 			// add to array list
-			for (Patient sa : llist) {
+			for (Patient sa : alist) {
 				// add to priority queue
 				pQueue.add(sa);
 			}
@@ -306,6 +333,7 @@ public class QueueController implements Initializable {
 			// add to sort queue
 			for (Patient ae : pQueue) {
 				// add to sort queue
+				
 				sort.add(ae);
 			}
 
@@ -323,6 +351,8 @@ public class QueueController implements Initializable {
 				new Thread(rr).start();
 				llist.add(ju);
 			}
+			// prevent adding unless a new
+			// patient is added
 			bool = false;
 		}
 	}
@@ -346,7 +376,33 @@ public class QueueController implements Initializable {
 			ptq.setTriage(tc.triagePass);
 
 			// add to array for sorting
-			llist.add(ptq);
+			alist.add(ptq);
+			
+			//************test**********
+			/*Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
+					"Lisburn", "BT67 524", "098 38563", "3759-283", 3, false);
+			Patient pat2 = new Patient("Ms", "June", "Campbell", "20 road",
+					"Lisburn", "BT23 524", "234 4263", "3234-83", 4, false);
+			Patient pat3 = new Patient("Mr", "Philip", "White", "94 road",
+					"Hillsborough", "BT57 254", "234 4543", "0568-283", 2, false);
+			Patient pat4 = new Patient("Mrs", "Mary", "Kelly", "60 road",
+					"Moria", "BT57 092", "689 2583", "3452-039", 1, true);
+			Patient pat5 = new Patient("Mr", "Conner", "Lee", "10 road",
+					"Anahilt", "BT59 203", "582 9385", "0429-3458", 3, false);
+			Patient pat6 = new Patient("Mrs", "Will", "Goon", "85 road",
+					"Kilea", "BT20 578", "098 3490", "0694-3829", 4, false);
+			Patient pat7 = new Patient("Mr", "Red", "Wright", "02 road",
+					"Belfast", "BT03 039", "485 3020", "9592-2985", 3, false);
+			alist.add(pat1);
+			alist.add(pat2);
+			alist.add(pat3);
+			alist.add(pat4);
+			alist.add(pat5);
+			alist.add(pat6);
+			alist.add(pat7);*/
+			//****************************************
+			
+			
 			// allow access for addingToArrays()
 			bool = true;
 			// reset values
