@@ -2,6 +2,11 @@ package javafx;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
@@ -22,28 +27,18 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import com.mysql.jdbc.PreparedStatement;
-
 public class LoginController extends Application implements Initializable {
 
 	@FXML
 	private Label loginLabel;
-
 	@FXML
 	private TextField fieldUsername;
-
 	@FXML
 	private PasswordField fieldPassword;
-
 	@FXML
 	private Button myButton; // value will be injected by the FXMLLoader
+
+	String expectedPassword, usersPermissions, fxmlToLoad, fxmlHeader;
 
 	/**
 	 * JDBC driver name and database URL
@@ -74,103 +69,149 @@ public class LoginController extends Application implements Initializable {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				attemptLogin();
+			}
+		});
 
-				// Local Variables
-				Connection conn = null;
-				Statement stmt = null;
+		fieldPassword.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent ke) {
+				if (ke.getCode().equals(KeyCode.ENTER)) {
 
-				java.sql.PreparedStatement preparedCon;
+					attemptLogin();
 
-				try {
-					// STEP 2: Register JDBC driver
-					Class.forName("com.mysql.jdbc.Driver");
-
-					// STEP 3: Open a connection
-					System.out.println("Connecting to database...");
-					conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-					// STEP 4: Execute a query
-					System.out.println("Creating statement...\n");
-					stmt = conn.createStatement();
-					String command;
-					System.out.println("statement created");
-
-					// Passed in values being applied to SQL query
-					System.out.println("setting input vars");
-
-					// test message
-					System.out.println("input vars set");
-
-					// test message
-					System.out.println("About to set command");
-					// *** Assign values to mysql insert***
-					command = "SELECT password FROM login_details WHERE username = \""
-							+ fieldUsername.getText().toString() + "\";";
-					// test message
-					System.out.println("command set");
-
-					// command executed
-					ResultSet rs = stmt.executeQuery(command);
-					// test message
-					System.out.println("Query executed");
-
-					String expectedPassword = null;
-
-					while (rs.next()) {
-
-						expectedPassword = rs.getString("password");
-
-					}
-
-					System.out.println("Expected = " + expectedPassword);
-					System.out.println("Actual = "
-							+ fieldPassword.getText().toString());
-
-					if (expectedPassword.equalsIgnoreCase(fieldPassword
-							.getText().toString())) {
-						System.out.println("Successful login");
-					} else {
-						System.out.println("Unsuccesful login");
-					}
-
-					// Clean-up environment
-					stmt.close();
-					conn.close();
-
-				} catch (SQLException se) {
-					// Handle errors for JDBC
-					se.printStackTrace();
-
-				} catch (Exception e) {
-					// Handle errors for Class.forName
-					e.printStackTrace();
-
-				} finally {
-					// finally block used to close resources
-					try {
-						if (stmt != null)
-							stmt.close();
-					} catch (SQLException se2) {
-					}// nothing we can do
-					try {
-						if (conn != null)
-							conn.close();
-					} catch (SQLException se) {
-						se.printStackTrace();
-					}// end finally try
-				}// end try
-			
+				}
+			}
+		});
 	}
 
-	public void triageLogin() {
+	public void attemptLogin() {
 
-		Parent root;
+		// Local Variables
+		Connection conn = null;
+		Statement stmt = null;
 
+		String findPassword = null;
+		String findPermissions = null;
+
+		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// STEP 4: Execute a query
+			stmt = conn.createStatement();
+			System.out.println("statement created");
+
+			// test message
+			System.out.println("About to set findPassword command");
+			// *** Assign values to mysql insert***
+			findPassword = "SELECT password FROM login_details WHERE username = \""
+					+ fieldUsername.getText().toString() + "\";";
+			// test message
+			System.out.println("findPassword set");
+
+			// test message
+			System.out.println("About to set findPermissions command");
+			// *** Assign values to mysql insert***
+			findPermissions = "SELECT permissions FROM login_details WHERE username = \""
+					+ fieldUsername.getText().toString() + "\";";
+			// test message
+			System.out.println("findPermissions set");
+
+			// findPassword query executed
+			ResultSet rs1 = stmt.executeQuery(findPassword);
+			// test message
+			System.out.println("findPassword Query executed");
+
+			while (rs1.next()) {
+
+				expectedPassword = rs1.getString("password");
+
+			}
+
+			System.out.println("Expected = " + expectedPassword);
+			System.out
+					.println("Actual = " + fieldPassword.getText().toString());
+
+			if (expectedPassword.equalsIgnoreCase(fieldPassword.getText()
+					.toString())) {
+				System.out.println("Successful login");
+			} else {
+				System.out.println("Unsuccesful login");
+			}
+
+			// findPermissions query executed
+			ResultSet rs2 = stmt.executeQuery(findPermissions);
+			while (rs2.next()) {
+				usersPermissions = rs2.getString("permissions");
+			}
+
+			// loads screen allowed for that user
+			switch (usersPermissions) {
+
+			case "reception":
+				fxmlToLoad = "ReceptionLayout.fxml";
+				fxmlHeader = "Reception Page";
+				userLogin();
+				break;
+			case "triage":
+				fxmlToLoad = "Triage.fxml";
+				fxmlHeader = "Triage Page";
+				userLogin();
+				break;
+			case "doctor":
+				fxmlToLoad = "TreatmentRoom.fxml";
+				fxmlHeader = "Treatment Room Page";
+				userLogin();
+				break;
+
+			}
+
+			// Clean-up environment
+			stmt.close();
+			conn.close();
+
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			}// nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}// end finally try
+		}// end try
+
+	}
+
+	public void userLogin() {
+
+		Parent root = null;
 		Stage anotherStage = new Stage();
 
-		Parent anotherRoot;
-
-		root = FXMLLoader.load(getClass().getResource("/javafx/Queue.fxml"));
+		try {
+			root = FXMLLoader
+					.load(getClass().getResource("/javafx/Queue.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Stage primaryStage = new Stage();
 		Scene scene = new Scene(root, 1400, 684);
 		primaryStage.setTitle("Queue Page");
@@ -178,67 +219,23 @@ public class LoginController extends Application implements Initializable {
 		primaryStage.show();
 		Stage stage = (Stage) myButton.getScene().getWindow();
 
-		// FXML for second stage Parent anotherRoot =
-		FXMLLoader.load(getClass().getResource("Triage.fxml"));
+		// FXML for second stage
+		Parent anotherRoot = null;
+		try {
+			anotherRoot = FXMLLoader.load(getClass().getResource(fxmlToLoad));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Scene anotherScene = new Scene(anotherRoot);
 		anotherStage.setScene(anotherScene);
-		anotherStage.setTitle("Triage Page");
+		anotherStage.setTitle(fxmlHeader);
 		anotherStage.show();
 		stage.close();
 
-		// set icon of the application Image applicationIcon =
-		// new
-		Image(getClass().getResourceAsStream("PASicon.png"));
-		primaryStage.getIcons().add(applicationIcon);
-
-	}
-
-	public void adminLogin() {
-
-		root = FXMLLoader.load(getClass().getResource("/javafx/Queue.fxml"));
-		Stage primaryStage = new Stage();
-		Scene scene = new Scene(root, 500, 250);
-		primaryStage.setTitle("Queue Page");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		Stage stage = (Stage) myButton.getScene().getWindow();
-
-		// FXML for second stage Parent anotherRoot =
-		FXMLLoader.load(getClass().getResource("ReceptionLayout.fxml"));
-		Scene anotherScene = new Scene(anotherRoot);
-		anotherStage.setScene(anotherScene);
-		anotherStage.setTitle("Reception Page");
-		anotherStage.show();
-		stage.close();
-
-		// set icon of the application Image applicationIcon =
-		// new
-		Image(getClass().getResourceAsStream("PASicon.png"));
-		primaryStage.getIcons().add(applicationIcon);
-
-	}
-
-	public void doctorLogin() {
-
-		root = FXMLLoader.load(getClass().getResource("/javafx/Queue.fxml"));
-		Stage primaryStage = new Stage();
-		Scene scene = new Scene(root, 1400, 684);
-		primaryStage.setTitle("Treatment Room");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		Stage stage = (Stage) myButton.getScene().getWindow();
-
-		// FXML for second stage Parent anotherRoot =
-		FXMLLoader.load(getClass().getResource("TreatmentRoom.fxml"));
-		Scene anotherScene = new Scene(anotherRoot);
-		anotherStage.setScene(anotherScene);
-		anotherStage.setTitle("Treatment Room Page");
-		anotherStage.show();
-		stage.close();
-
-		// set icon of the application Image applicationIcon =
-		// new
-		Image(getClass().getResourceAsStream("PASicon.png"));
+		// set icon of the application
+		Image applicationIcon = new Image(getClass().getResourceAsStream(
+				"PASicon.png"));
 		primaryStage.getIcons().add(applicationIcon);
 
 	}
