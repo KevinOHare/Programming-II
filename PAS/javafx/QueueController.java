@@ -109,6 +109,8 @@ public class QueueController implements Initializable {
 
 	// Boolean to keep queue working
 	static Boolean boolQ = true;
+	
+	static String duplicate = " ";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -165,6 +167,34 @@ public class QueueController implements Initializable {
 					
 					// to add and cycle through arrays
 					addingToArrays();
+					
+					//**
+					
+					/*for (Patient sa : llist) {
+						// add to priority queue
+						pQueue.add(sa);
+						
+					}
+
+					llist.clear();*/
+					// add to sort queue
+					for (Patient ae : pQueue) {
+						// add to sort queue
+						
+						sort.add(ae);
+					}
+					
+					// add to sort queue
+					for (Patient ae : sort) {
+						// add to sort queue
+						
+						llist.add(ae);
+					}
+					
+					
+					
+					
+					//**
 
 					// print treatment room to console
 					System.out.println("****** Treatment Room *******");
@@ -319,6 +349,29 @@ public class QueueController implements Initializable {
 	 */
 	public void addingToArrays() {
 
+		if (bool == true){
+			
+			for (Patient ft : llist){
+				PatientThread pt = new PatientThread(ft);
+				Runnable rr = new Runnable() {
+					public void run() {
+						pt.run();
+					}
+				};
+				new Thread(rr).start();
+				//llist.add(ft);
+			}
+			
+			bool = false;
+			/*for (int i = 0; i < alist.size(); i++) {
+				alist.remove(i);
+			}*/
+		}
+		
+		
+		
+		
+		/*
 		// check if Patient object can be added (with the
 		// 10 limit of Patients) and a boolean to check if
 		// the Patient is new
@@ -354,7 +407,7 @@ public class QueueController implements Initializable {
 			// prevent adding unless a new
 			// patient is added
 			bool = false;
-		}
+		}*/
 	}
 
 	/**
@@ -370,13 +423,14 @@ public class QueueController implements Initializable {
 
 		// find out if triage controller has data
 		// in order to add data to patient object
-		if (tc.firstNamePass != null) {
+		if ((tc.firstNamePass != null) && (tc.firstNamePass != duplicate)) {
 			ptq.setFirstName(tc.firstNamePass);
 			ptq.setLastName(tc.lastNamePass);
 			ptq.setTriage(tc.triagePass);
 
 			// add to array for sorting
-			alist.add(ptq);
+			llist.add(ptq);
+			
 			
 			//************test**********
 			/*Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
@@ -393,13 +447,13 @@ public class QueueController implements Initializable {
 					"Kilea", "BT20 578", "098 3490", "0694-3829", 4, false);
 			Patient pat7 = new Patient("Mr", "Red", "Wright", "02 road",
 					"Belfast", "BT03 039", "485 3020", "9592-2985", 3, false);
-			alist.add(pat1);
-			alist.add(pat2);
-			alist.add(pat3);
-			alist.add(pat4);
-			alist.add(pat5);
-			alist.add(pat6);
-			alist.add(pat7);*/
+			llist.add(pat1);
+			llist.add(pat2);
+			llist.add(pat3);
+			llist.add(pat4);
+			llist.add(pat5);
+			llist.add(pat6);
+			llist.add(pat7);*/
 			//****************************************
 			
 			
@@ -409,6 +463,8 @@ public class QueueController implements Initializable {
 			tc.firstNamePass = null;
 			tc.tableLastName = null;
 			// tc.triagePass = 0;
+			duplicate = tc.firstNamePass;
+		
 		}
 	}
 
