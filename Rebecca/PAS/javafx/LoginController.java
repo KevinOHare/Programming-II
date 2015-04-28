@@ -56,6 +56,7 @@ public class LoginController extends Application implements Initializable {
 				Parent root;
 				
 				 Stage anotherStage = new Stage();
+				 
 				
 				try {
 					if (fieldUsername.getText().equals("triage")
@@ -89,7 +90,7 @@ public class LoginController extends Application implements Initializable {
 						root = FXMLLoader.load(getClass().getResource(
 								"/javafx/Queue.fxml"));
 						Stage primaryStage = new Stage();
-						Scene scene = new Scene(root, 1400, 684);
+						Scene scene = new Scene(root, 500 , 250);
 						primaryStage.setTitle("Queue Page");
 						primaryStage.setScene(scene);
 						primaryStage.show();
@@ -102,7 +103,7 @@ public class LoginController extends Application implements Initializable {
 						anotherStage.setTitle("Reception Page");
 			            anotherStage.show();
 						stage.close();
-
+						
 						// set icon of the application
 						Image applicationIcon = new Image(getClass()
 								.getResourceAsStream("PASicon.png"));
@@ -121,7 +122,7 @@ public class LoginController extends Application implements Initializable {
 						Stage stage = (Stage) myButton.getScene().getWindow();
 						
 						// FXML for second stage			        
-			            Parent anotherRoot = FXMLLoader.load(getClass().getResource("TreatmentRoomController.fxml"));
+			            Parent anotherRoot = FXMLLoader.load(getClass().getResource("TreatmentRoom.fxml"));
 			            Scene anotherScene = new Scene(anotherRoot);
 			            anotherStage.setScene(anotherScene);
 						anotherStage.setTitle("Treatment Room Page");
@@ -218,7 +219,7 @@ public class LoginController extends Application implements Initializable {
 									Stage stage = (Stage) myButton.getScene().getWindow();
 									
 									// FXML for second stage			        
-						            Parent anotherRoot = FXMLLoader.load(getClass().getResource("TreatmentRoomController.fxml"));
+						            Parent anotherRoot = FXMLLoader.load(getClass().getResource("TreatmentRoom.fxml"));
 						            Scene anotherScene = new Scene(anotherRoot);
 						            anotherStage.setScene(anotherScene);
 									anotherStage.setTitle("Treatment Room Page");

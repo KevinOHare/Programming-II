@@ -27,6 +27,8 @@ public class TreatmentRoomThread implements Runnable {
 		
 		int loop = 0;
 		
+		
+		
 		do {
 			//System.out.println(loop);
 			this.treatmentRoom.setCountTimer(loop);
@@ -37,9 +39,8 @@ public class TreatmentRoomThread implements Runnable {
 				System.out.println("Interrupted");
 			}
 			
-		} while (loop != 10); // to act as 10 mins
+		} while (loop != 50); // to act as 10 mins
 		
-	
 		
 	}
 

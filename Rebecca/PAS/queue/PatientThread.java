@@ -17,8 +17,8 @@ public class PatientThread implements Runnable {
 		this.patient = patient;
 	}
 	
-
-
+	// Instance variables
+	
 	private boolean threadBool = true;
 	
 	@Override
@@ -26,8 +26,6 @@ public class PatientThread implements Runnable {
 
 		int loop = 0;
 		do {
-			
-			if (loop < 100) {
 			//System.out.println(loop);
 			loop++;
 			this.patient.setCountTimer(loop);
@@ -35,7 +33,6 @@ public class PatientThread implements Runnable {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				System.out.println("Interupted");
-			}
 			}
 		} while (loop < 300); // to act as 30 mins
 
