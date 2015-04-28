@@ -1,5 +1,5 @@
 package onCallMessage;
-/*package onCallMessage;
+
 // See HOW TO document to get this code working on your machine
 //everyone will need to download twilio jar 
  
@@ -74,4 +74,4 @@ public class OnCallMessage {
 		 
 	 
 	 
-}*/
+}

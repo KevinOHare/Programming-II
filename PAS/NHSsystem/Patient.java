@@ -50,6 +50,12 @@ public class Patient extends Person implements Comparable<Patient>{
 	 * is an emergency condition
 	 */
 	private boolean emergencyCondition;
+	
+	/**
+	 * Instance variable to indicate if patient timer
+	 * has exceeded queue time limit
+	 */
+	private int PatientMin;
 
 	/**
 	 * Default constructor
@@ -164,9 +170,26 @@ public class Patient extends Person implements Comparable<Patient>{
 		this.emergencyCondition = emergencyCondition;
 	}
 	
-	//public boolean equals(Patient other) {
-	//	return this.getTriage() == other.getTriage();
-	//}
+	/**
+	 * to get the patient min limit
+	 * @return PatientMin
+	 */
+	public int getPatientMin(){
+		return PatientMin;
+	}
+	
+	/**
+	 * to set the patient min limit
+	 * @param PatientMin
+	 */
+	public void setPatientMin(int PatientMin){
+		this.PatientMin = PatientMin;
+	}
+	
+	
+	
+	
+	
 
 	/**
 	 * Implemented with comparable to
@@ -184,9 +207,7 @@ public class Patient extends Person implements Comparable<Patient>{
 		} else {
 			return -1;
 		}
-
 	}
-	
 	
 
 	/**
