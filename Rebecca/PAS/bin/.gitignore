@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /.DS_Store
 /.checkstyle
 /.classpath
@@ -9,4 +10,11 @@
 /database/
 /javafx/
 /onCallMessage/
+=======
+/TestingQuene/
+/.metadata/
+/.settings/
+/NHSsystem/
+/javafx/
+>>>>>>> Stashed changes
 /queue/

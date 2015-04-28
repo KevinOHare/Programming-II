@@ -23,8 +23,8 @@ public class Queue {
 
 	static PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
 	 public int compare(Patient pat1, Patient pat2) {
-         return (pat1.isEmergencyCondition() == pat2.isEmergencyCondition()) ? (Integer.valueOf(pat1.getCountTimer()).compareTo(pat2.getCountTimer()))
-                                                                           : (pat1.isEmergencyCondition() ? -1 : 1);
+         return (pat1.getEmergencyCondition() == pat2.getEmergencyCondition()) ? (Integer.valueOf(pat1.getCountTimer()).compareTo(pat2.getCountTimer()))
+                                                                           : (pat1.getEmergencyCondition() ? -1 : 1);
 	 }
 
 	static LinkedList<TreatmentRoom> treat = new LinkedList<TreatmentRoom>();

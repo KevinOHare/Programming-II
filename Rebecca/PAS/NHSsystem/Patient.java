@@ -12,6 +12,7 @@ import queue.PatientThread;
  */
 public class Patient extends Person implements Comparable<Patient>{
 
+
 	/**
 	 * Instance variable for the NHS number of the patient
 	 */
@@ -152,7 +153,7 @@ public class Patient extends Person implements Comparable<Patient>{
 	/**
 	 * @return the emergencyCondition
 	 */
-	public boolean isEmergencyCondition() {
+	public boolean getEmergencyCondition() {
 		return emergencyCondition;
 	}
 
@@ -162,6 +163,10 @@ public class Patient extends Person implements Comparable<Patient>{
 	 */
 	public void setEmergencyCondition(boolean emergencyCondition) {
 		this.emergencyCondition = emergencyCondition;
+		
+		if (emergencyCondition == true){
+			setTriage(1);
+		}
 	}
 	
 	//public boolean equals(Patient other) {
