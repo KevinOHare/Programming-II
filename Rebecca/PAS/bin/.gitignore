@@ -1,1 +1,12 @@
-/TestingQuene/
+/.DS_Store
+/.checkstyle
+/.classpath
+/.metadata/
+/.project
+/.settings/
+/NHSsystem/
+/build.fxbuild
+/database/
+/javafx/
+/onCallMessage/
+/queue/

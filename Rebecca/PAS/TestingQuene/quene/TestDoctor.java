@@ -12,13 +12,8 @@ public class TestDoctor {
 	}
 
 	@Test
-	public void testDoctor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDoctorStringStringStringStringStringStringStringInt() {
-		fail("Not yet implemented");
+	public final void test() {
+		fail("Not yet implemented"); // TODO
 	}
 
 }

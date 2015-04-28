@@ -3,7 +3,8 @@ package NHSsystem;
 
 /**
  * RoomOccupiedException
- * Thrown when trying to place patient into an already occupied room 
+ * Thrown when trying to place patient into an already occupied room
+ * 
  * @author Vicky Stacey
  */
 public class RoomOccupiedException extends Exception {
