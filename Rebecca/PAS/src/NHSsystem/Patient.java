@@ -5,7 +5,6 @@ package NHSsystem;
 
 import queue.PatientThread;
 
-
 /**
  * @author chrismcclune
  *
@@ -21,31 +20,31 @@ public class Patient extends Person implements Comparable<Patient> {
 	 * Instance variable for triage priority
 	 */
 	private int triage;
-	
+
 	/**
 	 * Instance variable to count the timer method
 	 */
 	private int countTimer;
-	
+
 	/**
-	 * Instance variable to signal if patient is
-	 * in a treatment room
+	 * Instance variable to signal if patient is in a treatment room
 	 */
 	private Boolean inRoom = false;
 
 	/**
 	 * Default constructor
-	 * @param string8 
-	 * @param string7 
-	 * @param string6 
-	 * @param string5 
-	 * @param string4 
-	 * @param string3 
-	 * @param string2 
-	 * @param string 
+	 * 
+	 * @param string8
+	 * @param string7
+	 * @param string6
+	 * @param string5
+	 * @param string4
+	 * @param string3
+	 * @param string2
+	 * @param string
 	 */
-	public Patient(){
-		
+	public Patient() {
+
 	}
 
 	/**
@@ -88,6 +87,7 @@ public class Patient extends Person implements Comparable<Patient> {
 
 	/**
 	 * Get triage priority
+	 * 
 	 * @return triage
 	 */
 	public int getTriage() {
@@ -95,86 +95,93 @@ public class Patient extends Person implements Comparable<Patient> {
 	}
 
 	/**
-	 * Set triage priority
-	 * with validation 
+	 * Set triage priority with validation
+	 * 
 	 * @param triage
 	 */
-	public void setTriage(int triage)  {
+	public void setTriage(int triage) {
 		if (triage >= 1 || triage <= 4) {
 			this.triage = triage;
 		} else {
 			this.triage = 4;
-			}
-		
+		}
+
 	}
-	
-	/**
-	 * get method for the count timer
-	 * @return countTimer
-	 */
-	public int getCountTimer(){
-		return countTimer;
-	}
-	
-	/**
-	 * set method for the count timer
-	 * @param countTimer
-	 */
-	public void setCountTimer(int countTimer){
-		this.countTimer = countTimer;
-	}
-	
-	/**
-	 * get method for the in room boolean
-	 * @return inRoom
-	 */
-	public Boolean getInRoom(){
-		return inRoom;
-	}
-	
-	/**
-	 * set method for the in room boolean
-	 * @param inRoom
-	 */
-	public void setInRoom(Boolean inRoom){
-		this.inRoom = inRoom;
-	}
-	
-	//public boolean equals(Patient other) {
-	//	return this.getTriage() == other.getTriage();
-	//}
 
 	/**
-	 * Implemented with comparable to
-	 * be used by priority queue to
-	 * sort the triage in the right order
+	 * get method for the count timer
+	 * 
+	 * @return countTimer
+	 */
+	public int getCountTimer() {
+		return countTimer;
+	}
+
+	/**
+	 * set method for the count timer
+	 * 
+	 * @param countTimer
+	 */
+	public void setCountTimer(int countTimer) {
+		this.countTimer = countTimer;
+	}
+
+	/**
+	 * get method for the in room boolean
+	 * 
+	 * @return inRoom
+	 */
+	public Boolean getInRoom() {
+		return inRoom;
+	}
+
+	/**
+	 * set method for the in room boolean
+	 * 
+	 * @param inRoom
+	 */
+	public void setInRoom(Boolean inRoom) {
+		this.inRoom = inRoom;
+	}
+
+	// public boolean equals(Patient other) {
+	// return this.getTriage() == other.getTriage();
+	// }
+
+	/**
+	 * Implemented with comparable to be used by priority queue to sort the
+	 * triage in the right order
 	 */
 	@Override
 	public int compareTo(Patient other) {
-		
-		if (other.getCountTimer() < 25) {
-			
-		if (this.equals(other)) {
-			return 0;
-		} else if (this.getTriage() > other.getTriage()) {
+
+		if (other.getCountTimer() <= 25) {
+
+			if (this.equals(other)) {
+				return 0;
+			} else if (this.getTriage() > other.getTriage()) {
+				return 1;
+			} else {
+				return -1;
+			}
+
+		}
+		if (other.getCountTimer() <= 30) {
 			return 1;
 		} else {
-			return -1;
+			return 0;
 		}
-		
-	} else {
-		return 1;
-	}
 
-	}
+	} 
 
 	/**
 	 * A to string method to print results
 	 */
 	@Override
 	public String toString() {
-		return this.getFirstName() + "  "
-				+ this.getLastName() + "   ID:" + this.getNhsNumber() + "  |  *Triage:{" + this.getTriage() + "}  *QueueTimer:[" + this.getCountTimer() + "]  |";
+		return this.getFirstName() + "  " + this.getLastName() + "   ID:"
+				+ this.getNhsNumber() + "  |  *Triage:{" + this.getTriage()
+				+ "}  *QueueTimer:[" + this.getCountTimer() + "]  |";
 
 	}
 }

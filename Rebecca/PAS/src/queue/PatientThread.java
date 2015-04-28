@@ -27,7 +27,7 @@ public class PatientThread implements Runnable {
 		int loop = 0;
 		do {
 			
-			if (loop < 25) {
+			if (loop < 100) {
 			//System.out.println(loop);
 			loop++;
 			this.patient.setCountTimer(loop);
@@ -37,7 +37,7 @@ public class PatientThread implements Runnable {
 				System.out.println("Interupted");
 			}
 			}
-		} while (loop < 30); // to act as 30 mins
+		} while (loop < 300); // to act as 30 mins
 
 	}
 	

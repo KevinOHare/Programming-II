@@ -39,6 +39,7 @@ public class TreatmentRoomThread implements Runnable {
 			
 		} while (loop != 10); // to act as 10 mins
 		
+	
 		
 	}
 

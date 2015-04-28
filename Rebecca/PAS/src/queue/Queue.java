@@ -24,10 +24,12 @@ public class Queue {
 	static SortedSet<Patient> sort = new TreeSet<Patient>();
 
 	static PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
-
+	
 	static LinkedList<TreatmentRoom> treat = new LinkedList<TreatmentRoom>();
 
 	static TreatmentRoom[] treatAr = new TreatmentRoom[5];
+	
+	String[] stringPa = new String[10];
 
 	// **** test *****
 
@@ -51,6 +53,8 @@ public class Queue {
 			"Hillsborough", "BT02 984", "039 3085", "303-59387", 4);
 	static Patient pat10 = new Patient("Ms", "Rachel", "Lenvine", "03 road",
 			"Moria", "BT28 828", "493 03895", "294-3985", 1);
+	
+	
 
 	// instance of treatment room objects
 
@@ -135,6 +139,7 @@ public class Queue {
 					// a boolean assigned within patient
 					// object to execute the remove later
 					as.setInRoom(true);
+					
 				} else if (treat.get(1).isAvailable() == true) {
 					treat.get(1).setPatient(as);
 					treat.get(1).setAvailable(false);
@@ -214,7 +219,9 @@ public class Queue {
 
 			System.out.println("\n*****************************************\n");
 			Thread.sleep(4000);
+			
 		}
+		
 
 	}
 
@@ -237,5 +244,6 @@ public class Queue {
 		};
 		new Thread(r).start();
 	}
+	
 
 }
