@@ -1,4 +1,4 @@
-package quene;
+package TestingQuene.quene;
 
 import static org.junit.Assert.*;
 

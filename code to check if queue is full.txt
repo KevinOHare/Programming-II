@@ -1,0 +1,35 @@
+// JL checks if queue is full
+						boolean queueIsFull = false;
+						if ((!(stringPa[0] == null))
+								&& (!(stringPa[1] == null))
+								&& (!(stringPa[2] == null))
+								&& (!(stringPa[3] == null))
+								&& (!(stringPa[4] == null))
+								&& (!(stringPa[5] == null))
+								&& (!(stringPa[6] == null))
+								&& (!(stringPa[7] == null))
+								&& (!(stringPa[8] == null))
+								&& (!(stringPa[9] == null))) {
+							queueIsFull = true;
+						} else if ((stringPa[0] == null)
+								|| (stringPa[1] == null)
+								|| (stringPa[2] == null)
+								|| (stringPa[3] == null)
+								|| (stringPa[4] == null)
+								|| (stringPa[5] == null)
+								|| (stringPa[6] == null)
+								|| (stringPa[7] == null)
+								|| (stringPa[8] == null)
+								|| (stringPa[9] == null)) {
+							queueIsFull = false;
+						}
+
+						// JL sends manager a message if queue is full
+						if (queueIsFull) {
+							try {
+								onCallMessage.OnCallMessage.ManagerMessage1();
+							} catch (TwilioRestException tre) {
+								System.out
+										.println("Message to manager not sent");
+							}
+						}

@@ -39,7 +39,7 @@ public class QueueController implements Initializable {
 
 	@FXML
 	ChoiceBox triageListNum;
-	
+
 	@FXML
 	ChoiceBox triagePriority;
 
@@ -51,8 +51,8 @@ public class QueueController implements Initializable {
 		// take the entered number in the linked list for patient
 		int llistNum = Integer.parseInt((String) triageListNum.getValue());
 		llistNum--; // remove 1 as dealing with an array
-		
-		// take the entered triage priority and set it to the 
+
+		// take the entered triage priority and set it to the
 		// selected linked list patient number
 		int priNum = Integer.parseInt((String) triagePriority.getValue());
 		llist.get(llistNum).setTriage(priNum);
@@ -62,8 +62,8 @@ public class QueueController implements Initializable {
 	private void handleButtonTreat() throws IOException {
 		// take the entered number in the linked list for treatment room
 		int num = Integer.parseInt((String) treatBox.getValue());
-		num --; // remove 1 as dealing with an array
-		
+		num--; // remove 1 as dealing with an array
+
 		// pass in strings for labels in TreatmentRoomController
 		strFirstName = treat.get(num).getPatient().getFirstName();
 		strLastName = treat.get(num).getPatient().getLastName();
@@ -86,6 +86,13 @@ public class QueueController implements Initializable {
 	static SortedSet<Patient> sort = new TreeSet<Patient>();
 
 	static PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
+
+	public int compare(Patient pat1, Patient pat2) {
+		return (pat1.getEmergencyCondition() == pat2.getEmergencyCondition()) ? (Integer
+				.valueOf(pat1.getCountTimer()).compareTo(pat2.getCountTimer()))
+				: (pat1.getEmergencyCondition() ? -1 : 1);
+
+	}
 
 	public static String[] stringPa = new String[10];
 
@@ -121,8 +128,8 @@ public class QueueController implements Initializable {
 		treat.add(room4);
 		treat.add(room5);
 		
-		//**********************TEST*********************
-		/*Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
+		
+		Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
 				"Lisburn", "BT67 524", "098 38563", "3759-283", 3, false);
 		Patient pat2 = new Patient("Ms", "June", "Campbell", "20 road",
 				"Lisburn", "BT23 524", "234 4263", "3234-83", 4, false);
@@ -141,9 +148,9 @@ public class QueueController implements Initializable {
 		Patient pat9 = new Patient("Mr", "Kevin", "Ken", "95 road",
 				"Hillsborough", "BT02 984", "039 3085", "303-59387", 4, false);
 		Patient pat10 = new Patient("Ms", "Rachel", "Lenvine", "03 road",
-				"Moria", "BT28 828", "493 03895", "294-3985", 1, true);*/
+				"Moria", "BT28 828", "493 03895", "294-3985", 1, true);
 		
-		/*llist.add(pat1);
+		llist.add(pat1);
 		llist.add(pat2);
 		llist.add(pat3);
 		llist.add(pat4);
@@ -151,8 +158,8 @@ public class QueueController implements Initializable {
 		llist.add(pat6);
 		llist.add(pat7);
 		llist.add(pat8);
-		llist.add(pat9);*/
-		//***************************************************
+		llist.add(pat9);
+		
 
 		// Thread run in the background to produce the queue
 		Runnable r = new Runnable() {
@@ -182,6 +189,12 @@ public class QueueController implements Initializable {
 					for (Patient as : llist) {
 						// print patient in queue
 						System.out.println(as.toString());
+						
+						if(pat1.getEmergencyCondition() == true){
+							bypassQueue(); 
+						
+							}else{
+						
 
 						// check rooms are available
 						if (treat.getFirst().isAvailable() == true) {
@@ -291,8 +304,79 @@ public class QueueController implements Initializable {
 					}
 				}
 			}
-		};
+		
+			}
+			}
+		;
+		
 		new Thread(r).start();
+	}
+
+	protected void bypassQueue() {
+		
+		Patient emergencyPatient = new Patient();
+		
+		if (treat.get(1).isAvailable() == true) {
+			treat.get(1).setPatient(emergencyPatient);
+			// a boolean assigned within patient
+			// object to execute the remove later
+			emergencyPatient.setInRoom(true);
+		} else if (treat.get(2).isAvailable() == true) {
+			treat.get(2).setPatient(emergencyPatient);
+			treat.get(2).setAvailable(false);
+			// start count for treatment room
+			// using Treatment room thread
+			startTimer(treat.get(2));
+			// a boolean assigned within patient
+			// object to execute the remove later
+			emergencyPatient.setInRoom(true);
+		} else if (treat.get(3).isAvailable() == true) {
+			treat.get(3).setPatient(emergencyPatient);
+			treat.get(3).setAvailable(false);
+			// start count for treatment room
+			// using Treatment room thread
+			startTimer(treat.get(3));
+			// a boolean assigned within patient
+			// object to execute the remove later
+			emergencyPatient.setInRoom(true);
+		} else if (treat.get(4).isAvailable() == true) {
+			treat.get(4).setPatient(emergencyPatient);
+			treat.get(4).setAvailable(false);
+			// start count for treatment room
+			// using Treatment room thread
+			startTimer(treat.get(4));
+			// a boolean assigned within patient
+			// object to execute the remove later
+			emergencyPatient.setInRoom(true);
+		} else if (treat.getLast().isAvailable() == true) {
+			treat.getLast().setPatient(emergencyPatient);
+			treat.getLast().setAvailable(false);
+			// start count for treatment room
+			// using Treatment room thread
+			startTimer(treat.getLast());
+			// a boolean assigned within patient
+			// object to execute the remove later
+			emergencyPatient.setInRoom(true);
+	
+		} else {
+			removePatientFromRoom();
+		}
+			
+	
+		
+	} 
+
+	private void removePatientFromRoom() {
+		
+		for (int i = 0; i <= 5; i++) {
+			if (!treat.get(i).isAvailable()) {
+				
+				
+				
+			}
+		}
+		
+		
 	}
 
 	/**
@@ -333,7 +417,7 @@ public class QueueController implements Initializable {
 			// add to sort queue
 			for (Patient ae : pQueue) {
 				// add to sort queue
-				
+
 				sort.add(ae);
 			}
 
@@ -377,32 +461,28 @@ public class QueueController implements Initializable {
 
 			// add to array for sorting
 			alist.add(ptq);
-			
-			//************test**********
-			/*Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
-					"Lisburn", "BT67 524", "098 38563", "3759-283", 3, false);
-			Patient pat2 = new Patient("Ms", "June", "Campbell", "20 road",
-					"Lisburn", "BT23 524", "234 4263", "3234-83", 4, false);
-			Patient pat3 = new Patient("Mr", "Philip", "White", "94 road",
-					"Hillsborough", "BT57 254", "234 4543", "0568-283", 2, false);
-			Patient pat4 = new Patient("Mrs", "Mary", "Kelly", "60 road",
-					"Moria", "BT57 092", "689 2583", "3452-039", 1, true);
-			Patient pat5 = new Patient("Mr", "Conner", "Lee", "10 road",
-					"Anahilt", "BT59 203", "582 9385", "0429-3458", 3, false);
-			Patient pat6 = new Patient("Mrs", "Will", "Goon", "85 road",
-					"Kilea", "BT20 578", "098 3490", "0694-3829", 4, false);
-			Patient pat7 = new Patient("Mr", "Red", "Wright", "02 road",
-					"Belfast", "BT03 039", "485 3020", "9592-2985", 3, false);
-			alist.add(pat1);
-			alist.add(pat2);
-			alist.add(pat3);
-			alist.add(pat4);
-			alist.add(pat5);
-			alist.add(pat6);
-			alist.add(pat7);*/
-			//****************************************
-			
-			
+
+			// ************test**********
+			/*
+			 * Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
+			 * "Lisburn", "BT67 524", "098 38563", "3759-283", 3, false);
+			 * Patient pat2 = new Patient("Ms", "June", "Campbell", "20 road",
+			 * "Lisburn", "BT23 524", "234 4263", "3234-83", 4, false); Patient
+			 * pat3 = new Patient("Mr", "Philip", "White", "94 road",
+			 * "Hillsborough", "BT57 254", "234 4543", "0568-283", 2, false);
+			 * Patient pat4 = new Patient("Mrs", "Mary", "Kelly", "60 road",
+			 * "Moria", "BT57 092", "689 2583", "3452-039", 1, true); Patient
+			 * pat5 = new Patient("Mr", "Conner", "Lee", "10 road", "Anahilt",
+			 * "BT59 203", "582 9385", "0429-3458", 3, false); Patient pat6 =
+			 * new Patient("Mrs", "Will", "Goon", "85 road", "Kilea",
+			 * "BT20 578", "098 3490", "0694-3829", 4, false); Patient pat7 =
+			 * new Patient("Mr", "Red", "Wright", "02 road", "Belfast",
+			 * "BT03 039", "485 3020", "9592-2985", 3, false); alist.add(pat1);
+			 * alist.add(pat2); alist.add(pat3); alist.add(pat4);
+			 * alist.add(pat5); alist.add(pat6); alist.add(pat7);
+			 */
+			// ****************************************
+
 			// allow access for addingToArrays()
 			bool = true;
 			// reset values

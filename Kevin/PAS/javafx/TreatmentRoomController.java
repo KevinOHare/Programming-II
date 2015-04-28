@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -93,19 +94,24 @@ public class TreatmentRoomController implements Initializable {
 			// STEP 4: Execute a query
 			System.out.println("Creating statement...\n");
 			stmt = conn.createStatement();
-			String command;
+			String findMaxApptNumQuery;
+			String insertCommand;
 			System.out.println("statement created");
 
 			// Passed in values being applied to SQL query
 			System.out.println("setting input vars");
 			// to be replaced by value from queue
-			String ID = "test ID 19";
+			String NHS_Number = "testNhsNum";
 
 			String startTimeString = startTime.toString();
 			String finishTimeString = finishTime.toString();
 			// time difference converted from milliseconds to minutes
-			String appointmentDuration = (long)(finishTime.getTime() - startTime
-					.getTime()) / 60000 + "m"+(long)((finishTime.getTime()-startTime.getTime())%60000)/1000+"s";
+			String appointmentDuration = (long) (finishTime.getTime() - startTime
+					.getTime())
+					/ 60000
+					+ "m"
+					+ (long) ((finishTime.getTime() - startTime.getTime()) % 60000)
+					/ 1000 + "s";
 
 			// doctors manually entered treatment details
 			String treatmentDetailsString = treatmentDetailsText.getText()
@@ -114,18 +120,36 @@ public class TreatmentRoomController implements Initializable {
 			// test message
 			System.out.println("input vars set");
 
+			findMaxApptNumQuery = "SELECT MAX(ApptNum) as maxApptNum from treatment_log";
+
+			ResultSet rs = stmt.executeQuery(findMaxApptNumQuery);
+
+			String maxApptNum = null;
+
+			while (rs.next()) {
+
+				maxApptNum = rs.getString("maxApptNum");
+
+			}
+
+			System.out.println("Curren maxApptNum = "+maxApptNum);
+
+			int newApptNum = Integer.parseInt(maxApptNum) + 1;
+			
+			System.out.println("New maxApptNum = "+newApptNum);
+
 			// test message
 			System.out.println("About to set command");
 			// *** Assign values to mysql insert***
-			command = "INSERT INTO treatment_log VALUES ('" + ID + "', '"
-					+ startTimeString + "', '" + finishTimeString + "', '"
-					+ appointmentDuration + "', '" + treatmentDetailsString
-					+ "')";
+			insertCommand = "INSERT INTO treatment_log VALUES ("+ Integer.toString(newApptNum)
+					+ ",'" + NHS_Number + "','" + startTimeString + "','"
+					+ finishTimeString + "','" + appointmentDuration + "','"
+					+ treatmentDetailsString + "')";
 			// test message
 			System.out.println("command set");
 
 			// command executed
-			stmt.executeUpdate(command);
+			stmt.executeUpdate(insertCommand);
 			// test message
 			System.out.println("Command executed");
 
@@ -155,14 +179,14 @@ public class TreatmentRoomController implements Initializable {
 				se.printStackTrace();
 			}// end finally try
 		}// end try
-		
+
 		firstNameText.setText("");
 		surnameText.setText("");
 		bloodTypeText.setText("");
 		allergiesText.setText("");
 		beginTimeText.setText("");
 		treatmentDetailsText.setText("");
-		
+
 		System.out.println("Goodbye!");
 	}// end main
 }
