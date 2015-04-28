@@ -1,5 +1,5 @@
 package onCallMessage;
-/*package onCallMessage;
+/*
 // See HOW TO document to get this code working on your machine
 //everyone will need to download twilio jar 
  
@@ -22,7 +22,7 @@ public class OnCallMessage {
 	 public static final String ACCOUNT_SID = "ACbd1c2283f3ce08388849962a45c65c8a"; 
 	 public static final String AUTH_TOKEN = "25c9cda6ed1d2dd17d5a8d362082e37a"; 
 	 
-	 public static void main(String[]args) throws TwilioRestException { 
+	 public static void TeamMessage() throws TwilioRestException { 
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
 	 
 		 // Build the parameters 
@@ -54,7 +54,7 @@ public class OnCallMessage {
 		 System.out.println(message.getSid()); 
 	 } 
 	 
- public static void ManagerMessage2() throws TwilioRestException {
+	 public static void ManagerMessage2() throws TwilioRestException {
 		 
 		 TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
 		 
@@ -72,6 +72,5 @@ public class OnCallMessage {
 		 System.out.println(message.getSid()); 
 	 } 
 		 
-	 
 	 
 }*/
