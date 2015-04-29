@@ -25,6 +25,31 @@ public class OnCallTeam {
 	 * Instance of Patient object
 	 */
 	private Patient patient;
+	
+	/**
+	 * Instance of first doctor
+	 */
+	private Doctor d1;
+	
+	/**
+	 * Instance of second doctor
+	 */
+	private Doctor d2;
+	
+	/**
+	 * Instance of first nurse
+	 */
+	private Nurse n1;
+	
+	/**
+	 * Instance of second nurse
+	 */
+	private Nurse n2;
+	
+	/**
+	 * Instance of third nurse
+	 */
+	private Nurse n3;
 
 	/**
 	 * Default constructor
@@ -104,6 +129,76 @@ public class OnCallTeam {
 	public String toString() {
 		return this.isAvailable + "\t" + this.patient
 				+ "\tOn Call Team Timer: " + this.getCountTimer();
+	}
+
+	/**
+	 * @return the d1
+	 */
+	public Doctor getD1() {
+		return d1;
+	}
+
+	/**
+	 * @param d1 the d1 to set
+	 */
+	public void setD1(Doctor d1) {
+		this.d1 = d1;
+	}
+
+	/**
+	 * @return the d2
+	 */
+	public Doctor getD2() {
+		return d2;
+	}
+
+	/**
+	 * @param d2 the d2 to set
+	 */
+	public void setD2(Doctor d2) {
+		this.d2 = d2;
+	}
+
+	/**
+	 * @return the n1
+	 */
+	public Nurse getN1() {
+		return n1;
+	}
+
+	/**
+	 * @param n1 the n1 to set
+	 */
+	public void setN1(Nurse n1) {
+		this.n1 = n1;
+	}
+
+	/**
+	 * @return the n2
+	 */
+	public Nurse getN2() {
+		return n2;
+	}
+
+	/**
+	 * @param n2 the n2 to set
+	 */
+	public void setN2(Nurse n2) {
+		this.n2 = n2;
+	}
+
+	/**
+	 * @return the n3
+	 */
+	public Nurse getN3() {
+		return n3;
+	}
+
+	/**
+	 * @param n3 the n3 to set
+	 */
+	public void setN3(Nurse n3) {
+		this.n3 = n3;
 	}
 
 }
