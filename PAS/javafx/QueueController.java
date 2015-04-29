@@ -12,8 +12,10 @@ import java.util.TreeSet;
 import com.twilio.sdk.TwilioRestException;
 
 import onCallMessage.OnCallMessage;
+import queue.OnCallTeamThread;
 import queue.PatientThread;
 import queue.TreatmentRoomThread;
+import NHSsystem.OnCallTeam;
 import NHSsystem.Patient;
 import NHSsystem.TreatmentRoom;
 import javafx.animation.Animation;
@@ -109,6 +111,10 @@ public class QueueController implements Initializable {
 	static TreatmentRoom room5 = new TreatmentRoom(5, true);
 
 	public static String[] stringAr = new String[5];
+
+	// INSTANCE FOR ON CALL TEAM
+
+	static OnCallTeam onCallTeam = new OnCallTeam();
 
 	// Boolean to check whether a new Patient can be added
 	// to queue
@@ -333,18 +339,12 @@ public class QueueController implements Initializable {
 					// exceeded the queue limits
 					checkQueueTimerLimit();
 
-					/*
-					 * // print on call team to console
-					 * System.out.println("\n******On Call Team******\n");
-					 * 
-					 * // prints out whether or not the on call team is
-					 * available if (onCallTeam.isAvailable() == true) {
-					 * System.out.println("Current status: Available"); } else
-					 * if (onCallTeam.isAvailable() == false) {
-					 * System.out.println("Current status: Engaged"); // print
-					 * out details of patient here }
-					 */
-
+					// print on call team to console
+					System.out.println("\n******On Call Team******\n");
+					System.out.println("Available? \t Patient Details");
+					System.out.println(onCallTeam.toString());
+					
+					// END
 					System.out
 							.println("\n*****************************************\n");
 					try {
@@ -372,6 +372,24 @@ public class QueueController implements Initializable {
 		Runnable r = new Runnable() {
 			public void run() {
 				thr.run();
+			}
+		};
+		new Thread(r).start();
+	}
+	
+	/**
+	 * A method to invoke the on call team thread class timer count
+	 * 
+	 * @param oct
+	 */
+	public static void startTimer(OnCallTeam oct) {
+
+		// instantiate classes to activate the
+		// start time at the queue
+		OnCallTeamThread octq = new OnCallTeamThread(oct);
+		Runnable r = new Runnable() {
+			public void run() {
+				octq.run();
 			}
 		};
 		new Thread(r).start();
@@ -443,11 +461,9 @@ public class QueueController implements Initializable {
 				ptq.setFirstName(tc.firstNamePass);
 				ptq.setLastName(tc.lastNamePass);
 				ptq.setTriage(tc.triagePass);
-				
+
 				ptq.setAllergy(tc.allergyPass);
 				ptq.setBloodType(tc.bloodTypePass);
-				
-				
 
 				// add to array for sorting
 				llist.add(ptq);
@@ -482,12 +498,12 @@ public class QueueController implements Initializable {
 				tc.tableLastName = null;
 				// tc.triagePass = 0;
 				duplicate = tc.firstNamePass;
-				
+
 			} else {
 				// queue is full of non-emergency
 				// patients
-				//call.ManagerMessage1();
-				
+				// call.ManagerMessage1();
+
 			}
 		}
 	}
@@ -495,7 +511,8 @@ public class QueueController implements Initializable {
 	/**
 	 * check each patient in queue to check if a on call message is needed to be
 	 * sent to Hospital Manager
-	 * @throws TwilioRestException 
+	 * 
+	 * @throws TwilioRestException
 	 */
 	public void checkQueueTimerLimit() throws TwilioRestException {
 		// Local variable
@@ -519,20 +536,21 @@ public class QueueController implements Initializable {
 	 * emergency patient
 	 * 
 	 * @param Patient
-	 * @throws TwilioRestException 
+	 * @throws TwilioRestException
 	 */
-	public void removePatientFromTreat(Patient pt) throws TwilioRestException{
+	public void removePatientFromTreat(Patient pt) throws TwilioRestException {
 		// Local variable
 		Boolean bool = false;
-		
-		// check treatment rooms for patient less than 
+
+		// check treatment rooms for patient less than
 		// emergency (or 1)
-		for (int i = 0; i < treat.size(); i++){
-			if (treat.get(i).getPatient().getTriage() == 1){
-				//*do nothing
+		for (int i = 0; i < treat.size(); i++) {
+			if (treat.get(i).getPatient().getTriage() == 1) {
+				// *do nothing
 				// set bool for on call message
 				bool = true;
-			} else if ((treat.get(i).getPatient().getTriage() >= 2) || (treat.get(i).getPatient().getTriage() <= 4)) {
+			} else if ((treat.get(i).getPatient().getTriage() >= 2)
+					|| (treat.get(i).getPatient().getTriage() <= 4)) {
 				// adjust triage priority
 				treat.get(i).getPatient().setTriage(1);
 				treat.get(i).getPatient().getTriage();
@@ -541,25 +559,25 @@ public class QueueController implements Initializable {
 				// set patient here to null
 				treat.get(i).setPatient(null);
 				treat.get(i).setCountTimer(0);
-				
+
 				// add emergency patient
 				treat.get(i).setPatient(pt);
 				treat.get(i).getPatient();
 				startTimer(treat.get(i));
-				
+
 				// set bool to not call message
 				bool = false;
-				
+
 				break;
-			} 
+			}
 			break;
 		}
-		
+
 		// message call
-		if (bool = true){
-			// call message for queue full
-			call.ManagerMessage1();
-		}	
+		if (bool = true) {
+			// call message for on call team
+			OnCallMessage.OnCallTeamMessage();
+		}
 	}
-	
-}//************************end of class**********************
+
+}// ************************end of class**********************
