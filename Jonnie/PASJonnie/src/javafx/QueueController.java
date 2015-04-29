@@ -431,7 +431,11 @@ public class QueueController implements Initializable {
 
 		// if emergency then assign patient to an empty treatment room
 		if (ep.getTriage() == 1) {
-			if (treat.getFirst().isAvailable() == true) {
+			
+				treat.get(1).setAvailable(false);
+				// start count for treatment room
+				// using Treatment room thread
+				startTimer(treat.get(1));if (treat.getFirst().isAvailable() == true) {
 				treat.getFirst().setPatient(ep);
 				treat.getFirst().setAvailable(false);
 				// start count for treatment room
@@ -442,10 +446,6 @@ public class QueueController implements Initializable {
 				ep.setInRoom(true);
 			} else if (treat.get(1).isAvailable() == true) {
 				treat.get(1).setPatient(ep);
-				treat.get(1).setAvailable(false);
-				// start count for treatment room
-				// using Treatment room thread
-				startTimer(treat.get(1));
 				// a boolean assigned within patient
 				// object to execute the remove later
 				ep.setInRoom(true);

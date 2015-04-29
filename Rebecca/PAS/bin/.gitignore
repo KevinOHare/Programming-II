@@ -1,20 +1,6 @@
-<<<<<<< Updated upstream
-/.DS_Store
-/.checkstyle
-/.classpath
-/.metadata/
-/.project
-/.settings/
-/NHSsystem/
-/build.fxbuild
-/database/
-/javafx/
-/onCallMessage/
-=======
 /TestingQuene/
 /.metadata/
 /.settings/
 /NHSsystem/
 /javafx/
->>>>>>> Stashed changes
-/queue/
+/onCallMessage/

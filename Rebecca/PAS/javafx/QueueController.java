@@ -1,6 +1,7 @@
 package javafx;
 
 import java.io.IOException;
+import onCallMessage.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -8,6 +9,8 @@ import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import com.twilio.sdk.TwilioRestException;
 
 import queue.PatientThread;
 import queue.TreatmentRoomThread;
@@ -492,4 +495,43 @@ public class QueueController implements Initializable {
 		}
 	}
 
+	public void queueFull(){
+	// JL checks if queue is full
+	boolean queueIsFull = false;
+	
+	if ((!(stringPa[0] == null))
+			&& (!(stringPa[1] == null))
+			&& (!(stringPa[2] == null))
+			&& (!(stringPa[3] == null))
+			&& (!(stringPa[4] == null))
+			&& (!(stringPa[5] == null))
+			&& (!(stringPa[6] == null))
+			&& (!(stringPa[7] == null))
+			&& (!(stringPa[8] == null))
+			&& (!(stringPa[9] == null))) {
+		queueIsFull = true;
+	} else if ((stringPa[0] == null)
+			|| (stringPa[1] == null)
+			|| (stringPa[2] == null)
+			|| (stringPa[3] == null)
+			|| (stringPa[4] == null)
+			|| (stringPa[5] == null)
+			|| (stringPa[6] == null)
+			|| (stringPa[7] == null)
+			|| (stringPa[8] == null)
+			|| (stringPa[9] == null)) {
+		queueIsFull = false;
+	}
+
+	// JL sends manager a message if queue is full
+	if (queueIsFull) {
+		try {
+			OnCallMessage.ManagerMessage1();
+		} catch (TwilioRestException tre) {
+			System.out
+					.println("Message to manager not sent");
+		}
+	}
+	
+}
 }
