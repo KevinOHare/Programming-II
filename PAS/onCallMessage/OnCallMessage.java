@@ -21,8 +21,8 @@ public class OnCallMessage {
 	
 	 // Find your Account Sid and Token at twilio.com/user/account - copy and paste the two here
 
-	 public static final String ACCOUNT_SID = "ACbd1c2283f3ce08388849962a45c65c8a"; 
-	 public static final String AUTH_TOKEN = "25c9cda6ed1d2dd17d5a8d362082e37a"; 
+	 public static final String ACCOUNT_SID = "ACb6746bac3b7204dcb3a7777879b70a63"; 
+	 public static final String AUTH_TOKEN = "c350300591d3c582c5e9f80ade758c3f"; 
 	 
 	 public static void main(String[]args) throws TwilioRestException { 
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
@@ -31,9 +31,9 @@ public class OnCallMessage {
 		 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
 		 params.add(new BasicNameValuePair("Body", "Emergency Alert! You are required to attend the hospital immediately"));
 		 //staff numbers message sent to
-		 params.add(new BasicNameValuePair("To", "+447787945009"));
+		 params.add(new BasicNameValuePair("To", "+447543635708"));
 		 //twilio number used to send message
-		 params.add(new BasicNameValuePair("From", "+441249400057"));    
+		 params.add(new BasicNameValuePair("From", "+441633901163"));    
 	 
 		 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 
 		 Message message = messageFactory.create(params); 
@@ -47,9 +47,9 @@ public class OnCallMessage {
 		 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
 		 params.add(new BasicNameValuePair("Body", "Emergency Alert! The Accident and Emergency Queue is full."));
 		 //staff numbers message sent to
-		 params.add(new BasicNameValuePair("To", "+447787945009"));
+		 params.add(new BasicNameValuePair("To", "+447543635708"));
 		 //twilio number used to send message
-		 params.add(new BasicNameValuePair("From", "+441249400057"));    
+		 params.add(new BasicNameValuePair("From", "+441633901163"));    
 	 
 		 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 
 		 Message message = messageFactory.create(params); 
@@ -64,9 +64,9 @@ public class OnCallMessage {
 		 params.add(new BasicNameValuePair("Body", "Emergency Alert! Patient Waiting Times in Accident and Emergency "
 		 		+ "& Department are exceding 30 minutes."));
 		 //message sent to staff
-		 params.add(new BasicNameValuePair("To", "+447787945009")); //this is your phone number
+		 params.add(new BasicNameValuePair("To", "+447543635708")); //this is your phone number
 		 //twilio number used to send message
-		 params.add(new BasicNameValuePair("From", "+441249400057"));  // this is a number twilio provides - see note in word file  
+		 params.add(new BasicNameValuePair("From", "+441633901163"));  // this is a number twilio provides - see note in word file  
    
 	 
 		 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 

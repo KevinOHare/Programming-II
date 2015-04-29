@@ -56,7 +56,17 @@ public class Patient extends Person implements Comparable<Patient>{
 	 * has exceeded queue time limit
 	 */
 	private int PatientMin;
-
+	
+	/**
+	 * Instance Variable of Allergy
+	 */
+	private String allergy;
+	
+	/**
+	 * Instance Variable of Blood Type
+	 */
+	private String bloodType;
+	
 	/**
 	 * Default constructor
 	 */
@@ -186,10 +196,38 @@ public class Patient extends Person implements Comparable<Patient>{
 		this.PatientMin = PatientMin;
 	}
 	
+	/**
+	 * get allergy method
+	 * @return allergy
+	 */
+	public String getAllergy(){
+		return allergy;
+	}
 	
+	/**
+	 * set allergy method
+	 * @param allergy
+	 */
+	public void setAllergy(String allergy){
+		this.allergy = allergy;
+	}
 	
+	/**
+	 * get blood type method
+	 * @return bloodType
+	 */
+	public String getBloodType(){
+		return bloodType;
+	}
 	
-	
+	/**
+	 * set blood type method
+	 * @param bloodType
+	 */
+	public void setBloodType(String bloodType){
+		this.bloodType = bloodType;
+	}
+
 
 	/**
 	 * Implemented with comparable to

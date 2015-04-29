@@ -51,6 +51,15 @@ public class TreatmentRoomController implements Initializable {
 	 */
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
+	
+	/**
+	 * Instance QueueController class
+	 */
+	static QueueController qc = new QueueController();
+	String firstStr = qc.strFirstName;
+	String surStr = qc.strLastName;
+	String bloodStr = qc.strBloodType;
+	String allergyStr = qc.strAllergy;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -60,10 +69,10 @@ public class TreatmentRoomController implements Initializable {
 
 		// different labels set
 		// to be replaced by values from queue
-		firstNameText.setText("test firstName");
-		surnameText.setText("test surname");
-		bloodTypeText.setText("test blood type");
-		allergiesText.setText("test allergies");
+		firstNameText.setText(firstStr);
+		surnameText.setText(surStr);
+		bloodTypeText.setText(bloodStr);
+		allergiesText.setText(allergyStr);
 		beginTimeText.setText(startTime.toString());
 
 		// test message ensuring setting label finishes

@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import com.twilio.sdk.TwilioRestException;
+
 import onCallMessage.OnCallMessage;
 import queue.PatientThread;
 import queue.TreatmentRoomThread;
@@ -35,6 +37,8 @@ public class QueueController implements Initializable {
 
 	public String strFirstName;
 	public String strLastName;
+	public String strAllergy;
+	public String strBloodType;
 
 	// FXML ID TAGS
 
@@ -68,6 +72,8 @@ public class QueueController implements Initializable {
 		// pass in strings for labels in TreatmentRoomController
 		strFirstName = treat.get(num).getPatient().getFirstName();
 		strLastName = treat.get(num).getPatient().getLastName();
+		strAllergy = treat.get(num).getPatient().getAllergy();
+		strBloodType = treat.get(num).getPatient().getBloodType();
 		// open new window for Treatment Room
 		Stage anotherStage = new Stage();
 		Parent anotherRoot = FXMLLoader.load(getClass().getResource(
@@ -113,7 +119,7 @@ public class QueueController implements Initializable {
 
 	// Check duplicate patients
 	static String duplicate = " ";
-	
+
 	// instance of OnCallMessage
 	static OnCallMessage call = new OnCallMessage();
 
@@ -271,6 +277,18 @@ public class QueueController implements Initializable {
 						}
 					}
 
+					// check patient is emergency and put in a
+					// treatment room
+					for (int l = 0; l < llist.size(); l++) {
+						if (llist.get(l).getTriage() == 1) {
+							// check to remove a non-emergency patient
+							// from treatment room if an emergency patient
+							// needs a treatment room
+							removePatientFromTreat(llist.get(l));
+							llist.remove(llist.get(l));
+						}
+					}
+
 					// to remove patients from the list that are in
 					// treatment rooms
 					for (int i = 0; i < llist.size(); i++) {
@@ -314,12 +332,6 @@ public class QueueController implements Initializable {
 					// call method to check if patient has
 					// exceeded the queue limits
 					checkQueueTimerLimit();
-					
-					// check to remove a non-emergency patient
-					// from treatment room if an emergency patient
-					// needs a treatment room
-					removePatientFromTreat();
-					
 
 					/*
 					 * // print on call team to console
@@ -425,74 +437,129 @@ public class QueueController implements Initializable {
 		// find out if triage controller has data
 		// in order to add data to patient object
 		if ((tc.firstNamePass != null) && (tc.firstNamePass != duplicate)) {
-			
+
 			// check linked list size is 10
 			if (llist.size() < 10) {
-			ptq.setFirstName(tc.firstNamePass);
-			ptq.setLastName(tc.lastNamePass);
-			ptq.setTriage(tc.triagePass);
+				ptq.setFirstName(tc.firstNamePass);
+				ptq.setLastName(tc.lastNamePass);
+				ptq.setTriage(tc.triagePass);
+				
+				ptq.setAllergy(tc.allergyPass);
+				ptq.setBloodType(tc.bloodTypePass);
+				
+				
 
-			// add to array for sorting
-			llist.add(ptq);
+				// add to array for sorting
+				llist.add(ptq);
 
-			// ************test**********
-			/*
-			 * Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
-			 * "Lisburn", "BT67 524", "098 38563", "3759-283", 3, false);
-			 * Patient pat2 = new Patient("Ms", "June", "Campbell", "20 road",
-			 * "Lisburn", "BT23 524", "234 4263", "3234-83", 4, false); Patient
-			 * pat3 = new Patient("Mr", "Philip", "White", "94 road",
-			 * "Hillsborough", "BT57 254", "234 4543", "0568-283", 2, false);
-			 * Patient pat4 = new Patient("Mrs", "Mary", "Kelly", "60 road",
-			 * "Moria", "BT57 092", "689 2583", "3452-039", 1, true); Patient
-			 * pat5 = new Patient("Mr", "Conner", "Lee", "10 road", "Anahilt",
-			 * "BT59 203", "582 9385", "0429-3458", 3, false); Patient pat6 =
-			 * new Patient("Mrs", "Will", "Goon", "85 road", "Kilea",
-			 * "BT20 578", "098 3490", "0694-3829", 4, false); Patient pat7 =
-			 * new Patient("Mr", "Red", "Wright", "02 road", "Belfast",
-			 * "BT03 039", "485 3020", "9592-2985", 3, false); llist.add(pat1);
-			 * llist.add(pat2); llist.add(pat3); llist.add(pat4);
-			 * llist.add(pat5); llist.add(pat6); llist.add(pat7);
-			 */
-			// ****************************************
+				// ************test**********
+				/*
+				 * Patient pat1 = new Patient("Mr", "Steven", "Kennedy",
+				 * "45 road", "Lisburn", "BT67 524", "098 38563", "3759-283", 3,
+				 * false); Patient pat2 = new Patient("Ms", "June", "Campbell",
+				 * "20 road", "Lisburn", "BT23 524", "234 4263", "3234-83", 4,
+				 * false); Patient pat3 = new Patient("Mr", "Philip", "White",
+				 * "94 road", "Hillsborough", "BT57 254", "234 4543",
+				 * "0568-283", 2, false); Patient pat4 = new Patient("Mrs",
+				 * "Mary", "Kelly", "60 road", "Moria", "BT57 092", "689 2583",
+				 * "3452-039", 1, true); Patient pat5 = new Patient("Mr",
+				 * "Conner", "Lee", "10 road", "Anahilt", "BT59 203",
+				 * "582 9385", "0429-3458", 3, false); Patient pat6 = new
+				 * Patient("Mrs", "Will", "Goon", "85 road", "Kilea",
+				 * "BT20 578", "098 3490", "0694-3829", 4, false); Patient pat7
+				 * = new Patient("Mr", "Red", "Wright", "02 road", "Belfast",
+				 * "BT03 039", "485 3020", "9592-2985", 3, false);
+				 * llist.add(pat1); llist.add(pat2); llist.add(pat3);
+				 * llist.add(pat4); llist.add(pat5); llist.add(pat6);
+				 * llist.add(pat7);
+				 */
+				// ****************************************
 
-			// allow access for addingToArrays()
-			bool = true;
-			// reset values
-			tc.firstNamePass = null;
-			tc.tableLastName = null;
-			// tc.triagePass = 0;
-			duplicate = tc.firstNamePass;
+				// allow access for addingToArrays()
+				bool = true;
+				// reset values
+				tc.firstNamePass = null;
+				tc.tableLastName = null;
+				// tc.triagePass = 0;
+				duplicate = tc.firstNamePass;
+				
+			} else {
+				// queue is full of non-emergency
+				// patients
+				//call.ManagerMessage1();
+				
 			}
 		}
 	}
 
 	/**
-	 * check each patient in queue to check if a on call
-	 * message is needed to be sent to Hospital Manager
+	 * check each patient in queue to check if a on call message is needed to be
+	 * sent to Hospital Manager
+	 * @throws TwilioRestException 
 	 */
-	public void checkQueueTimerLimit(){
+	public void checkQueueTimerLimit() throws TwilioRestException {
 		// Local variable
 		int count = 0;
-		
+
 		// cycle through and check if 30min
-		// limit is hit by any patient 
-		for (int i = 0; i < llist.size(); i++){
+		// limit is hit by any patient
+		for (int i = 0; i < llist.size(); i++) {
 			count += llist.get(i).getPatientMin();
-			if (llist.get(i).getPatientMin() == 1){
+			if (llist.get(i).getPatientMin() == 1) {
 				llist.remove(llist.get(i));
 			}
 		}
-		if (count == 2){
-			//call.ManagerMessage2();
+		if (count == 2) {
+			call.ManagerMessage2();
 		}
 	}
-	
+
 	/**
+	 * a method to remove patients in a treatment room to make way for an
+	 * emergency patient
 	 * 
+	 * @param Patient
+	 * @throws TwilioRestException 
 	 */
-	public void removePatientFromTreat(){
+	public void removePatientFromTreat(Patient pt) throws TwilioRestException{
+		// Local variable
+		Boolean bool = false;
 		
+		// check treatment rooms for patient less than 
+		// emergency (or 1)
+		for (int i = 0; i < treat.size(); i++){
+			if (treat.get(i).getPatient().getTriage() == 1){
+				//*do nothing
+				// set bool for on call message
+				bool = true;
+			} else if ((treat.get(i).getPatient().getTriage() >= 2) || (treat.get(i).getPatient().getTriage() <= 4)) {
+				// adjust triage priority
+				treat.get(i).getPatient().setTriage(1);
+				treat.get(i).getPatient().getTriage();
+				// add back to queue list
+				llist.add(treat.get(i).getPatient());
+				// set patient here to null
+				treat.get(i).setPatient(null);
+				treat.get(i).setCountTimer(0);
+				
+				// add emergency patient
+				treat.get(i).setPatient(pt);
+				treat.get(i).getPatient();
+				startTimer(treat.get(i));
+				
+				// set bool to not call message
+				bool = false;
+				
+				break;
+			} 
+			break;
+		}
+		
+		// message call
+		if (bool = true){
+			// call message for queue full
+			call.ManagerMessage1();
+		}	
 	}
 	
-}
+}//************************end of class**********************

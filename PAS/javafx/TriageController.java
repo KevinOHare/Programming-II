@@ -28,6 +28,8 @@ public class TriageController implements Initializable {
 	public static String firstNamePass;
 	public static String lastNamePass;
 	public static int triagePass;
+	public static String allergyPass;
+	public static String bloodTypePass;
 	
 	// INSTANCE VARIABLES
 	
@@ -53,6 +55,8 @@ public class TriageController implements Initializable {
 		firstNamePass = tt.getFirstName();
 		lastNamePass = tt.getLastName();
 		triagePass = tt.getCondition();
+		allergyPass = tt.getAllergy();
+	    bloodTypePass = rlc.bloodTypePass;
 		
 	}
 	
