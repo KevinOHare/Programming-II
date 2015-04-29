@@ -4,7 +4,7 @@
 package NHSsystem;
 
 /**
- * Class that represents the on-call team
+ * Class that represents the on call team
  * 
  * @author Jonnie Leathem
  *
@@ -123,6 +123,7 @@ public class OnCallTeam {
 	}
 	
 	/**
+	 * Gets the first doctor
 	 * @return the d1
 	 */
 	public Doctor getD1() {
@@ -130,6 +131,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Sets the first doctor
 	 * @param d1 the d1 to set
 	 */
 	public void setD1(Doctor d1) {
@@ -137,6 +139,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Gets the second doctor
 	 * @return the d2
 	 */
 	public Doctor getD2() {
@@ -144,6 +147,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Sets the second doctor
 	 * @param d2 the d2 to set
 	 */
 	public void setD2(Doctor d2) {
@@ -151,6 +155,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Gets the first nurse
 	 * @return the n1
 	 */
 	public Nurse getN1() {
@@ -158,6 +163,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Sets the first nurse
 	 * @param n1 the n1 to set
 	 */
 	public void setN1(Nurse n1) {
@@ -165,6 +171,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Gets the second nurse
 	 * @return the n2
 	 */
 	public Nurse getN2() {
@@ -172,6 +179,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Sets the second nurse
 	 * @param n2 the n2 to set
 	 */
 	public void setN2(Nurse n2) {
@@ -179,6 +187,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Gets the third nurse
 	 * @return the n3
 	 */
 	public Nurse getN3() {
@@ -186,6 +195,7 @@ public class OnCallTeam {
 	}
 
 	/**
+	 * Sets the third nurse
 	 * @param n3 the n3 to set
 	 */
 	public void setN3(Nurse n3) {

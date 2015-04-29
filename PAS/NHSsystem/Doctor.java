@@ -4,6 +4,8 @@
 package NHSsystem;
 
 /**
+ * Class that represents a doctor
+ * 
  * @author chrismcclune
  *
  */
@@ -13,7 +15,7 @@ public class Doctor extends Staff {
 	 * Default constructor
 	 */
 	public Doctor() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**

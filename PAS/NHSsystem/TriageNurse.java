@@ -4,6 +4,8 @@
 package NHSsystem;
 
 /**
+ * Class that represents the triage nurse
+ * 
  * @author chrismcclune
  *
  */
@@ -13,7 +15,7 @@ public class TriageNurse extends Staff {
 	 * Default constructor
 	 */
 	public TriageNurse() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
