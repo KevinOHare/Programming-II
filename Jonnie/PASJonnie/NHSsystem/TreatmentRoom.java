@@ -27,6 +27,11 @@ public class TreatmentRoom {
 	private int countTimer;
 	
 	/**
+	 * Instance of Doctor object
+	 */
+	private Doctor doctor;
+	
+	/**
 	 * Instance of Patient object
 	 */
 	private Patient patient;
@@ -85,6 +90,20 @@ public class TreatmentRoom {
 	 */
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
+	}
+	
+	/**
+	 * @return the doctor
+	 */
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	/**
+	 * @param doctor the doctor to set
+	 */
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 	/**

@@ -290,7 +290,11 @@ public class QueueController implements Initializable {
 							// check to remove a non-emergency patient
 							// from treatment room if an emergency patient
 							// needs a treatment room
-							removePatientFromTreat(llist.get(l));
+							try {
+								removePatientFromTreat(llist.get(l));
+							} catch (TwilioRestException tre) {
+								System.out.println("Could not send message to on call team");
+							}
 							llist.remove(llist.get(l));
 						}
 					}
@@ -337,7 +341,11 @@ public class QueueController implements Initializable {
 
 					// call method to check if patient has
 					// exceeded the queue limits
-					checkQueueTimerLimit();
+					try {
+						checkQueueTimerLimit();
+					} catch (TwilioRestException tre) {
+						System.out.println("Could not send message to manager");
+					}
 
 					// print on call team to console
 					System.out.println("\n******On Call Team******\n");
@@ -527,7 +535,7 @@ public class QueueController implements Initializable {
 			}
 		}
 		if (count == 2) {
-			call.ManagerMessage2();
+			OnCallMessage.ManagerMessage2();
 		}
 	}
 
@@ -577,6 +585,7 @@ public class QueueController implements Initializable {
 		if (bool = true) {
 			// call message for on call team
 			OnCallMessage.OnCallTeamMessage();
+			onCallTeam.setPatient(pt);
 		}
 	}
 
