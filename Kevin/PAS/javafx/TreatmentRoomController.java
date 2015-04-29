@@ -51,15 +51,6 @@ public class TreatmentRoomController implements Initializable {
 	 */
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
-	
-	/**
-	 * Instance QueueController class
-	 */
-	static QueueController qc = new QueueController();
-	String firstStr = qc.strFirstName;
-	String surStr = qc.strLastName;
-	String bloodStr = qc.strBloodType;
-	String allergyStr = qc.strAllergy;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -67,16 +58,15 @@ public class TreatmentRoomController implements Initializable {
 		// test message ensuring initialize begins
 		System.out.println("initialising begins");
 
-		// different labels set
-		// to be replaced by values from queue
-		firstNameText.setText(firstStr);
-		surnameText.setText(surStr);
-		bloodTypeText.setText(bloodStr);
-		allergiesText.setText(allergyStr);
+		// label text set by values from queue
+		firstNameText.setText(QueueController.strFirstName);
+		surnameText.setText(QueueController.strLastName);
+		bloodTypeText.setText(QueueController.strBloodType);
+		allergiesText.setText(QueueController.strAllergy);
 		beginTimeText.setText(startTime.toString());
 
 		// test message ensuring setting label finishes
-		System.out.println("initialising ends");
+		System.out.println("Labels text set");
 
 	}
 
@@ -92,29 +82,30 @@ public class TreatmentRoomController implements Initializable {
 		Statement stmt = null;
 
 		try {
-			// STEP 2: Register JDBC driver
+			// Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
 
-			// STEP 3: Open a connection
+			// Open a connection
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-			// STEP 4: Execute a query
-			System.out.println("Creating statement...\n");
+			// Create a query
 			stmt = conn.createStatement();
-			String command;
-			System.out.println("statement created");
+			System.out.println("Statement created");
 
-			// Passed in values being applied to SQL query
-			System.out.println("setting input vars");
 			// to be replaced by value from queue
-			String ID = "test ID 16";
+			String NHS_Number = TriageTable.nhs;
 
+			// start and finish times
 			String startTimeString = startTime.toString();
 			String finishTimeString = finishTime.toString();
 			// time difference converted from milliseconds to minutes
-			String appointmentDuration = (long)(finishTime.getTime() - startTime
-					.getTime()) / 60000 + "m"+(long)((finishTime.getTime()-startTime.getTime())%60000)/1000+"s";
+			String appointmentDuration = (long) (finishTime.getTime() - startTime
+					.getTime())
+					/ 60000
+					+ "m"
+					+ (long) ((finishTime.getTime() - startTime.getTime()) % 60000)
+					/ 1000 + "s";
 
 			// doctors manually entered treatment details
 			String treatmentDetailsString = treatmentDetailsText.getText()
@@ -126,16 +117,20 @@ public class TreatmentRoomController implements Initializable {
 			// test message
 			System.out.println("About to set command");
 			// *** Assign values to mysql insert***
-			command = "INSERT INTO treatment_log VALUES ('" + ID + "', '"
-					+ startTimeString + "', '" + finishTimeString + "', '"
-					+ appointmentDuration + "', '" + treatmentDetailsString
-					+ "')";
-			// test message
+			String insertCommand = "INSERT INTO treatment_log (NHS,Started,Finished,Duration,Details) VALUES ( '"
+					+ NHS_Number
+					+ "','"
+					+ startTimeString
+					+ "','"
+					+ finishTimeString
+					+ "','"
+					+ appointmentDuration
+					+ "','"
+					+ treatmentDetailsString + "')";
 			System.out.println("command set");
 
 			// command executed
-			stmt.executeUpdate(command);
-			// test message
+			stmt.executeUpdate(insertCommand);
 			System.out.println("Command executed");
 
 			// Clean-up environment
@@ -164,6 +159,14 @@ public class TreatmentRoomController implements Initializable {
 				se.printStackTrace();
 			}// end finally try
 		}// end try
+
+		firstNameText.setText("");
+		surnameText.setText("");
+		bloodTypeText.setText("");
+		allergiesText.setText("");
+		beginTimeText.setText("");
+		treatmentDetailsText.setText("");
+
 		System.out.println("Goodbye!");
 	}// end main
 }

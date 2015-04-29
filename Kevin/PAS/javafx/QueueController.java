@@ -12,7 +12,7 @@ import java.util.TreeSet;
 import com.twilio.sdk.TwilioRestException;
 
 import onCallMessage.OnCallMessage;
-import queue.OnCallTeamThread;
+//import queue.OnCallTeamThread;
 import queue.PatientThread;
 import queue.TreatmentRoomThread;
 import NHSsystem.OnCallTeam;
@@ -37,10 +37,10 @@ public class QueueController implements Initializable {
 
 	// VALUES TO BE PASSED ON TO OTHER CLASSES
 
-	public String strFirstName;
-	public String strLastName;
-	public String strAllergy;
-	public String strBloodType;
+	public static String strFirstName;
+	public static String strLastName;
+	public static String strAllergy;
+	public static String strBloodType;
 
 	// FXML ID TAGS
 
@@ -394,10 +394,10 @@ public class QueueController implements Initializable {
 
 		// instantiate classes to activate the
 		// start time at the queue
-		OnCallTeamThread octq = new OnCallTeamThread(oct);
+		//OnCallTeamThread octq = new OnCallTeamThread(oct);
 		Runnable r = new Runnable() {
 			public void run() {
-				octq.run();
+				//octq.run();
 			}
 		};
 		new Thread(r).start();
