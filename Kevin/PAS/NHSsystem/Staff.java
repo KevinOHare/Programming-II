@@ -4,6 +4,8 @@
 package NHSsystem;
 
 /**
+ * Class that represents the staff
+ * 
  * @author chrismcclune
  *
  */
@@ -15,10 +17,10 @@ public class Staff extends Person {
 	private int staffID;
 
 	/**
-	 * 
+	 * Default constructor
 	 */
 	public Staff() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**

@@ -39,12 +39,14 @@ public class ReceptionLayoutController implements Initializable {
 	public static String firstNamePass;
 	public static String lastNamePass;
 	public static String allergyPass;
+	public static String bloodTypePass;
 	public static boolean NHSValidation;
 	public static boolean firstNameValidation;
 	public static boolean lastNameValidation;
 	public static boolean postcodeValidation;
 
 	String tempAllergy;
+	String tempBloodType;
 
 	// TEXT FIELDS
 
@@ -88,6 +90,7 @@ public class ReceptionLayoutController implements Initializable {
 		firstNamePass = rt.getFirstName();
 		lastNamePass = rt.getLastName();
 		allergyPass = tempAllergy;
+		bloodTypePass = tempBloodType;
 
 		// check if the search has produced a result
 		if (!data.isEmpty()) {
@@ -160,8 +163,9 @@ public class ReceptionLayoutController implements Initializable {
 		String str5 = ar[4];
 		String str6 = ar[5];
 		String str7 = ar[6];
-		// get the allergy for Triage screen
+		// get the allergy and blood type for Triage screen
 		tempAllergy = ar[7];
+		tempBloodType = ar[8];
 
 		// set string values to ReceptionLayoutTable
 		// object

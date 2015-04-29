@@ -4,7 +4,7 @@
 package NHSsystem;
 
 /**
- * Class that represents the on-call team
+ * Class that represents the on call team
  * 
  * @author Jonnie Leathem
  *
@@ -25,6 +25,31 @@ public class OnCallTeam {
 	 * Instance of Patient object
 	 */
 	private Patient patient;
+	
+	/**
+	 * Instance of first doctor
+	 */
+	private Doctor d1;
+	
+	/**
+	 * Instance of second doctor
+	 */
+	private Doctor d2;
+	
+	/**
+	 * Instance of first nurse
+	 */
+	private Nurse n1;
+	
+	/**
+	 * Instance of second nurse
+	 */
+	private Nurse n2;
+	
+	/**
+	 * Instance of third nurse
+	 */
+	private Nurse n3;
 
 	/**
 	 * Default constructor
@@ -96,13 +121,93 @@ public class OnCallTeam {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
+	
+	/**
+	 * Gets the first doctor
+	 * @return the d1
+	 */
+	public Doctor getD1() {
+		return d1;
+	}
+
+	/**
+	 * Sets the first doctor
+	 * @param d1 the d1 to set
+	 */
+	public void setD1(Doctor d1) {
+		this.d1 = d1;
+	}
+
+	/**
+	 * Gets the second doctor
+	 * @return the d2
+	 */
+	public Doctor getD2() {
+		return d2;
+	}
+
+	/**
+	 * Sets the second doctor
+	 * @param d2 the d2 to set
+	 */
+	public void setD2(Doctor d2) {
+		this.d2 = d2;
+	}
+
+	/**
+	 * Gets the first nurse
+	 * @return the n1
+	 */
+	public Nurse getN1() {
+		return n1;
+	}
+
+	/**
+	 * Sets the first nurse
+	 * @param n1 the n1 to set
+	 */
+	public void setN1(Nurse n1) {
+		this.n1 = n1;
+	}
+
+	/**
+	 * Gets the second nurse
+	 * @return the n2
+	 */
+	public Nurse getN2() {
+		return n2;
+	}
+
+	/**
+	 * Sets the second nurse
+	 * @param n2 the n2 to set
+	 */
+	public void setN2(Nurse n2) {
+		this.n2 = n2;
+	}
+
+	/**
+	 * Gets the third nurse
+	 * @return the n3
+	 */
+	public Nurse getN3() {
+		return n3;
+	}
+
+	/**
+	 * Sets the third nurse
+	 * @param n3 the n3 to set
+	 */
+	public void setN3(Nurse n3) {
+		this.n3 = n3;
+	}
 
 	/**
 	 * To string method
 	 */
 	@Override
 	public String toString() {
-		return this.isAvailable + "\t" + this.patient
+		return this.isAvailable + "\t\t" + this.patient
 				+ "\tOn Call Team Timer: " + this.getCountTimer();
 	}
 

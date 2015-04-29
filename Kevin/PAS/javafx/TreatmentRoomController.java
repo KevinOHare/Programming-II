@@ -8,7 +8,6 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -52,6 +51,15 @@ public class TreatmentRoomController implements Initializable {
 	 */
 	static final String USER = "40025827";
 	static final String PASS = "UYN6542";
+	
+	/**
+	 * Instance QueueController class
+	 */
+	static QueueController qc = new QueueController();
+	String firstStr = qc.strFirstName;
+	String surStr = qc.strLastName;
+	String bloodStr = qc.strBloodType;
+	String allergyStr = qc.strAllergy;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -61,10 +69,10 @@ public class TreatmentRoomController implements Initializable {
 
 		// different labels set
 		// to be replaced by values from queue
-		firstNameText.setText("test firstName");
-		surnameText.setText("test surname");
-		bloodTypeText.setText("test blood type");
-		allergiesText.setText("test allergies");
+		firstNameText.setText(firstStr);
+		surnameText.setText(surStr);
+		bloodTypeText.setText(bloodStr);
+		allergiesText.setText(allergyStr);
 		beginTimeText.setText(startTime.toString());
 
 		// test message ensuring setting label finishes
@@ -94,24 +102,19 @@ public class TreatmentRoomController implements Initializable {
 			// STEP 4: Execute a query
 			System.out.println("Creating statement...\n");
 			stmt = conn.createStatement();
-			String findMaxApptNumQuery;
-			String insertCommand;
+			String command;
 			System.out.println("statement created");
 
 			// Passed in values being applied to SQL query
 			System.out.println("setting input vars");
 			// to be replaced by value from queue
-			String NHS_Number = "testNhsNum";
+			String ID = "test ID 16";
 
 			String startTimeString = startTime.toString();
 			String finishTimeString = finishTime.toString();
 			// time difference converted from milliseconds to minutes
-			String appointmentDuration = (long) (finishTime.getTime() - startTime
-					.getTime())
-					/ 60000
-					+ "m"
-					+ (long) ((finishTime.getTime() - startTime.getTime()) % 60000)
-					/ 1000 + "s";
+			String appointmentDuration = (long)(finishTime.getTime() - startTime
+					.getTime()) / 60000 + "m"+(long)((finishTime.getTime()-startTime.getTime())%60000)/1000+"s";
 
 			// doctors manually entered treatment details
 			String treatmentDetailsString = treatmentDetailsText.getText()
@@ -120,36 +123,18 @@ public class TreatmentRoomController implements Initializable {
 			// test message
 			System.out.println("input vars set");
 
-			findMaxApptNumQuery = "SELECT MAX(ApptNum) as maxApptNum from treatment_log";
-
-			ResultSet rs = stmt.executeQuery(findMaxApptNumQuery);
-
-			String maxApptNum = null;
-
-			while (rs.next()) {
-
-				maxApptNum = rs.getString("maxApptNum");
-
-			}
-
-			System.out.println("Curren maxApptNum = "+maxApptNum);
-
-			int newApptNum = Integer.parseInt(maxApptNum) + 1;
-			
-			System.out.println("New maxApptNum = "+newApptNum);
-
 			// test message
 			System.out.println("About to set command");
 			// *** Assign values to mysql insert***
-			insertCommand = "INSERT INTO treatment_log VALUES ("+ Integer.toString(newApptNum)
-					+ ",'" + NHS_Number + "','" + startTimeString + "','"
-					+ finishTimeString + "','" + appointmentDuration + "','"
-					+ treatmentDetailsString + "')";
+			command = "INSERT INTO treatment_log VALUES ('" + ID + "', '"
+					+ startTimeString + "', '" + finishTimeString + "', '"
+					+ appointmentDuration + "', '" + treatmentDetailsString
+					+ "')";
 			// test message
 			System.out.println("command set");
 
 			// command executed
-			stmt.executeUpdate(insertCommand);
+			stmt.executeUpdate(command);
 			// test message
 			System.out.println("Command executed");
 
@@ -179,14 +164,6 @@ public class TreatmentRoomController implements Initializable {
 				se.printStackTrace();
 			}// end finally try
 		}// end try
-
-		firstNameText.setText("");
-		surnameText.setText("");
-		bloodTypeText.setText("");
-		allergiesText.setText("");
-		beginTimeText.setText("");
-		treatmentDetailsText.setText("");
-
 		System.out.println("Goodbye!");
 	}// end main
 }

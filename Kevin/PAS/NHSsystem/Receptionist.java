@@ -4,6 +4,8 @@
 package NHSsystem;
 
 /**
+ * Class that represents the receptionist
+ * 
  * @author chrismcclune
  *
  */
@@ -13,7 +15,7 @@ public class Receptionist extends Staff {
 	 * Default constructor
 	 */
 	public Receptionist() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
