@@ -394,13 +394,15 @@ public class QueueController implements Initializable {
 
 		// instantiate classes to activate the
 		// start time at the queue
-		//OnCallTeamThread octq = new OnCallTeamThread(oct);
+		/*
+		OnCallTeamThread octq = new OnCallTeamThread(oct);
 		Runnable r = new Runnable() {
 			public void run() {
-				//octq.run();
+				octq.run();
 			}
 		};
 		new Thread(r).start();
+		*/
 	}
 
 	/**

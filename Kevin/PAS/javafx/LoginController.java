@@ -1,5 +1,8 @@
 package javafx;
 
+/**
+ * import resources
+ */
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -9,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import database.JDBC;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,37 +30,99 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+/**
+ * Class that allows a valid user to be able to login to PAS
+ * @author chrismcclune
+ *
+ */
 public class LoginController extends Application implements Initializable {
 
+	/**
+	 * Label Object for the Login 
+	 */
 	@FXML
 	private Label loginLabel;
+	
+	/**
+	 * TextField object for the username 
+	 */
 	@FXML
 	private TextField fieldUsername;
+	
+	/**
+	 * TextField object for the password
+	 */
 	@FXML
 	private PasswordField fieldPassword;
+	
+	/**
+	 * Button object for the login screen
+	 */
 	@FXML
 	private Button myButton; // value will be injected by the FXMLLoader
 
 	String expectedPassword, usersPermissions, fxmlToLoad, fxmlHeader;
 
+	
 	/**
 	 * JDBC driver name and database URL
 	 */
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
+	//static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * URL of database connection
+	 */
+	//static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
 	/**
-	 * Database credentials
+	 * Database username
 	 */
-	static final String USER = "40025827";
-	static final String PASS = "UYN6542";
+	//static final String USER = "40025827";
 
+	/**
+	 * Database password
+	 */
+	//static final String PASS = "UYN6542";
+
+	/**
+	 * Constant to be used with the valid admin's username
+	 */
+	static final String validAdminUsername = "admin";
+	
+	/**
+	 * Constant to be used with the valid Triage Nurse's username
+	 */
+	static final String validTriageUsername = "triage";
+	
+	/**
+	 * Constant to be used with the valid doctor's username
+	 */
+	static final String validDoctorUsername = "doctor";
+	
+	/**
+	 * Constant to be used with the valid password
+	 */
+	static final String validPassword = "password";
+
+	/**
+	 * Boolean to be used with username/password validation
+	 */
+	static boolean validationCheck = false;
+
+	/**
+	 * Method to display the Java FX windows
+	 * @param event
+	 * @throws Exception
+	 */
 	public void display(ActionEvent event) throws Exception {
 
 	}
 
+	/**
+	 * Method called by FXMLLoader upon initialization
+	 * Overrides initialise in super class
+	 */
 	@Override
-	// This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 
 		assert myButton != null : "fx:id=\"myButton\" was not injected: check your FXML file 'simple.fxml'.";
@@ -65,25 +131,43 @@ public class LoginController extends Application implements Initializable {
 		// injected
 
 		myButton.setOnAction(new EventHandler<ActionEvent>() {
-
+			/**
+			 * Method that handles button clicked with mouse
+			 */
 			@Override
 			public void handle(ActionEvent arg0) {
-				attemptLogin();
+				validateLogin();
+				// if valid details are entered then check details against database username/password
+				while (validationCheck == true) {
+					attemptLogin();
+					// reset validation for next login
+					validationCheck = false;
+				}
 			}
 		});
 
 		fieldPassword.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			/**
+			 * Method that handles button pressed with Enter Key
+			 */
 			@Override
 			public void handle(KeyEvent ke) {
 				if (ke.getCode().equals(KeyCode.ENTER)) {
-
-					attemptLogin();
-
+					validateLogin();
+					// if valid details are entered then check details against database username/password
+					while (validationCheck == true) {
+						attemptLogin();
+						// reset validation for next login
+						validationCheck = false;
+					}
 				}
 			}
 		});
 	}
 
+	/**
+	 * Method to connect to the Username / Password Database 
+	 */
 	public void attemptLogin() {
 
 		// Local Variables
@@ -92,7 +176,14 @@ public class LoginController extends Application implements Initializable {
 
 		String findPassword = null;
 		String findPermissions = null;
-
+		
+		if (JDBC.connectionOpened == false){
+			System.out.println("Connection closed");
+			JDBC.openConnection();
+			JDBC.connectionOpened = true;
+			}
+		
+		/*
 		try {
 			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -101,6 +192,9 @@ public class LoginController extends Application implements Initializable {
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
+			*/
+			
+			try{
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();
 			System.out.println("statement created");
@@ -199,6 +293,28 @@ public class LoginController extends Application implements Initializable {
 
 	}
 
+	/**
+	 * Method to validate the login details provided by user
+	 */
+	public void validateLogin() {
+		// if username is either 'admin'/'triage'/'doctor' AND password is 'password'
+		if ((fieldUsername.getText().equalsIgnoreCase(validAdminUsername)
+				|| fieldUsername.getText()
+						.equalsIgnoreCase(validTriageUsername) || fieldUsername
+				.getText().equalsIgnoreCase(validDoctorUsername))
+				&& (fieldPassword.getText().equalsIgnoreCase(validPassword))) {
+			// set validation boolean to true
+			validationCheck = true;
+		} else {
+			// else boolean is false and display message
+			validationCheck = false;
+			System.err.println("Please enter valid username and password");
+		}
+	}
+
+	/**
+	 * Method to set Java FX login
+	 */
 	public void userLogin() {
 
 		Parent root = null;
@@ -239,6 +355,9 @@ public class LoginController extends Application implements Initializable {
 
 	}
 
+	/**
+	 * Method to start Java FX application
+	 */
 	@Override
 	public void start(Stage arg0) throws Exception {
 		// TODO Auto-generated method stub

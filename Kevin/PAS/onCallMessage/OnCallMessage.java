@@ -15,10 +15,13 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
  
+/**
+ * Class to send appropriate messages to Managers and On Call Team
+ * @author chrismcclune
+ *
+ */
 public class OnCallMessage {
  
-	
-	
 	 // Find your Account Sid and Token at twilio.com/user/account - copy and paste the two here
 
 	 public static final String ACCOUNT_SID = "ACb6746bac3b7204dcb3a7777879b70a63"; 
