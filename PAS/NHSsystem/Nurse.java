@@ -18,6 +18,7 @@ public class Nurse extends Staff {
 
 	/**
 	 * Constructor with arguments
+	 * 
 	 * @param title
 	 * @param firstName
 	 * @param lastName
@@ -27,9 +28,20 @@ public class Nurse extends Staff {
 	 * @param contactNumber
 	 */
 	public Nurse(String title, String firstName, String lastName,
-			String street, String city, String postcode, String contactNumber, int staffID) {
-		super(title, firstName, lastName, street, city, postcode, contactNumber, staffID);
+			String street, String city, String postcode, String contactNumber,
+			int staffID) {
+		super(title, firstName, lastName, street, city, postcode,
+				contactNumber, staffID);
 		// add any other class specific variables here
 	}
+
+	// INSTANCES OF NURSES
+
+	public Nurse n1 = new Nurse("Ms.", "Josephina", "Barton",
+			"2A Manderson Street", "Belfast", "BT4 1TR", "02838348854", 20);
+	public Nurse n2 = new Nurse("Mr.", "James", "McEvoy", "13 Aston Gardens",
+			"Belfast", "BT4 3FS", "02838347665", 21);
+	public Nurse n3 = new Nurse("Ms.", "Roberta", "McGregor",
+			"15 Aston Gardens", "Belfast", "BT4 3FS", "02838342355", 22);
 
 }
