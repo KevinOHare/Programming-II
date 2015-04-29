@@ -12,8 +12,11 @@ import java.util.TreeSet;
 import com.twilio.sdk.TwilioRestException;
 
 import onCallMessage.OnCallMessage;
+import queue.OnCallTeamQueue;
+import queue.OnCallTeamThread;
 import queue.PatientThread;
 import queue.TreatmentRoomThread;
+import NHSsystem.OnCallTeam;
 import NHSsystem.Patient;
 import NHSsystem.TreatmentRoom;
 import javafx.animation.Animation;
@@ -109,6 +112,10 @@ public class QueueController implements Initializable {
 	static TreatmentRoom room5 = new TreatmentRoom(5, true);
 
 	public static String[] stringAr = new String[5];
+	
+	// INSTANCE FOR ON CALL TEAM
+
+		static OnCallTeam onCallTeam = new OnCallTeam();
 
 	// Boolean to check whether a new Patient can be added
 	// to queue
@@ -333,18 +340,12 @@ public class QueueController implements Initializable {
 					// exceeded the queue limits
 					checkQueueTimerLimit();
 
-					/*
-					 * // print on call team to console
-					 * System.out.println("\n******On Call Team******\n");
-					 * 
-					 * // prints out whether or not the on call team is
-					 * available if (onCallTeam.isAvailable() == true) {
-					 * System.out.println("Current status: Available"); } else
-					 * if (onCallTeam.isAvailable() == false) {
-					 * System.out.println("Current status: Engaged"); // print
-					 * out details of patient here }
-					 */
+					// print on call team to console
+					System.out.println("\n******On Call Team******\n");
+					System.out.println("Available? \t Patient Details");
+					System.out.println(onCallTeam.toString());
 
+					// END
 					System.out
 							.println("\n*****************************************\n");
 					try {
@@ -376,6 +377,25 @@ public class QueueController implements Initializable {
 		};
 		new Thread(r).start();
 	}
+	
+	/**
+	 * A method to invoke the on call team thread class timer count
+	 * 
+	 * @param oct
+	 */
+	public static void startTimer(OnCallTeam oct) {
+
+		// instantiate classes to activate the
+		// start time at the queue
+		OnCallTeamQueue octq = new OnCallTeamQueue(oct);
+		Runnable r = new Runnable() {
+			public void run() {
+				octq.run();
+			}
+		};
+		new Thread(r).start();
+	}
+
 
 	/**
 	 * A method to cycle through the array collections to order, organise and
@@ -558,7 +578,7 @@ public class QueueController implements Initializable {
 		// message call
 		if (bool = true){
 			// call message for queue full
-			call.ManagerMessage1();
+			OnCallMessage.OnCallTeamMessage();
 		}	
 	}
 	
