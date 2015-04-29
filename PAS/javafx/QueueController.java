@@ -37,10 +37,10 @@ public class QueueController implements Initializable {
 
 	// VALUES TO BE PASSED ON TO OTHER CLASSES
 
-	public String strFirstName;
-	public String strLastName;
-	public String strAllergy;
-	public String strBloodType;
+	public static String strFirstName;
+	public static String strLastName;
+	public static String strAllergy;
+	public static String strBloodType;
 
 	// FXML ID TAGS
 

@@ -5,7 +5,7 @@ public class TriageTable {
 	/**
 	 * Table Variables
 	 */
-	private String nhs;
+	public static String nhs;
 	private String firstName;
 	private String lastName;
 	private String allergy;
