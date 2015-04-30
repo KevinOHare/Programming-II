@@ -380,8 +380,11 @@ public class ReceptionLayoutController implements Initializable {
 	private void handleButtonAUF(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
 		// nhsPass = id.setText();
+<<<<<<< HEAD
 		// nhsPass = id.getText();
 
+=======
+>>>>>>> origin/master
 		firstNamePass = tt.setFirstName("Unknown Female");
 		lastNamePass = tt.setLastName("Unknown Female");
 		allergyPass = tt.setAllergy("Unknown");

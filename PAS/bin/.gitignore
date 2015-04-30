@@ -1,5 +1,18 @@
+<<<<<<< HEAD
 /NHSsystem/
 /TestingQuene/
 /database/
+=======
+/.metadata/
+/.project
+/.settings/
+/NHSsystem/
+/build.fxbuild
+>>>>>>> origin/master
 /javafx/
+/.DS_Store
+/.checkstyle
+/.classpath
+/TestingQuene/
+/database/
 /onCallMessage/
