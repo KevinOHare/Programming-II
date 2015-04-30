@@ -63,14 +63,14 @@
             <Tooltip autoHide="true" text="Valid postcode includes a space e.g. BT27 6HD" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
-            <Font name="Bernard MT Condensed" size="15.0" />
+            <Font name="Kokila Bold" size="23.0" />
          </font></Label>
       <Label fx:id="labelQM2" layoutX="610.0" layoutY="219.0" text="?">
       <tooltip>
             <Tooltip autoHide="true" text="Valid NHS Number is 10 numbers" wrapText="true" />
          </tooltip>
          <font>
-            <Font name="Bernard MT Condensed" size="15.0" />
+            <Font name="Kokila Bold" size="23.0" />
          </font></Label>
   </children>
 </AnchorPane>

@@ -346,8 +346,8 @@ public class LoginController extends Application implements Initializable {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		primaryStage.setResizable(false);
-		primaryStage.setX(600);
-		primaryStage.setY(5);
+		primaryStage.setX(620);
+		primaryStage.setY(10);
 		Stage stage = (Stage) myButton.getScene().getWindow();
 		stage.close();
 		// set icon of the application
@@ -369,7 +369,7 @@ public class LoginController extends Application implements Initializable {
 		queueStage.show();
 		queueStage.setResizable(false);
 		queueStage.setX(120);
-		queueStage.setY(5);
+		queueStage.setY(10);
 		stage.close();
 
 		// set icon of the application
@@ -401,8 +401,8 @@ public class LoginController extends Application implements Initializable {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		primaryStage.setResizable(false);
-		primaryStage.setX(600);
-		primaryStage.setY(5);
+		primaryStage.setX(620);
+		primaryStage.setY(10);
 		Stage stage = (Stage) myButton.getScene().getWindow();
 		stage.close();
 		// set icon of the application
@@ -424,8 +424,8 @@ public class LoginController extends Application implements Initializable {
 		triageStage.setTitle("Triage");
 		triageStage.show();
 		queueStage.setResizable(false);
-		triageStage.setX(600);
-		triageStage.setY(5);
+		triageStage.setX(620);
+		triageStage.setY(10);
 		stage.close();
 
 		// set icon of the application
@@ -447,8 +447,8 @@ public class LoginController extends Application implements Initializable {
 		doctorStage.setTitle("Treatment Room");
 		doctorStage.show();
 		queueStage.setResizable(false);
-		doctorStage.setX(600);
-		doctorStage.setY(5);
+		doctorStage.setX(620);
+		doctorStage.setY(10);
 		stage.close();
 
 		// set icon of the application
@@ -471,7 +471,7 @@ public class LoginController extends Application implements Initializable {
 		queueStage.show();
 		queueStage.setResizable(false);
 		queueStage.setX(120);
-		queueStage.setY(5);
+		queueStage.setY(10);
 		stage.close();
 
 		// set icon of the application
