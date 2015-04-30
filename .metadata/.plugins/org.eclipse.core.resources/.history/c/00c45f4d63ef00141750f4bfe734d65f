@@ -57,18 +57,19 @@ public class QueueController implements Initializable {
 
 	@FXML
 	ChoiceBox treatNumTime;
-
+	
 	@FXML
 	ChoiceBox searchTriage;
-
+	
 	@FXML
 	TextField searchFirst;
-
+	
 	@FXML
 	TextField searchNhs;
-
+	
 	@FXML
 	TextArea searchDisplay;
+	
 
 	@FXML
 	private void handleButtonTriage() {
@@ -107,9 +108,9 @@ public class QueueController implements Initializable {
 	private void handleButtonTreatTimerEx() {
 		extensionOfTime();
 	}
-
+	
 	@FXML
-	private void handleButtonSearchFunction() {
+	private void handleButtonSearchFunction(){
 		searchMethod();
 	}
 
@@ -210,7 +211,7 @@ public class QueueController implements Initializable {
 						System.out.println(count + ". " + as.toString());
 						// Numbering of patients in queue
 						count++;
-						if (count == 11) {
+						if (count < 11) {
 							count = 1;
 						}
 
@@ -426,8 +427,6 @@ public class QueueController implements Initializable {
 				// Instance of the Patient object
 				Patient ptq = new Patient();
 
-				ptq.setNhsNumber(tc.nhsPass);
-				ptq.setTitle(tc.titlePass);
 				ptq.setFirstName(tc.firstNamePass);
 				ptq.setLastName(tc.lastNamePass);
 				ptq.setTriage(tc.triagePass);
@@ -507,7 +506,7 @@ public class QueueController implements Initializable {
 		System.out.println("*********** Status Code *****************");
 		// print out the status code
 		System.out.println("Waititng time status code: " + status);
-		if (status == 4) {
+		if (status == 4){
 			System.out.println("**Queue is Full**");
 		}
 	}
@@ -619,48 +618,19 @@ public class QueueController implements Initializable {
 
 		startTimer(treat.get(num));
 	}
-
+	
 	/**
-	 * a search method used to find the patient as entered in the queue fxml
+	 * a search method used to find the patient as
+	 * entered in the queue fxml
 	 */
-	public void searchMethod() {
-
-		// get values from search boxes
-		int tr = Integer.parseInt((String) searchTriage.getValue());
-		String strFir = searchFirst.getText();
-		String strNhs = searchNhs.getText();
-		Patient pt;
-
-		// check patients in queue
-		for (int i = 0; i < llist.size(); i++) {
-			if ((llist.get(i).getTriage() == tr)
-					|| (llist.get(i).getFirstName() == strFir)
-					|| (llist.get(i).getNhsNumber() == strNhs)) {
-				pt = llist.get(i);
-				// get and display the patient in text box
-				searchDisplay.setText(pt.getTitle() + " " + pt.getFirstName()
-						+ " " + pt.getLastName() + "  NHS Number: "
-						+ pt.getNhsNumber() + " Triage Category: "
-						+ pt.getTriage());
-			}
-
-		}
+	public void searchMethod(){
+		//searchTriage.getText();
+		//searchFirst.getText();
 		
-		// check patients in treatment rooms
-		for (int i = 0; i < treat.size(); i++) {
-			if ((treat.get(i).getPatient().getTriage() == tr)
-					|| (treat.get(i).getPatient().getFirstName() == strFir)
-					|| (treat.get(i).getPatient().getNhsNumber() == strNhs)) {
-				pt = treat.get(i).getPatient();
-				// get and display the patient in text box
-				searchDisplay.setText(pt.getTitle() + " " + pt.getFirstName()
-						+ " " + pt.getLastName() + "  NHS Number: "
-						+ pt.getNhsNumber() + " Triage Category: "
-						+ pt.getTriage());
-			}
-
-		}
-
+		//searchNhs.getText();
+		
+	
+		//searchDisplay.setText();
 	}
 
 }// ************************end of class**********************
