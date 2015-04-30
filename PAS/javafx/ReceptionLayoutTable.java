@@ -8,36 +8,37 @@ package javafx;
 public class ReceptionLayoutTable {
 
 	/**
-	 * String
+	 * String for the title in the table
 	 */
 	private String title;
 	
 	/**
-	 * 
+	 * String for the first name in the table
 	 */
 	private String firstName;
 	
 	/**
-	 * 
+	 * String for the last name in the table
 	 */
 	private String lastName;
 	
 	/**
-	 * 
+	 * String for the street in the table
 	 */
 	private String street;
 	
 	/**
-	 * 
+	 * String for the city in the table
 	 */
 	private String city;
 	
 	/**
+	 * String for the postcode in the table
 	 */
 	private String postcode;
 	
 	/**
-	 * 
+	 * String for the telephone in the table
 	 */
 	private String telephone;
 

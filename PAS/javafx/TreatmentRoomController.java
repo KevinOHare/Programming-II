@@ -13,21 +13,46 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+/**
+ * Class to show the treatment window and the functionality of the Treatment room
+ * @author chrismcclune
+ *
+ */
 public class TreatmentRoomController implements Initializable {
 
 	/**
-	 * Labels and TextArea from TreatmentRoom.fxml
+	 * Label object for the first name
 	 */
 	@FXML
 	Label firstNameText;
+	
+	/**
+	 * Label object for the first name
+	 */
 	@FXML
 	Label surnameText;
+	
+	/**
+	 * Label object for blood type
+	 */
 	@FXML
 	Label bloodTypeText;
+	
+	/**
+	 * Label for the allergies
+	 */
 	@FXML
 	Label allergiesText;
+	
+	/**
+	 * Label for the start time of the treatment
+	 */
 	@FXML
 	Label beginTimeText;
+	
+	/**
+	 * Text area for the treatment details
+	 */
 	@FXML
 	TextArea treatmentDetailsText;
 
@@ -35,23 +60,35 @@ public class TreatmentRoomController implements Initializable {
 	 * startTime instantiated upon window opening
 	 */
 	public static Date startTime = new Date();
+	
 	/**
 	 * finishTime not instantiated until save button selected
 	 */
 	public static Date finishTime;
 
 	/**
-	 * JDBC driver name and database URL
+	 * String for the JDBC Driver
 	 */
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * String for the URL of the database
+	 */
 	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
 	/**
-	 * Database credentials
+	 * String for the username of the database
 	 */
 	static final String USER = "40025827";
+	
+	/**
+	 * String for the password of the database
+	 */
 	static final String PASS = "UYN6542";
 
+	/**
+	 * Method that overrides initialize from super class
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -70,7 +107,9 @@ public class TreatmentRoomController implements Initializable {
 
 	}
 
-	// BUTTON
+	/**
+	 * Method to handle the save and clear button
+	 */
 	@FXML
 	private void handleSaveAndClearButtonAction() {
 
@@ -157,9 +196,10 @@ public class TreatmentRoomController implements Initializable {
 					conn.close();
 			} catch (SQLException se) {
 				se.printStackTrace();
-			}// end finally try
-		}// end try
+			}
+		}
 
+		// set the texts to blank
 		firstNameText.setText("");
 		surnameText.setText("");
 		bloodTypeText.setText("");
