@@ -1,4 +1,9 @@
+/.classpath
+/.metadata/
+/.DS_Store
+/.checkstyle
 /NHSsystem/
+/TestingQuene/
 /database/
 /javafx/
 /onCallMessage/
