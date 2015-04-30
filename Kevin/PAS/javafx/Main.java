@@ -1,5 +1,8 @@
 package javafx;
 
+/**
+ * import the resources
+ */
 import java.awt.Button;
 import java.io.IOException;
 
@@ -14,8 +17,16 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * Class to start the application
+ * @author chrismcclune
+ *
+ */
 public class Main extends Application {
 
+	/**
+	 * Method to start the application
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 

@@ -261,8 +261,7 @@ public class Patient extends Person implements Comparable<Patient> {
 	 */
 	@Override
 	public String toString() {
-		return this.getFirstName() + "  " + this.getLastName() + "   ID:"
-				+ this.getNhsNumber() + "  |  *Triage:{" + this.getTriage()
+		return this.getFirstName() + "  " + this.getLastName() + "  |  *Triage:{" + this.getTriage()
 				+ "}  *QueueTimer:[" + this.getCountTimer() + "]  |";
 
 	}

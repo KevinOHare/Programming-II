@@ -1,16 +1,44 @@
 package javafx;
 
+/**
+ * Class to show the reception table and its functionality
+ * @author chrismcclune
+ *
+ */
 public class ReceptionLayoutTable {
 
 	/**
-	 * Table variables
+	 * String
 	 */
 	private String title;
+	
+	/**
+	 * 
+	 */
 	private String firstName;
+	
+	/**
+	 * 
+	 */
 	private String lastName;
+	
+	/**
+	 * 
+	 */
 	private String street;
+	
+	/**
+	 * 
+	 */
 	private String city;
+	
+	/**
+	 */
 	private String postcode;
+	
+	/**
+	 * 
+	 */
 	private String telephone;
 
 	/**
@@ -69,9 +97,10 @@ public class ReceptionLayoutTable {
 	/**
 	 * set first name
 	 * @param firstName
+	 * @return 
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public String setFirstName(String firstName) {
+		return this.firstName = firstName;
 	}
 
 	/**
@@ -85,9 +114,10 @@ public class ReceptionLayoutTable {
 	/**
 	 * set last name
 	 * @param lastName
+	 * @return 
 	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public String setLastName(String lastName) {
+		return this.lastName = lastName;
 	}
 
 	/**

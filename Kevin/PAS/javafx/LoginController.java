@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-
-import database.JDBC;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -63,26 +61,25 @@ public class LoginController extends Application implements Initializable {
 
 	String expectedPassword, usersPermissions, fxmlToLoad, fxmlHeader;
 
-	
 	/**
 	 * JDBC driver name and database URL
 	 */
-	//static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	
 	/**
 	 * URL of database connection
 	 */
-	//static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
+	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
 	/**
 	 * Database username
 	 */
-	//static final String USER = "40025827";
+	static final String USER = "40025827";
 
 	/**
 	 * Database password
 	 */
-	//static final String PASS = "UYN6542";
+	static final String PASS = "UYN6542";
 
 	/**
 	 * Constant to be used with the valid admin's username
@@ -115,7 +112,6 @@ public class LoginController extends Application implements Initializable {
 	 * @throws Exception
 	 */
 	public void display(ActionEvent event) throws Exception {
-
 	}
 
 	/**
@@ -176,14 +172,7 @@ public class LoginController extends Application implements Initializable {
 
 		String findPassword = null;
 		String findPermissions = null;
-		
-		if (JDBC.connectionOpened == false){
-			System.out.println("Connection closed");
-			JDBC.openConnection();
-			JDBC.connectionOpened = true;
-			}
-		
-		/*
+
 		try {
 			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -192,43 +181,25 @@ public class LoginController extends Application implements Initializable {
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-			*/
-			
-			try{
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();
-			System.out.println("statement created");
-
-			// test message
-			System.out.println("About to set findPassword command");
+			
 			// *** Assign values to mysql insert***
 			findPassword = "SELECT password FROM login_details WHERE username = \""
 					+ fieldUsername.getText().toString() + "\";";
-			// test message
-			System.out.println("findPassword set");
 
-			// test message
-			System.out.println("About to set findPermissions command");
 			// *** Assign values to mysql insert***
 			findPermissions = "SELECT permissions FROM login_details WHERE username = \""
 					+ fieldUsername.getText().toString() + "\";";
-			// test message
-			System.out.println("findPermissions set");
 
 			// findPassword query executed
 			ResultSet rs1 = stmt.executeQuery(findPassword);
-			// test message
-			System.out.println("findPassword Query executed");
 
 			while (rs1.next()) {
 
 				expectedPassword = rs1.getString("password");
 
 			}
-
-			System.out.println("Expected = " + expectedPassword);
-			System.out
-					.println("Actual = " + fieldPassword.getText().toString());
 
 			if (expectedPassword.equalsIgnoreCase(fieldPassword.getText()
 					.toString())) {

@@ -2,56 +2,34 @@ package database;
 
 //STEP 1. Import required packages
 import java.sql.*;
-import javafx.LoginController;
 
 public class JDBC {
 	// JDBC driver name and database URL
-	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	public static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
 	// Database credentials
-	public static final String USER = "40025827";
-	public static final String PASS = "UYN6542";
-
-	 // Local Variables
-	public static Connection conn = null;
-	public static Statement stmt = null;
+	static final String USER = "40025827";
+	static final String PASS = "UYN6542";
 	
-	public static boolean connectionOpened = false;
-
 	// create string array
 	String[] str = new String[9];
-
-	public static void openConnection() {
-
-		// STEP 2: Register JDBC driver
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// STEP 3: Open a connection
-		System.out.println("Connecting to database...");
-		try {
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 
 	public void databaseSearch(String firstName, String lastName,
 			String postcode, String id) {
 
-		if (connectionOpened == false){
-		openConnection();
-		connectionOpened = true;
-		}
+		// Local Variables
+		Connection conn = null;
+		Statement stmt = null;
 
 		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
 			// STEP 4: Execute a query
 			System.out.println("Creating statement...\n");
 			stmt = conn.createStatement();
@@ -97,7 +75,7 @@ public class JDBC {
 				// *** Test ***
 				System.out.println(rset1 + " " + rset3 + " " + rset4 + " "
 						+ rset7 + " " + rset10);
-
+				
 				// assign values to str array
 				str[0] = rset2;
 				str[1] = rset3;
@@ -111,6 +89,7 @@ public class JDBC {
 
 			}
 
+
 			// STEP 6: Clean-up environment
 			rs.close();
 			stmt.close();
@@ -118,17 +97,28 @@ public class JDBC {
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
-
+			
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-
+			
 		} finally {
 			// finally block used to close resources
-			closeConnection();
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			}// nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}// end finally try
 		}// end try
 		System.out.println("Goodbye!");
 	}// end main
+
 
 	/**
 	 * A method to return the rsets of the correct patient search
@@ -138,22 +128,6 @@ public class JDBC {
 	public String[] rsetPrint() {
 		// local variable
 		return str;
-	}
-
-	public void closeConnection() {
-
-		try {
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException se2) {
-		}// nothing we can do
-		try {
-			if (conn != null)
-				conn.close();
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}// end finally try
-
 	}
 
 }// ************** class ************
