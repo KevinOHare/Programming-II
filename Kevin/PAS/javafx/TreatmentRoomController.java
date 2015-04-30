@@ -56,7 +56,7 @@ public class TreatmentRoomController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		// test message ensuring initialize begins
-		System.out.println("initialising begins");
+		System.out.println("TRController initialising begins");
 
 		// label text set by values from queue
 		firstNameText.setText(QueueController.strFirstName);
@@ -66,7 +66,7 @@ public class TreatmentRoomController implements Initializable {
 		beginTimeText.setText(startTime.toString());
 
 		// test message ensuring setting label finishes
-		System.out.println("Labels text set");
+		System.out.println("TRController Labels text set");
 
 	}
 

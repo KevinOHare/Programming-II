@@ -30,29 +30,30 @@ import javafx.stage.Stage;
 
 /**
  * Class that allows a valid user to be able to login to PAS
+ * 
  * @author chrismcclune
  *
  */
 public class LoginController extends Application implements Initializable {
 
 	/**
-	 * Label Object for the Login 
+	 * Label Object for the Login
 	 */
 	@FXML
 	private Label loginLabel;
-	
+
 	/**
-	 * TextField object for the username 
+	 * TextField object for the username
 	 */
 	@FXML
 	private TextField fieldUsername;
-	
+
 	/**
 	 * TextField object for the password
 	 */
 	@FXML
 	private PasswordField fieldPassword;
-	
+
 	/**
 	 * Button object for the login screen
 	 */
@@ -65,7 +66,7 @@ public class LoginController extends Application implements Initializable {
 	 * JDBC driver name and database URL
 	 */
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	
+
 	/**
 	 * URL of database connection
 	 */
@@ -85,17 +86,17 @@ public class LoginController extends Application implements Initializable {
 	 * Constant to be used with the valid admin's username
 	 */
 	static final String validAdminUsername = "admin";
-	
+
 	/**
 	 * Constant to be used with the valid Triage Nurse's username
 	 */
 	static final String validTriageUsername = "triage";
-	
+
 	/**
 	 * Constant to be used with the valid doctor's username
 	 */
 	static final String validDoctorUsername = "doctor";
-	
+
 	/**
 	 * Constant to be used with the valid password
 	 */
@@ -108,6 +109,7 @@ public class LoginController extends Application implements Initializable {
 
 	/**
 	 * Method to display the Java FX windows
+	 * 
 	 * @param event
 	 * @throws Exception
 	 */
@@ -115,8 +117,8 @@ public class LoginController extends Application implements Initializable {
 	}
 
 	/**
-	 * Method called by FXMLLoader upon initialization
-	 * Overrides initialise in super class
+	 * Method called by FXMLLoader upon initialization Overrides initialise in
+	 * super class
 	 */
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -133,7 +135,8 @@ public class LoginController extends Application implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 				validateLogin();
-				// if valid details are entered then check details against database username/password
+				// if valid details are entered then check details against
+				// database username/password
 				while (validationCheck == true) {
 					attemptLogin();
 					// reset validation for next login
@@ -150,7 +153,8 @@ public class LoginController extends Application implements Initializable {
 			public void handle(KeyEvent ke) {
 				if (ke.getCode().equals(KeyCode.ENTER)) {
 					validateLogin();
-					// if valid details are entered then check details against database username/password
+					// if valid details are entered then check details against
+					// database username/password
 					while (validationCheck == true) {
 						attemptLogin();
 						// reset validation for next login
@@ -162,7 +166,7 @@ public class LoginController extends Application implements Initializable {
 	}
 
 	/**
-	 * Method to connect to the Username / Password Database 
+	 * Method to connect to the Username / Password Database
 	 */
 	public void attemptLogin() {
 
@@ -183,7 +187,7 @@ public class LoginController extends Application implements Initializable {
 
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();
-			
+
 			// *** Assign values to mysql insert***
 			findPassword = "SELECT password FROM login_details WHERE username = \""
 					+ fieldUsername.getText().toString() + "\";";
@@ -268,7 +272,8 @@ public class LoginController extends Application implements Initializable {
 	 * Method to validate the login details provided by user
 	 */
 	public void validateLogin() {
-		// if username is either 'admin'/'triage'/'doctor' AND password is 'password'
+		// if username is either 'admin'/'triage'/'doctor' AND password is
+		// 'password'
 		if ((fieldUsername.getText().equalsIgnoreCase(validAdminUsername)
 				|| fieldUsername.getText()
 						.equalsIgnoreCase(validTriageUsername) || fieldUsername
@@ -304,6 +309,23 @@ public class LoginController extends Application implements Initializable {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		Stage stage = (Stage) myButton.getScene().getWindow();
+
+		
+		// FXML for waiting room screen
+		Parent queueRoot = null;
+		Stage wRoomStage = new Stage();
+		try {
+			queueRoot = FXMLLoader.load(getClass().getResource("waitingRoom.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene wRoomScene = new Scene(queueRoot);
+		wRoomStage.setScene(wRoomScene);
+		wRoomStage.setTitle("Waiting Room");
+		wRoomStage.show();
+		stage.close();
+		
 
 		// FXML for second stage
 		Parent anotherRoot = null;
