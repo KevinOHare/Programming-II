@@ -177,6 +177,9 @@ public class QueueController implements Initializable {
 					for (TreatmentRoom tr : treat) {
 						System.out.println(tr.toString());
 					}
+					
+					// check the status code
+					statusCodeUpdate();
 
 					// print details for console for patient
 					System.out.println("********** Queue ************");
@@ -445,6 +448,26 @@ public class QueueController implements Initializable {
 	public void sortingQueue() {
 
 		Collections.sort(llist);
+	}
+	
+	/**
+	 * A method to update the queue based on the status of the longest waiting
+	 * patient in the queue
+	 */
+	public void statusCodeUpdate() {
+		// automatically updating status code based on waiting times
+		// iterate through the queue and find the highest waiting time
+		int status = 1; // Default code
+		int countValue;
+		int currentMax = 0;
+
+		// checking the highest time in queue
+		for (int i = 0; i < llist.size(); i++) {
+			countValue = llist.get(i).getCountTimer();
+			if (countValue > currentMax) {
+				currentMax = countValue;
+			}
+		}
 	}
 
 	/**
