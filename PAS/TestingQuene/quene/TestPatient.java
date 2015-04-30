@@ -1,5 +1,8 @@
 package TestingQuene.quene;
 
+/**
+ * import resources
+ */
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -7,6 +10,11 @@ import org.junit.Test;
 
 import NHSsystem.Patient;
 
+/**
+ * Class to test Patient class
+ * @author chrismcclune
+ *
+ */
 public class TestPatient {
 
 	@Before

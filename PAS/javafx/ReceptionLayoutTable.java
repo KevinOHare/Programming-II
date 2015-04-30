@@ -1,16 +1,44 @@
 package javafx;
 
+/**
+ * Class to show the reception table and its functionality
+ * @author chrismcclune
+ *
+ */
 public class ReceptionLayoutTable {
 
 	/**
-	 * Table variables
+	 * String
 	 */
 	private String title;
+	
+	/**
+	 * 
+	 */
 	private String firstName;
+	
+	/**
+	 * 
+	 */
 	private String lastName;
+	
+	/**
+	 * 
+	 */
 	private String street;
+	
+	/**
+	 * 
+	 */
 	private String city;
+	
+	/**
+	 */
 	private String postcode;
+	
+	/**
+	 * 
+	 */
 	private String telephone;
 
 	/**

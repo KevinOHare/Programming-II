@@ -322,7 +322,7 @@ public class QueueController implements Initializable {
 					System.out
 							.println("\n*****************************************\n");
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(4000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
