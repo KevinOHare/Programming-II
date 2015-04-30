@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="684.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.ReceptionLayoutController">
+  <children>
+    <Text layoutX="235.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Search" wrappingWidth="157.68292617797852">
+      <font>
+        <Font size="24.0" />
+      </font>
+    </Text>
+    <TextField fx:id="firstName" layoutX="430.0" layoutY="78.0" prefHeight="25.0" prefWidth="171.0" />
+    <TextField fx:id="lastName" layoutX="430.0" layoutY="123.0" prefHeight="25.0" prefWidth="171.0" />
+    <TextField fx:id="postcode" layoutX="430.0" layoutY="171.0" prefHeight="25.0" prefWidth="171.0" />
+    <TextField fx:id="id" layoutX="430.0" layoutY="215.0" prefHeight="25.0" prefWidth="171.0" />
+    <Text layoutX="344.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" wrappingWidth="84.68292236328125" />
+    <Text layoutX="344.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="84.68292236328125" />
+    <Text layoutX="344.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postcode" wrappingWidth="84.68292236328125" />
+    <Text layoutX="344.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NHS Number" wrappingWidth="84.68292617797852" />
+    <TableView fx:id="tableID" layoutX="27.0" layoutY="310.0" prefHeight="285.0" prefWidth="574.0">
+      <columns>
+        <TableColumn fx:id="tableTitle" prefWidth="49.0" text="Title" />
+        <TableColumn fx:id="tableFirstName" prefWidth="86.0" text="First Name" />
+        <TableColumn fx:id="tableLastName" prefWidth="87.0" text="Last Name" />
+        <TableColumn fx:id="tableStreet" prefWidth="114.0" text="Street" />
+        <TableColumn fx:id="tableCity" prefWidth="78.0" text="City" />
+        <TableColumn fx:id="tablePostcode" prefWidth="77.0" text="Postcode" />
+        <TableColumn fx:id="tableTelephone" prefWidth="82.0" text="Telephone" />
+      </columns>
+    </TableView>
+    <Text layoutX="27.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Results :" wrappingWidth="109.68292617797852">
+      <font>
+        <Font name="System Bold" size="14.0" />
+      </font>
+    </Text>
+    <Button layoutX="260.0" layoutY="623.0" mnemonicParsing="false" onAction="#handleActionNewPage" prefHeight="32.0" prefWidth="110.0" text="Add to Triage">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+    <Button layoutX="504.0" layoutY="258.0" mnemonicParsing="false" onAction="#handleButtonAction" prefWidth="97.0" text="Search" />
+      <Label fx:id="searchValidation" layoutX="314.0" layoutY="262.0" prefHeight="16.0" prefWidth="182.0" />
+      <Pane fx:id="labelUP" layoutX="27.0" layoutY="71.0" prefHeight="177.0" prefWidth="259.0" style="-fx-background-color: F8F8F8; -fx-border-color: black;">
+         <children>
+            <Label layoutX="47.0" layoutY="10.0" text="Add Unknown Patient">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelAUM" layoutX="23.0" layoutY="40.0" text="Add unknown MALE directly to triage" />
+            <Button fx:id="bttnAUM" layoutX="23.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleButtonAUM" text="Add Unknown Male" />
+            <Label fx:id="labelAUF" layoutX="23.0" layoutY="110.0" text="Add unknown FEMALE directly to triage" />
+            <Button fx:id="bttnAUF" layoutX="23.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleButtonAUF" text="Add Unknown Female" />
+         </children>
+      </Pane>
+      <Label fx:id="labelQM1" layoutX="611.0" layoutY="175.0" text="?">
+       <tooltip>
+            <Tooltip autoHide="true" text="Valid postcode includes a space e.g. BT27 6HD" textAlignment="JUSTIFY" wrapText="true" />
+         </tooltip>
+         <font>
+            <Font name="Bernard MT Condensed" size="15.0" />
+         </font></Label>
+      <Label fx:id="labelQM2" layoutX="610.0" layoutY="219.0" text="?">
+      <tooltip>
+            <Tooltip autoHide="true" text="Valid NHS Number is 10 numbers" wrapText="true" />
+         </tooltip>
+         <font>
+            <Font name="Bernard MT Condensed" size="15.0" />
+         </font></Label>
+  </children>
+</AnchorPane>

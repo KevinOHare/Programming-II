@@ -543,7 +543,7 @@ public class QueueController implements Initializable {
 				llist.remove(llist.get(i));
 			}
 		}
-		if (count == 2) {
+		if (count == 3) {
 			call.ManagerMessage2();
 		}
 	}

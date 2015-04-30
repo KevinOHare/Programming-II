@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import javafx.QueueController;
+import onCallMessage.Email;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -388,6 +389,7 @@ public class TestQueue {
 			llist.add(p10);
 			llist.add(p11);
 
+			Email.sendEmail();
 			
 			assertEquals(invalid, llist.size());
 		}
