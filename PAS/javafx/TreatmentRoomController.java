@@ -58,13 +58,22 @@ public class TreatmentRoomController implements Initializable {
 		// test message ensuring initialize begins
 		System.out.println("initialising begins");
 
+		if (QueueController.strFirstName == "Unknown Male" || QueueController.strFirstName == "Unknown Female"){
+		// label text set by values from queue
+		firstNameText.setText(QueueController.strFirstName);
+		surnameText.setText(QueueController.strLastName);
+		bloodTypeText.setText("Unknown");
+		allergiesText.setText(QueueController.strAllergy);
+		beginTimeText.setText(startTime.toString());}
+		
+		else{
 		// label text set by values from queue
 		firstNameText.setText(QueueController.strFirstName);
 		surnameText.setText(QueueController.strLastName);
 		bloodTypeText.setText(QueueController.strBloodType);
 		allergiesText.setText(QueueController.strAllergy);
 		beginTimeText.setText(startTime.toString());
-
+		}
 		// test message ensuring setting label finishes
 		System.out.println("Labels text set");
 

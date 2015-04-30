@@ -301,7 +301,7 @@ public class ReceptionLayoutController implements Initializable {
 	@FXML
 	private void handleButtonAUF(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
-		//nhsPass = id.getText();
+		// nhsPass = id.setText();
 		firstNamePass = tt.setFirstName("Unknown Female");
 		lastNamePass = tt.setLastName("Unknown Female");
 		allergyPass = tt.setAllergy("Unknown");
