@@ -5,7 +5,7 @@ public class TriageTable {
 	/**
 	 * Table Variables
 	 */
-	private String nhs;
+	public static String nhs;
 	private String firstName;
 	private String lastName;
 	private String allergy;
@@ -62,9 +62,10 @@ public class TriageTable {
 	/**
 	 * set method for first name
 	 * @param firstName
+	 * @return 
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public String setFirstName(String firstName) {
+		return this.firstName = firstName;
 	}
 
 	/**
@@ -78,9 +79,10 @@ public class TriageTable {
 	/**
 	 * set method for last name
 	 * @param lastName
+	 * @return 
 	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public String setLastName(String lastName) {
+		return this.lastName = lastName;
 	}
 
 	/**
@@ -94,9 +96,10 @@ public class TriageTable {
 	/**
 	 * set method for allergy
 	 * @param allergy
+	 * @return 
 	 */
-	public void setAllergy(String allergy) {
-		this.allergy = allergy;
+	public String setAllergy(String allergy) {
+		return this.allergy = allergy;
 	}
 
 	/**

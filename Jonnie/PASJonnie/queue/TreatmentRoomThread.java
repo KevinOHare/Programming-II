@@ -23,7 +23,7 @@ public class TreatmentRoomThread implements Runnable {
 	 * treatment room object
 	 */
 	@Override
-	public void run() {
+	public synchronized void run() {
 		
 		int loop = 0;
 		

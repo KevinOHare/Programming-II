@@ -1,5 +1,8 @@
 package javafx;
 
+/**
+ * import resources
+ */
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -8,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,14 +28,34 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+/**
+ * Class that allows a valid user to be able to login to PAS
+ * @author chrismcclune
+ *
+ */
 public class LoginController extends Application implements Initializable {
 
+	/**
+	 * Label Object for the Login 
+	 */
 	@FXML
 	private Label loginLabel;
+	
+	/**
+	 * TextField object for the username 
+	 */
 	@FXML
 	private TextField fieldUsername;
+	
+	/**
+	 * TextField object for the password
+	 */
 	@FXML
 	private PasswordField fieldPassword;
+	
+	/**
+	 * Button object for the login screen
+	 */
 	@FXML
 	private Button myButton; // value will be injected by the FXMLLoader
 
@@ -43,20 +65,60 @@ public class LoginController extends Application implements Initializable {
 	 * JDBC driver name and database URL
 	 */
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * URL of database connection
+	 */
 	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
 	/**
-	 * Database credentials
+	 * Database username
 	 */
 	static final String USER = "40025827";
+
+	/**
+	 * Database password
+	 */
 	static final String PASS = "UYN6542";
 
-	public void display(ActionEvent event) throws Exception {
+	/**
+	 * Constant to be used with the valid admin's username
+	 */
+	static final String validAdminUsername = "admin";
+	
+	/**
+	 * Constant to be used with the valid Triage Nurse's username
+	 */
+	static final String validTriageUsername = "triage";
+	
+	/**
+	 * Constant to be used with the valid doctor's username
+	 */
+	static final String validDoctorUsername = "doctor";
+	
+	/**
+	 * Constant to be used with the valid password
+	 */
+	static final String validPassword = "password";
 
+	/**
+	 * Boolean to be used with username/password validation
+	 */
+	static boolean validationCheck = false;
+
+	/**
+	 * Method to display the Java FX windows
+	 * @param event
+	 * @throws Exception
+	 */
+	public void display(ActionEvent event) throws Exception {
 	}
 
+	/**
+	 * Method called by FXMLLoader upon initialization
+	 * Overrides initialise in super class
+	 */
 	@Override
-	// This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 
 		assert myButton != null : "fx:id=\"myButton\" was not injected: check your FXML file 'simple.fxml'.";
@@ -65,25 +127,43 @@ public class LoginController extends Application implements Initializable {
 		// injected
 
 		myButton.setOnAction(new EventHandler<ActionEvent>() {
-
+			/**
+			 * Method that handles button clicked with mouse
+			 */
 			@Override
 			public void handle(ActionEvent arg0) {
-				attemptLogin();
+				validateLogin();
+				// if valid details are entered then check details against database username/password
+				while (validationCheck == true) {
+					attemptLogin();
+					// reset validation for next login
+					validationCheck = false;
+				}
 			}
 		});
 
 		fieldPassword.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			/**
+			 * Method that handles button pressed with Enter Key
+			 */
 			@Override
 			public void handle(KeyEvent ke) {
 				if (ke.getCode().equals(KeyCode.ENTER)) {
-
-					attemptLogin();
-
+					validateLogin();
+					// if valid details are entered then check details against database username/password
+					while (validationCheck == true) {
+						attemptLogin();
+						// reset validation for next login
+						validationCheck = false;
+					}
 				}
 			}
 		});
 	}
 
+	/**
+	 * Method to connect to the Username / Password Database 
+	 */
 	public void attemptLogin() {
 
 		// Local Variables
@@ -103,38 +183,23 @@ public class LoginController extends Application implements Initializable {
 
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();
-			System.out.println("statement created");
-
-			// test message
-			System.out.println("About to set findPassword command");
+			
 			// *** Assign values to mysql insert***
 			findPassword = "SELECT password FROM login_details WHERE username = \""
 					+ fieldUsername.getText().toString() + "\";";
-			// test message
-			System.out.println("findPassword set");
 
-			// test message
-			System.out.println("About to set findPermissions command");
 			// *** Assign values to mysql insert***
 			findPermissions = "SELECT permissions FROM login_details WHERE username = \""
 					+ fieldUsername.getText().toString() + "\";";
-			// test message
-			System.out.println("findPermissions set");
 
 			// findPassword query executed
 			ResultSet rs1 = stmt.executeQuery(findPassword);
-			// test message
-			System.out.println("findPassword Query executed");
 
 			while (rs1.next()) {
 
 				expectedPassword = rs1.getString("password");
 
 			}
-
-			System.out.println("Expected = " + expectedPassword);
-			System.out
-					.println("Actual = " + fieldPassword.getText().toString());
 
 			if (expectedPassword.equalsIgnoreCase(fieldPassword.getText()
 					.toString())) {
@@ -199,6 +264,28 @@ public class LoginController extends Application implements Initializable {
 
 	}
 
+	/**
+	 * Method to validate the login details provided by user
+	 */
+	public void validateLogin() {
+		// if username is either 'admin'/'triage'/'doctor' AND password is 'password'
+		if ((fieldUsername.getText().equalsIgnoreCase(validAdminUsername)
+				|| fieldUsername.getText()
+						.equalsIgnoreCase(validTriageUsername) || fieldUsername
+				.getText().equalsIgnoreCase(validDoctorUsername))
+				&& (fieldPassword.getText().equalsIgnoreCase(validPassword))) {
+			// set validation boolean to true
+			validationCheck = true;
+		} else {
+			// else boolean is false and display message
+			validationCheck = false;
+			System.err.println("Please enter valid username and password");
+		}
+	}
+
+	/**
+	 * Method to set Java FX login
+	 */
 	public void userLogin() {
 
 		Parent root = null;
@@ -239,6 +326,9 @@ public class LoginController extends Application implements Initializable {
 
 	}
 
+	/**
+	 * Method to start Java FX application
+	 */
 	@Override
 	public void start(Stage arg0) throws Exception {
 		// TODO Auto-generated method stub

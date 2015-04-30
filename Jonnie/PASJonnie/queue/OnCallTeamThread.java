@@ -2,7 +2,7 @@ package queue;
 
 import NHSsystem.OnCallTeam;
 
-public class OnCallTeamQueue implements Runnable {
+public class OnCallTeamThread implements Runnable {
 	
 	/**
 	 * Instance var
@@ -14,7 +14,7 @@ public class OnCallTeamQueue implements Runnable {
 	 * 
 	 * @param onCallTeam
 	 */
-	public OnCallTeamQueue(OnCallTeam onCallTeam) {
+	public OnCallTeamThread(OnCallTeam onCallTeam) {
 		this.onCallTeam = onCallTeam;
 	}
 
