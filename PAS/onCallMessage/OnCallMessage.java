@@ -71,6 +71,8 @@ public class OnCallMessage {
 		 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 
 		 Message message = messageFactory.create(params); 
 		 System.out.println(message.getSid()); 
+		 
+		Email.sendEmail1();
 	 } 
 	 
 	 /**
@@ -94,6 +96,10 @@ public class OnCallMessage {
 		 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 
 		 Message message = messageFactory.create(params); 
 		 System.out.println(message.getSid()); 
+		 
+		 Email.sendEmail2();
+		 
+		
 	 } 
 		 
  /**

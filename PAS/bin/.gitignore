@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /.DS_Store
 /.checkstyle
 /.classpath
@@ -11,6 +12,11 @@
 /hs_err_pid2292.log
 /hs_err_pid2295.log
 /hs_err_pid2722.log
+=======
+/NHSsystem/
+/TestingQueue/
+/database/
+>>>>>>> Stashed changes
 /javafx/
 /onCallMessage/
 /queue/
