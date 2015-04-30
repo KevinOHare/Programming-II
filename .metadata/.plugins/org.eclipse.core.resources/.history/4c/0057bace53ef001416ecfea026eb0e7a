@@ -1,0 +1,14 @@
+/.DS_Store
+/.checkstyle
+/.classpath
+/.metadata/
+/.project
+/.settings/
+/NHSsystem/
+/TestingQueue/
+/build.fxbuild
+/database/
+/hs_err_pid2292.log
+/hs_err_pid2295.log
+/hs_err_pid2722.log
+/javafx/

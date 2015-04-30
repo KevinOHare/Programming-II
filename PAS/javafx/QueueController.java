@@ -313,30 +313,30 @@ public class QueueController implements Initializable {
 
 					// check if the treatment rooms are finished
 					// with patients
-					if (treat.getFirst().getCountTimer() == 999) {
+					if (treat.getFirst().getCountTimer() == 599) {
 						treat.getFirst().setAvailable(true);
 						// treat.remove(treat.getFirst().getPatient());
 						treat.getFirst().setPatient(null);
 						treat.getFirst().setCountTimer(0);
 					}
-					if (treat.get(1).getCountTimer() == 999) {
+					if (treat.get(1).getCountTimer() == 599) {
 						treat.get(1).setAvailable(true);
 						treat.get(1).setPatient(null);
 						treat.get(1).setCountTimer(0);
 
 					}
-					if (treat.get(2).getCountTimer() == 999) {
+					if (treat.get(2).getCountTimer() == 599) {
 						treat.get(2).setAvailable(true);
 						treat.get(2).setPatient(null);
 						treat.get(2).setCountTimer(0);
 
 					}
-					if (treat.get(3).getCountTimer() == 999) {
+					if (treat.get(3).getCountTimer() == 599) {
 						treat.get(3).setAvailable(true);
 						treat.get(3).setPatient(null);
 						treat.get(3).setCountTimer(0);
 					}
-					if (treat.getLast().getCountTimer() == 999) {
+					if (treat.getLast().getCountTimer() == 599) {
 						treat.getLast().setAvailable(true);
 						treat.getLast().setPatient(null);
 						treat.getLast().setCountTimer(0);
@@ -522,14 +522,14 @@ public class QueueController implements Initializable {
 		int count = 0;
 
 		for (int i = 0; i < llist.size(); i++) {
-			// 25 mins has passed - 1500
-			if (llist.get(i).getCountTimer() == 60) {
+			// 25 mins has passed - 1500milsec
+			if (llist.get(i).getCountTimer() == 1500) {
 				// set triage to 2 so patient
 				// can move up queue
 				llist.get(i).setTriage(2);
 			}
-			// 30 mins has passed - 1800
-			if (llist.get(i).getCountTimer() == 80) {
+			// 30 mins has passed - 1800milsec
+			if (llist.get(i).getCountTimer() == 1800) {
 				// set patient beyound
 				llist.get(i).setPatientMin(1);
 			}
@@ -543,8 +543,12 @@ public class QueueController implements Initializable {
 				llist.remove(llist.get(i));
 			}
 		}
+
 		if (count == 3) {
-			call.ManagerMessage2();
+			OnCallMessage.ManagerMessage2();
+		}
+		if (count == 2) {
+			OnCallMessage.ManagerMessage2();
 		}
 	}
 

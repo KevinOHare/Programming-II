@@ -39,7 +39,7 @@ public class TreatmentRoomThread implements Runnable {
 				System.out.println("Interrupted");
 			}
 			
-		} while (loop != 50); // to act as 10 mins
+		} while (loop != 600); // to act as 10 mins
 		
 		
 	}

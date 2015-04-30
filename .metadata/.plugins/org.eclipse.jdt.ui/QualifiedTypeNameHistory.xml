@@ -16,4 +16,6 @@
 <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
 <fullyQualifiedTypeName name="NHSsystem.Patient"/>
 <fullyQualifiedTypeName name="database.JDBC"/>
+<fullyQualifiedTypeName name="javafx.TriageTable"/>
+<fullyQualifiedTypeName name="javafx.QueueController"/>
 </qualifiedTypeNameHistroy>

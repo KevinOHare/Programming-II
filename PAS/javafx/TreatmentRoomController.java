@@ -1,5 +1,7 @@
 package javafx;
 
+import javafx.QueueController;
+import javafx.TriageTable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
