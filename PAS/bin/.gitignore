@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-/javafx/
-/database/
-/TestingQuene/
-=======
-/.metadata/
-/.project
-/.settings/
-/NHSsystem/
-/build.fxbuild
-/javafx/
-/.DS_Store
-/.checkstyle
-/.classpath
-/TestingQuene/
-/database/
-/onCallMessage/
->>>>>>> origin/master
-/queue/
 /TestingQueue/
+/javafx/
+/queue/

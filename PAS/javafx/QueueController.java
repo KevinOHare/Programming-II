@@ -31,6 +31,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -56,6 +57,19 @@ public class QueueController implements Initializable {
 
 	@FXML
 	ChoiceBox treatNumTime;
+	
+	@FXML
+	ChoiceBox searchTriage;
+	
+	@FXML
+	TextField searchFirst;
+	
+	@FXML
+	TextField searchNhs;
+	
+	@FXML
+	TextArea searchDisplay;
+	
 
 	@FXML
 	private void handleButtonTriage() {
@@ -93,6 +107,11 @@ public class QueueController implements Initializable {
 	@FXML
 	private void handleButtonTreatTimerEx() {
 		extensionOfTime();
+	}
+	
+	@FXML
+	private void handleButtonSearchFunction(){
+		searchMethod();
 	}
 
 	// INSTANCES FOR PATIENT OBJECT
@@ -192,7 +211,7 @@ public class QueueController implements Initializable {
 						System.out.println(count + ". " + as.toString());
 						// Numbering of patients in queue
 						count++;
-						if (count == 10) {
+						if (count < 11) {
 							count = 1;
 						}
 
@@ -363,7 +382,7 @@ public class QueueController implements Initializable {
 		// start time at the queue
 		TreatmentRoomThread thr = new TreatmentRoomThread(tr);
 		Runnable r = new Runnable() {
-			public void run() {
+			public synchronized void run() {
 				thr.run();
 			}
 		};
@@ -381,7 +400,7 @@ public class QueueController implements Initializable {
 		// start time at the queue
 		OnCallTeamThread octt = new OnCallTeamThread(oct);
 		Runnable r = new Runnable() {
-			public void run() {
+			public synchronized void run() {
 				octt.run();
 			}
 		};
@@ -418,7 +437,7 @@ public class QueueController implements Initializable {
 				// start patient thread
 				PatientThread pt = new PatientThread(ptq);
 				Runnable rr = new Runnable() {
-					public void run() {
+					public synchronized void run() {
 						pt.run();
 					}
 				};
@@ -487,7 +506,9 @@ public class QueueController implements Initializable {
 		System.out.println("*********** Status Code *****************");
 		// print out the status code
 		System.out.println("Waititng time status code: " + status);
-		System.out.println("*****************************************");
+		if (status == 4){
+			System.out.println("**Queue is Full**");
+		}
 	}
 
 	/**
@@ -592,6 +613,20 @@ public class QueueController implements Initializable {
 		num--; // remove 1 as dealing with an array
 
 		startTimer(treat.get(num));
+	}
+	
+	/**
+	 * a search method used to find the patient as
+	 * entered in the queue fxml
+	 */
+	public void searchMethod(){
+		//searchTriage.getText();
+		//searchFirst.getText();
+		
+		//searchNhs.getText();
+		
+	
+		//searchDisplay.setText();
 	}
 
 }// ************************end of class**********************
