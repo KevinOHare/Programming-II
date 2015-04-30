@@ -1,79 +1,44 @@
 package database;
 
 /**
- * Import resources
+ * import resources
  */
 import java.sql.*;
 
 /**
- * Class to connect to the database and search it to hold the patient information
- * 
+ * Class used to connect to the database and search for patient details
  * @author chrismcclune
  *
  */
 public class JDBC {
+	
 	/**
-	 * String to hold the JDBC driver
+	 * String for the JDBC driver
 	 */
-	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * String for the database URL
+	 */
+	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
 	/**
-	 * String to hold the URL of the database
+	 * String for the username of the database
 	 */
-	public static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
-
+	static final String USER = "40025827";
+	
 	/**
-	 * String to hold the username for the database
+	 * String for the password of the database
 	 */
-	public static final String USER = "40025827";
-
+	static final String PASS = "UYN6542";
+	
 	/**
-	 * String to hold the password for the database
-	 */
-	public static final String PASS = "UYN6542";
-
-	/**
-	 * Connection object for the database
-	 */
-	public static Connection conn = null;
-
-	/**
-	 * Statement object for the database
-	 */
-	public static Statement stmt = null;
-
-	/**
-	 * String array to hold the attributes from the database
+	 * String array for the attributes in the database
 	 */
 	public static String[] str = new String[9];
 
 	/**
-	 * Method to open connection to the database
-	 */
-	public static void openConnection() {
-
-		// STEP 2: Register JDBC driver
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// STEP 3: Open a connection
-		System.out.println("Connecting to database...");
-		try {
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * Method to search the database
-	 * 
+	 * Method to connect and search the database and save patient details
 	 * @param firstName
 	 * @param lastName
 	 * @param postcode
@@ -82,9 +47,19 @@ public class JDBC {
 	public void databaseSearch(String firstName, String lastName,
 			String postcode, String id) {
 
+		// Local Variables
+		Connection conn = null;
+		Statement stmt = null;
+
 		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
 			// STEP 4: Execute a query
-			System.out.println("Creating statement...\n");
 			stmt = conn.createStatement();
 			String sql1;
 
@@ -128,7 +103,7 @@ public class JDBC {
 				// *** Test ***
 				System.out.println(rset1 + " " + rset3 + " " + rset4 + " "
 						+ rset7 + " " + rset10);
-
+				
 				// assign values to str array
 				str[0] = rset2;
 				str[1] = rset3;
@@ -142,6 +117,7 @@ public class JDBC {
 
 			}
 
+
 			// STEP 6: Clean-up environment
 			rs.close();
 			stmt.close();
@@ -149,45 +125,35 @@ public class JDBC {
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
-
+			
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-
+			
 		} finally {
 			// finally block used to close resources
-			closeConnection();
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			}// nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
 		}
 		System.out.println("Goodbye!");
 	}
 
+
 	/**
 	 * A method to return the rsets of the correct patient search
-	 * 
 	 * @return rsets
 	 */
 	public String[] rsetPrint() {
 		return str;
-	}
-
-	/**
-	 * Method to close the database connection
-	 */
-	public static void closeConnection() {
-
-		// close the statement
-		try {
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException se2) {
-		}
-		// close the connection
-		try {
-			if (conn != null)
-				conn.close();
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
 	}
 
 }

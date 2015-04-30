@@ -22,7 +22,7 @@ public class OnCallTeamThread implements Runnable {
 	 * Counts the time since team called upon
 	 */
 	@Override
-	public void run() {
+	public synchronized void run() {
 
 		int loop = 0;
 

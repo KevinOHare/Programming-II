@@ -18,7 +18,6 @@ import com.twilio.sdk.TwilioRestException;
 
 import NHSsystem.Patient;
 import NHSsystem.TreatmentRoom;
-import queue.Queue;
 
 public class TestQueue {
 
@@ -395,4 +394,3 @@ public class TestQueue {
 		
 		
 	}
-	

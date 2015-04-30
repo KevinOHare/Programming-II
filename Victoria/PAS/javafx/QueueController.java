@@ -31,6 +31,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -53,9 +54,22 @@ public class QueueController implements Initializable {
 
 	@FXML
 	ChoiceBox treatBox;
-	
+
 	@FXML
 	ChoiceBox treatNumTime;
+	
+	@FXML
+	ChoiceBox searchTriage;
+	
+	@FXML
+	TextField searchFirst;
+	
+	@FXML
+	TextField searchNhs;
+	
+	@FXML
+	TextArea searchDisplay;
+	
 
 	@FXML
 	private void handleButtonTriage() {
@@ -89,10 +103,15 @@ public class QueueController implements Initializable {
 		anotherStage.setTitle("Treatment Room Page");
 		anotherStage.show();
 	}
-	
+
 	@FXML
 	private void handleButtonTreatTimerEx() {
 		extensionOfTime();
+	}
+	
+	@FXML
+	private void handleButtonSearchFunction(){
+		searchMethod();
 	}
 
 	// INSTANCES FOR PATIENT OBJECT
@@ -149,7 +168,6 @@ public class QueueController implements Initializable {
 		treat.add(room4);
 		treat.add(room5);
 
-
 		// Thread run in the background to produce the queue
 		Runnable r = new Runnable() {
 			public synchronized void run() {
@@ -179,6 +197,9 @@ public class QueueController implements Initializable {
 						System.out.println(tr.toString());
 					}
 
+					// check the status code
+					statusCodeUpdate();
+
 					// print details for console for patient
 					System.out.println("********** Queue ************");
 					System.out
@@ -190,12 +211,15 @@ public class QueueController implements Initializable {
 						System.out.println(count + ". " + as.toString());
 						// Numbering of patients in queue
 						count++;
-						if (count == 10) {
+						if (count < 11) {
 							count = 1;
 						}
 
 						// check rooms are available
 						if (treat.get(0).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 1 please. ***");
 							treat.get(0).setPatient(as);
 							treat.get(0).setAvailable(false);
 							// start count for treatment room
@@ -206,6 +230,9 @@ public class QueueController implements Initializable {
 							as.setInRoom(true);
 							llist.remove(as);
 						} else if (treat.get(1).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 2 please. ***");
 							treat.get(1).setPatient(as);
 							treat.get(1).setAvailable(false);
 							// start count for treatment room
@@ -216,6 +243,9 @@ public class QueueController implements Initializable {
 							as.setInRoom(true);
 							llist.remove(as);
 						} else if (treat.get(2).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 3 please. ***");
 							treat.get(2).setPatient(as);
 							treat.get(2).setAvailable(false);
 							// start count for treatment room
@@ -226,6 +256,9 @@ public class QueueController implements Initializable {
 							as.setInRoom(true);
 							llist.remove(as);
 						} else if (treat.get(3).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 4 please. ***");
 							treat.get(3).setPatient(as);
 							treat.get(3).setAvailable(false);
 							// start count for treatment room
@@ -236,6 +269,9 @@ public class QueueController implements Initializable {
 							as.setInRoom(true);
 							llist.remove(as);
 						} else if (treat.get(4).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 5 please. ***");
 							treat.get(4).setPatient(as);
 							treat.get(4).setAvailable(false);
 							// start count for treatment room
@@ -268,7 +304,8 @@ public class QueueController implements Initializable {
 								llist.remove(llist.get(l));
 							} catch (TwilioRestException tre) {
 								tre.printStackTrace();
-								System.out.println("Could not send message to on call team");
+								System.out
+										.println("Could not send message to on call team");
 							}
 
 						}
@@ -309,13 +346,14 @@ public class QueueController implements Initializable {
 					// exceeded the queue limits
 					try {
 						checkQueueTimerLimit();
-					} catch (TwilioRestException e1){
+					} catch (TwilioRestException e1) {
 						e1.printStackTrace();
 						System.out.println("Could not send message to manager");
 					}
-					
+
 					// print on call team to console
-					System.out.println("\n************ On Call Team ***********\n");
+					System.out
+							.println("\n************ On Call Team ***********\n");
 					System.out.println("Available? \t Patient Details");
 					System.out.println(onCallTeam.toString());
 
@@ -344,16 +382,15 @@ public class QueueController implements Initializable {
 		// start time at the queue
 		TreatmentRoomThread thr = new TreatmentRoomThread(tr);
 		Runnable r = new Runnable() {
-			public void run() {
+			public synchronized void run() {
 				thr.run();
 			}
 		};
 		new Thread(r).start();
 	}
-	
+
 	/**
-	 * A method to invoke the on call team thread class
-	 * thread timer count
+	 * A method to invoke the on call team thread class thread timer count
 	 * 
 	 * @param oct
 	 */
@@ -363,7 +400,7 @@ public class QueueController implements Initializable {
 		// start time at the queue
 		OnCallTeamThread octt = new OnCallTeamThread(oct);
 		Runnable r = new Runnable() {
-			public void run() {
+			public synchronized void run() {
 				octt.run();
 			}
 		};
@@ -400,7 +437,7 @@ public class QueueController implements Initializable {
 				// start patient thread
 				PatientThread pt = new PatientThread(ptq);
 				Runnable rr = new Runnable() {
-					public void run() {
+					public synchronized void run() {
 						pt.run();
 					}
 				};
@@ -429,7 +466,49 @@ public class QueueController implements Initializable {
 	 */
 	public void sortingQueue() {
 
-		Collections.sort(llist);	
+		Collections.sort(llist);
+	}
+
+	/**
+	 * A method to update the queue based on the status of the longest waiting
+	 * patient in the queue
+	 */
+	public void statusCodeUpdate() {
+		// automatically updating status code based on waiting times
+		// iterate through the queue and find the highest waiting time
+		int status = 1; // Default code
+		int countValue;
+		int currentMax = 0;
+
+		// checking the highest time in queue
+		for (int i = 0; i < llist.size(); i++) {
+			countValue = llist.get(i).getCountTimer();
+			if (countValue > currentMax) {
+				currentMax = countValue;
+			}
+		}
+
+		// if linked list queue is greater than or
+		// is 10
+		if (llist.size() == 10) {
+			status = 4;
+		}
+		// set the status code based on the
+		// highest timed patient in queue
+		else if (currentMax >= 0 && currentMax < 10) {
+			status = 1;
+		} else if (currentMax >= 10 && currentMax < 20) {
+			status = 2;
+		} else if (currentMax >= 20) {
+			status = 3;
+		}
+
+		System.out.println("*********** Status Code *****************");
+		// print out the status code
+		System.out.println("Waititng time status code: " + status);
+		if (status == 4){
+			System.out.println("**Queue is Full**");
+		}
 	}
 
 	/**
@@ -492,7 +571,7 @@ public class QueueController implements Initializable {
 					|| (treat.get(i).getPatient().getTriage() == 4)) {
 				// adjust triage priority
 				treat.get(i).getPatient().setTriage(2);// set as higher priority
-				//treat.get(i).getPatient().getTriage();
+				// treat.get(i).getPatient().getTriage();
 				// add back to queue list
 				llist.add(treat.get(i).getPatient());
 				// set patient here to null
@@ -536,7 +615,18 @@ public class QueueController implements Initializable {
 		startTimer(treat.get(num));
 	}
 	
+	/**
+	 * a search method used to find the patient as
+	 * entered in the queue fxml
+	 */
+	public void searchMethod(){
+		//searchTriage.getText();
+		//searchFirst.getText();
+		
+		//searchNhs.getText();
+		
 	
-	
+		//searchDisplay.setText();
+	}
 
 }// ************************end of class**********************
