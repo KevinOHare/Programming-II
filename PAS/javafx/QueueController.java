@@ -167,7 +167,7 @@ public class QueueController implements Initializable {
 						e2.printStackTrace();
 						System.out.println("Could not send message");
 					}
-
+					
 					// method to sort java collections
 					sortingQueue();
 
@@ -179,6 +179,9 @@ public class QueueController implements Initializable {
 						System.out.println(tr.toString());
 					}
 
+					// check the status code
+					statusCodeUpdate();
+					
 					// print details for console for patient
 					System.out.println("********** Queue ************");
 					System.out
@@ -430,6 +433,46 @@ public class QueueController implements Initializable {
 	public void sortingQueue() {
 
 		Collections.sort(llist);	
+	}
+	
+	/**
+	 * A method to update the queue based on the status
+	 * of the longest waiting patient in the queue
+	 */
+	public void statusCodeUpdate(){
+		// automatically updating status code based on waiting times
+		// iterate through the queue and find the highest waiting time
+		int status = 1; // Default code
+		int countValue;
+		int currentMax = 0;
+		
+		// checking the highest time in queue
+		for (int i = 0; i <llist.size(); i++) {
+			countValue = llist.get(i).getCountTimer();
+			if (countValue > currentMax) {
+				currentMax = countValue;
+			}
+		}
+		
+		// if linked list queue is greater than or
+		// is 10
+		if (llist.size() == 10) {
+			status = 4;
+		}
+		// set the status code based on the 
+		// highest timed patient in queue
+		else if (currentMax >= 0 && currentMax < 10) {
+			status = 1;
+		} else if (currentMax >= 10 && currentMax < 20) {
+			status = 2;
+		} else if (currentMax >= 20) {
+			status = 3;
+		}
+		
+		System.out.println("*********** Status Code *****************");
+		// print out the status code
+		System.out.println("Waititng time status code: " + status);
+		System.out.println("*****************************************");
 	}
 
 	/**
