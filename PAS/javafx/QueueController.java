@@ -53,7 +53,7 @@ public class QueueController implements Initializable {
 
 	@FXML
 	ChoiceBox treatBox;
-	
+
 	@FXML
 	ChoiceBox treatNumTime;
 
@@ -89,7 +89,7 @@ public class QueueController implements Initializable {
 		anotherStage.setTitle("Treatment Room Page");
 		anotherStage.show();
 	}
-	
+
 	@FXML
 	private void handleButtonTreatTimerEx() {
 		extensionOfTime();
@@ -149,7 +149,6 @@ public class QueueController implements Initializable {
 		treat.add(room4);
 		treat.add(room5);
 
-
 		// Thread run in the background to produce the queue
 		Runnable r = new Runnable() {
 			public synchronized void run() {
@@ -167,7 +166,7 @@ public class QueueController implements Initializable {
 						e2.printStackTrace();
 						System.out.println("Could not send message");
 					}
-					
+
 					// method to sort java collections
 					sortingQueue();
 
@@ -181,7 +180,7 @@ public class QueueController implements Initializable {
 
 					// check the status code
 					statusCodeUpdate();
-					
+
 					// print details for console for patient
 					System.out.println("********** Queue ************");
 					System.out
@@ -199,6 +198,9 @@ public class QueueController implements Initializable {
 
 						// check rooms are available
 						if (treat.get(0).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 1 please. ***");
 							treat.get(0).setPatient(as);
 							treat.get(0).setAvailable(false);
 							// start count for treatment room
@@ -209,6 +211,9 @@ public class QueueController implements Initializable {
 							as.setInRoom(true);
 							llist.remove(as);
 						} else if (treat.get(1).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 2 please. ***");
 							treat.get(1).setPatient(as);
 							treat.get(1).setAvailable(false);
 							// start count for treatment room
@@ -219,6 +224,9 @@ public class QueueController implements Initializable {
 							as.setInRoom(true);
 							llist.remove(as);
 						} else if (treat.get(2).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 3 please. ***");
 							treat.get(2).setPatient(as);
 							treat.get(2).setAvailable(false);
 							// start count for treatment room
@@ -229,6 +237,9 @@ public class QueueController implements Initializable {
 							as.setInRoom(true);
 							llist.remove(as);
 						} else if (treat.get(3).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 4 please. ***");
 							treat.get(3).setPatient(as);
 							treat.get(3).setAvailable(false);
 							// start count for treatment room
@@ -239,6 +250,9 @@ public class QueueController implements Initializable {
 							as.setInRoom(true);
 							llist.remove(as);
 						} else if (treat.get(4).isAvailable() == true) {
+							System.out.println("\n*** " + as.getFirstName()
+									+ " " + as.getLastName()
+									+ " to treatment room 5 please. ***");
 							treat.get(4).setPatient(as);
 							treat.get(4).setAvailable(false);
 							// start count for treatment room
@@ -271,7 +285,8 @@ public class QueueController implements Initializable {
 								llist.remove(llist.get(l));
 							} catch (TwilioRestException tre) {
 								tre.printStackTrace();
-								System.out.println("Could not send message to on call team");
+								System.out
+										.println("Could not send message to on call team");
 							}
 
 						}
@@ -312,13 +327,14 @@ public class QueueController implements Initializable {
 					// exceeded the queue limits
 					try {
 						checkQueueTimerLimit();
-					} catch (TwilioRestException e1){
+					} catch (TwilioRestException e1) {
 						e1.printStackTrace();
 						System.out.println("Could not send message to manager");
 					}
-					
+
 					// print on call team to console
-					System.out.println("\n************ On Call Team ***********\n");
+					System.out
+							.println("\n************ On Call Team ***********\n");
 					System.out.println("Available? \t Patient Details");
 					System.out.println(onCallTeam.toString());
 
@@ -353,10 +369,9 @@ public class QueueController implements Initializable {
 		};
 		new Thread(r).start();
 	}
-	
+
 	/**
-	 * A method to invoke the on call team thread class
-	 * thread timer count
+	 * A method to invoke the on call team thread class thread timer count
 	 * 
 	 * @param oct
 	 */
@@ -432,34 +447,34 @@ public class QueueController implements Initializable {
 	 */
 	public void sortingQueue() {
 
-		Collections.sort(llist);	
+		Collections.sort(llist);
 	}
-	
+
 	/**
-	 * A method to update the queue based on the status
-	 * of the longest waiting patient in the queue
+	 * A method to update the queue based on the status of the longest waiting
+	 * patient in the queue
 	 */
-	public void statusCodeUpdate(){
+	public void statusCodeUpdate() {
 		// automatically updating status code based on waiting times
 		// iterate through the queue and find the highest waiting time
 		int status = 1; // Default code
 		int countValue;
 		int currentMax = 0;
-		
+
 		// checking the highest time in queue
-		for (int i = 0; i <llist.size(); i++) {
+		for (int i = 0; i < llist.size(); i++) {
 			countValue = llist.get(i).getCountTimer();
 			if (countValue > currentMax) {
 				currentMax = countValue;
 			}
 		}
-		
+
 		// if linked list queue is greater than or
 		// is 10
 		if (llist.size() == 10) {
 			status = 4;
 		}
-		// set the status code based on the 
+		// set the status code based on the
 		// highest timed patient in queue
 		else if (currentMax >= 0 && currentMax < 10) {
 			status = 1;
@@ -468,7 +483,7 @@ public class QueueController implements Initializable {
 		} else if (currentMax >= 20) {
 			status = 3;
 		}
-		
+
 		System.out.println("*********** Status Code *****************");
 		// print out the status code
 		System.out.println("Waititng time status code: " + status);
@@ -535,7 +550,7 @@ public class QueueController implements Initializable {
 					|| (treat.get(i).getPatient().getTriage() == 4)) {
 				// adjust triage priority
 				treat.get(i).getPatient().setTriage(2);// set as higher priority
-				//treat.get(i).getPatient().getTriage();
+				// treat.get(i).getPatient().getTriage();
 				// add back to queue list
 				llist.add(treat.get(i).getPatient());
 				// set patient here to null
