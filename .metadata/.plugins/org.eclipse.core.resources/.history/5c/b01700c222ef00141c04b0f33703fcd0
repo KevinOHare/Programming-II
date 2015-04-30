@@ -6,7 +6,7 @@ package database;
 import java.sql.*;
 
 /**
- * Class to connect to the database and search it to hold the patient information
+ * Class to connect to the database and
  * 
  * @author chrismcclune
  *

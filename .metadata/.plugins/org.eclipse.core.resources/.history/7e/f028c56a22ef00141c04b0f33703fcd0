@@ -1,55 +1,27 @@
 package database;
 
-/**
- * Import resources
- */
+//STEP 1. Import required packages
 import java.sql.*;
+import javafx.LoginController;
 
-/**
- * Class to connect to the database and search it to hold the patient information
- * 
- * @author chrismcclune
- *
- */
 public class JDBC {
-	/**
-	 * String to hold the JDBC driver
-	 */
+	// JDBC driver name and database URL
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-
-	/**
-	 * String to hold the URL of the database
-	 */
 	public static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
-	/**
-	 * String to hold the username for the database
-	 */
+	// Database credentials
 	public static final String USER = "40025827";
-
-	/**
-	 * String to hold the password for the database
-	 */
 	public static final String PASS = "UYN6542";
 
-	/**
-	 * Connection object for the database
-	 */
+	 // Local Variables
 	public static Connection conn = null;
-
-	/**
-	 * Statement object for the database
-	 */
 	public static Statement stmt = null;
+	
+	public static boolean connectionOpened = false;
 
-	/**
-	 * String array to hold the attributes from the database
-	 */
-	public static String[] str = new String[9];
+	// create string array
+	String[] str = new String[9];
 
-	/**
-	 * Method to open connection to the database
-	 */
 	public static void openConnection() {
 
 		// STEP 2: Register JDBC driver
@@ -71,16 +43,13 @@ public class JDBC {
 
 	}
 
-	/**
-	 * Method to search the database
-	 * 
-	 * @param firstName
-	 * @param lastName
-	 * @param postcode
-	 * @param id
-	 */
 	public void databaseSearch(String firstName, String lastName,
 			String postcode, String id) {
+
+		if (connectionOpened == false){
+		openConnection();
+		connectionOpened = true;
+		}
 
 		try {
 			// STEP 4: Execute a query
@@ -157,9 +126,9 @@ public class JDBC {
 		} finally {
 			// finally block used to close resources
 			closeConnection();
-		}
+		}// end try
 		System.out.println("Goodbye!");
-	}
+	}// end main
 
 	/**
 	 * A method to return the rsets of the correct patient search
@@ -167,27 +136,24 @@ public class JDBC {
 	 * @return rsets
 	 */
 	public String[] rsetPrint() {
+		// local variable
 		return str;
 	}
 
-	/**
-	 * Method to close the database connection
-	 */
 	public static void closeConnection() {
 
-		// close the statement
 		try {
 			if (stmt != null)
 				stmt.close();
 		} catch (SQLException se2) {
-		}
-		// close the connection
+		}// nothing we can do
 		try {
 			if (conn != null)
 				conn.close();
 		} catch (SQLException se) {
 			se.printStackTrace();
-		}
+		}// end finally try
+
 	}
 
-}
+}// ************** class ************

@@ -6,8 +6,7 @@ package database;
 import java.sql.*;
 
 /**
- * Class to connect to the database and search it to hold the patient information
- * 
+ * Class to connect to the database and 
  * @author chrismcclune
  *
  */
@@ -16,7 +15,7 @@ public class JDBC {
 	 * String to hold the JDBC driver
 	 */
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-
+	
 	/**
 	 * String to hold the URL of the database
 	 */
@@ -26,7 +25,7 @@ public class JDBC {
 	 * String to hold the username for the database
 	 */
 	public static final String USER = "40025827";
-
+	
 	/**
 	 * String to hold the password for the database
 	 */
@@ -36,7 +35,7 @@ public class JDBC {
 	 * Connection object for the database
 	 */
 	public static Connection conn = null;
-
+	
 	/**
 	 * Statement object for the database
 	 */
@@ -73,14 +72,12 @@ public class JDBC {
 
 	/**
 	 * Method to search the database
-	 * 
 	 * @param firstName
 	 * @param lastName
 	 * @param postcode
 	 * @param id
 	 */
-	public void databaseSearch(String firstName, String lastName,
-			String postcode, String id) {
+	public void databaseSearch(String firstName, String lastName, String postcode, String id) {
 
 		try {
 			// STEP 4: Execute a query
@@ -157,16 +154,16 @@ public class JDBC {
 		} finally {
 			// finally block used to close resources
 			closeConnection();
-		}
+		}// end try
 		System.out.println("Goodbye!");
 	}
 
 	/**
 	 * A method to return the rsets of the correct patient search
-	 * 
 	 * @return rsets
 	 */
 	public String[] rsetPrint() {
+		// local variable
 		return str;
 	}
 

@@ -30,7 +30,7 @@ public class OnCallMessage {
 	 public static final String ACCOUNT_SID = "ACb6746bac3b7204dcb3a7777879b70a63"; 
 	 public static final String AUTH_TOKEN = "c350300591d3c582c5e9f80ade758c3f"; 
 	 
-	 public static void OnCallMessage2() throws TwilioRestException { 
+	 public static void main(String[]args) throws TwilioRestException { 
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
 	 
 		 // Build the parameters 

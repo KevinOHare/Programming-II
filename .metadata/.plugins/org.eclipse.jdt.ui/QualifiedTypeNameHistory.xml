@@ -15,4 +15,5 @@
 <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
 <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
 <fullyQualifiedTypeName name="NHSsystem.Patient"/>
+<fullyQualifiedTypeName name="database.JDBC"/>
 </qualifiedTypeNameHistroy>

@@ -315,7 +315,7 @@ public class LoginController extends Application implements Initializable {
 			e.printStackTrace();
 		}
 		Stage primaryStage = new Stage();
-		Scene scene = new Scene(root, 480, 380);
+		Scene scene = new Scene(root, 1400, 684);
 		primaryStage.setTitle("Queue Page");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -326,6 +326,7 @@ public class LoginController extends Application implements Initializable {
 		try {
 			anotherRoot = FXMLLoader.load(getClass().getResource(fxmlToLoad));
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Scene anotherScene = new Scene(anotherRoot);
@@ -334,7 +335,7 @@ public class LoginController extends Application implements Initializable {
 		anotherStage.show();
 		stage.close();
 
-		// set icon of the Queue page
+		// set icon of the application
 		Image applicationIcon = new Image(getClass().getResourceAsStream(
 				"PASicon.png"));
 		primaryStage.getIcons().add(applicationIcon);

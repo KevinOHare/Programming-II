@@ -1,88 +1,231 @@
 package javafx;
 
-import java.awt.Button;
+/**
+ * import resources
+ */
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import database.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Class to show the reception layout and control its functions
+ * 
+ * @author chrismcclune
+ *
+ */
 public class ReceptionLayoutController implements Initializable {
 
-	// LOCAL VARIABLES
-
+	/**
+	 * String used to make nhs number available to other classes
+	 */
 	public static String nhsPass;
+
+	/**
+	 * String used to make first name available to other classes
+	 */
 	public static String firstNamePass;
+
+	/**
+	 * String used to make last name available to other classes
+	 */
 	public static String lastNamePass;
+
+	/**
+	 * String used to make allergy available to other classes
+	 */
 	public static String allergyPass;
+
+	/**
+	 * String used to make blood type available to other classes.=
+	 */
 	public static String bloodTypePass;
+
+	/**
+	 * Boolean used to show if user input of NHS number is correct
+	 */
 	public static boolean NHSValidation;
+
+	/**
+	 * Boolean used to show if user input of first name is correct
+	 */
 	public static boolean firstNameValidation;
+
+	/**
+	 * Boolean used to show if user input of last name is correct
+	 */
 	public static boolean lastNameValidation;
+
+	/**
+	 * Boolean used to show if user input of postcode is correct
+	 */
 	public static boolean postcodeValidation;
 
-	String tempAllergy;
-	String tempBloodType;
+	/**
+	 * String used to assign allergy of patient
+	 */
+	public static String tempAllergy;
+	
+	/**
+	 * String used to assign blood type of patient
+	 */
+	public static String tempBloodType;
 
-	// TEXT FIELDS
-
+	/**
+	 * TextField object for the first name
+	 */
 	@FXML
 	TextField firstName;
 
+	/**
+	 * TextField object for the last name
+	 */
 	@FXML
 	TextField lastName;
 
+	/**
+	 * TextField object for the postcode
+	 */
 	@FXML
 	TextField postcode;
 
+	/**
+	 * TextField object for the id
+	 */
 	@FXML
 	TextField id;
 
-	// BUTTON
+	/**
+	 * TableView object for the ID
+	 */
+	@FXML
+	TableView<ReceptionLayoutTable> tableID;
 
+	/**
+	 * TableColumn object for the title
+	 */
+	@FXML
+	TableColumn<ReceptionLayoutTable, String> tableTitle;
+
+	/**
+	 * TableColumn object for the first name
+	 */
+	@FXML
+	TableColumn<ReceptionLayoutTable, String> tableFirstName;
+
+	/**
+	 * TableColumn object for the last name
+	 */
+	@FXML
+	TableColumn<ReceptionLayoutTable, String> tableLastName;
+
+	/**
+	 * TableColumn object for the Street
+	 */
+	@FXML
+	TableColumn<ReceptionLayoutTable, String> tableStreet;
+
+	/**
+	 * TableColumn object for the City
+	 */
+	@FXML
+	TableColumn<ReceptionLayoutTable, String> tableCity;
+
+	/**
+	 * TableColumn object for the postcode
+	 */
+	@FXML
+	TableColumn<ReceptionLayoutTable, String> tablePostcode;
+
+	/**
+	 * TableColumn object for the telephone number
+	 */
+	@FXML
+	TableColumn<ReceptionLayoutTable, String> tableTelephone;
+
+	// create Table object
+	ReceptionLayoutTable rt = new ReceptionLayoutTable();
+	TriageTable tt = new TriageTable();
+	// create observable list
+	ObservableList<ReceptionLayoutTable> data = FXCollections
+			.observableArrayList();
+	
+
+	/**
+	 * Method to override initialize in super class
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		// TABLE VIEW
+		tableTitle
+				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
+						"title"));
+		tableFirstName
+				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
+						"firstName"));
+		tableLastName
+				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
+						"lastName"));
+		tableStreet
+				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
+						"street"));
+		tableCity
+				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
+						"city"));
+		tablePostcode
+				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
+						"postcode"));
+		tableTelephone
+				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
+						"telephone"));
+
+		// set data to table id for show results
+		tableID.setItems(data);
+	}
+
+	/**
+	 * Method to handle the action of the clear button
+	 */
 	@FXML
 	private void handleButtonAction() {
 		data.clear();
-		
+
 		NHSValidation = false;
 		firstNameValidation = false;
 		lastNameValidation = false;
 		postcodeValidation = false;
-		
+
 		validateUserInput();
-		
-		while (NHSValidation && firstNameValidation && lastNameValidation && postcodeValidation) {
+
+		while (NHSValidation && firstNameValidation && lastNameValidation
+				&& postcodeValidation) {
 			searchDB();
 			break;
 		}
 	}
-	
-	
 
+	/**
+	 * Method to handle the action of moving to the next page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void handleActionNewPage(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
@@ -103,47 +246,13 @@ public class ReceptionLayoutController implements Initializable {
 			stage.setScene(scene);
 			stage.setTitle("Triage Screen");
 			stage.centerOnScreen();
-			stage.show();			
+			stage.show();
 		}
 	}
 
-	// TABLE PROPERTIES
-	@FXML
-	TableView<ReceptionLayoutTable> tableID;
-
-	@FXML
-	TableColumn<ReceptionLayoutTable, String> tableTitle;
-
-	@FXML
-	TableColumn<ReceptionLayoutTable, String> tableFirstName;
-
-	@FXML
-	TableColumn<ReceptionLayoutTable, String> tableLastName;
-
-	@FXML
-	TableColumn<ReceptionLayoutTable, String> tableStreet;
-
-	@FXML
-	TableColumn<ReceptionLayoutTable, String> tableCity;
-
-	@FXML
-	TableColumn<ReceptionLayoutTable, String> tablePostcode;
-
-	@FXML
-	TableColumn<ReceptionLayoutTable, String> tableTelephone;
-
-	// CREATE TABLE
-
-	ReceptionLayoutTable rt = new ReceptionLayoutTable();
-	TriageTable tt = new TriageTable();
-
-
-	ObservableList<ReceptionLayoutTable> data = FXCollections
-			.observableArrayList();
-
-	// Method to pull text from text fields
-	// and call the JDBC class to get the
-	// information needed
+	/**
+	 * Method to access patient data from the database
+	 */
 	public void searchDB() {
 		// instance class
 		JDBC db = new JDBC();
@@ -192,30 +301,35 @@ public class ReceptionLayoutController implements Initializable {
 		data.addAll(rt);
 
 	}
-	
+
+	/**
+	 * Method to validate the users input client side
+	 */
 	@FXML
-	public void validateUserInput(){
+	public void validateUserInput() {
 		// validate firstName input
 		String firstNameCheck = firstName.getText();
-		if (firstNameCheck.length() > 0){
+		if (firstNameCheck.length() > 0) {
 			firstNameValidation = true;
 		} else {
 			firstName.setPromptText("Please enter first name");
 		}
-		
+
 		// validate lastName input
 		String lastNameCheck = lastName.getText();
-		if (lastNameCheck.length() > 0){
+		if (lastNameCheck.length() > 0) {
 			lastNameValidation = true;
 		} else {
 			lastName.setPromptText("Please enter last name");
 		}
-		
+
 		// validate postcode input
 		String postcodeCheck = postcode.getText();
-		String regexp="^(GIR ?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)|[0-9][A-HJKPS-UW]) ?[0-9][ABD-HJLNP-UW-Z]{2})$";
+		String regexp = "^(GIR ?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)|[0-9][A-HJKPS-UW]) ?[0-9][ABD-HJLNP-UW-Z]{2})$";
 
+		// create pattern from regular expression
 		Pattern pattern = Pattern.compile(regexp);
+		// match user input to the valid pattern
 		Matcher matcher = pattern.matcher(postcodeCheck.toUpperCase());
 
 		if (matcher.matches()) {
@@ -223,17 +337,7 @@ public class ReceptionLayoutController implements Initializable {
 		} else {
 			postcode.setPromptText("Please enter valid postcode");
 		}
-		
-		/*
-		// validate postcode input
-		 String postcodeCheck = lastName.getText(); 
-		 if (postcodeCheck.length() > 0 && postcodeCheck.length() < 9){
-			postcodeValidation = true;
-		} else {
-			postcode.setPromptText("Please enter valid postcode");
-		}
-		*/
-		
+
 		// validate NHS number input
 		String NHSCharacters = id.getText();
 		if (NHSCharacters.length() == 10) {
@@ -242,80 +346,56 @@ public class ReceptionLayoutController implements Initializable {
 			id.setPromptText("Enter valid NHS number");
 		}
 	}
-	
-	
 
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		// TABLE VIEW
-		tableTitle
-				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
-						"title"));
-		tableFirstName
-				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
-						"firstName"));
-		tableLastName
-				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
-						"lastName"));
-		tableStreet
-				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
-						"street"));
-		tableCity
-				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
-						"city"));
-		tablePostcode
-				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
-						"postcode"));
-		tableTelephone
-				.setCellValueFactory(new PropertyValueFactory<ReceptionLayoutTable, String>(
-						"telephone"));
-
-		// set data to table id for show results
-		tableID.setItems(data);
-
-	}
-	
+	/**
+	 * Method to Handle the action of the button to add a new unknown male emergency
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void handleButtonAUM(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
-		//nhsPass = id.getText();
+		// nhsPass = id.getText();
 		firstNamePass = tt.setFirstName("Unknown Male");
 		lastNamePass = tt.setLastName("Unknown Male");
 		allergyPass = tt.setAllergy("Unknown");
 
 		// check if the search has produced a result
-			// open new window centred
-			Parent root = FXMLLoader
-					.load(getClass().getResource("Triage.fxml"));
-			Scene scene = new Scene(root, 500, 400);
-			Stage stage = (Stage) ((Node) event.getSource()).getScene()
-					.getWindow();
-			stage.setScene(scene);
-			stage.setTitle("Triage Screen");
-			stage.centerOnScreen();
-			stage.show();			
-		}
-	
+		// open new window centred
+		Parent root = FXMLLoader.load(getClass().getResource("Triage.fxml"));
+		Scene scene = new Scene(root, 500, 400);
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.setTitle("Triage Screen");
+		stage.centerOnScreen();
+		stage.show();
+	}
+
+	/**
+	 * Method to handle the action of the button to add a new unknown female emergency
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void handleButtonAUF(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
+<<<<<<< Updated upstream
 		// nhsPass = id.setText();
+=======
+		// nhsPass = id.getText();
+>>>>>>> Stashed changes
 		firstNamePass = tt.setFirstName("Unknown Female");
 		lastNamePass = tt.setLastName("Unknown Female");
 		allergyPass = tt.setAllergy("Unknown");
 
 		// check if the search has produced a result
-			// open new window centred
-			Parent root = FXMLLoader
-					.load(getClass().getResource("Triage.fxml"));
-			Scene scene = new Scene(root, 500, 400);
-			Stage stage = (Stage) ((Node) event.getSource()).getScene()
-					.getWindow();
-			stage.setScene(scene);
-			stage.setTitle("Triage Screen");
-			stage.centerOnScreen();
-			stage.show();			
-		}
+		// open new window centred
+		Parent root = FXMLLoader.load(getClass().getResource("Triage.fxml"));
+		Scene scene = new Scene(root, 500, 400);
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.setTitle("Triage Screen");
+		stage.centerOnScreen();
+		stage.show();
+	}
 }

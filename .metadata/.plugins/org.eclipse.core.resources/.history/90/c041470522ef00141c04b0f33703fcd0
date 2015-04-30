@@ -6,11 +6,12 @@ package javafx;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-import database.JDBC;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,71 +31,72 @@ import javafx.stage.Stage;
 
 /**
  * Class that allows a valid user to be able to login to PAS
- * 
  * @author chrismcclune
  *
  */
 public class LoginController extends Application implements Initializable {
 
 	/**
-	 * Label Object for the Login
+	 * Label Object for the Login 
 	 */
 	@FXML
 	private Label loginLabel;
-
+	
 	/**
-	 * TextField object for the username
+	 * TextField object for the username 
 	 */
 	@FXML
 	private TextField fieldUsername;
-
+	
 	/**
 	 * TextField object for the password
 	 */
 	@FXML
 	private PasswordField fieldPassword;
-
+	
 	/**
 	 * Button object for the login screen
 	 */
 	@FXML
-	private Button myButton;
+	private Button myButton; // value will be injected by the FXMLLoader
+
+	String expectedPassword, usersPermissions, fxmlToLoad, fxmlHeader;
 
 	/**
-	 * String used to compare entered password with saved password
+	 * JDBC driver name and database URL
 	 */
-	public static String expectedPassword;
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * URL of database connection
+	 */
+	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
 	/**
-	 * String used to assign users permission to view certain windows
+	 * Database username
 	 */
-	public static String usersPermissions;
+	static final String USER = "40025827";
 
 	/**
-	 * String to assign certain fxml windows
+	 * Database password
 	 */
-	public static String fxmlToLoad;
-
-	/**
-	 * String to set the title of fxml windows
-	 */
-	public static String fxmlHeader;
+	static final String PASS = "UYN6542";
 
 	/**
 	 * Constant to be used with the valid admin's username
 	 */
 	static final String validAdminUsername = "admin";
-
+	
 	/**
 	 * Constant to be used with the valid Triage Nurse's username
 	 */
 	static final String validTriageUsername = "triage";
-
+	
 	/**
 	 * Constant to be used with the valid doctor's username
 	 */
 	static final String validDoctorUsername = "doctor";
-
+	
 	/**
 	 * Constant to be used with the valid password
 	 */
@@ -107,7 +109,6 @@ public class LoginController extends Application implements Initializable {
 
 	/**
 	 * Method to display the Java FX windows
-	 * 
 	 * @param event
 	 * @throws Exception
 	 */
@@ -116,8 +117,8 @@ public class LoginController extends Application implements Initializable {
 	}
 
 	/**
-	 * Method called by FXMLLoader upon initialization Overrides initialise in
-	 * super class
+	 * Method called by FXMLLoader upon initialization
+	 * Overrides initialise in super class
 	 */
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -134,8 +135,7 @@ public class LoginController extends Application implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 				validateLogin();
-				// if valid details are entered then check details against
-				// database username/password
+				// if valid details are entered then check details against database username/password
 				while (validationCheck == true) {
 					attemptLogin();
 					// reset validation for next login
@@ -152,8 +152,7 @@ public class LoginController extends Application implements Initializable {
 			public void handle(KeyEvent ke) {
 				if (ke.getCode().equals(KeyCode.ENTER)) {
 					validateLogin();
-					// if valid details are entered then check details against
-					// database username/password
+					// if valid details are entered then check details against database username/password
 					while (validationCheck == true) {
 						attemptLogin();
 						// reset validation for next login
@@ -165,9 +164,8 @@ public class LoginController extends Application implements Initializable {
 	}
 
 	/**
-	 * Method to connect to the Username / Password Database
+	 * Method to connect to the Username / Password Database 
 	 */
-	@SuppressWarnings("null")
 	public void attemptLogin() {
 
 		// Local Variables
@@ -177,10 +175,14 @@ public class LoginController extends Application implements Initializable {
 		String findPassword = null;
 		String findPermissions = null;
 
-		// open the connection to the database
-		JDBC.openConnection();
-
 		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();
 			System.out.println("statement created");
@@ -283,8 +285,7 @@ public class LoginController extends Application implements Initializable {
 	 * Method to validate the login details provided by user
 	 */
 	public void validateLogin() {
-		// if username is either 'admin'/'triage'/'doctor' AND password is
-		// 'password'
+		// if username is either 'admin'/'triage'/'doctor' AND password is 'password'
 		if ((fieldUsername.getText().equalsIgnoreCase(validAdminUsername)
 				|| fieldUsername.getText()
 						.equalsIgnoreCase(validTriageUsername) || fieldUsername
@@ -315,7 +316,7 @@ public class LoginController extends Application implements Initializable {
 			e.printStackTrace();
 		}
 		Stage primaryStage = new Stage();
-		Scene scene = new Scene(root, 480, 380);
+		Scene scene = new Scene(root, 1400, 684);
 		primaryStage.setTitle("Queue Page");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -326,6 +327,7 @@ public class LoginController extends Application implements Initializable {
 		try {
 			anotherRoot = FXMLLoader.load(getClass().getResource(fxmlToLoad));
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Scene anotherScene = new Scene(anotherRoot);
@@ -334,7 +336,7 @@ public class LoginController extends Application implements Initializable {
 		anotherStage.show();
 		stage.close();
 
-		// set icon of the Queue page
+		// set icon of the application
 		Image applicationIcon = new Image(getClass().getResourceAsStream(
 				"PASicon.png"));
 		primaryStage.getIcons().add(applicationIcon);
