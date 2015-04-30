@@ -19,16 +19,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
-/**
- * Class used to send email messages
- * @author chrismcclune
- *
- */
+
 public class Email{
  
-	/**
-	 * Method to send an email to the hospital manager when all rooms are in use by emergencies
-	 */
 	public static void sendEmail1(){
  
 		//email address that is sending message
@@ -75,10 +68,6 @@ public class Email{
 		}
 		
 	}
-	
-	/**
-	 * Method to send the hospital manager an email message when non-emergency patients are being sent to other hospitals.
-	 */
 	public static void sendEmail2(){
 		 
 		//email address that is sending message
