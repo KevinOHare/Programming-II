@@ -26,14 +26,8 @@ import java.util.List;
 public class OnCallMessage {
  
 	 // Find your Account Sid and Token at twilio.com/user/account - copy and paste the two here
-	/**
-	 * Constant String for the account_sid from Twilio account
-	 */
+
 	 public static final String ACCOUNT_SID = "ACb6746bac3b7204dcb3a7777879b70a63"; 
-	 
-	 /**
-	  * Constant String for the Authentication token from Twilio account
-	  */
 	 public static final String AUTH_TOKEN = "c350300591d3c582c5e9f80ade758c3f"; 
 	 
 	 public static void OnCallMessage2() throws TwilioRestException { 
