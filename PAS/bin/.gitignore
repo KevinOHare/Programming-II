@@ -1,9 +1,12 @@
-/.classpath
-/.metadata/
 /.DS_Store
 /.checkstyle
+/.classpath
+/.metadata/
+/.project
+/.settings/
 /NHSsystem/
 /TestingQuene/
+/build.fxbuild
 /database/
 /javafx/
 /onCallMessage/

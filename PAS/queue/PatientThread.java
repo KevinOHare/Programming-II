@@ -25,27 +25,13 @@ public class PatientThread implements Runnable {
 	private boolean threadBool = true;
 	
 	@Override
-	public void run() {
+	public synchronized void run() {
 
 		int loop = 0;
 		do {
 			// System.out.println(loop);
 			loop++;
 			this.patient.setCountTimer(loop);
-			
-			// 25 mins has passed
-			if (loop == 1500) { 
-				// set triage to 1 so patient 
-				// can move up queue
-				this.patient.setTriage(1);
-			}
-			
-			// 30 mins has passed
-			if (loop >= 1800){
-				// set patient beyound 
-				this.patient.setPatientMin(1);
-			}
-				
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

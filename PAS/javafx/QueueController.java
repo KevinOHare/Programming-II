@@ -3,6 +3,7 @@ package javafx;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.ResourceBundle;
@@ -52,6 +53,9 @@ public class QueueController implements Initializable {
 
 	@FXML
 	ChoiceBox treatBox;
+	
+	@FXML
+	ChoiceBox treatNumTime;
 
 	@FXML
 	private void handleButtonTriage() {
@@ -82,8 +86,13 @@ public class QueueController implements Initializable {
 				"TreatmentRoom.fxml"));
 		Scene anotherScene = new Scene(anotherRoot);
 		anotherStage.setScene(anotherScene);
-		anotherStage.setTitle("Triage Page");
+		anotherStage.setTitle("Treatment Room Page");
 		anotherStage.show();
+	}
+	
+	@FXML
+	private void handleButtonTreatTimerEx() {
+		extensionOfTime();
 	}
 
 	// INSTANCES FOR PATIENT OBJECT
@@ -140,73 +149,27 @@ public class QueueController implements Initializable {
 		treat.add(room4);
 		treat.add(room5);
 
-		// **********************TEST*********************
-		/*
-		 * Patient pat1 = new Patient("Mr", "Steven", "Kennedy", "45 road",
-		 * "Lisburn", "BT67 524", "098 38563", "3759-283", 3, false); Patient
-		 * pat2 = new Patient("Ms", "June", "Campbell", "20 road", "Lisburn",
-		 * "BT23 524", "234 4263", "3234-83", 4, false); Patient pat3 = new
-		 * Patient("Mr", "Philip", "White", "94 road", "Hillsborough",
-		 * "BT57 254", "234 4543", "0568-283", 2, false); Patient pat4 = new
-		 * Patient("Mrs", "Mary", "Kelly", "60 road", "Moria", "BT57 092",
-		 * "689 2583", "3452-039", 1, true); Patient pat5 = new Patient("Mr",
-		 * "Conner", "Lee", "10 road", "Anahilt", "BT59 203", "582 9385",
-		 * "0429-3458", 3, false); Patient pat6 = new Patient("Mrs", "Will",
-		 * "Goon", "85 road", "Kilea", "BT20 578", "098 3490", "0694-3829", 4,
-		 * false); Patient pat7 = new Patient("Mr", "Red", "Wright", "02 road",
-		 * "Belfast", "BT03 039", "485 3020", "9592-2985", 3, false); Patient
-		 * pat8 = new Patient("Ms", "Kelly", "Goodman", "58 road", "Lisburn",
-		 * "BT28 394", "509 3853", "9837-3029", 2, false); Patient pat9 = new
-		 * Patient("Mr", "Kevin", "Ken", "95 road", "Hillsborough", "BT02 984",
-		 * "039 3085", "303-59387", 4, false); Patient pat10 = new Patient("Ms",
-		 * "Rachel", "Lenvine", "03 road", "Moria", "BT28 828", "493 03895",
-		 * "294-3985", 1, true);
-		 */
-
-		/*
-		 * llist.add(pat1); llist.add(pat2); llist.add(pat3); llist.add(pat4);
-		 * llist.add(pat5); llist.add(pat6); llist.add(pat7); llist.add(pat8);
-		 * llist.add(pat9);
-		 */
-		// ***************************************************
 
 		// Thread run in the background to produce the queue
 		Runnable r = new Runnable() {
-			public void run() {
+			public synchronized void run() {
 				while (boolQ = true) {
+
+					// Local variable
+					int count = 1;
 
 					// call to method to check if new patients
 					// can be added
-					addToQueue();
-
-					// to add and cycle through arrays
-					addingToArrays();
-
-					// **
-
-					/*
-					 * for (Patient sa : llist) { // add to priority queue
-					 * pQueue.add(sa);
-					 * 
-					 * }
-					 * 
-					 * llist.clear();
-					 */
-					// add to sort queue
-					for (Patient ae : pQueue) {
-						// add to sort queue
-
-						sort.add(ae);
+					try {
+						addToQueue();
+					} catch (TwilioRestException e2) {
+						// error message
+						e2.printStackTrace();
+						System.out.println("Could not send message");
 					}
 
-					// add to sort queue
-					for (Patient ae : sort) {
-						// add to sort queue
-
-						llist.add(ae);
-					}
-
-					// **
+					// method to sort java collections
+					sortingQueue();
 
 					// print treatment room to console
 					System.out.println("****** Treatment Room *******");
@@ -222,19 +185,26 @@ public class QueueController implements Initializable {
 							.println("Name\t\t  Address & Contact Details & ID number");
 					// check if a Patient can get into a treatment room
 					for (Patient as : llist) {
+
 						// print patient in queue
-						System.out.println(as.toString());
+						System.out.println(count + ". " + as.toString());
+						// Numbering of patients in queue
+						count++;
+						if (count == 10) {
+							count = 1;
+						}
 
 						// check rooms are available
-						if (treat.getFirst().isAvailable() == true) {
-							treat.getFirst().setPatient(as);
-							treat.getFirst().setAvailable(false);
+						if (treat.get(0).isAvailable() == true) {
+							treat.get(0).setPatient(as);
+							treat.get(0).setAvailable(false);
 							// start count for treatment room
 							// using Treatment room thread
-							startTimer(treat.getFirst());
+							startTimer(treat.get(0));
 							// a boolean assigned within patient
 							// object to execute the remove later
 							as.setInRoom(true);
+							llist.remove(as);
 						} else if (treat.get(1).isAvailable() == true) {
 							treat.get(1).setPatient(as);
 							treat.get(1).setAvailable(false);
@@ -244,6 +214,7 @@ public class QueueController implements Initializable {
 							// a boolean assigned within patient
 							// object to execute the remove later
 							as.setInRoom(true);
+							llist.remove(as);
 						} else if (treat.get(2).isAvailable() == true) {
 							treat.get(2).setPatient(as);
 							treat.get(2).setAvailable(false);
@@ -253,6 +224,7 @@ public class QueueController implements Initializable {
 							// a boolean assigned within patient
 							// object to execute the remove later
 							as.setInRoom(true);
+							llist.remove(as);
 						} else if (treat.get(3).isAvailable() == true) {
 							treat.get(3).setPatient(as);
 							treat.get(3).setAvailable(false);
@@ -262,6 +234,7 @@ public class QueueController implements Initializable {
 							// a boolean assigned within patient
 							// object to execute the remove later
 							as.setInRoom(true);
+							llist.remove(as);
 						} else if (treat.get(4).isAvailable() == true) {
 							treat.get(4).setPatient(as);
 							treat.get(4).setAvailable(false);
@@ -271,15 +244,15 @@ public class QueueController implements Initializable {
 							// a boolean assigned within patient
 							// object to execute the remove later
 							as.setInRoom(true);
-						} else if (treat.getLast().isAvailable() == true) {
-							treat.getLast().setPatient(as);
-							treat.getLast().setAvailable(false);
-							// start count for treatment room
-							// using Treatment room thread
-							startTimer(treat.getLast());
-							// a boolean assigned within patient
-							// object to execute the remove later
-							as.setInRoom(true);
+							llist.remove(as);
+						}
+					}
+
+					// to remove patients from the list that are in
+					// treatment rooms
+					for (int i = 0; i < llist.size(); i++) {
+						if (llist.get(i).getInRoom() == true) {
+							llist.remove(llist.get(i));
 						}
 					}
 
@@ -292,48 +265,41 @@ public class QueueController implements Initializable {
 							// needs a treatment room
 							try {
 								removePatientFromTreat(llist.get(l));
+								llist.remove(llist.get(l));
 							} catch (TwilioRestException tre) {
+								tre.printStackTrace();
 								System.out.println("Could not send message to on call team");
 							}
-							llist.remove(llist.get(l));
-						}
-					}
-
-					// to remove patients from the list that are in
-					// treatment rooms
-					for (int i = 0; i < llist.size(); i++) {
-						if (llist.get(i).getInRoom() == true) {
-							llist.remove(llist.get(i));
 
 						}
 					}
 
 					// check if the treatment rooms are finished
 					// with patients
-					if (treat.getFirst().getCountTimer() == 49) {
+					if (treat.getFirst().getCountTimer() == 999) {
 						treat.getFirst().setAvailable(true);
 						// treat.remove(treat.getFirst().getPatient());
 						treat.getFirst().setPatient(null);
 						treat.getFirst().setCountTimer(0);
 					}
-					if (treat.get(1).getCountTimer() == 49) {
+					if (treat.get(1).getCountTimer() == 999) {
 						treat.get(1).setAvailable(true);
 						treat.get(1).setPatient(null);
 						treat.get(1).setCountTimer(0);
 
 					}
-					if (treat.get(2).getCountTimer() == 49) {
+					if (treat.get(2).getCountTimer() == 999) {
 						treat.get(2).setAvailable(true);
 						treat.get(2).setPatient(null);
 						treat.get(2).setCountTimer(0);
 
 					}
-					if (treat.get(3).getCountTimer() == 49) {
+					if (treat.get(3).getCountTimer() == 999) {
 						treat.get(3).setAvailable(true);
 						treat.get(3).setPatient(null);
 						treat.get(3).setCountTimer(0);
 					}
-					if (treat.getLast().getCountTimer() == 49) {
+					if (treat.getLast().getCountTimer() == 999) {
 						treat.getLast().setAvailable(true);
 						treat.getLast().setPatient(null);
 						treat.getLast().setCountTimer(0);
@@ -343,20 +309,20 @@ public class QueueController implements Initializable {
 					// exceeded the queue limits
 					try {
 						checkQueueTimerLimit();
-					} catch (TwilioRestException tre) {
+					} catch (TwilioRestException e1){
+						e1.printStackTrace();
 						System.out.println("Could not send message to manager");
 					}
-
+					
 					// print on call team to console
-					System.out.println("\n******On Call Team******\n");
+					System.out.println("\n************ On Call Team ***********\n");
 					System.out.println("Available? \t Patient Details");
 					System.out.println(onCallTeam.toString());
-					
-					// END
+
 					System.out
 							.println("\n*****************************************\n");
 					try {
-						Thread.sleep(4000);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -386,7 +352,8 @@ public class QueueController implements Initializable {
 	}
 	
 	/**
-	 * A method to invoke the on call team thread class timer count
+	 * A method to invoke the on call team thread class
+	 * thread timer count
 	 * 
 	 * @param oct
 	 */
@@ -394,78 +361,35 @@ public class QueueController implements Initializable {
 
 		// instantiate classes to activate the
 		// start time at the queue
-		OnCallTeamThread octq = new OnCallTeamThread(oct);
+		OnCallTeamThread octt = new OnCallTeamThread(oct);
 		Runnable r = new Runnable() {
 			public void run() {
-				octq.run();
+				octt.run();
 			}
 		};
 		new Thread(r).start();
 	}
 
 	/**
-	 * A method to cycle through the array collections to order, organise and
-	 * begin the Patient thread
-	 */
-	public void addingToArrays() {
-
-		if (bool == true) {
-
-			for (Patient ft : llist) {
-				PatientThread pt = new PatientThread(ft);
-				Runnable rr = new Runnable() {
-					public void run() {
-						pt.run();
-					}
-				};
-				new Thread(rr).start();
-				// llist.add(ft);
-			}
-
-			bool = false;
-			/*
-			 * for (int i = 0; i < alist.size(); i++) { alist.remove(i); }
-			 */
-		}
-
-		/*
-		 * // check if Patient object can be added (with the // 10 limit of
-		 * Patients) and a boolean to check if // the Patient is new if ((bool
-		 * == true)) {
-		 * 
-		 * // add to array list for (Patient sa : alist) { // add to priority
-		 * queue pQueue.add(sa); }
-		 * 
-		 * // add to sort queue for (Patient ae : pQueue) { // add to sort queue
-		 * 
-		 * sort.add(ae); }
-		 * 
-		 * // add to array list for editing // the working queue for (Patient ju
-		 * : sort) { // instantiate classes to activate the // start time at the
-		 * queue PatientThread pt = new PatientThread(ju); Runnable rr = new
-		 * Runnable() { public void run() { pt.run(); } }; new
-		 * Thread(rr).start(); llist.add(ju); } // prevent adding unless a new
-		 * // patient is added bool = false; }
-		 */
-	}
-
-	/**
 	 * A method to instantiate the information from Triage controller to add to
 	 * queue
+	 * 
+	 * @throws TwilioRestException
 	 */
-	public void addToQueue() {
+	public void addToQueue() throws TwilioRestException {
 		// Instance of Triage Controller
 		TriageController tc = new TriageController();
-
-		// Instance of the Patient object
-		Patient ptq = new Patient();
 
 		// find out if triage controller has data
 		// in order to add data to patient object
 		if ((tc.firstNamePass != null) && (tc.firstNamePass != duplicate)) {
 
 			// check linked list size is 10
-			if (llist.size() < 10) {
+			if (llist.size() <= 9) {
+
+				// Instance of the Patient object
+				Patient ptq = new Patient();
+
 				ptq.setFirstName(tc.firstNamePass);
 				ptq.setLastName(tc.lastNamePass);
 				ptq.setTriage(tc.triagePass);
@@ -473,34 +397,18 @@ public class QueueController implements Initializable {
 				ptq.setAllergy(tc.allergyPass);
 				ptq.setBloodType(tc.bloodTypePass);
 
-				// add to array for sorting
+				// start patient thread
+				PatientThread pt = new PatientThread(ptq);
+				Runnable rr = new Runnable() {
+					public void run() {
+						pt.run();
+					}
+				};
+				new Thread(rr).start();
+
+				// add to linked list array
 				llist.add(ptq);
 
-				// ************test**********
-				/*
-				 * Patient pat1 = new Patient("Mr", "Steven", "Kennedy",
-				 * "45 road", "Lisburn", "BT67 524", "098 38563", "3759-283", 3,
-				 * false); Patient pat2 = new Patient("Ms", "June", "Campbell",
-				 * "20 road", "Lisburn", "BT23 524", "234 4263", "3234-83", 4,
-				 * false); Patient pat3 = new Patient("Mr", "Philip", "White",
-				 * "94 road", "Hillsborough", "BT57 254", "234 4543",
-				 * "0568-283", 2, false); Patient pat4 = new Patient("Mrs",
-				 * "Mary", "Kelly", "60 road", "Moria", "BT57 092", "689 2583",
-				 * "3452-039", 1, true); Patient pat5 = new Patient("Mr",
-				 * "Conner", "Lee", "10 road", "Anahilt", "BT59 203",
-				 * "582 9385", "0429-3458", 3, false); Patient pat6 = new
-				 * Patient("Mrs", "Will", "Goon", "85 road", "Kilea",
-				 * "BT20 578", "098 3490", "0694-3829", 4, false); Patient pat7
-				 * = new Patient("Mr", "Red", "Wright", "02 road", "Belfast",
-				 * "BT03 039", "485 3020", "9592-2985", 3, false);
-				 * llist.add(pat1); llist.add(pat2); llist.add(pat3);
-				 * llist.add(pat4); llist.add(pat5); llist.add(pat6);
-				 * llist.add(pat7);
-				 */
-				// ****************************************
-
-				// allow access for addingToArrays()
-				bool = true;
 				// reset values
 				tc.firstNamePass = null;
 				tc.tableLastName = null;
@@ -510,10 +418,18 @@ public class QueueController implements Initializable {
 			} else {
 				// queue is full of non-emergency
 				// patients
-				// call.ManagerMessage1();
+				call.ManagerMessage1();
 
 			}
 		}
+	}
+
+	/**
+	 * a method to sort the java collections
+	 */
+	public void sortingQueue() {
+
+		Collections.sort(llist);	
 	}
 
 	/**
@@ -526,6 +442,20 @@ public class QueueController implements Initializable {
 		// Local variable
 		int count = 0;
 
+		for (int i = 0; i < llist.size(); i++) {
+			// 25 mins has passed - 1500
+			if (llist.get(i).getCountTimer() == 60) {
+				// set triage to 2 so patient
+				// can move up queue
+				llist.get(i).setTriage(2);
+			}
+			// 30 mins has passed - 1800
+			if (llist.get(i).getCountTimer() == 80) {
+				// set patient beyound
+				llist.get(i).setPatientMin(1);
+			}
+		}
+
 		// cycle through and check if 30min
 		// limit is hit by any patient
 		for (int i = 0; i < llist.size(); i++) {
@@ -535,7 +465,7 @@ public class QueueController implements Initializable {
 			}
 		}
 		if (count == 2) {
-			OnCallMessage.ManagerMessage2();
+			call.ManagerMessage2();
 		}
 	}
 
@@ -557,11 +487,12 @@ public class QueueController implements Initializable {
 				// *do nothing
 				// set bool for on call message
 				bool = true;
-			} else if ((treat.get(i).getPatient().getTriage() >= 2)
-					|| (treat.get(i).getPatient().getTriage() <= 4)) {
+			} else if ((treat.get(i).getPatient().getTriage() == 2)
+					|| (treat.get(i).getPatient().getTriage() == 3)
+					|| (treat.get(i).getPatient().getTriage() == 4)) {
 				// adjust triage priority
-				treat.get(i).getPatient().setTriage(1);
-				treat.get(i).getPatient().getTriage();
+				treat.get(i).getPatient().setTriage(2);// set as higher priority
+				//treat.get(i).getPatient().getTriage();
 				// add back to queue list
 				llist.add(treat.get(i).getPatient());
 				// set patient here to null
@@ -569,6 +500,7 @@ public class QueueController implements Initializable {
 				treat.get(i).setCountTimer(0);
 
 				// add emergency patient
+				pt.setInRoom(true);
 				treat.get(i).setPatient(pt);
 				treat.get(i).getPatient();
 				startTimer(treat.get(i));
@@ -583,10 +515,25 @@ public class QueueController implements Initializable {
 
 		// message call
 		if (bool = true) {
-			// call message for on call team
+			// call message for queue full
 			OnCallMessage.OnCallTeamMessage();
 			onCallTeam.setPatient(pt);
 		}
+	}
+
+	/**
+	 * a method to extend the time of a patient in a treatment room
+	 */
+	public void extensionOfTime() {
+		// Local variable
+		int resetTime = 30;
+
+		// get the patient in chosen treatment
+		// room and extend treat timer
+		int num = Integer.parseInt((String) treatNumTime.getValue());
+		num--; // remove 1 as dealing with an array
+
+		startTimer(treat.get(num));
 	}
 
 }// ************************end of class**********************

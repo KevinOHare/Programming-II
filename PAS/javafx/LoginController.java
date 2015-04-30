@@ -316,7 +316,7 @@ public class LoginController extends Application implements Initializable {
 			e.printStackTrace();
 		}
 		Stage primaryStage = new Stage();
-		Scene scene = new Scene(root, 1400, 684);
+		Scene scene = new Scene(root, 480, 380);
 		primaryStage.setTitle("Queue Page");
 		primaryStage.setScene(scene);
 		primaryStage.show();
