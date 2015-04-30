@@ -381,6 +381,8 @@ public class ReceptionLayoutController implements Initializable {
 		// assign strings for the Triage table
 		// nhsPass = id.setText();
 
+		// nhsPass = id.getText();
+
 		firstNamePass = tt.setFirstName("Unknown Female");
 		lastNamePass = tt.setLastName("Unknown Female");
 		allergyPass = tt.setAllergy("Unknown");
