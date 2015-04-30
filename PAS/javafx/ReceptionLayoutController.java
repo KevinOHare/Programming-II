@@ -135,6 +135,8 @@ public class ReceptionLayoutController implements Initializable {
 	// CREATE TABLE
 
 	ReceptionLayoutTable rt = new ReceptionLayoutTable();
+	TriageTable tt = new TriageTable();
+
 
 	ObservableList<ReceptionLayoutTable> data = FXCollections
 			.observableArrayList();
@@ -274,5 +276,46 @@ public class ReceptionLayoutController implements Initializable {
 		tableID.setItems(data);
 
 	}
+	
+	@FXML
+	private void handleButtonAUM(ActionEvent event) throws IOException {
+		// assign strings for the Triage table
+		//nhsPass = id.getText();
+		firstNamePass = tt.setFirstName("Unknown Male");
+		lastNamePass = tt.setLastName("Unknown Male");
+		allergyPass = tt.setAllergy("Unknown");
 
+		// check if the search has produced a result
+			// open new window centred
+			Parent root = FXMLLoader
+					.load(getClass().getResource("Triage.fxml"));
+			Scene scene = new Scene(root, 500, 400);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene()
+					.getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Triage Screen");
+			stage.centerOnScreen();
+			stage.show();			
+		}
+	
+	@FXML
+	private void handleButtonAUF(ActionEvent event) throws IOException {
+		// assign strings for the Triage table
+		//nhsPass = id.getText();
+		firstNamePass = tt.setFirstName("Unknown Female");
+		lastNamePass = tt.setLastName("Unknown Female");
+		allergyPass = tt.setAllergy("Unknown");
+
+		// check if the search has produced a result
+			// open new window centred
+			Parent root = FXMLLoader
+					.load(getClass().getResource("Triage.fxml"));
+			Scene scene = new Scene(root, 500, 400);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene()
+					.getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Triage Screen");
+			stage.centerOnScreen();
+			stage.show();			
+		}
 }

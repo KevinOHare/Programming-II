@@ -53,9 +53,9 @@
                </font>
             </Label>
             <Label fx:id="labelAUM" layoutX="23.0" layoutY="40.0" text="Add unknown MALE directly to triage" />
-            <Button fx:id="bttnAUM" layoutX="23.0" layoutY="64.0" mnemonicParsing="false" text="Add Unknown Male" />
+            <Button fx:id="bttnAUM" layoutX="23.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleButtonAUM" text="Add Unknown Male" />
             <Label fx:id="labelAUF" layoutX="23.0" layoutY="110.0" text="Add unknown FEMALE directly to triage" />
-            <Button fx:id="bttnAUF" layoutX="23.0" layoutY="134.0" mnemonicParsing="false" text="Add Unknown Female" />
+            <Button fx:id="bttnAUF" layoutX="23.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleButtonAUF" text="Add Unknown Female" />
          </children>
       </Pane>
       <Label fx:id="labelQM1" layoutX="611.0" layoutY="175.0" text="?">

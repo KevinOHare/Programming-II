@@ -69,9 +69,10 @@ public class ReceptionLayoutTable {
 	/**
 	 * set first name
 	 * @param firstName
+	 * @return 
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public String setFirstName(String firstName) {
+		return this.firstName = firstName;
 	}
 
 	/**
@@ -85,9 +86,10 @@ public class ReceptionLayoutTable {
 	/**
 	 * set last name
 	 * @param lastName
+	 * @return 
 	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public String setLastName(String lastName) {
+		return this.lastName = lastName;
 	}
 
 	/**
