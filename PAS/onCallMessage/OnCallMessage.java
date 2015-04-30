@@ -1,7 +1,10 @@
 package onCallMessage;
 
-// See HOW TO document to get this code working on your machine
+//See HOW TO document to get this code working on your machine
 //everyone will need to download twilio jar 
+/**
+ * To send automated text messages to the hospital's manger and on call team in emergency situations
+ */
  
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
@@ -42,13 +45,18 @@ public class OnCallMessage {
 		 Message message = messageFactory.create(params); 
 		 System.out.println(message.getSid()); 
 	 } 
-	 
+	 /**
+	  * sends hospital manager message when all treatment rooms and on call team are engaged
+	  * @throws TwilioRestException
+	  */
 	 public static void ManagerMessage1() throws TwilioRestException {
 		 
 		 TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
 		 
 		 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
-		 params.add(new BasicNameValuePair("Body", "Emergency Alert! The Accident and Emergency Queue is full."));
+		 params.add(new BasicNameValuePair("Body", "Emergency Alert! All A&E Department treatment rooms &"
+		 		+ " on call team are occupied with patients in emergency condition. New emergency patients are now being directed "
+		 		+ "to other hospitals"));
 		 //staff numbers message sent to
 		 params.add(new BasicNameValuePair("To", "+447543635708"));
 		 //twilio number used to send message
@@ -59,13 +67,18 @@ public class OnCallMessage {
 		 System.out.println(message.getSid()); 
 	 } 
 	 
+	 /**
+	  * Sends a message to the hospital manager when 3 or more patients have been waiting in the queue
+	  * for over 30 minutes
+	  * @throws TwilioRestException
+	  */
  public static void ManagerMessage2() throws TwilioRestException {
 		 
 		 TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
 		 
 		 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
 		 params.add(new BasicNameValuePair("Body", "Emergency Alert! Patient Waiting Times in Accident and Emergency "
-		 		+ "& Department are exceding 30 minutes."));
+		 		+ "Department are exceding 30 minutes."));
 		 //message sent to staff
 		 params.add(new BasicNameValuePair("To", "+447543635708")); //this is your phone number
 		 //twilio number used to send message

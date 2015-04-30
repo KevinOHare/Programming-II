@@ -46,7 +46,7 @@
         <Font name="System Bold" size="14.0" />
       </font>
     </Text>
-    <Button layoutX="363.0" layoutY="613.0" mnemonicParsing="false" onAction="#handleActionNewPage" prefHeight="26.0" prefWidth="97.0" text="Add to Triage" />
+    <Button layoutX="363.0" layoutY="613.0" mnemonicParsing="false" onAction="#handleActionNewPage" prefHeight="26.0" prefWidth="115.0" text="Add to Triage" />
     <Button layoutX="363.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleButtonAction" prefWidth="97.0" text="Search" />
       <Label fx:id="searchValidation" layoutX="158.0" layoutY="250.0" prefHeight="16.0" prefWidth="182.0" />
   </children>
