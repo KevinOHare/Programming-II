@@ -1,11 +1,3 @@
-/.metadata/
-/.project
-/.DS_Store
-/.checkstyle
-/.classpath
 /NHSsystem/
-/TestingQueue/
 /database/
 /javafx/
-/onCallMessage/
-/queue/

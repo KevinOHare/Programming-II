@@ -96,28 +96,28 @@
       <TextArea fx:id="searchDisplay" layoutX="52.0" layoutY="492.0" prefHeight="127.0" prefWidth="359.0" />
       <Label fx:id="labelEditTri" layoutX="411.0" layoutY="109.0" text="?">
       <tooltip>
-            <Tooltip autoHide="true" text="Used to edit the triage of a paitent" textAlignment="JUSTIFY" wrapText="true" />
+            <Tooltip autoHide="true" text="Used to edit the triage of a patient" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
             <Font name="Kokila Bold" size="23.0" />
          </font></Label>
       <Label fx:id="labelAssignRm" layoutX="412.0" layoutY="201.0" text="?">
       <tooltip>
-            <Tooltip autoHide="true" text="Assigns a paitent to treatment room" textAlignment="JUSTIFY" wrapText="true" />
+            <Tooltip autoHide="true" text="Assigns a patient to treatment room" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
             <Font name="Kokila Bold" size="23.0" />
          </font></Label>
       <Label fx:id="labelExtTime" layoutX="412.0" layoutY="295.0" text="?">
       <tooltip>
-            <Tooltip autoHide="true" text="Extendends the time spent by the paitent in the treatment room" textAlignment="JUSTIFY" wrapText="true" />
+            <Tooltip autoHide="true" text="Extends the time spent by the patient in the treatment room" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
             <Font name="Kokila Bold" size="23.0" />
          </font></Label>
       <Label fx:id="labelSearch" layoutX="412.0" layoutY="439.0" text="?">
       <tooltip>
-            <Tooltip autoHide="true" text="Searches for paitents" textAlignment="JUSTIFY" wrapText="true" />
+            <Tooltip autoHide="true" text="Searches for patients" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
             <Font name="Kokila Bold" size="23.0" />
