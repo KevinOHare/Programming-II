@@ -1,7 +1,5 @@
 package onCallMessage;
 
-//See HOW TO document to get this code working on your machine
-//everyone will need to download twilio jar 
 /**
  * To send automated text messages to the hospital's manger and on call team in emergency situations
  */
@@ -24,9 +22,7 @@ import java.util.List;
  *
  */
 public class OnCallMessage {
-
-	// Find your Account Sid and Token at twilio.com/user/account - copy and
-	// paste the two here
+	
 	/**
 	 * Constant String for the account_sid from Twilio account
 	 */
@@ -102,22 +98,8 @@ public class OnCallMessage {
 				"Emergency Alert! Patient Waiting Times in Accident and Emergency "
 						+ "Department are exceding 30 minutes."));
 		// message sent to staff
-		params.add(new BasicNameValuePair("To", "+447543635708")); // this is
-																	// your
-																	// phone
-																	// number
-		// twilio number used to send message
-		params.add(new BasicNameValuePair("From", "+441633901163")); // this is
-																		// a
-																		// number
-																		// twilio
-																		// provides
-																		// - see
-																		// note
-																		// in
-																		// word
-																		// file
-
+		params.add(new BasicNameValuePair("To", "+447543635708"));
+		params.add(new BasicNameValuePair("From", "+441633901163")); 
 		MessageFactory messageFactory = client.getAccount().getMessageFactory();
 		Message message = messageFactory.create(params);
 		System.out.println(message.getSid());

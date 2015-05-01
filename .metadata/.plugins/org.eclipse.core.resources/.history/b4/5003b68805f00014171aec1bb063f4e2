@@ -1,0 +1,91 @@
+/**
+ * 
+ */
+package NHSsystem;
+
+/**
+ * Class that represents the on call team
+ * 
+ * @author Jonnie Leathem
+ *
+ */
+public class OnCallTeam {
+
+	/**
+	 * The availability of the treatment room
+	 */
+	private boolean isAvailable;
+
+	/**
+	 * A count for the timer method
+	 */
+	private int countTimer;
+
+	/**
+	 * Default constructor
+	 */
+	public OnCallTeam() {
+
+	}
+
+	/**
+	 * Args based constructor
+	 * 
+	 * @param isAvailable
+	 * @param countTimer
+	 * @param patient
+	 * @param d1
+	 * @param d2
+	 * @param n1
+	 * @param n2
+	 * @param n3
+	 */
+	public OnCallTeam(boolean isAvailable, int countTimer, Patient patient,
+			Doctor d1, Doctor d2, Nurse n1, Nurse n2, Nurse n3) {
+		this.isAvailable = isAvailable;
+		this.countTimer = countTimer;
+	}
+
+	/**
+	 * Gets the availability of the on call team
+	 * @return the isAvailable
+	 */
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	/**
+	 * Sets the availability of the on call team
+	 * @param isAvailable
+	 *            the isAvailable to set
+	 */
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+
+	/**
+	 * Gets the count of the on call timer
+	 * @return the countTimer
+	 */
+	public int getCountTimer() {
+		return countTimer;
+	}
+
+	/**
+	 * Sets the count of the on call timer
+	 * @param countTimer
+	 *            the countTimer to set
+	 */
+	public void setCountTimer(int countTimer) {
+		this.countTimer = countTimer;
+	}
+
+	/**
+	 * To string method
+	 */
+	@Override
+	public String toString() {
+		return this.isAvailable + "\t\t" + "\tOn Call Team Timer: " + this.getCountTimer();
+	}
+
+}

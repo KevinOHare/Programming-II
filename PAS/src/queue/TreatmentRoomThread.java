@@ -10,6 +10,12 @@ public class TreatmentRoomThread implements Runnable {
 	TreatmentRoom treatmentRoom;
 	
 	/**
+	 * Instance variable
+	 */
+	private int startPoint;
+	
+
+	/**
 	 * Set properties to treatment room object
 	 * @param treatmentRoom
 	 */
@@ -43,5 +49,22 @@ public class TreatmentRoomThread implements Runnable {
 		
 		
 	}
+	
+	/**
+	 * getter method for start point
+	 * @return startPoint
+	 */
+	public int getStartPoint() {
+		return startPoint;
+	}
+
+	/**
+	 * setter method for start point
+	 * @param startPoint
+	 */
+	public void setStartPoint(int startPoint) {
+		this.startPoint = startPoint;
+	}
+
 
 }

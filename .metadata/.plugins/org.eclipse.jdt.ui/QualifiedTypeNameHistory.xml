@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="NHSsystem.Doctor"/>
 <fullyQualifiedTypeName name="NHSsystem.Manager"/>
 <fullyQualifiedTypeName name="NHSsystem.Nurse"/>
 <fullyQualifiedTypeName name="javafx.scene.control.Tooltip"/>
@@ -26,4 +25,5 @@
 <fullyQualifiedTypeName name="com.sun.net.httpserver.Authenticator.Failure"/>
 <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
 <fullyQualifiedTypeName name="java.lang.AssertionError"/>
+<fullyQualifiedTypeName name="NHSsystem.Doctor"/>
 </qualifiedTypeNameHistroy>
