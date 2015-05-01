@@ -228,22 +228,22 @@ public class LoginController extends Application implements Initializable {
 
 			case "reception":
 				fxmlToLoad = "ReceptionLayout.fxml";
-				fxmlHeader = "Reception Page";
+				fxmlHeader = "Reception";
 				userLoginRecept();
 				break;
 			case "triage":
 				fxmlToLoad = "Triage.fxml";
-				fxmlHeader = "Triage Page";
+				fxmlHeader = "Triage";
 				userLoginWithQueue();
 				break;
 			case "doctor":
 				fxmlToLoad = "TreatmentRoom.fxml";
-				fxmlHeader = "Treatment Room Page";
+				fxmlHeader = "Treatment Room";
 				userLoginWithQueue();
 				break;
 			case "demo":
 				fxmlToLoad = "ReceptionLayout.fxml";
-				fxmlHeader = "Reception Page";
+				fxmlHeader = "Reception";
 				userLoginAllScreens();
 				break;
 
@@ -423,7 +423,7 @@ public class LoginController extends Application implements Initializable {
 		triageStage.setScene(triageScene);
 		triageStage.setTitle("Triage");
 		triageStage.show();
-		queueStage.setResizable(false);
+		triageStage.setResizable(false);
 		triageStage.setX(620);
 		triageStage.setY(10);
 		stage.close();
@@ -446,7 +446,7 @@ public class LoginController extends Application implements Initializable {
 		doctorStage.setScene(doctorScene);
 		doctorStage.setTitle("Treatment Room");
 		doctorStage.show();
-		queueStage.setResizable(false);
+		doctorStage.setResizable(false);
 		doctorStage.setX(620);
 		doctorStage.setY(10);
 		stage.close();
