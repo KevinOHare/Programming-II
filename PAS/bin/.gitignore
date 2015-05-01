@@ -1,9 +1,13 @@
-<<<<<<< Updated upstream
-/javafx/
-/queue/
-/database/
-=======
+/.DS_Store
+/.checkstyle
+/.classpath
+/.metadata/
+/.project
+/.settings/
+/NHSsystem/
 /TestingQueue/
->>>>>>> Stashed changes
+/build.fxbuild
+/database/
+/javafx/
 /onCallMessage/
 /queue/
