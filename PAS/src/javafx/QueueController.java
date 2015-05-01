@@ -16,6 +16,8 @@ import onCallMessage.OnCallMessage;
 import queue.OnCallTeamThread;
 import queue.PatientThread;
 import queue.TreatmentRoomThread;
+import NHSsystem.Doctor;
+import NHSsystem.Nurse;
 import NHSsystem.OnCallTeam;
 import NHSsystem.Patient;
 import NHSsystem.TreatmentRoom;
@@ -141,7 +143,8 @@ public class QueueController implements Initializable {
 
 	// INSTANCE FOR ON CALL TEAM
 
-	static OnCallTeam onCallTeam = new OnCallTeam();
+	static OnCallTeam onCallTeam = new OnCallTeam(true, 0, null, Doctor.d1,
+			Doctor.d2, Nurse.n1, Nurse.n2, Nurse.n3);
 
 	// Boolean to check whether a new Patient can be added
 	// to queue
@@ -605,9 +608,20 @@ public class QueueController implements Initializable {
 
 		// message call
 		if (bool = true) {
-			// call message for queue full
-			OnCallMessage.OnCallTeamMessage();
-			onCallTeam.setPatient(pt);
+			if (onCallTeam.isAvailable() == true) {
+				// on call team message
+				OnCallMessage.OnCallTeamMessage();
+				onCallTeam.setPatient(pt);
+				onCallTeam.setAvailable(false);
+				startTimer(onCallTeam);
+			} else if (onCallTeam.isAvailable() == false) {
+				OnCallMessage.ManagerMessage1();
+			}
+			
+			if (onCallTeam.getCountTimer() == 899) {
+				onCallTeam.setPatient(null);
+				onCallTeam.setAvailable(true);
+			}
 		}
 	}
 
