@@ -49,10 +49,10 @@
       <ChoiceBox fx:id="triagePriority" layoutX="157.0" layoutY="112.0" prefHeight="26.0" prefWidth="111.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="1" />
-               <String fx:value="2" />
-               <String fx:value="3" />
-               <String fx:value="4" />
+               <String fx:value="1. Emergency" />
+               <String fx:value="2. Urgent" />
+               <String fx:value="3. Semi-Urgent " />
+               <String fx:value="4. Non-Urgent" />
             </FXCollections>
          </items>
       </ChoiceBox>
@@ -99,28 +99,28 @@
             <Tooltip autoHide="true" text="Used to edit the triage of a patient" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
-            <Font name="Kokila Bold" size="18.0" />
+            <Font name="Kokila Bold" size="23.0" />
          </font></Label>
       <Label fx:id="labelAssignRm" layoutX="412.0" layoutY="201.0" text="?">
       <tooltip>
             <Tooltip autoHide="true" text="Assigns a patient to treatment room" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
-            <Font name="Kokila Bold" size="18.0" />
+            <Font name="Kokila Bold" size="23.0" />
          </font></Label>
       <Label fx:id="labelExtTime" layoutX="412.0" layoutY="295.0" text="?">
       <tooltip>
             <Tooltip autoHide="true" text="Extends the time spent by the patient in the treatment room" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
-            <Font name="Kokila Bold" size="18.0" />
+            <Font name="Kokila Bold" size="23.0" />
          </font></Label>
       <Label fx:id="labelSearch" layoutX="412.0" layoutY="439.0" text="?">
       <tooltip>
             <Tooltip autoHide="true" text="Searches for patients" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
-            <Font name="Kokila Bold" size="18.0" />
+            <Font name="Kokila Bold" size="23.0" />
          </font></Label>
   </children>
 </Pane>

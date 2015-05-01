@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="657.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.ReceptionLayoutController">
+<AnchorPane prefHeight="684.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.ReceptionLayoutController">
   <children>
     <Text layoutX="235.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Search" wrappingWidth="157.68292617797852">
       <font>
@@ -63,14 +63,14 @@
             <Tooltip autoHide="true" text="Valid postcode includes a space e.g. BT27 6HD" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
-            <Font name="Kokila Bold" size="18.0" />
+            <Font name="Kokila Bold" size="23.0" />
          </font></Label>
       <Label fx:id="labelQM2" layoutX="610.0" layoutY="219.0" text="?">
       <tooltip>
             <Tooltip autoHide="true" text="Valid NHS Number is 10 numbers" wrapText="true" />
          </tooltip>
          <font>
-            <Font name="Kokila Bold" size="18.0" />
+            <Font name="Kokila Bold" size="23.0" />
          </font></Label>
   </children>
 </AnchorPane>
