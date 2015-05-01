@@ -1,14 +1,13 @@
 package onCallMessage;
 
 /**
- * Sends an email to the hospital manager in emergency situation
- * 
+ * Sends an email to the hospital manager in emergency situations 
  */
 
-/*  
- * everyone will need to download 2 jars for this to work
- * See word doc by Chris
- */
+ /* 
+  * everyone will need to download 2 jars for this to work
+  * See word doc Chris has put up on github
+  */
 
 import java.util.Properties;
 import javax.mail.Message;
@@ -32,7 +31,7 @@ public class Email{
 	public static void sendEmail1(){
  
 		//email address that is sending message
-		//its set to a google account anyone can access
+		//its currently set to a google account we can all access
 		final String username = "hostipalmanager@gmail.com";
 		//password of email account sending message
 		final String password = "hospital12";
@@ -54,7 +53,7 @@ public class Email{
 		try {
 			
 			Message message = new MimeMessage(session);
-			//email account that recieves message
+			//email account that receives message
 			message.setFrom(new InternetAddress("hostipalmanager@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse("hostipalmanager@gmail.com"));
@@ -66,7 +65,7 @@ public class Email{
  
 			Transport.send(message);
  
-			System.out.println("Done");
+			System.out.println("Message Sent");
  
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
@@ -82,7 +81,7 @@ public class Email{
 	public static void sendEmail2(){
 		 
 		//email address that is sending message
-		//its set to a google account anyone can access
+		//its set to a google account we can all access
 		final String username = "hostipalmanager@gmail.com";
 		//password of email account sending message
 		final String password = "hospital12";
@@ -104,7 +103,7 @@ public class Email{
 		try {
 			
 			Message message = new MimeMessage(session);
-			//email account that recieves message
+			//email account that receives message
 			message.setFrom(new InternetAddress("hostipalmanager@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse("hostipalmanager@gmail.com"));
@@ -115,7 +114,7 @@ public class Email{
  
 			Transport.send(message);
  
-			System.out.println("Done");
+			System.out.println("Message Sent");
  
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

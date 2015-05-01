@@ -1,5 +1,9 @@
 package TestingQueue.queue;
 
+/**
+ * testing queue controller class
+ */
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,6 +14,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import javafx.QueueController;
+import onCallMessage.Email;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,6 +62,8 @@ public class TestQueue {
 	Patient p11 = new Patient("Mr", "Simon", "Tim", "4 road",
 			"Lisburn", "BT67 904", "098 38563", "3759-283", 0, false);
 
+	private Object invalid;
+
 	
 	
 	@Before
@@ -98,6 +105,7 @@ public class TestQueue {
 	}
 	
 
+	//testing triage
 	@Test
 	public final void testSetTriageVaild() {
 		
@@ -113,6 +121,7 @@ public class TestQueue {
 		}
 	
 
+	//testing patients in the queue
 	@Test
 	public final void testPatientsInQuene() {
 		PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
@@ -162,6 +171,7 @@ public class TestQueue {
 		assertNotNull(pQueue);
 	}
 	
+	//testing treatment time
 	@Test
 	public final void TreatmentTime() {
 		
@@ -212,18 +222,10 @@ public class TestQueue {
 	public void testQueuePlacement() {
 
 		PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
-
-		//LinkedList<TreatmentRoom> treat = new LinkedList<TreatmentRoom>();
-		//QueueController q = new QueueController();
-		
-		//TreatmentRoom roomOne = new TreatmentRoom(1, true);
 		
 		p1.setTriage(3);
-		
 		p2.setTriage(1);
-		
 		p3.setTriage(2);
-		
 		p4.setTriage(4);
 		
 		pQueue.add(p1);
@@ -244,7 +246,7 @@ public class TestQueue {
 	
 	}
 	
-	//test romm is valid
+	//test room is valid
 	@Test
 		public void testsetRoomValid(){
 		
@@ -277,6 +279,8 @@ public class TestQueue {
 			
 		}
 	
+	
+	//test room invalid
 	@Test
 	public void testsetRoomInvalid(){
 		
@@ -336,61 +340,4 @@ public class TestQueue {
 		assertEquals(expected,actual);
 		
 	}
-	//
-	@Test(expected = IllegalArgumentException.class)
-	public void queueUpperBoundaryInValid() throws TwilioRestException{
-	
-		//PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
-		
-		p1.setTriage(4);
-		p2.setTriage(4);
-		p3.setTriage(4);
-		p4.setTriage(4);
-		p5.setTriage(4);
-		p6.setTriage(4);
-		p7.setTriage(4);
-		p8.setTriage(4);
-		p9.setTriage(4);
-		p10.setTriage(4);
-		p11.setTriage(4);
-		
-		
-	/**	pQueue.add(p1);
-		pQueue.add(p2);
-		pQueue.add(p3);
-		pQueue.add(p4);
-		pQueue.add(p5);
-		pQueue.add(p6);
-		pQueue.add(p7);
-		pQueue.add(p8);
-		pQueue.add(p9);
-		pQueue.add(p10);
-		pQueue.add(p11); */
-		
-		/*int expected = 11;
-		int actual = pQueue.size();
-		assertEquals(expected, actual);
-		System.out.println(pQueue.size()); */
-		
-		LinkedList<Patient> llist = new LinkedList<Patient>();
-		
-		int invalid = 11;
-		
-			llist.add(p1);
-			llist.add(p2);
-			llist.add(p3);
-			llist.add(p4);
-			llist.add(p5);
-			llist.add(p6);
-			llist.add(p7);
-			llist.add(p8);
-			llist.add(p9);
-			llist.add(p10);
-			llist.add(p11);
-
-			
-			assertEquals(invalid, llist.size());
-		}
-		
-		
 	}
