@@ -65,12 +65,13 @@ public class JDBC {
 			stmt = conn.createStatement();
 			String sql1;
 
-			// Passed in values being applied to SQL query
+			// Passed in values with whitespace and 's removed
 			String firstNamedb = firstName.replaceAll(" ", "");
 			String surNamedb = lastName.replaceAll(" ", "").replaceAll("'", "");
 			String postcodedb = postcode.replaceAll(" ", "");
 			String IDdb = id;
 
+			// REPLACE removes whitespace and 's
 			sql1 = "SELECT * FROM patient WHERE REPLACE (first_name,' ','') = '"
 					+ firstNamedb
 					+ "' and REPLACE(REPLACE(last_name, '''', ''),' ','') = '"

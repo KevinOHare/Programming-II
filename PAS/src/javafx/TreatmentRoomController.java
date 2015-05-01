@@ -152,11 +152,6 @@ public class TreatmentRoomController implements Initializable {
 			String treatmentDetailsString = treatmentDetailsText.getText()
 					.toString();
 
-			// test message
-			System.out.println("input vars set");
-
-			// test message
-			System.out.println("About to set command");
 			// *** Assign values to mysql insert***
 			String insertCommand = "INSERT INTO treatment_log (NHS,Started,Finished,Duration,Details) VALUES ( '"
 					+ NHS_Number
@@ -168,7 +163,6 @@ public class TreatmentRoomController implements Initializable {
 					+ appointmentDuration
 					+ "','"
 					+ treatmentDetailsString + "')";
-			System.out.println("command set");
 
 			// command executed
 			stmt.executeUpdate(insertCommand);
@@ -201,7 +195,7 @@ public class TreatmentRoomController implements Initializable {
 			}
 		}
 
-		// set the texts to blank
+		// set the labels to blank
 		firstNameText.setText("");
 		surnameText.setText("");
 		bloodTypeText.setText("");
