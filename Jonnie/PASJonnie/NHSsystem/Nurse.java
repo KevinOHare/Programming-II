@@ -39,11 +39,11 @@ public class Nurse extends Staff {
 
 	// INSTANCES OF NURSES
 
-	public Nurse n1 = new Nurse("Ms.", "Josephina", "Barton",
+	public static Nurse n1 = new Nurse("Ms.", "Josephina", "Barton",
 			"2A Manderson Street", "Belfast", "BT4 1TR", "02838348854", 20);
-	public Nurse n2 = new Nurse("Mr.", "James", "McEvoy", "13 Aston Gardens",
+	public static Nurse n2 = new Nurse("Mr.", "James", "McEvoy", "13 Aston Gardens",
 			"Belfast", "BT4 3FS", "02838347665", 21);
-	public Nurse n3 = new Nurse("Ms.", "Roberta", "McGregor",
+	public static Nurse n3 = new Nurse("Ms.", "Roberta", "McGregor",
 			"15 Aston Gardens", "Belfast", "BT4 3FS", "02838342355", 22);
 
 }

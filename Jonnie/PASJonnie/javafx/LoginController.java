@@ -30,29 +30,30 @@ import javafx.stage.Stage;
 
 /**
  * Class that allows a valid user to be able to login to PAS
+ * 
  * @author chrismcclune
  *
  */
 public class LoginController extends Application implements Initializable {
 
 	/**
-	 * Label Object for the Login 
+	 * Label Object for the Login
 	 */
 	@FXML
 	private Label loginLabel;
-	
+
 	/**
-	 * TextField object for the username 
+	 * TextField object for the username
 	 */
 	@FXML
 	private TextField fieldUsername;
-	
+
 	/**
 	 * TextField object for the password
 	 */
 	@FXML
 	private PasswordField fieldPassword;
-	
+
 	/**
 	 * Button object for the login screen
 	 */
@@ -65,7 +66,7 @@ public class LoginController extends Application implements Initializable {
 	 * JDBC driver name and database URL
 	 */
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	
+
 	/**
 	 * URL of database connection
 	 */
@@ -85,17 +86,22 @@ public class LoginController extends Application implements Initializable {
 	 * Constant to be used with the valid admin's username
 	 */
 	static final String validAdminUsername = "admin";
-	
+
 	/**
 	 * Constant to be used with the valid Triage Nurse's username
 	 */
 	static final String validTriageUsername = "triage";
-	
+
 	/**
 	 * Constant to be used with the valid doctor's username
 	 */
 	static final String validDoctorUsername = "doctor";
-	
+
+	/**
+	 * Constant to be use with the valid demo username
+	 */
+	static final String validDemoUsername = "demo";
+
 	/**
 	 * Constant to be used with the valid password
 	 */
@@ -108,6 +114,7 @@ public class LoginController extends Application implements Initializable {
 
 	/**
 	 * Method to display the Java FX windows
+	 * 
 	 * @param event
 	 * @throws Exception
 	 */
@@ -115,8 +122,8 @@ public class LoginController extends Application implements Initializable {
 	}
 
 	/**
-	 * Method called by FXMLLoader upon initialization
-	 * Overrides initialise in super class
+	 * Method called by FXMLLoader upon initialization Overrides initialise in
+	 * super class
 	 */
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -133,7 +140,8 @@ public class LoginController extends Application implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 				validateLogin();
-				// if valid details are entered then check details against database username/password
+				// if valid details are entered then check details against
+				// database username/password
 				while (validationCheck == true) {
 					attemptLogin();
 					// reset validation for next login
@@ -150,7 +158,8 @@ public class LoginController extends Application implements Initializable {
 			public void handle(KeyEvent ke) {
 				if (ke.getCode().equals(KeyCode.ENTER)) {
 					validateLogin();
-					// if valid details are entered then check details against database username/password
+					// if valid details are entered then check details against
+					// database username/password
 					while (validationCheck == true) {
 						attemptLogin();
 						// reset validation for next login
@@ -162,7 +171,7 @@ public class LoginController extends Application implements Initializable {
 	}
 
 	/**
-	 * Method to connect to the Username / Password Database 
+	 * Method to connect to the Username / Password Database
 	 */
 	public void attemptLogin() {
 
@@ -183,7 +192,7 @@ public class LoginController extends Application implements Initializable {
 
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();
-			
+
 			// *** Assign values to mysql insert***
 			findPassword = "SELECT password FROM login_details WHERE username = \""
 					+ fieldUsername.getText().toString() + "\";";
@@ -219,18 +228,23 @@ public class LoginController extends Application implements Initializable {
 
 			case "reception":
 				fxmlToLoad = "ReceptionLayout.fxml";
-				fxmlHeader = "Reception Page";
-				userLogin();
+				fxmlHeader = "Reception";
+				userLoginRecept();
 				break;
 			case "triage":
 				fxmlToLoad = "Triage.fxml";
-				fxmlHeader = "Triage Page";
-				userLogin();
+				fxmlHeader = "Triage";
+				userLoginWithQueue();
 				break;
 			case "doctor":
 				fxmlToLoad = "TreatmentRoom.fxml";
-				fxmlHeader = "Treatment Room Page";
-				userLogin();
+				fxmlHeader = "Treatment Room";
+				userLoginWithQueue();
+				break;
+			case "demo":
+				fxmlToLoad = "ReceptionLayout.fxml";
+				fxmlHeader = "Reception";
+				userLoginAllScreens();
 				break;
 
 			}
@@ -268,11 +282,14 @@ public class LoginController extends Application implements Initializable {
 	 * Method to validate the login details provided by user
 	 */
 	public void validateLogin() {
-		// if username is either 'admin'/'triage'/'doctor' AND password is 'password'
+		// if username is either 'admin'/'triage'/'doctor' AND password is
+		// 'password'
 		if ((fieldUsername.getText().equalsIgnoreCase(validAdminUsername)
 				|| fieldUsername.getText()
-						.equalsIgnoreCase(validTriageUsername) || fieldUsername
-				.getText().equalsIgnoreCase(validDoctorUsername))
+						.equalsIgnoreCase(validTriageUsername)
+				|| fieldUsername.getText()
+						.equalsIgnoreCase(validDoctorUsername) || fieldUsername
+				.getText().equalsIgnoreCase(validDemoUsername))
 				&& (fieldPassword.getText().equalsIgnoreCase(validPassword))) {
 			// set validation boolean to true
 			validationCheck = true;
@@ -284,45 +301,183 @@ public class LoginController extends Application implements Initializable {
 	}
 
 	/**
-	 * Method to set Java FX login
+	 * Method to set Java FX login for reception screen only
 	 */
-	public void userLogin() {
+	public void userLoginRecept() {
 
 		Parent root = null;
-		Stage anotherStage = new Stage();
-
 		try {
-			root = FXMLLoader
-					.load(getClass().getResource("/javafx/Queue.fxml"));
+			root = FXMLLoader.load(getClass().getResource(fxmlToLoad));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Stage primaryStage = new Stage();
-		Scene scene = new Scene(root, 1400, 684);
-		primaryStage.setTitle("Queue Page");
+		Scene scene = new Scene(root);
+		primaryStage.setTitle(fxmlHeader);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		primaryStage.setResizable(false);
 		Stage stage = (Stage) myButton.getScene().getWindow();
-
-		// FXML for second stage
-		Parent anotherRoot = null;
-		try {
-			anotherRoot = FXMLLoader.load(getClass().getResource(fxmlToLoad));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Scene anotherScene = new Scene(anotherRoot);
-		anotherStage.setScene(anotherScene);
-		anotherStage.setTitle(fxmlHeader);
-		anotherStage.show();
 		stage.close();
-
 		// set icon of the application
 		Image applicationIcon = new Image(getClass().getResourceAsStream(
 				"PASicon.png"));
 		primaryStage.getIcons().add(applicationIcon);
+	}
+
+	/**
+	 * Method to set Java FX login for triage and doctor including queue
+	 */
+	public void userLoginWithQueue() {
+
+		Parent root = null;
+		Stage queueStage = new Stage();
+
+		try {
+			root = FXMLLoader.load(getClass().getResource(fxmlToLoad));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Stage primaryStage = new Stage();
+		Scene scene = new Scene(root);
+		primaryStage.setTitle(fxmlHeader);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		primaryStage.setResizable(false);
+		primaryStage.setX(620);
+		primaryStage.setY(10);
+		Stage stage = (Stage) myButton.getScene().getWindow();
+		stage.close();
+		// set icon of the application
+		Image applicationIcon = new Image(getClass().getResourceAsStream(
+				"PASicon.png"));
+		primaryStage.getIcons().add(applicationIcon);
+
+		// FXML for Queue stage
+		Parent queueRoot = null;
+		try {
+			queueRoot = FXMLLoader.load(getClass().getResource("Queue.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene queueScene = new Scene(queueRoot);
+		queueStage.setScene(queueScene);
+		queueStage.setTitle("Queue");
+		queueStage.show();
+		queueStage.setResizable(false);
+		queueStage.setX(120);
+		queueStage.setY(10);
+		stage.close();
+
+		// set icon of the application
+		Image applicationIconQueue = new Image(getClass().getResourceAsStream(
+				"PASicon.png"));
+		queueStage.getIcons().add(applicationIcon);
+
+	}
+
+	/**
+	 * Method to set Java FX login to open all screens for demo purposes
+	 */
+	public void userLoginAllScreens() {
+
+		Parent root = null;
+		Stage doctorStage = new Stage();
+		Stage triageStage = new Stage();
+		Stage queueStage = new Stage();
+
+		try {
+			root = FXMLLoader.load(getClass().getResource(fxmlToLoad));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Stage primaryStage = new Stage();
+		Scene scene = new Scene(root);
+		primaryStage.setTitle(fxmlHeader);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		primaryStage.setResizable(false);
+		primaryStage.setX(620);
+		primaryStage.setY(10);
+		Stage stage = (Stage) myButton.getScene().getWindow();
+		stage.close();
+		// set icon of the application
+		Image applicationIcon = new Image(getClass().getResourceAsStream(
+				"PASicon.png"));
+		primaryStage.getIcons().add(applicationIcon);
+
+		// FXML for Triage stage
+		Parent triageRoot = null;
+
+		try {
+			triageRoot = FXMLLoader.load(getClass().getResource("Triage.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene triageScene = new Scene(triageRoot);
+		triageStage.setScene(triageScene);
+		triageStage.setTitle("Triage");
+		triageStage.show();
+		triageStage.setResizable(false);
+		triageStage.setX(620);
+		triageStage.setY(10);
+		stage.close();
+
+		// set icon of the application
+		Image applicationIconTriage = new Image(getClass().getResourceAsStream(
+				"PASicon.png"));
+		triageStage.getIcons().add(applicationIcon);
+
+		// FXML for Doctor stage
+		Parent doctorRoot = null;
+		try {
+			doctorRoot = FXMLLoader.load(getClass().getResource(
+					"TreatmentRoom.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene doctorScene = new Scene(doctorRoot);
+		doctorStage.setScene(doctorScene);
+		doctorStage.setTitle("Treatment Room");
+		doctorStage.show();
+		doctorStage.setResizable(false);
+		doctorStage.setX(620);
+		doctorStage.setY(10);
+		stage.close();
+
+		// set icon of the application
+		Image applicationIconDoctor = new Image(getClass().getResourceAsStream(
+				"PASicon.png"));
+		doctorStage.getIcons().add(applicationIcon);
+
+		// FXML for Queue stage
+		Parent queueRoot = null;
+
+		try {
+			queueRoot = FXMLLoader.load(getClass().getResource("Queue.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene queueScene = new Scene(queueRoot);
+		queueStage.setScene(queueScene);
+		queueStage.setTitle("Queue");
+		queueStage.show();
+		queueStage.setResizable(false);
+		queueStage.setX(120);
+		queueStage.setY(10);
+		stage.close();
+
+		// set icon of the application
+		Image applicationIconQueue = new Image(getClass().getResourceAsStream(
+				"PASicon.png"));
+		queueStage.getIcons().add(applicationIcon);
 
 	}
 

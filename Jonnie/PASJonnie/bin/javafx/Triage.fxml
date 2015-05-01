@@ -8,9 +8,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="369.9609375" prefWidth="505.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.TriageController">
+<AnchorPane prefHeight="431.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.TriageController">
   <children>
-    <TableView fx:id="tableID" layoutX="26.0" prefHeight="162.0" prefWidth="451.0" AnchorPane.topAnchor="124.0">
+    <TableView fx:id="tableID" layoutX="41.0" layoutY="138.0" prefHeight="179.0" prefWidth="523.0" AnchorPane.topAnchor="138.0">
       <columnResizePolicy>
         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
       </columnResizePolicy>
@@ -22,13 +22,13 @@
         <TableColumn fx:id="tableCondition" prefWidth="101.0" text="Condition" />
       </columns>
     </TableView>
-    <Label layoutX="27.0" layoutY="34.0" prefHeight="73.0" prefWidth="390.0" text="Triage Assignment System">
+    <Label layoutX="129.0" layoutY="14.0" prefHeight="73.0" prefWidth="345.0" text="Triage Assignment System">
       <font>
         <Font size="29.0" />
       </font>
     </Label>
-    <Button layoutX="388.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleButtonTransfer" prefHeight="25.0" prefWidth="60.0" text="Save" />
-    <ChoiceBox fx:id="box" layoutX="27.0" layoutY="309.0" prefHeight="25.0" prefWidth="158.0">
+    <Button layoutX="272.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonTransfer" prefHeight="25.0" prefWidth="60.0" text="Save" />
+    <ChoiceBox fx:id="box" layoutX="41.0" layoutY="97.0" prefHeight="25.0" prefWidth="158.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="1. Emergency" />
@@ -38,7 +38,7 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <Button layoutX="193.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="60.0" text="Enter" />
-      <Button layoutX="313.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleButtonBack" prefHeight="25.0" prefWidth="60.0" text="Back" />
+    <Button layoutX="220.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="60.0" text="Enter" />
+      <Button layoutX="245.0" layoutY="374.0" mnemonicParsing="false" onAction="#handleButtonBack" prefHeight="25.0" prefWidth="116.0" text="Return To Queue" />
   </children>
 </AnchorPane>

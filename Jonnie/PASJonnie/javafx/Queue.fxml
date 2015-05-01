@@ -8,15 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="700" maxWidth="1400" minHeight="254.0" minWidth="446.0" prefHeight="349.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.QueueController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.QueueController">
   <children>
-    <Label layoutX="24.0" layoutY="8.0" prefHeight="63.0" prefWidth="202.0" text="Queue System">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="WHITE" focusTraversable="true" height="73.0" layoutX="34.0" layoutY="80.0" opacity="0.08" stroke="BLACK" strokeType="INSIDE" width="394.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="WHITE" focusTraversable="true" height="80.0" layoutX="34.0" layoutY="168.0" opacity="0.08" stroke="BLACK" strokeType="INSIDE" width="394.0" />
+    <Label layoutX="147.0" layoutY="14.0" prefHeight="63.0" prefWidth="202.0" text="Queue System">
       <font>
         <Font name="System Bold" size="27.0" />
       </font>
     </Label>
-    <Button layoutX="287.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleButtonTriage" prefHeight="26.0" prefWidth="105.0" text="Edit Triage" />
-    <ChoiceBox fx:id="triageListNum" layoutX="52.0" layoutY="102.0" prefHeight="25.0" prefWidth="65.0">
+    <Button layoutX="301.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleButtonTriage" prefHeight="26.0" prefWidth="105.0" text="Edit Triage" />
+    <ChoiceBox fx:id="triageListNum" layoutX="53.0" layoutY="112.0" prefHeight="25.0" prefWidth="65.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="1" />
@@ -32,8 +34,8 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <Button layoutX="263.0" layoutY="194.0" mnemonicParsing="false" onAction="#handleButtonTreat" prefWidth="129.0" text="Assign Room" />
-    <ChoiceBox fx:id="treatBox" layoutX="117.0" layoutY="194.0" prefWidth="65.0">
+    <Button layoutX="301.0" layoutY="204.0" mnemonicParsing="false" onAction="#handleButtonTreat" prefHeight="26.0" prefWidth="105.0" text="Assign Room" />
+    <ChoiceBox fx:id="treatBox" layoutX="53.0" layoutY="204.0" prefWidth="65.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="1" />
@@ -44,23 +46,21 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-      <ChoiceBox fx:id="triagePriority" layoutX="157.0" layoutY="102.0" prefHeight="26.0" prefWidth="111.0">
+      <ChoiceBox fx:id="triagePriority" layoutX="157.0" layoutY="112.0" prefHeight="26.0" prefWidth="111.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="1. Emergency" />
-               <String fx:value="2. Urgent" />
-               <String fx:value="3. Semi-Urgent " />
-               <String fx:value="4. Non-Urgent" />
+               <String fx:value="1" />
+               <String fx:value="2" />
+               <String fx:value="3" />
+               <String fx:value="4" />
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Label layoutX="44.0" layoutY="79.0" text="Queue Position" />
-      <Label layoutX="156.0" layoutY="79.0" text="New Triage Priority" />
-      <Label layoutX="88.0" layoutY="169.0" text="Treatment Room Number" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="WHITE" focusTraversable="true" height="73.0" layoutX="28.0" layoutY="70.0" opacity="0.08" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="WHITE" focusTraversable="true" height="80.0" layoutX="28.0" layoutY="158.0" opacity="0.08" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="WHITE" focusTraversable="true" height="80.0" layoutX="28.0" layoutY="252.0" opacity="0.08" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-      <ChoiceBox fx:id="treatNumTime" layoutX="117.0" layoutY="288.0" prefWidth="65.0">
+      <Label layoutX="53.0" layoutY="89.0" text="Queue Position" />
+      <Label layoutX="158.0" layoutY="89.0" text="New Triage Priority" />
+      <Label layoutX="53.0" layoutY="181.0" text="Treatment Room Number" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="WHITE" focusTraversable="true" height="80.0" layoutX="34.0" layoutY="262.0" opacity="0.08" stroke="BLACK" strokeType="INSIDE" width="394.0" />
+      <ChoiceBox fx:id="treatNumTime" layoutX="53.0" layoutY="298.0" prefWidth="65.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="1" />
@@ -71,7 +71,56 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Label layoutX="89.0" layoutY="264.0" text="Treatment Room Number" />
-      <Button layoutX="263.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleButtonTreatTimerEx" prefWidth="129.0" text="Extension Time" />
+      <Label layoutX="53.0" layoutY="275.0" text="Treatment Room Number" />
+      <Button layoutX="306.0" layoutY="298.0" mnemonicParsing="false" onAction="#handleButtonTreatTimerEx" prefHeight="25.0" prefWidth="101.0" text="Extension Time" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="WHITE" focusTraversable="true" height="267.0" layoutX="34.0" layoutY="369.0" opacity="0.08" stroke="BLACK" strokeType="INSIDE" width="394.0" />
+      <ChoiceBox fx:id="searchTriage" layoutX="53.0" layoutY="403.0" prefHeight="25.0" prefWidth="63.0">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="1" />
+               <String fx:value="2" />
+               <String fx:value="3" />
+               <String fx:value="4" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <TextField fx:id="searchFirst" layoutX="134.0" layoutY="403.0" prefHeight="25.0" prefWidth="122.0" promptText="First Name" />
+      <TextField fx:id="searchNhs" layoutX="281.0" layoutY="403.0" prefHeight="25.0" prefWidth="128.0" promptText="NHS Number" />
+      <Button layoutX="306.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleButtonSearchFunction" prefHeight="25.0" prefWidth="101.0" text="Search" />
+      <Label layoutX="53.0" layoutY="381.0" text="Triage" />
+      <Label layoutX="135.0" layoutY="381.0" text="Search Function" />
+      <Label layoutX="53.0" layoutY="467.0" text="Search Results:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextArea fx:id="searchDisplay" layoutX="52.0" layoutY="492.0" prefHeight="127.0" prefWidth="359.0" />
+      <Label fx:id="labelEditTri" layoutX="411.0" layoutY="109.0" text="?">
+      <tooltip>
+            <Tooltip autoHide="true" text="Used to edit the triage of a patient" textAlignment="JUSTIFY" wrapText="true" />
+         </tooltip>
+         <font>
+            <Font name="Kokila Bold" size="18.0" />
+         </font></Label>
+      <Label fx:id="labelAssignRm" layoutX="412.0" layoutY="201.0" text="?">
+      <tooltip>
+            <Tooltip autoHide="true" text="Assigns a patient to treatment room" textAlignment="JUSTIFY" wrapText="true" />
+         </tooltip>
+         <font>
+            <Font name="Kokila Bold" size="18.0" />
+         </font></Label>
+      <Label fx:id="labelExtTime" layoutX="412.0" layoutY="295.0" text="?">
+      <tooltip>
+            <Tooltip autoHide="true" text="Extends the time spent by the patient in the treatment room" textAlignment="JUSTIFY" wrapText="true" />
+         </tooltip>
+         <font>
+            <Font name="Kokila Bold" size="18.0" />
+         </font></Label>
+      <Label fx:id="labelSearch" layoutX="412.0" layoutY="439.0" text="?">
+      <tooltip>
+            <Tooltip autoHide="true" text="Searches for patients" textAlignment="JUSTIFY" wrapText="true" />
+         </tooltip>
+         <font>
+            <Font name="Kokila Bold" size="18.0" />
+         </font></Label>
   </children>
 </Pane>

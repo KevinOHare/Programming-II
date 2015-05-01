@@ -1,20 +1,49 @@
 package database;
 
-//STEP 1. Import required packages
+/**
+ * import resources
+ */
 import java.sql.*;
 
+/**
+ * Class used to connect to the database and search for patient details
+ * @author chrismcclune
+ *
+ */
 public class JDBC {
-	// JDBC driver name and database URL
+	
+	/**
+	 * String for the JDBC driver
+	 */
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * String for the database URL
+	 */
 	static final String DB_URL = "jdbc:mysql://web2.eeecs.qub.ac.uk/40025827";
 
-	// Database credentials
+	/**
+	 * String for the username of the database
+	 */
 	static final String USER = "40025827";
+	
+	/**
+	 * String for the password of the database
+	 */
 	static final String PASS = "UYN6542";
 	
-	// create string array
-	String[] str = new String[9];
+	/**
+	 * String array for the attributes in the database
+	 */
+	public static String[] str = new String[9];
 
+	/**
+	 * Method to connect and search the database and save patient details
+	 * @param firstName
+	 * @param lastName
+	 * @param postcode
+	 * @param id
+	 */
 	public void databaseSearch(String firstName, String lastName,
 			String postcode, String id) {
 
@@ -31,7 +60,6 @@ public class JDBC {
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
 			// STEP 4: Execute a query
-			System.out.println("Creating statement...\n");
 			stmt = conn.createStatement();
 			String sql1;
 
@@ -114,20 +142,18 @@ public class JDBC {
 					conn.close();
 			} catch (SQLException se) {
 				se.printStackTrace();
-			}// end finally try
-		}// end try
+			}
+		}
 		System.out.println("Goodbye!");
-	}// end main
+	}
 
 
 	/**
 	 * A method to return the rsets of the correct patient search
-	 * 
 	 * @return rsets
 	 */
 	public String[] rsetPrint() {
-		// local variable
 		return str;
 	}
 
-}// ************** class ************
+}

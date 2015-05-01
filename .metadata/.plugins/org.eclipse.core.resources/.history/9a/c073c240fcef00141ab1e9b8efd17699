@@ -39,9 +39,24 @@ public class QueueController implements Initializable {
 
 	// VALUES TO BE PASSED ON TO OTHER CLASSES
 
+	/**
+	 * Instance Variable for first name
+	 */
 	public static String strFirstName;
+	
+	/**
+	 * Instance Variable for last name
+	 */
 	public static String strLastName;
+	
+	/**
+	 * Instance Variable for allergy
+	 */
 	public static String strAllergy;
+	
+	/**
+	 * Instance Variable for blood type
+	 */
 	public static String strBloodType;
 
 	// FXML ID TAGS
@@ -70,6 +85,10 @@ public class QueueController implements Initializable {
 	@FXML
 	TextArea searchDisplay;
 
+	/**
+	 * button method to edit the triage category of a patient 
+	 * in the queue
+	 */
 	@FXML
 	private void handleButtonTriage() {
 		// take the entered number in the linked list for patient
@@ -82,6 +101,10 @@ public class QueueController implements Initializable {
 		llist.get(llistNum).setTriage(priNum);
 	}
 
+	/**
+	 * button method to open up the treatment room window
+	 * @throws IOException
+	 */
 	@FXML
 	private void handleButtonTreat() throws IOException {
 		// take the entered number in the linked list for treatment room
@@ -103,11 +126,19 @@ public class QueueController implements Initializable {
 		anotherStage.show();
 	}
 
+	/**
+	 * button method to call on the extension of
+	 * time method
+	 */
 	@FXML
 	private void handleButtonTreatTimerEx() {
 		extensionOfTime();
 	}
 
+	/**
+	 * button method to call the search function of the 
+	 * patient and treatment room queue
+	 */
 	@FXML
 	private void handleButtonSearchFunction() {
 		searchMethod();
@@ -115,29 +146,17 @@ public class QueueController implements Initializable {
 
 	// INSTANCES FOR PATIENT OBJECT
 
-	static ArrayList<Patient> alist = new ArrayList<Patient>();
-
 	static LinkedList<Patient> llist = new LinkedList<Patient>();
-
-	static SortedSet<Patient> sort = new TreeSet<Patient>();
-
-	static PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
-
-	public static String[] stringPa = new String[10];
 
 	// INSTANCES FOR TREATMENT ROOM OBJECT
 
 	static LinkedList<TreatmentRoom> treat = new LinkedList<TreatmentRoom>();
-
-	static TreatmentRoom[] treatAr = new TreatmentRoom[5];
 
 	static TreatmentRoom room1 = new TreatmentRoom(1, true);
 	static TreatmentRoom room2 = new TreatmentRoom(2, true);
 	static TreatmentRoom room3 = new TreatmentRoom(3, true);
 	static TreatmentRoom room4 = new TreatmentRoom(4, true);
 	static TreatmentRoom room5 = new TreatmentRoom(5, true);
-
-	public static String[] stringAr = new String[5];
 
 	// INSTANCE FOR ON CALL TEAM
 
@@ -155,12 +174,20 @@ public class QueueController implements Initializable {
 
 	// instance of OnCallMessage
 	static OnCallMessage call = new OnCallMessage();
+	
+	// static int to set up the treatment room timer
+	static int treatStart;
 
+	/**
+	 * a initialize method to populate the fxml
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		// **** Treatment Rooms ****
 
+		// adding treatment room objects to the 
+		// linked list
 		treat.add(room1);
 		treat.add(room2);
 		treat.add(room3);
@@ -170,6 +197,8 @@ public class QueueController implements Initializable {
 		// Thread run in the background to produce the queue
 		Runnable r = new Runnable() {
 			public synchronized void run() {
+				// boolQ is always set to true to keep the
+				// queue as an infinite loop
 				while (boolQ = true) {
 
 					// Local variable
@@ -300,7 +329,6 @@ public class QueueController implements Initializable {
 							// needs a treatment room
 							try {
 								removePatientFromTreat(llist.get(l));
-								llist.remove(llist.get(l));
 							} catch (TwilioRestException tre) {
 								tre.printStackTrace();
 								System.out
@@ -314,7 +342,6 @@ public class QueueController implements Initializable {
 					// with patients
 					if (treat.getFirst().getCountTimer() == 599) {
 						treat.getFirst().setAvailable(true);
-						// treat.remove(treat.getFirst().getPatient());
 						treat.getFirst().setPatient(null);
 						treat.getFirst().setCountTimer(0);
 					}
@@ -361,7 +388,7 @@ public class QueueController implements Initializable {
 					try {
 						Thread.sleep(4000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						// print stack to console
 						e.printStackTrace();
 					}
 				}
@@ -380,6 +407,7 @@ public class QueueController implements Initializable {
 		// instantiate classes to activate the
 		// start time at the queue
 		TreatmentRoomThread thr = new TreatmentRoomThread(tr);
+		thr.setStartPoint(treatStart); // set based on variable
 		Runnable r = new Runnable() {
 			public synchronized void run() {
 				thr.run();
@@ -426,6 +454,8 @@ public class QueueController implements Initializable {
 				// Instance of the Patient object
 				Patient ptq = new Patient();
 
+				// add in data passed from triage controller
+				// class
 				ptq.setNhsNumber(tc.nhsPass);
 				ptq.setTitle(tc.titlePass);
 				ptq.setFirstName(tc.firstNamePass);
@@ -457,7 +487,6 @@ public class QueueController implements Initializable {
 				// queue is full of non-emergency
 				// patients
 				OnCallMessage.AlertOnCallTeam();
-
 			}
 		}
 	}
@@ -466,7 +495,7 @@ public class QueueController implements Initializable {
 	 * a method to sort the java collections
 	 */
 	public void sortingQueue() {
-
+		// sort using the collections import
 		Collections.sort(llist);
 	}
 
@@ -506,7 +535,7 @@ public class QueueController implements Initializable {
 
 		System.out.println("*********** Status Code *****************");
 		// print out the status code
-		System.out.println("Waititng time status code: " + status);
+		System.out.println("Waiting time status code: " + status);
 		if (status == 4) {
 			System.out.println("**Queue is Full**");
 		}
@@ -521,7 +550,7 @@ public class QueueController implements Initializable {
 	public void checkQueueTimerLimit() throws TwilioRestException {
 		// Local variable
 		int count = 0;
-
+		// cycle through the queue
 		for (int i = 0; i < llist.size(); i++) {
 			// 25 mins has passed - 1500milsec
 			if (llist.get(i).getCountTimer() == 1500) {
@@ -576,10 +605,12 @@ public class QueueController implements Initializable {
 					|| (treat.get(i).getPatient().getTriage() == 4)) {
 				// adjust triage priority
 				treat.get(i).getPatient().setTriage(2);// set as higher priority
-				// treat.get(i).getPatient().getTriage();
+				// set patient as not being in an room
+				treat.get(i).getPatient().setInRoom(false);
 				// add back to queue list
 				llist.add(treat.get(i).getPatient());
-				// set patient here to null
+				// set patient here to null and 
+				// count timer to 0
 				treat.get(i).setPatient(null);
 				treat.get(i).setCountTimer(0);
 
@@ -591,16 +622,9 @@ public class QueueController implements Initializable {
 
 				// set bool to not call message
 				bool = false;
-
-				break;
-				// if all treatment rooms occupied with emergency patients and
-				// on call team engaged then send patient to another hospital
-				// and send sms to manager
-			} else if ((treat.get(i).getPatient().getTriage() == 1)
-					&& (onCallTeam.getPatient() != null)) {
-				OnCallMessage.ManagerMessage1();
-			}
-			break;
+				// break out of for loop when added
+				break;	
+			} 
 		}
 
 		// message call
@@ -615,15 +639,26 @@ public class QueueController implements Initializable {
 	 * a method to extend the time of a patient in a treatment room
 	 */
 	public void extensionOfTime() {
-		// Local variable
-		int resetTime = 30;
 
 		// get the patient in chosen treatment
 		// room and extend treat timer
 		int num = Integer.parseInt((String) treatNumTime.getValue());
 		num--; // remove 1 as dealing with an array
-
-		startTimer(treat.get(num));
+		
+		// get current treatment room time and take away to extend
+		int resetTime = treat.get(num).getCountTimer()-30;
+		
+		TreatmentRoom tr = treat.get(num);
+		// remove patient to temporary value
+		treat.remove(tr);
+		// reset timer back by defined milSecs
+		treatStart = resetTime;
+		// re-add patient back to the room
+		treat.add(num, tr);
+		// start a new timer thread
+		startTimer(tr);
+		// reset the treatment room timer start back to 0
+		treatStart = 0;
 	}
 
 	/**
@@ -631,10 +666,13 @@ public class QueueController implements Initializable {
 	 */
 	public void searchMethod() {
 
-		// get values from search boxes
+		// get value from triage category box
 		int tr = Integer.parseInt((String) searchTriage.getValue());
+		// get the first name search
 		String strFir = searchFirst.getText();
+		// get the nhs id 
 		String strNhs = searchNhs.getText();
+		// local variable
 		Patient pt;
 
 		// check patients in queue
@@ -642,6 +680,7 @@ public class QueueController implements Initializable {
 			if ((llist.get(i).getTriage() == tr)
 					|| (llist.get(i).getFirstName() == strFir)
 					|| (llist.get(i).getNhsNumber() == strNhs)) {
+				// assign to temporary value
 				pt = llist.get(i);
 				// get and display the patient in text box
 				searchDisplay.setText(pt.getTitle() + " " + pt.getFirstName()
@@ -657,6 +696,7 @@ public class QueueController implements Initializable {
 			if ((treat.get(i).getPatient().getTriage() == tr)
 					|| (treat.get(i).getPatient().getFirstName() == strFir)
 					|| (treat.get(i).getPatient().getNhsNumber() == strNhs)) {
+				// assign to temporary value
 				pt = treat.get(i).getPatient();
 				// get and display the patient in text box
 				searchDisplay.setText(pt.getTitle() + " " + pt.getFirstName()

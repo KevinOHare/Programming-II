@@ -64,11 +64,22 @@ public class OnCallTeam {
 	 * @param isAvailable
 	 * @param countTimer
 	 * @param patient
+	 * @param d1
+	 * @param d2
+	 * @param n1
+	 * @param n2
+	 * @param n3
 	 */
-	public OnCallTeam(boolean isAvailable, int countTimer, Patient patient) {
-		this.setAvailable(isAvailable);
-		this.setCountTimer(countTimer);
-		this.setPatient(patient);
+	public OnCallTeam(boolean isAvailable, int countTimer, Patient patient,
+			Doctor d1, Doctor d2, Nurse n1, Nurse n2, Nurse n3) {
+		this.isAvailable = isAvailable;
+		this.countTimer = countTimer;
+		this.patient = patient;
+		this.d1 = d1;
+		this.d2 = d2;
+		this.n1 = n1;
+		this.n2 = n2;
+		this.n3 = n3;
 	}
 
 	/**

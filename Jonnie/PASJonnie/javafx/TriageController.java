@@ -25,6 +25,8 @@ public class TriageController implements Initializable {
 
 	// LOCAL VARIABLES
 	
+	public static String titlePass;
+	public static String nhsPass;
 	public static String firstNamePass;
 	public static String lastNamePass;
 	public static int triagePass;
@@ -52,6 +54,8 @@ public class TriageController implements Initializable {
 		// assign values to static strings and ints
 		// for transfer to queue system
 		
+		titlePass = rlc.titlePass;
+		nhsPass = rlc.nhsPass;
 		firstNamePass = tt.getFirstName();
 		lastNamePass = tt.getLastName();
 		triagePass = tt.getCondition();

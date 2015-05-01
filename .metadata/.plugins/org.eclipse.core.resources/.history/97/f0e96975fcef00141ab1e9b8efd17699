@@ -48,7 +48,7 @@ public class OnCallMessage {
 		// Build the parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("Body",
-				"Alert! Queue at hospital is full."));
+				"Alert! A&E Queue at hospital is full."));
 		// staff numbers message sent to
 		params.add(new BasicNameValuePair("To", "+447543635708"));
 		// twilio number used to send message

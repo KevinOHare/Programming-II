@@ -36,8 +36,10 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader(); // FXML for primary stage
 			Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root);
+			primaryStage.setTitle("User Login");
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			primaryStage.setResizable(false);
 			// set icon of the application
 			Image applicationIcon = new Image(getClass().getResourceAsStream(
 					"PASicon.png"));
