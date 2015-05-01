@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import queue.PatientThread;
 import NHSsystem.Patient;
 
 /**
@@ -62,8 +63,31 @@ public class TestPatient {
 		
 
 	}
+	//test valid loop
+	@Test
+	public void testTimerValid(){
+		
+		int loop;
+		int valid = 10000;
+		PatientThread pt = new PatientThread(null);
+		//pt.run();
+		//pt.getLoop();
+		pt.setLoop(valid);
+		
+		assertEquals(valid, pt.getLoop());
+		
+	}
 	
-	
-	
+	//test invalid loop
 
+	@Test
+	public void testTimerInvalid(){
+		int loop;
+		int invalid = 30000000;
+		PatientThread pt = new PatientThread(null);
+		//pt.getLoop();
+		pt.setLoop(invalid);
+		
+		assertEquals(invalid, pt.getLoop());
+}
 }

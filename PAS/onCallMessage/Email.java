@@ -2,6 +2,7 @@ package onCallMessage;
 
 /**
  * Sends an email to the hospital manager in emergency situations 
+ * @author Vicky
  */
 
  /* 
@@ -17,12 +18,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
- 
-/**
- * Class used to send email messages
- * @author chrismcclune
- *
- */
 public class Email{
  
 	/**
