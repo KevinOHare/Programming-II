@@ -1,0 +1,47 @@
+/**
+ * 
+ */
+package JavafxTests;
+
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
+
+/**
+ * @author chrismcclune
+ * Custom Regex Matcher class to be used with JUNIT tests for RecpetionLayoutController
+ */
+public class RegexMatcher extends TypeSafeMatcher<String> {
+
+	/**
+	 * Var to hold the regular expression
+	 */
+    private final String regex;
+    
+    /**
+     * Constructor
+     */
+    public RegexMatcher(final String regex) {
+        this.regex = regex;
+    }
+
+    /**
+     * Method to override the describeTo method in super class (TypeSafeMatcher)
+     */
+    @Override
+    public void describeTo(final Description description) {
+        description.appendText("matches regex=`" + regex + "`");
+    }
+
+    /**
+     * Method to override the matchesSafely method in super class (TypeSafeMatcher)
+     */
+    @Override
+    public boolean matchesSafely(final String string) {
+        return string.matches(regex);
+    }
+
+
+    public static RegexMatcher matchesRegex(final String regex) {
+        return new RegexMatcher(regex);
+    }
+}

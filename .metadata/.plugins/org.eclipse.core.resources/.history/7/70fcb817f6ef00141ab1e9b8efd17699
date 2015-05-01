@@ -1,0 +1,108 @@
+/**
+ * 
+ */
+package JavafxTests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * @author chrismcclune
+ *
+ */
+public class ReceptionLayoutControllerTests {
+
+	// valid Test data
+	String validFirstName = "Chris";
+	String validLastName = "McClune";
+	String validPostcode = "BT7 3FY";
+	String validNHSNumber = "0040138365";
+	
+	// invalid Test data
+	String invalidFirstName = "";
+	String invalidLastName = "";
+	String invalidPostcode = "BT789 7EG";
+	String invalidNHSNumber = "40138365";
+	
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	/**
+	 * Test method for valid FirstName
+	 */
+	@Test
+	public void testValidateUserInputValidFirstName() {
+		String actual = "Chris";
+		String expected = validFirstName;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for valid LastName
+	 */
+	@Test
+	public void testValidateUserInputValidLastName() {
+		String actual = "McClune";
+		String expected = validLastName;
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test method for valid Postcode
+	 */
+	@Test
+	public void testValidateUserInputValidPostcode() {
+		String actual = "BT78 3FY";
+		//using custom matcher class
+		assertThat(actual, RegexMatcher.matchesRegex("^(GIR ?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)|[0-9][A-HJKPS-UW]) ?[0-9][ABD-HJLNP-UW-Z]{2})$"));
+	}
+	
+	/**
+	 * Test method for valid NHSNumber
+	 */
+	@Test
+	public void testValidateUserInputValidNHSNumber() {
+		Integer expected = 10;
+		Integer actual = validNHSNumber.length();
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test method for invalid FirstName
+	 */
+	@Test
+	public void testValidateUserInputInvalidFirstName() {
+		assertNotNull(invalidFirstName);
+	}
+
+	/**
+	 * Test method for invalid LastName
+	 */
+	@Test
+	public void testValidateUserInputInvalidLastName() {
+		assertNotNull(invalidLastName);
+	}
+	/**
+	 * Test method for invalid Postcode
+	 */
+	@Test
+	public void testValidateUserInputInvalidPostcode() {
+		
+	}
+	
+	/**
+	 * Test method for invalid NHSNumber
+	 */
+	@Test
+	public void testValidateUserInputInvalidNHSNumber() {
+		Integer expected = 10;
+		Integer actual = invalidNHSNumber.length();
+		assertNotEquals(expected, actual);
+	}
+}

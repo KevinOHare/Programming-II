@@ -1,0 +1,42 @@
+package Test.Login;
+
+import static org.junit.Assert.*;
+import javafx.LoginController;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * Class to test the login window
+ * @author chrismcclune
+ *
+ */
+public class loginTest {
+	
+	//test data
+	String adminUsername = "admin";
+	String triageUsername = "triage";
+	String doctorUsername = "doctor";
+	String password = "password";
+	
+	LoginController lc = new LoginController();
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		lc.fieldUsername.setText(adminUsername);
+	}
+
+
+	/**
+	 * Test method for {@link javafx.LoginController#validateLogin()}.
+	 */
+	@Test
+	public void testValidateLoginUsername() {
+		String actual = "admin";
+		String expected = lc.fieldUsername.getText();
+		assertEquals(expected, actual);
+	}
+
+}

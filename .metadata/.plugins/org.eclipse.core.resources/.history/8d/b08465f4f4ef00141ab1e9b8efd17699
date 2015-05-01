@@ -1,0 +1,58 @@
+/**
+ * 
+ */
+package JavafxTests;
+
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.internal.ReflectiveTypeFinder;
+import org.junit.Assert;
+
+/**
+ * @author chrismcclune
+ *
+ */
+public class RegexMatcher extends TypeSafeMatcher<String> {
+
+	/**
+	 * 
+	 */
+	public RegexMatcher() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param expectedType
+	 */
+	public RegexMatcher(Class<?> expectedType) {
+		super(expectedType);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param typeFinder
+	 */
+	public RegexMatcher(ReflectiveTypeFinder typeFinder) {
+		super(typeFinder);
+		// TODO Auto-generated constructor stub
+	}
+
+	/* (non-Javadoc)
+	 * @see org.hamcrest.SelfDescribing#describeTo(org.hamcrest.Description)
+	 */
+	@Override
+	public void describeTo(Description arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/* (non-Javadoc)
+	 * @see org.hamcrest.TypeSafeMatcher#matchesSafely(java.lang.Object)
+	 */
+	@Override
+	protected boolean matchesSafely(String arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
