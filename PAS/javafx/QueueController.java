@@ -155,6 +155,9 @@ public class QueueController implements Initializable {
 
 	// instance of OnCallMessage
 	static OnCallMessage call = new OnCallMessage();
+	
+	// static int to set up the treatment room timer
+	static int treatStart;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -380,6 +383,7 @@ public class QueueController implements Initializable {
 		// instantiate classes to activate the
 		// start time at the queue
 		TreatmentRoomThread thr = new TreatmentRoomThread(tr);
+		thr.setStartPoint(treatStart); // set based on variable
 		Runnable r = new Runnable() {
 			public synchronized void run() {
 				thr.run();
@@ -619,8 +623,10 @@ public class QueueController implements Initializable {
 		num--; // remove 1 as dealing with an array
 		TreatmentRoom tr = treat.get(num);
 		treat.remove(tr);
+		treatStart = resetTime;
 		treat.add(num, tr);
 		startTimer(treat.get(num));
+		treatStart = 0;
 	}
 
 	/**
