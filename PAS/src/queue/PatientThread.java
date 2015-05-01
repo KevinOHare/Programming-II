@@ -23,11 +23,12 @@ public class PatientThread implements Runnable {
 	// Instance variables
 
 	private boolean threadBool = true;
+	private int loop;
 	
 	@Override
 	public synchronized void run() {
 
-		int loop = 0;
+		loop = 0;
 		do {
 			loop++;
 			this.patient.setCountTimer(loop);
@@ -43,4 +44,11 @@ public class PatientThread implements Runnable {
 	public Boolean changeBool(Boolean threadBool) {
 		return this.threadBool = threadBool;
 	}
+		public int getLoop() {
+		return loop;
+	}
+
+		public void setLoop(int loop) {
+		this.loop = loop;
+	}	
 }

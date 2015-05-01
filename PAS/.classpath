@@ -5,9 +5,16 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+<<<<<<< Updated upstream
 	<classpathentry kind="lib" path="/Library/Java/JavaMail/javax.mail.jar"/>
 	<classpathentry kind="lib" path="/Library/Java/jaf-1.1.1/activation.jar"/>
 	<classpathentry kind="lib" path="/Library/Java/Twilio jar file/twilio-java-sdk-3.8.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="/Library/Java/mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar"/>
+=======
+	<classpathentry kind="lib" path="/Users/Vicky/Downloads/jaf-1.1.1/activation.jar"/>
+	<classpathentry kind="lib" path="/Users/Vicky/Downloads/twilio-java-sdk-3.7.2-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="/Users/Vicky/Downloads/jdbc-insert/lib/mysql-connector-java-5.1.29-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/Vicky/Downloads/javamail-1.4.5/mail.jar"/>
+>>>>>>> Stashed changes
 	<classpathentry kind="output" path="bin"/>
 </classpath>

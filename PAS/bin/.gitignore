@@ -2,7 +2,13 @@
 /database/
 /javafx/
 /javafxTests/
+<<<<<<< Updated upstream
 /onCallMessage/
 /queue/
 /queueTests/
 /NHSsystemTests/
+=======
+/queueTests/
+/queue/
+/onCallMessage/
+>>>>>>> Stashed changes
