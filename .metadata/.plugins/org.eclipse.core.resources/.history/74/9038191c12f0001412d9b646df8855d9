@@ -1,0 +1,156 @@
+/**
+ * 
+ */
+package NHSsystemTests;
+
+// import resources
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import NHSsystem.Patient;
+
+/**
+ * Class to tes the Patient Class
+ * 
+ * @author chrismcclune
+
+ */
+public class PatientTest {
+	
+	// Test data
+		String title;
+		String firstName;
+		String lastName;
+		String street;
+		String city;
+		String postcode;
+		String contactNumber;
+		String nhsNumber;
+		int triage;
+		boolean emergencyCondition;
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	/**
+	 * Test method for default constructor
+	 */
+	@Test
+	public void testPatientDefaultConstructor() {
+		Patient pat = new Patient();
+		assertNotNull(pat);
+	}
+
+	/**
+	 * Test method for non default constructor
+	 */
+	@Test
+	public void testPatientNonDefaultConstructor() {
+		Patient pat = new Patient(title, firstName, lastName, street, city, postcode, contactNumber, nhsNumber, triage, emergencyCondition);
+		assertEquals(title, pat.getTitle());
+		assertEquals(firstName, pat.getFirstName());
+		assertEquals(lastName, pat.getLastName());
+		assertEquals(street, pat.getStreet());
+		assertEquals(city, pat.getCity());
+		assertEquals(postcode, pat.getPostcode());
+		assertEquals(contactNumber, pat.getContactNumber());
+		assertEquals(
+	}
+
+	/**
+	 * Test method for Get and Set of NHS number
+	 */
+	@Test
+	public void testGetSetNhsNumber() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for Get and Set of Triage category
+	 */
+	@Test
+	public void testGetSetTriage() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#getCountTimer()}.
+	 */
+	@Test
+	public void testGetSetCountTimer() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#getInRoom()}.
+	 */
+	@Test
+	public void testGetInRoom() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#setEmergencyCondition(boolean)}.
+	 */
+	@Test
+	public void testGetSetEmergencyCondition() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#getPatientMin()}.
+	 */
+	@Test
+	public void testGetSetPatientMin() {
+		fail("Not yet implemented");
+	}
+
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#getAllergy()}.
+	 */
+	@Test
+	public void testGetSetAllergy() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#getBloodType()}.
+	 */
+	@Test
+	public void testGetSetBloodType() {
+		fail("Not yet implemented");
+	}
+
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#compareTo(NHSsystem.Patient)}.
+	 */
+	@Test
+	public void testCompareTo() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#isEmergencyCondition()}.
+	 */
+	@Test
+	public void testIsEmergencyCondition() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link NHSsystem.Patient#toString()}.
+	 */
+	@Test
+	public void testToString() {
+		fail("Not yet implemented");
+	}
+
+}

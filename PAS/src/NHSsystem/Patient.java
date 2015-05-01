@@ -3,8 +3,6 @@
  */
 package NHSsystem;
 
-import queue.PatientThread;
-
 /**
  * Class that represents a patient
  * 
@@ -24,16 +22,15 @@ public class Patient extends Person implements Comparable<Patient> {
 	private int triage;
 
 	/**
-	 * highest priority is emergency
+	 * Constant for highest priority is emergency
 	 */
 
-	private static final int TOP_PRIORITY = 1;
+	public static final int TOP_PRIORITY = 1;
 
 	/**
-	 * lowest priority is Non Emergency
-	 */
-
-	private static final int LOW_PRIORITY = 4;
+	 * Constant for lowest priority is Non Emergency
+	 *
+	public static final int LOW_PRIORITY = 4;
 
 	/**
 	 * Instance variable to count the timer method
@@ -172,7 +169,7 @@ public class Patient extends Person implements Comparable<Patient> {
 	/**
 	 * @return the emergencyCondition
 	 */
-	public boolean isEmergencyCondition() {
+	public boolean getEmergencyCondition() {
 		return emergencyCondition;
 	}
 

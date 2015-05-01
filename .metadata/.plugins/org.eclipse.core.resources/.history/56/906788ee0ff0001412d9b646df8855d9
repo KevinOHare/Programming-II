@@ -1,0 +1,36 @@
+package NHSsystemTests;
+
+// import resources
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * Class to test the Nurse class
+ * @author chrismcclune
+ *
+ */
+public class NurseTest {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	/**
+	 * Method to test the Defuult Constructor
+	 */
+	@Test
+	public void testNurseDefaultConstructor() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Method to test the non default constructor
+	 */
+	@Test
+	public void testNurseNonDefaultConstructor() {
+		fail("Not yet implemented");
+	}
+
+}

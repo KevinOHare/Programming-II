@@ -1,0 +1,40 @@
+package NHSsystemTests;
+
+// import resources
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * Class to test the Manager class
+ * @author chrismcclune
+ *
+ */
+public class ManagerTest {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void testManager() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testManagerStringStringStringStringStringStringStringIntString() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetEmail() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSetEmail() {
+		fail("Not yet implemented");
+	}
+
+}

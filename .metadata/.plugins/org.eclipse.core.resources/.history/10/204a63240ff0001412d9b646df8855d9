@@ -1,0 +1,45 @@
+package NHSsystemTests;
+
+// import resources
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * Class to test the Manager class
+ * @author chrismcclune
+ *
+ */
+public class ManagerTest {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	/**
+	 * Method to test the Default Constructor
+	 */
+	@Test
+	public void testManagerDefaultConstructor() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Method to test the Non-Default Constructor
+	 */
+	@Test
+	public void testManagerNonDefaultConstructor() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Method to test the Get of email address variable
+	 */
+	@Test
+	public void testSetGetEmail() {
+		fail("Not yet implemented");
+	}
+
+
+}

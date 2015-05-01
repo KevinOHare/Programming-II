@@ -1,0 +1,36 @@
+package NHSsystemTests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import NHSsystem.Doctor;
+
+public class DoctorTest {
+	
+	String title;
+	String firstName;
+	String lastName;
+	String street;
+	String city;
+	String postcode;
+	String contactNumber;
+	int staffID;
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void testDoctorDefaultConstructor() {
+		Doctor doc = new Doctor();
+		assertNotNull(doc);
+	}
+
+	@Test
+	public void testDoctorNonDefaultConstructor() {
+		Doctor doc = new Doctor(title, firstName, lastName, street, city, postcode, contactNumber, staffID);
+	}
+
+}
