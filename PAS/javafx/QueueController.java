@@ -300,7 +300,7 @@ public class QueueController implements Initializable {
 							// needs a treatment room
 							try {
 								removePatientFromTreat(llist.get(l));
-								llist.remove(llist.get(l));
+								//llist.remove(llist.get(l));
 							} catch (TwilioRestException tre) {
 								tre.printStackTrace();
 								System.out
@@ -576,7 +576,7 @@ public class QueueController implements Initializable {
 					|| (treat.get(i).getPatient().getTriage() == 4)) {
 				// adjust triage priority
 				treat.get(i).getPatient().setTriage(2);// set as higher priority
-				// treat.get(i).getPatient().getTriage();
+				treat.get(i).getPatient().setInRoom(false);
 				// add back to queue list
 				llist.add(treat.get(i).getPatient());
 				// set patient here to null
@@ -593,14 +593,9 @@ public class QueueController implements Initializable {
 				bool = false;
 
 				break;
-				// if all treatment rooms occupied with emergency patients and
-				// on call team engaged then send patient to another hospital
-				// and send sms to manager
-			} else if ((treat.get(i).getPatient().getTriage() == 1)
-					&& (onCallTeam.getPatient() != null)) {
-				OnCallMessage.ManagerMessage1();
-			}
-			break;
+				
+			} 
+			
 		}
 
 		// message call
@@ -622,7 +617,9 @@ public class QueueController implements Initializable {
 		// room and extend treat timer
 		int num = Integer.parseInt((String) treatNumTime.getValue());
 		num--; // remove 1 as dealing with an array
-
+		TreatmentRoom tr = treat.get(num);
+		treat.remove(tr);
+		treat.add(num, tr);
 		startTimer(treat.get(num));
 	}
 
