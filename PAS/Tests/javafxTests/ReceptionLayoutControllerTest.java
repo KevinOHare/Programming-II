@@ -1,7 +1,4 @@
-/**
- * 
- */
-package JavafxTests;
+package javafxTests;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -11,20 +8,20 @@ import org.junit.Test;
  * @author chrismcclune
  *
  */
-public class ReceptionLayoutControllerTests {
+public class ReceptionLayoutControllerTest {
 
 	// valid Test data
 	String validFirstName = "Chris";
 	String validLastName = "McClune";
 	String validPostcode = "BT7 3FY";
 	String validNHSNumber = "0040138365";
-	
+
 	// invalid Test data
 	String invalidFirstName = "";
 	String invalidLastName = "";
 	String invalidPostcode = "BT789 7EG";
 	String invalidNHSNumber = "40138365";
-	
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -51,17 +48,17 @@ public class ReceptionLayoutControllerTests {
 		String expected = validLastName;
 		assertEquals(expected, actual);
 	}
-	
+
 	/**
-	 * Test method for valid Postcode
+	 * Test method for valid Postcode Uses custom Regex Matcher class
 	 */
 	@Test
 	public void testValidateUserInputValidPostcode() {
-		String actual = "BT7 3FY";
-		String expected = validPostcode;
-		assertEquals(expected, actual);
+		String actual = validPostcode;
+		// using custom matcher class
+		assertThat(actual,RegexMatcher.matchesRegex("^(GIR ?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)|[0-9][A-HJKPS-UW]) ?[0-9][ABD-HJLNP-UW-Z]{2})$"));
 	}
-	
+
 	/**
 	 * Test method for valid NHSNumber
 	 */
@@ -71,7 +68,7 @@ public class ReceptionLayoutControllerTests {
 		Integer actual = validNHSNumber.length();
 		assertEquals(expected, actual);
 	}
-	
+
 	/**
 	 * Test method for invalid FirstName
 	 */
@@ -87,14 +84,16 @@ public class ReceptionLayoutControllerTests {
 	public void testValidateUserInputInvalidLastName() {
 		assertNotNull(invalidLastName);
 	}
+
 	/**
 	 * Test method for invalid Postcode
 	 */
-	@Test
+	@Test (expected = java.lang.AssertionError.class)
 	public void testValidateUserInputInvalidPostcode() {
-		
+		String actual = invalidPostcode;
+		assertThat(actual,RegexMatcher.matchesRegex("^(GIR ?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)|[0-9][A-HJKPS-UW]) ?[0-9][ABD-HJLNP-UW-Z]{2})$"));
 	}
-	
+
 	/**
 	 * Test method for invalid NHSNumber
 	 */
