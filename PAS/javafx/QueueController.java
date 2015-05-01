@@ -456,7 +456,7 @@ public class QueueController implements Initializable {
 			} else {
 				// queue is full of non-emergency
 				// patients
-				call.ManagerMessage1();
+				OnCallMessage.AlertOnCallTeam();
 
 			}
 		}
@@ -545,12 +545,12 @@ public class QueueController implements Initializable {
 			}
 		}
 
-		if (count == 3) {
+		// if more than two people have been waiting longer than 30 mins then
+		// message the manager
+		if (count > 2) {
 			OnCallMessage.ManagerMessage2();
 		}
-		if (count == 2) {
-			OnCallMessage.ManagerMessage2();
-		}
+
 	}
 
 	/**
@@ -593,6 +593,12 @@ public class QueueController implements Initializable {
 				bool = false;
 
 				break;
+				// if all treatment rooms occupied with emergency patients and
+				// on call team engaged then send patient to another hospital
+				// and send sms to manager
+			} else if ((treat.get(i).getPatient().getTriage() == 1)
+					&& (onCallTeam.getPatient() != null)) {
+				OnCallMessage.ManagerMessage1();
 			}
 			break;
 		}
@@ -645,7 +651,7 @@ public class QueueController implements Initializable {
 			}
 
 		}
-		
+
 		// check patients in treatment rooms
 		for (int i = 0; i < treat.size(); i++) {
 			if ((treat.get(i).getPatient().getTriage() == tr)
