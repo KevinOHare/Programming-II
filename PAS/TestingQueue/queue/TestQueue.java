@@ -15,6 +15,7 @@ import java.util.PriorityQueue;
 
 import javafx.QueueController;
 import onCallMessage.Email;
+import onCallMessage.OnCallMessage;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -72,24 +73,14 @@ public class TestQueue {
 		PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
 		
 			p1.setTriage(1);
-			
 			p2.setTriage(2);
-			
 			p3.setTriage(2);
-			
 			p4.setTriage(2);
-			
 			p5.setTriage(2);
-
 			p6.setTriage(2);
-
 			p7.setTriage(2);
-		
 			p8.setTriage(3);
-			
 			p9.setTriage(3);
-			
-			
 			p10.setTriage(3);
 			
 			pQueue.add(p1);
@@ -123,7 +114,7 @@ public class TestQueue {
 
 	//testing patients in the queue
 	@Test
-	public final void testPatientsInQuene() {
+	public final void testPatientsInQueue() {
 		PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
 		
 		p1.setTriage(1);
@@ -340,4 +331,37 @@ public class TestQueue {
 		assertEquals(expected,actual);
 		
 	}
+	
+	@Test
+	public void testRoomFull() throws TwilioRestException{
+		
+		LinkedList<TreatmentRoom> treat = new LinkedList<TreatmentRoom>();
+		LinkedList<Patient> llist = new LinkedList<Patient>();
+		
+		p1.setTriage(3);
+		p2.setTriage(1);
+		
+		TreatmentRoom room1 = new TreatmentRoom(1, true);
+		treat.add(room1);
+		room1.setPatient(p1);
+		
+		room1.getPatient();
+		
+		q.removePatientFromTreat(p1);
+		
+		//treat.getFirst().setPatient(p2);
+		
+		//if (treat.getFirst().getPatient().getTriage() != 1){
+			//llist.add(treat.getFirst().getPatient());
+			//treat.get(0).setPatient(null);
+			//room1.setPatient(p2);
+		//}
+		
+		Patient actual = room1.getPatient();
+		//Patient expected = p2;
+		
+		assertEquals(null, actual);
 	}
+
+	
+}
