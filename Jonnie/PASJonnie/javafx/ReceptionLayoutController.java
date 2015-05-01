@@ -33,6 +33,11 @@ import javafx.stage.Stage;
 public class ReceptionLayoutController implements Initializable {
 
 	/**
+	 * String used to make title available to other classes
+	 */
+	public static String titlePass;
+	
+	/**
 	 * String used to make nhs number available to other classes
 	 */
 	public static String nhsPass;
@@ -229,6 +234,7 @@ public class ReceptionLayoutController implements Initializable {
 	@FXML
 	private void handleActionNewPage(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
+		titlePass = rt.getTitle();
 		nhsPass = id.getText();
 		firstNamePass = rt.getFirstName();
 		lastNamePass = rt.getLastName();
@@ -380,6 +386,8 @@ public class ReceptionLayoutController implements Initializable {
 	private void handleButtonAUF(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
 		// nhsPass = id.setText();
+
+		// nhsPass = id.getText();
 
 		firstNamePass = tt.setFirstName("Unknown Female");
 		lastNamePass = tt.setLastName("Unknown Female");

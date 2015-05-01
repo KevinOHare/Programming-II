@@ -22,7 +22,7 @@ public class OnCallTeamThread implements Runnable {
 	 * Counts the time since team called upon
 	 */
 	@Override
-	public void run() {
+	public synchronized void run() {
 
 		int loop = 0;
 
@@ -34,7 +34,7 @@ public class OnCallTeamThread implements Runnable {
 			} catch (InterruptedException ex) {
 				System.out.println("Interrupted");
 			}
-		} while (loop != 900);// 15 minutes
+		} while (loop != 20);// 20 seconds
 
 	}
 

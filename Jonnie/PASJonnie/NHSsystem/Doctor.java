@@ -39,19 +39,19 @@ public class Doctor extends Staff {
 
 	// INTANCES OF DOCTORS
 
-	public Doctor d1 = new Doctor("Dr.", "Jospeh", "Barton",
+	public static Doctor d1 = new Doctor("Dr.", "Jospeh", "Barton",
 			"383 Holywood Road", "Belfast", "BT4 2LS", "02838345746", 10);
-	public Doctor d2 = new Doctor("Dr.", "Floyd", "Pacquiao",
+	public static Doctor d2 = new Doctor("Dr.", "Floyd", "Pacquiao",
 			"30 Eastleigh Drive", "Belfast", "BT4 3DX", "02838340092", 11);
-	public Doctor d3 = new Doctor("Dr.", "Manny", "Mayweather",
+	public static Doctor d3 = new Doctor("Dr.", "Manny", "Mayweather",
 			"15 Aston Gardens", "Belfast", "BT4 3FS", "02838341246", 12);
-	public Doctor d4 = new Doctor("Dr.", "Kate", "Taylor", "35 Stoney Road",
+	public static Doctor d4 = new Doctor("Dr.", "Kate", "Taylor", "35 Stoney Road",
 			"Belfast", "BT4 2XS", "02838345835", 13);
-	public Doctor d5 = new Doctor("Dr.", "Todd", "Umptious",
+	public static Doctor d5 = new Doctor("Dr.", "Todd", "Umptious",
 			"1 Churchland Close", "Holywood", "BT18 9LF", "02838341823", 14);
-	public Doctor d6 = new Doctor("Dr.", "Sarah", "Parker",
+	public static Doctor d6 = new Doctor("Dr.", "Sarah", "Parker",
 			"385 Holywood Road", "Belfast", "BT4 2LS", "02838343321", 15);
-	public Doctor d7 = new Doctor("Dr.", "Jessica", "Parker", "1 Orchard Lane",
+	public static Doctor d7 = new Doctor("Dr.", "Jessica", "Parker", "1 Orchard Lane",
 			"Belfast", "BT4 5BS", "02838345731", 16);
 
 }

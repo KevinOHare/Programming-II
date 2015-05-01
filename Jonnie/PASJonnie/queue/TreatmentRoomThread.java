@@ -10,6 +10,11 @@ public class TreatmentRoomThread implements Runnable {
 	TreatmentRoom treatmentRoom;
 	
 	/**
+	 * Instance variable
+	 */
+	private int startPoint;
+	
+	/**
 	 * Set properties to treatment room object
 	 * @param treatmentRoom
 	 */
@@ -25,7 +30,7 @@ public class TreatmentRoomThread implements Runnable {
 	@Override
 	public synchronized void run() {
 		
-		int loop = 0;
+		int loop = startPoint;
 		
 		
 		
@@ -39,9 +44,26 @@ public class TreatmentRoomThread implements Runnable {
 				System.out.println("Interrupted");
 			}
 			
-		} while (loop != 50); // to act as 10 mins
+		} while (loop != 600); // to act as 10 mins
 		
 		
+	}
+	
+	/**
+	 * get method for start point
+	 * @return startPoint
+	 */
+	public int getStartPoint() {
+		return startPoint;
+	}
+
+
+	/**
+	 * set method for start point
+	 * @param startPoint
+	 */
+	public void setStartPoint(int startPoint) {
+		this.startPoint = startPoint;
 	}
 
 }
