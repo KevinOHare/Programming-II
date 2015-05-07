@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 
 /**
  * Class used to implement the Queue system
+ * 
  * @author chrismcclune
  *
  */
@@ -43,17 +44,17 @@ public class QueueController implements Initializable {
 	 * String variable to pass to treatment room
 	 */
 	public static String strFirstName;
-	
+
 	/**
 	 * String variable to pass to treatment room
 	 */
 	public static String strLastName;
-	
+
 	/**
 	 * String variable to pass to treatment room
 	 */
 	public static String strAllergy;
-	
+
 	/**
 	 * String variable to pass to treatment room
 	 */
@@ -108,8 +109,6 @@ public class QueueController implements Initializable {
 	 */
 	@FXML
 	TextArea searchDisplay;
-	
-	
 
 	/**
 	 * Method for the triage button handler
@@ -128,6 +127,7 @@ public class QueueController implements Initializable {
 
 	/**
 	 * Method for the treatment button handler
+	 * 
 	 * @throws IOException
 	 */
 	@FXML
@@ -139,8 +139,13 @@ public class QueueController implements Initializable {
 		// pass in strings for labels in TreatmentRoomController
 		strFirstName = treat.get(num).getPatient().getFirstName();
 		strLastName = treat.get(num).getPatient().getLastName();
-		strAllergy = treat.get(num).getPatient().getAllergy();
-		strBloodType = treat.get(num).getPatient().getBloodType();
+		if (strFirstName == "Unknown Male" || strFirstName == "Unknown Female") {
+			strAllergy = "N/A";
+			strBloodType = "N/A";
+		} else {
+			strAllergy = treat.get(num).getPatient().getAllergy();
+			strBloodType = treat.get(num).getPatient().getBloodType();
+		}
 		// open new window for Treatment Room
 		Stage anotherStage = new Stage();
 		Parent anotherRoot = FXMLLoader.load(getClass().getResource(
@@ -181,22 +186,22 @@ public class QueueController implements Initializable {
 	 * Treatment room object for treatment room 1
 	 */
 	static TreatmentRoom room1 = new TreatmentRoom(1, true);
-	
+
 	/**
 	 * Treatment room object for treatment room 2
 	 */
 	static TreatmentRoom room2 = new TreatmentRoom(2, true);
-	
+
 	/**
 	 * Treatment room object for treatment room 3
 	 */
 	static TreatmentRoom room3 = new TreatmentRoom(3, true);
-	
+
 	/**
 	 * Treatment room object for treatment room 4
 	 */
 	static TreatmentRoom room4 = new TreatmentRoom(4, true);
-	
+
 	/**
 	 * Treatment room object for treatment room 5
 	 */
@@ -378,7 +383,8 @@ public class QueueController implements Initializable {
 								// llist.remove(llist.get(l));
 							} catch (TwilioRestException tre) {
 								tre.printStackTrace();
-								System.out.println("Could not send message to on call team");
+								System.out
+										.println("Could not send message to on call team");
 							}
 
 						}
@@ -425,10 +431,12 @@ public class QueueController implements Initializable {
 					}
 
 					// print on call team to console
-					System.out.println("\n************ On Call Team ***********\n");
+					System.out
+							.println("\n************ On Call Team ***********\n");
 					System.out.println("Available? \t Patient Details");
 					System.out.println(onCallTeam.toString());
-					System.out.println("\n*****************************************\n");
+					System.out
+							.println("\n*****************************************\n");
 					try {
 						Thread.sleep(4000);
 					} catch (InterruptedException e) {
@@ -681,7 +689,7 @@ public class QueueController implements Initializable {
 			} else if (onCallTeam.isAvailable() == false) {
 				OnCallMessage.ManagerMessage1();
 			}
-			
+
 			if (onCallTeam.getCountTimer() == 19) {
 				onCallTeam.setPatient(null);
 				onCallTeam.setAvailable(true);

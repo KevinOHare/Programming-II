@@ -1,8 +1,3 @@
-/NHSsystem/
 /NHSsystemTests/
-/database/
-/javafx/
 /javafxTests/
-/onCallMessage/
-/queue/
-/queueTests/
+/javafx/

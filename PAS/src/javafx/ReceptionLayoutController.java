@@ -36,7 +36,7 @@ public class ReceptionLayoutController implements Initializable {
 	 * String used to make title available to other classes
 	 */
 	public static String titlePass;
-	
+
 	/**
 	 * String used to make nhs number available to other classes
 	 */
@@ -86,7 +86,7 @@ public class ReceptionLayoutController implements Initializable {
 	 * String used to assign allergy of patient
 	 */
 	public static String tempAllergy;
-	
+
 	/**
 	 * String used to assign blood type of patient
 	 */
@@ -170,7 +170,6 @@ public class ReceptionLayoutController implements Initializable {
 	// create observable list
 	ObservableList<ReceptionLayoutTable> data = FXCollections
 			.observableArrayList();
-	
 
 	/**
 	 * Method to override initialize in super class
@@ -228,6 +227,7 @@ public class ReceptionLayoutController implements Initializable {
 
 	/**
 	 * Method to handle the action of moving to the next page
+	 * 
 	 * @param event
 	 * @throws IOException
 	 */
@@ -238,7 +238,12 @@ public class ReceptionLayoutController implements Initializable {
 		nhsPass = id.getText();
 		firstNamePass = rt.getFirstName();
 		lastNamePass = rt.getLastName();
-		allergyPass = tempAllergy;
+
+		if (tempAllergy == null) {
+			allergyPass = "N/A";
+		} else {
+			allergyPass = tempAllergy;
+		}
 		bloodTypePass = tempBloodType;
 
 		// check if the search has produced a result
@@ -354,17 +359,19 @@ public class ReceptionLayoutController implements Initializable {
 	}
 
 	/**
-	 * Method to Handle the action of the button to add a new unknown male emergency
+	 * Method to Handle the action of the button to add a new unknown male
+	 * emergency
+	 * 
 	 * @param event
 	 * @throws IOException
 	 */
 	@FXML
 	private void handleButtonAUM(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
-		// nhsPass = id.getText();
+		nhsPass = "0000000001";
 		firstNamePass = tt.setFirstName("Unknown Male");
 		lastNamePass = tt.setLastName("Unknown Male");
-		allergyPass = tt.setAllergy("Unknown");
+		allergyPass = tt.setAllergy("N/A");
 
 		// check if the search has produced a result
 		// open new window centred
@@ -378,20 +385,20 @@ public class ReceptionLayoutController implements Initializable {
 	}
 
 	/**
-	 * Method to handle the action of the button to add a new unknown female emergency
+	 * Method to handle the action of the button to add a new unknown female
+	 * emergency
+	 * 
 	 * @param event
 	 * @throws IOException
 	 */
 	@FXML
 	private void handleButtonAUF(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
-		// nhsPass = id.setText();
 
-		// nhsPass = id.getText();
-
+		nhsPass = "0000000000";
 		firstNamePass = tt.setFirstName("Unknown Female");
 		lastNamePass = tt.setLastName("Unknown Female");
-		allergyPass = tt.setAllergy("Unknown");
+		allergyPass = tt.setAllergy("N/A");
 
 		// check if the search has produced a result
 		// open new window centred
