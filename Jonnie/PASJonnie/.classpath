@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path=""/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="Tests"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/Twilio/twilio-java-sdk-3.8.0-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javax.mail-1.5.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jaf-1.1.1/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/javax.mail-1.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/Twilio/twilio-java-sdk-3.8.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/MySQL/MySQL Connector J/mysql-connector-java-5.1.35-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
