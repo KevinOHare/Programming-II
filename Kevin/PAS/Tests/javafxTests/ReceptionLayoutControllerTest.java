@@ -8,7 +8,7 @@ import org.junit.Test;
  * @author chrismcclune
  *
  */
-public class ReceptionLayoutControllerTests {
+public class ReceptionLayoutControllerTest {
 
 	// valid Test data
 	String validFirstName = "Chris";

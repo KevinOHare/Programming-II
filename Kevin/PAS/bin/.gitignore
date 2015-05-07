@@ -1,26 +1,7 @@
-<<<<<<< HEAD
-/database/
-/javafx/
 /NHSsystem/
-/onCallMessage/
-/queue/
-/databaseTests/
-/javafxTests/
 /NHSsystemTests/
-/onCallMessageTests/
-/queueTests/
-=======
-/.DS_Store
-/.checkstyle
-/.classpath
-/.metadata/
-/.project
-/.settings/
-/NHSsystem/
-/TestingQueue/
-/build.fxbuild
 /database/
 /javafx/
+/javafxTests/
 /onCallMessage/
-/queue/
->>>>>>> origin/master
+/queueTests/

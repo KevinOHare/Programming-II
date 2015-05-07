@@ -58,14 +58,14 @@
             <Button fx:id="bttnAUF" layoutX="23.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleButtonAUF" text="Add Unknown Female" />
          </children>
       </Pane>
-      <Label fx:id="labelQM1" layoutX="611.0" layoutY="175.0" text="?">
+      <Label fx:id="labelQM1" layoutX="607.0" layoutY="168.0" text="?">
        <tooltip>
             <Tooltip autoHide="true" text="Valid postcode includes a space e.g. BT27 6HD" textAlignment="JUSTIFY" wrapText="true" />
          </tooltip>
          <font>
             <Font name="Kokila Bold" size="23.0" />
          </font></Label>
-      <Label fx:id="labelQM2" layoutX="610.0" layoutY="219.0" text="?">
+      <Label fx:id="labelQM2" layoutX="606.0" layoutY="212.0" text="?">
       <tooltip>
             <Tooltip autoHide="true" text="Valid NHS Number is 10 numbers" wrapText="true" />
          </tooltip>

@@ -361,10 +361,10 @@ public class ReceptionLayoutController implements Initializable {
 	@FXML
 	private void handleButtonAUM(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
-		// nhsPass = id.getText();
+		nhsPass = "0000000001";
 		firstNamePass = tt.setFirstName("Unknown Male");
 		lastNamePass = tt.setLastName("Unknown Male");
-		allergyPass = tt.setAllergy("Unknown");
+		allergyPass = tt.setAllergy("N/A");
 
 		// check if the search has produced a result
 		// open new window centred
@@ -385,13 +385,11 @@ public class ReceptionLayoutController implements Initializable {
 	@FXML
 	private void handleButtonAUF(ActionEvent event) throws IOException {
 		// assign strings for the Triage table
-		// nhsPass = id.setText();
-
-		// nhsPass = id.getText();
-
+		
+		nhsPass = "0000000000";
 		firstNamePass = tt.setFirstName("Unknown Female");
 		lastNamePass = tt.setLastName("Unknown Female");
-		allergyPass = tt.setAllergy("Unknown");
+		allergyPass = tt.setAllergy("N/A");
 
 		// check if the search has produced a result
 		// open new window centred

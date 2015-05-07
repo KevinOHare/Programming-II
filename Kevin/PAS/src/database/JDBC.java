@@ -7,16 +7,17 @@ import java.sql.*;
 
 /**
  * Class used to connect to the database and search for patient details
+ * 
  * @author chrismcclune
  *
  */
 public class JDBC {
-	
+
 	/**
 	 * String for the JDBC driver
 	 */
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	
+
 	/**
 	 * String for the database URL
 	 */
@@ -26,12 +27,12 @@ public class JDBC {
 	 * String for the username of the database
 	 */
 	static final String USER = "40025827";
-	
+
 	/**
 	 * String for the password of the database
 	 */
 	static final String PASS = "UYN6542";
-	
+
 	/**
 	 * String array for the attributes in the database
 	 */
@@ -39,6 +40,7 @@ public class JDBC {
 
 	/**
 	 * Method to connect and search the database and save patient details
+	 * 
 	 * @param firstName
 	 * @param lastName
 	 * @param postcode
@@ -63,21 +65,19 @@ public class JDBC {
 			stmt = conn.createStatement();
 			String sql1;
 
-			// Passed in values being applied to SQL query
-			String firstNamedb = firstName;
-			String surNamedb = lastName;
-			String postcodedb = postcode;
+			// Passed in values with whitespace and 's removed
+			String firstNamedb = firstName.replaceAll(" ", "");
+			String surNamedb = lastName.replaceAll(" ", "").replaceAll("'", "");
+			String postcodedb = postcode.replaceAll(" ", "");
 			String IDdb = id;
 
-			// *** Assign values to mysql query ***
-			sql1 = "SELECT ID, title, first_name, last_name, address_1, address_2, address_3, country, telephone_number, allergies, blood_type FROM patient WHERE first_name = '"
+			// REPLACE removes whitespace and 's
+			sql1 = "SELECT * FROM patient WHERE REPLACE (first_name,' ','') = '"
 					+ firstNamedb
-					+ "' AND last_name = '"
+					+ "' and REPLACE(REPLACE(last_name, '''', ''),' ','') = '"
 					+ surNamedb
-					+ "' AND address_3 = '"
-					+ postcodedb
-					+ "' AND ID = '"
-					+ IDdb + "'";
+					+ "' and REPLACE(address_3, ' ', '') = '"
+					+ postcodedb + "' and ID = '" + IDdb + "';";
 
 			// *** Result Set ***
 			ResultSet rs = stmt.executeQuery(sql1);
@@ -103,7 +103,7 @@ public class JDBC {
 				// *** Test ***
 				System.out.println(rset1 + " " + rset3 + " " + rset4 + " "
 						+ rset7 + " " + rset10);
-				
+
 				// assign values to str array
 				str[0] = rset2;
 				str[1] = rset3;
@@ -117,7 +117,6 @@ public class JDBC {
 
 			}
 
-
 			// STEP 6: Clean-up environment
 			rs.close();
 			stmt.close();
@@ -125,11 +124,11 @@ public class JDBC {
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
-			
+
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-			
+
 		} finally {
 			// finally block used to close resources
 			try {
@@ -147,9 +146,9 @@ public class JDBC {
 		System.out.println("Goodbye!");
 	}
 
-
 	/**
 	 * A method to return the rsets of the correct patient search
+	 * 
 	 * @return rsets
 	 */
 	public String[] rsetPrint() {

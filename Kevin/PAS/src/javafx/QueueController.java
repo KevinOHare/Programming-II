@@ -1,5 +1,6 @@
 package javafx;
 
+// import resources
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,21 +10,16 @@ import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import com.twilio.sdk.TwilioRestException;
-
 import onCallMessage.OnCallMessage;
 import queue.OnCallTeamThread;
 import queue.PatientThread;
 import queue.TreatmentRoomThread;
+import NHSsystem.Doctor;
+import NHSsystem.Nurse;
 import NHSsystem.OnCallTeam;
 import NHSsystem.Patient;
 import NHSsystem.TreatmentRoom;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,43 +29,90 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
+/**
+ * Class used to implement the Queue system
+ * 
+ * @author chrismcclune
+ *
+ */
 public class QueueController implements Initializable {
 
 	// VALUES TO BE PASSED ON TO OTHER CLASSES
 
+	/**
+	 * String variable to pass to treatment room
+	 */
 	public static String strFirstName;
+
+	/**
+	 * String variable to pass to treatment room
+	 */
 	public static String strLastName;
+
+	/**
+	 * String variable to pass to treatment room
+	 */
 	public static String strAllergy;
+
+	/**
+	 * String variable to pass to treatment room
+	 */
 	public static String strBloodType;
 
 	// FXML ID TAGS
 
+	/**
+	 * Choicebox object for the triage list
+	 */
 	@FXML
 	ChoiceBox triageListNum;
 
+	/**
+	 * Choicebox object for the triage priority
+	 */
 	@FXML
 	ChoiceBox triagePriority;
 
+	/**
+	 * Choicebox object for the treatment box
+	 */
 	@FXML
 	ChoiceBox treatBox;
 
+	/**
+	 * Choicebox object for the treatment time
+	 */
 	@FXML
 	ChoiceBox treatNumTime;
 
+	/**
+	 * Choicebox object for the triage search
+	 */
 	@FXML
 	ChoiceBox searchTriage;
 
+	/**
+	 * Choicebox object for the search
+	 */
 	@FXML
 	TextField searchFirst;
 
+	/**
+	 * Choicebox object for the nhs number search
+	 */
 	@FXML
 	TextField searchNhs;
 
+	/**
+	 * Choicebox object for the search results
+	 */
 	@FXML
 	TextArea searchDisplay;
 
+	/**
+	 * Method for the triage button handler
+	 */
 	@FXML
 	private void handleButtonTriage() {
 		// take the entered number in the linked list for patient
@@ -82,6 +125,11 @@ public class QueueController implements Initializable {
 		llist.get(llistNum).setTriage(priNum);
 	}
 
+	/**
+	 * Method for the treatment button handler
+	 * 
+	 * @throws IOException
+	 */
 	@FXML
 	private void handleButtonTreat() throws IOException {
 		// take the entered number in the linked list for treatment room
@@ -91,8 +139,14 @@ public class QueueController implements Initializable {
 		// pass in strings for labels in TreatmentRoomController
 		strFirstName = treat.get(num).getPatient().getFirstName();
 		strLastName = treat.get(num).getPatient().getLastName();
-		strAllergy = treat.get(num).getPatient().getAllergy();
-		strBloodType = treat.get(num).getPatient().getBloodType();
+
+		if (strFirstName == "Unknown Male" || strFirstName == "Unknown Female") {
+			strAllergy = "N/A";
+			strBloodType = "N/A";
+		} else {
+			strAllergy = treat.get(num).getPatient().getAllergy();
+			strBloodType = treat.get(num).getPatient().getBloodType();
+		}
 		// open new window for Treatment Room
 		Stage anotherStage = new Stage();
 		Parent anotherRoot = FXMLLoader.load(getClass().getResource(
@@ -103,58 +157,85 @@ public class QueueController implements Initializable {
 		anotherStage.show();
 	}
 
+	/**
+	 * Method for the treatment timer button
+	 */
 	@FXML
 	private void handleButtonTreatTimerEx() {
 		extensionOfTime();
 	}
 
+	/**
+	 * Method for the search button handler
+	 */
 	@FXML
 	private void handleButtonSearchFunction() {
 		searchMethod();
 	}
 
-	// INSTANCES FOR PATIENT OBJECT
-
-	static ArrayList<Patient> alist = new ArrayList<Patient>();
-
+	/**
+	 * Linked list to hold the queue of patients
+	 */
 	static LinkedList<Patient> llist = new LinkedList<Patient>();
 
-	static SortedSet<Patient> sort = new TreeSet<Patient>();
-
-	static PriorityQueue<Patient> pQueue = new PriorityQueue<Patient>();
-
-	public static String[] stringPa = new String[10];
-
-	// INSTANCES FOR TREATMENT ROOM OBJECT
-
+	/**
+	 * Linked list to hold the treatment rooms
+	 */
 	static LinkedList<TreatmentRoom> treat = new LinkedList<TreatmentRoom>();
 
-	static TreatmentRoom[] treatAr = new TreatmentRoom[5];
-
+	/**
+	 * Treatment room object for treatment room 1
+	 */
 	static TreatmentRoom room1 = new TreatmentRoom(1, true);
+
+	/**
+	 * Treatment room object for treatment room 2
+	 */
 	static TreatmentRoom room2 = new TreatmentRoom(2, true);
+
+	/**
+	 * Treatment room object for treatment room 3
+	 */
 	static TreatmentRoom room3 = new TreatmentRoom(3, true);
+
+	/**
+	 * Treatment room object for treatment room 4
+	 */
 	static TreatmentRoom room4 = new TreatmentRoom(4, true);
+
+	/**
+	 * Treatment room object for treatment room 5
+	 */
 	static TreatmentRoom room5 = new TreatmentRoom(5, true);
 
-	public static String[] stringAr = new String[5];
-
 	// INSTANCE FOR ON CALL TEAM
+	static OnCallTeam onCallTeam = new OnCallTeam(true, 0, null, Doctor.d1,
+			Doctor.d2, Nurse.n1, Nurse.n2, Nurse.n3);
 
-	static OnCallTeam onCallTeam = new OnCallTeam();
+	/**
+	 * Boolean used to check if a patient has been created
+	 */
+	public static Boolean bool = false;
 
-	// Boolean to check whether a new Patient can be added
-	// to queue
-	static Boolean bool = false;
+	/**
+	 * Boolean used to check if the queue is active
+	 */
+	public static Boolean boolQ = true;
 
-	// Boolean to keep queue working
-	static Boolean boolQ = true;
+	/**
+	 * String used to check duplicate patients
+	 */
+	public static String duplicate = " ";
 
-	// Check duplicate patients
-	static String duplicate = " ";
+	/**
+	 * OnCallMessage object
+	 */
+	public static OnCallMessage call = new OnCallMessage();
 
-	// instance of OnCallMessage
-	static OnCallMessage call = new OnCallMessage();
+	/**
+	 * int used to indicate if the treatment has started
+	 */
+	public static int treatStart;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -300,7 +381,7 @@ public class QueueController implements Initializable {
 							// needs a treatment room
 							try {
 								removePatientFromTreat(llist.get(l));
-								llist.remove(llist.get(l));
+								// llist.remove(llist.get(l));
 							} catch (TwilioRestException tre) {
 								tre.printStackTrace();
 								System.out
@@ -355,7 +436,6 @@ public class QueueController implements Initializable {
 							.println("\n************ On Call Team ***********\n");
 					System.out.println("Available? \t Patient Details");
 					System.out.println(onCallTeam.toString());
-
 					System.out
 							.println("\n*****************************************\n");
 					try {
@@ -380,6 +460,7 @@ public class QueueController implements Initializable {
 		// instantiate classes to activate the
 		// start time at the queue
 		TreatmentRoomThread thr = new TreatmentRoomThread(tr);
+		thr.setStartPoint(treatStart); // set based on variable
 		Runnable r = new Runnable() {
 			public synchronized void run() {
 				thr.run();
@@ -576,7 +657,7 @@ public class QueueController implements Initializable {
 					|| (treat.get(i).getPatient().getTriage() == 4)) {
 				// adjust triage priority
 				treat.get(i).getPatient().setTriage(2);// set as higher priority
-				// treat.get(i).getPatient().getTriage();
+				treat.get(i).getPatient().setInRoom(false);
 				// add back to queue list
 				llist.add(treat.get(i).getPatient());
 				// set patient here to null
@@ -593,21 +674,27 @@ public class QueueController implements Initializable {
 				bool = false;
 
 				break;
-				// if all treatment rooms occupied with emergency patients and
-				// on call team engaged then send patient to another hospital
-				// and send sms to manager
-			} else if ((treat.get(i).getPatient().getTriage() == 1)
-					&& (onCallTeam.getPatient() != null)) {
-				OnCallMessage.ManagerMessage1();
+
 			}
-			break;
+
 		}
 
 		// message call
 		if (bool = true) {
-			// call message for queue full
-			OnCallMessage.OnCallTeamMessage();
-			onCallTeam.setPatient(pt);
+			if (onCallTeam.isAvailable() == true) {
+				// on call team message
+				OnCallMessage.OnCallTeamMessage();
+				onCallTeam.setPatient(pt);
+				onCallTeam.setAvailable(false);
+				startTimer(onCallTeam);
+			} else if (onCallTeam.isAvailable() == false) {
+				OnCallMessage.ManagerMessage1();
+			}
+
+			if (onCallTeam.getCountTimer() == 19) {
+				onCallTeam.setPatient(null);
+				onCallTeam.setAvailable(true);
+			}
 		}
 	}
 
@@ -622,8 +709,12 @@ public class QueueController implements Initializable {
 		// room and extend treat timer
 		int num = Integer.parseInt((String) treatNumTime.getValue());
 		num--; // remove 1 as dealing with an array
-
+		TreatmentRoom tr = treat.get(num);
+		treat.remove(tr);
+		treatStart = resetTime;
+		treat.add(num, tr);
 		startTimer(treat.get(num));
+		treatStart = 0;
 	}
 
 	/**
@@ -669,4 +760,4 @@ public class QueueController implements Initializable {
 
 	}
 
-}// ************************end of class**********************
+}
